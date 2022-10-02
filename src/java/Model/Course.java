@@ -66,5 +66,8 @@ public class Course {
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
+
+    
+   
     
 }

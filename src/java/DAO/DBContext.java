@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 public class DBContext {
     
     /*USE BELOW METHOD FOR YOUR DATABASE CONNECTION FOR BOTH SINGLE AND MULTILPE SQL SERVER INSTANCE(s)*/
-    /*DO NOT EDIT THE BELOW METHOD, YOU MUST USE ONLY THIS ONE FOR YOUR DATABASE CONNECTION*/
+    /*DO NOT EDIT THE BELOW METHOD, YOU MUST USE ONLY THIS ONE FOR YOUR DATABASE CONNECTION*/      
     public Connection getConnection()throws Exception {        
         String url = "jdbc:sqlserver://"+serverName+":"+portNumber +
                 ";databaseName="+dbName;//+"; integratedSecurity=true";
@@ -29,7 +29,7 @@ public class DBContext {
    
     /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
     private final String serverName = "localhost";
-    private final String dbName = "PRJ301_SE1625";
+    private final String dbName = "QuizPractiseDB_Demo";
     private final String portNumber = "1702";
     private final String userID = "sa";
     private final String password = "yolo19528";
