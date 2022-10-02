@@ -154,6 +154,6 @@ public class CourseDAO extends DBContext{
 //class using{
 //    public static void main(String[] args) {
 //        CourseDAO dao = new CourseDAO();      
-//        dao.deleteCourseCategory(11);
+//        dao.loadCourse();
 //    }
 //}
