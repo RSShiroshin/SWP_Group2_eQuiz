@@ -230,5 +230,8 @@ public class CourseDAO extends DBContext{
 //    public static void main(String[] args) {
 //        CourseDAO dao = new CourseDAO();      
 //        dao.loadCourse();
+//        for (Course course : dao.getCourseList()) {
+//            System.out.println(course.getCourseName());
+//        }
 //    }
 //}
