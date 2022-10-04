@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -148,6 +149,80 @@ public class CourseDAO extends DBContext{
         } catch (SQLException e) {
             status = "Error Delete" + e.getMessage();
         }
+    }
+      
+      // lọc courses theo phân loại (lọc theo categoryid)
+    public List<Course> getCoursesByCategoryId(int categoryId) {
+        List<Course> list = new ArrayList<>();
+        try {
+            String sql = "select * from Course where categoryID = ?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4),rs.getString(5)));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
+    // hiển thị courses theo phân trang
+    public List<Course> getCoursesWithPagging(int page, int PAGE_SIZE) {
+        List<Course> list = new ArrayList<>();
+        try {
+            String sql = "select * from Course order by courseID offset (?-1)*? row fetch next ? rows only";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, page);
+            ps.setInt(2, PAGE_SIZE);
+            ps.setInt(3, PAGE_SIZE);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Course(rs.getString(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5)));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
+    // search theo tên course 
+    public List<Course> search(String keyword) {
+        List<Course> list = new ArrayList<>();
+        try {
+            String sql = "select * from Course where courseName like ?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + keyword + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Course(rs.getString(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5)));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
+    // lấy course theo id để hiển thị detail course (hiển thị các subject trong course)
+    public Course getCourseById(int CourseId) {
+        try {
+            String sql = "select * from Course where courseID = ?";
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, CourseId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Course product = new Course(rs.getString(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5));
+                return product;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
     
 }
