@@ -1,0 +1,53 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 4, 2022, 8:23:04 AM
+    Author     : ducda
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+#topProfile{
+    display: flex;
+    margin-left: 150px;
+    padding-top: 20px;
+}
+.profileName {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.contentLogin{
+    display: flex;
+}
+
+.left, .right{
+    width: 50%;
+}
+
+.right input{
+    display: block;
+}
+
+.nameTitle {
+    display: flex;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.nameTitle a {
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-decoration: none;
+}
+
+.infoUser input{
+    width: 80%;
+    height: 50px;
+    margin-top: 20px;
+}
+

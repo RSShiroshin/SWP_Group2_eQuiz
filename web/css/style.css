@@ -1,0 +1,99 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 3, 2022, 8:49:16 PM
+    Author     : ducda
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+.header{
+    display: flex;
+}
+
+.top, .topR{
+   height: 63px;
+   background-color: white;
+   display: flex;
+   width: 50%;
+}
+.top img{
+    margin-left: 50px;
+    margin-right: 20px;
+}
+.top p {
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.top input{
+    width: 90px;
+    height: 40px;
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.topR input{
+    border: none;
+    background-color: silver;
+    color: black;
+    height: 40px;
+    width: 300px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.topR{
+    margin-right: 50px;
+    justify-content: right;
+}
+
+
+.topR img{
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.HomeContent{
+    background-color: #f6f7fb;
+}
+
+.star{
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.topStar{
+    padding-top: 20px;
+}
+.topStar h3 {
+    margin-left: 60px;  
+}
+
+.starElement{
+    width: 310px;
+    height: 156px;
+    background-color: aqua;
+    border-radius: 8px;
+    margin-left: 60px;
+    margin-top: 20px;
+    
+}
+.overStar{
+    /*width: 25%;*/
+    
+}
+
+
+
+
