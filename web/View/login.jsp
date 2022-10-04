@@ -16,18 +16,18 @@
     <body>
         <div class="contentLogin">
             <div class="left">
-
+                
             </div>
             <div class="right">
                 <div class="nameTitle">
-                    <a href="#">Đăng nhập</a>
-                    <a href="#">Đăng ký</a>
+                    <a style="color: #939bb4;" href="#">Sign up</a>
+                    <a style="color: black" href="#">Log in</a>
                 </div>
                 <form action="#" method="post">
                     <div class="infoUser">
                         <input type="text" name="id" placeholder="Nhập địa chỉ email hoặc tên người dùng của bạn">
                         <input type="password" name="pass" placeholder="Nhập mật khẩu">
-                        <input style="background-color: appworkspace" type="submit" value="Đăng ký">
+                        <button type="button">Log in</button>
                     </div>
                 </form>
             </div>
