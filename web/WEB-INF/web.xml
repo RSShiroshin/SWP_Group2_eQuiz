@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	 version="3.1">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>Controller.ProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeProfileController</servlet-name>
+        <servlet-class>Controller.ChangeProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserManagerController</servlet-name>
+        <servlet-class>Controller.UserManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RoleChangeController</servlet-name>
+        <servlet-class>Controller.RoleChangeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserStatusChangeController</servlet-name>
+        <servlet-class>Controller.UserStatusChangeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/ProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeProfileController</servlet-name>
+        <url-pattern>/ChangeProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagerController</servlet-name>
+        <url-pattern>/UserManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoleChangeController</servlet-name>
+        <url-pattern>/RoleChangeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserStatusChangeController</servlet-name>
+        <url-pattern>/UserStatusChangeController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
