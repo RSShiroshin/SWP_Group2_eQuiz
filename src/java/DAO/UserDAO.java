@@ -17,20 +17,19 @@ import java.util.Date;
  *
  * @author DELL
  */
-public class UserDAO extends DBContext{
+public class UserDAO extends DBContext {
+
     private Connection con;
     private String status;
-    public static ArrayList<User> userList ;  
+    public static ArrayList<User> userList;
 
     public UserDAO(ArrayList<User> userList) {
         this.userList = userList;
     }
-    
-    
-    
+
     public UserDAO() {
         try {
-            con = new DBContext().getConnection();          
+            con = new DBContext().getConnection();
         } catch (Exception ex) {
             status = "Error!!" + ex.getMessage();
         }
@@ -40,51 +39,49 @@ public class UserDAO extends DBContext{
         return userList;
     }
 
-    
-    
-    public void loadUser(){
+    public void loadUser() {
         userList = new ArrayList<>();
         String sql = "select *  from [User]";
-         try {
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               
+
                 int userID = rs.getInt(1);
                 String userName = rs.getString(2).trim();
                 String password = rs.getString(3).trim();
                 String fullName = rs.getString(4).trim();
                 String email = rs.getString(5).trim();
-                
-                String avatar = "";
-                if(rs.getString(6) != null)
-                    avatar = rs.getString(6).trim();
-                
-                String description = "";
-                if(rs.getString(7) != null)
-                    description = rs.getString(7).trim();
 
-                
-                int roleID = rs.getInt(8);               
-                boolean status = rs.getBoolean(9);
+                String avatar = "";
+                if (rs.getString(6) != null) {
+                    avatar = rs.getString(6).trim();
+                }
+
+                String description = "";
+                if (rs.getString(7) != null) {
+                    description = rs.getString(7).trim();
+                }
+
+                int roleID = rs.getInt(8);
+                boolean statusDB = rs.getBoolean(9);
                 Date registerDay = rs.getDate(10);
-                userList.add(new User(userID, userName, password, fullName, email, avatar, description, roleID, status, registerDay));
+                userList.add(new User(userID, userName, password, fullName, email, avatar, description, roleID, statusDB, registerDay));
             }
         } catch (SQLException e) {
             status = "Error Load User" + e.getMessage();
         }
     }
-    
-    
+
     public void insertUser(String userName, String password, String fullName,
-            String email,String avatar, String description, int roleID, boolean statusDB, String registerDay) {
-        String sql = "insert into [User] values(?,?,?,?,?,?,?,?,'"+registerDay+"')";
+            String email, String avatar, String description, int roleID, boolean statusDB, String registerDay) {
+        String sql = "insert into [User] values(?,?,?,?,?,?,?,?,'" + registerDay + "')";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, userName);
             ps.setString(2, password);
             ps.setString(3, fullName);
-            ps.setString(4, email);            
+            ps.setString(4, email);
             ps.setString(5, avatar);
             ps.setString(6, description);
             ps.setInt(7, roleID);
@@ -95,9 +92,10 @@ public class UserDAO extends DBContext{
             status = "Error Insert" + e.getMessage();
         }
     }
-     public void updateUser( int UserID, String userName, String password, String fullName,
-            String email,String avatar, String description, int roleID, boolean statusDB, String registerDay) {
-        String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?,  avatar = ?, description = ?, roleID = ?, status = ?, registerDay = '"+registerDay+"'"
+
+    public void updateUser(int UserID, String userName, String password, String fullName,
+            String email, String avatar, String description, int roleID, boolean statusDB, String registerDay) {
+        String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?,  avatar = ?, description = ?, roleID = ?, status = ?, registerDay = '" + registerDay + "'"
                 + "where userID = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -105,7 +103,7 @@ public class UserDAO extends DBContext{
             ps.setString(1, userName);
             ps.setString(2, password);
             ps.setString(3, fullName);
-            ps.setString(4, email);            
+            ps.setString(4, email);
             ps.setString(5, avatar);
             ps.setString(6, description);
             ps.setInt(7, roleID);
@@ -116,7 +114,8 @@ public class UserDAO extends DBContext{
             status = "Error Insert" + e.getMessage();
         }
     }
-    public void deleteUser(int userID){
+
+    public void deleteUser(int userID) {
         String sql = "delete from [User] where userID = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -127,13 +126,17 @@ public class UserDAO extends DBContext{
         }
     }
 
-
 }
-class using1{
+
+class using1 {
+
     public static void main(String[] args) {
-        UserDAO dao = new UserDAO();      
-        dao.updateUser(6, "BaoBao", "2002", "BaoBaoCute", "Baobao@gmail.com", "", "", 2, true, "10/3/2022");
+        UserDAO dao = new UserDAO();
+        
         dao.loadUser();
-        System.out.println(userList);
+        for (User user : dao.getUserList()) {
+            System.out.println(user.getUserName());
+        }
+        
     }
 }
