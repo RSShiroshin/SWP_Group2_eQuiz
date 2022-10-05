@@ -128,6 +128,34 @@ public class UserDAO extends DBContext {
 
 }
 
+ public User checkLogin(String username, String password) {
+        String sql = "SELECT [userID]\n"
+                + "      ,[userName]\n"
+                + "      ,[password]\n"
+                + "      ,[fullName]\n"
+                + "      ,[email]\n"
+                + "      ,[avatar]\n"
+                + "      ,[description]\n"
+                + "      ,[roleID]\n"
+                + "      ,[status]\n"
+                + "      ,[registerDay]\n"
+                + "  FROM [dbo].[User]\n"
+                + "  WHERE Username = ? AND [Password] = ?";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                User acc = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
+                return acc;
+            }
+        } catch (SQLException ex) {
+
+        }
+        return null;
+    }
+
 class using1 {
 
     public static void main(String[] args) {
