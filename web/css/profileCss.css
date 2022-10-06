@@ -45,7 +45,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .nameTitle a {
     margin-left: 50px;
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     text-decoration: none;
 }
 
@@ -66,7 +66,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background-size: cover;
     flex: 50%;
     height: 745px;
-    
+
 }
 
 .infoUser button{
@@ -76,6 +76,66 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background-color: #3ccfcf;
     border: none;
     color: white;
+    border-radius: 5px;
+
 }
+.infoUserR button{
+    width: 500px;
+    height: 50px;
+    margin-top: 20px;
+    background-color: #3ccfcf;
+    border: none;
+    color: white;
+    border-radius: 5px;
+
+}
+.infoUserR input{
+    width: 80%;
+    height: 50px;
+    margin-top: 5px;
+    padding-left: 10px;
+    border: 2px black solid;
+    border-radius: 5px;
+}
+.infoUserR input:focus{
+    border: 2px orange solid;
+    outline: none;
+}
+
+.infoUserR p{
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: initial;
+    color: #939bb4;
+}
+
+a{
+    text-decoration: none;
+    margin-left: 5px;
+    margin-top: 15px;
+}
+
+
+.infoUserR .sendLogin{
+    display: flex;
+    border: 1px black solid;
+    width: 500px;
+    padding: 10px 0;
+    margin: 30px 0 0 0;
+    border-radius: 5px;
+    justify-content: center; 
+}
+
+.infoUser .sendR{
+    display: flex;
+    border: 1px black solid;
+    width: 500px;
+    padding: 10px 0;
+    margin: 30px 0 0 0;
+    border-radius: 5px;
+    justify-content: center; 
+}
+
+
 
 

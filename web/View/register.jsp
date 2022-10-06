@@ -20,17 +20,26 @@
             </div>
             <div class="right">
                 <div class="nameTitle">
-                    <a style="color: black;" href="#">Sign up</a>
-                    <a style="color: #939bb4" href="#">Log in</a>
+                    <a style="color: black;" href="#">Đăng ký</a>
+                    <a style="color: #939bb4" href="#">Đăng nhập</a>
                 </div>
                 <form action="#" method="post">
-                    <div class="infoUser">
-                        <input type="text" name="user" placeholder="Nhập tên đăng nhập của bạn">
-                        <input type="text" name="id" placeholder="Nhập địa chỉ email của bạn">
-                        <input type="password" name="pass" placeholder="Nhập mật khẩu">
-                        <input type="password" name="repass" placeholder="Nhập lại mật khẩu">
+                    <div class="infoUserR">
+                        <p>TÊN</p>
+                        <input type="text" name="user" placeholder="Nhập tên của bạn">
+                        <p>TÊN ĐĂNG NHẬP</p>
                         <input type="text" name="name" placeholder="Nhập của bạn">
-                        <button type="button">Sign up</button>
+                        <p>EMAIL</p>
+                        <input type="text" name="id" placeholder="Nhập địa chỉ email của bạn">
+                        <p>MẬT KHẨU</p>
+                        <input type="password" name="pass" placeholder="Nhập mật khẩu">
+                        <p>XÁC NHẬN MẬT KHẨU</p>
+                        <input type="password" name="repass" placeholder="Nhập lại mật khẩu">
+                        <button type="button">Đăng ký</button>
+                        <div class="sendLogin">
+                            <p>Bạn đã có tài khoản?</p>
+                            <a href="#">Đăng nhập</a>
+                        </div>
                     </div>
                 </form>
             </div>
