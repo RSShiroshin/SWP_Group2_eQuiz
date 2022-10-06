@@ -8,6 +8,38 @@
         <servlet-name>CourseManager</servlet-name>
         <url-pattern>/CourseManager</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>Controller.HomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterCourseCategory</servlet-name>
+        <servlet-class>Controller.FilterCourseCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCourse</servlet-name>
+        <servlet-class>Controller.SearchCourseController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailCourse</servlet-name>
+        <servlet-class>Controller.DetailCourseController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterCourseCategory</servlet-name>
+        <url-pattern>/filter-category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchCourse</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailCourse</servlet-name>
+        <url-pattern>/detail</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
