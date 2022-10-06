@@ -19,15 +19,31 @@
                 <p>Trang chủ</p>
                 <p>Loại Quiz</p>
                 <p>Thư viện của bạn</p>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/QuizPracticeBeta/home">Home</a></li>
                 <input type="submit" value="Tạo" name="crate" />
+                
             </div>
             <div class="topR">
-                <input type="search" id="search" placeholder="Học phần, sách,...">
+                <input type="search" id="search" placeholder="Tìm kiếm tại đây" name="keyword">
                 <img src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
             </div>
+            <div>
+            <form action="search" class="d-flex mx-auto">
+                    <input class="form-control me-2" 
+                           type="search" 
+                           placeholder="Tìm kiếm tại đây" 
+                           aria-label="Search"
+                           name="keyword"
+                           />
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+
 
         </div>
 
-        
+
     </body>
 </html>
