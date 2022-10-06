@@ -156,7 +156,7 @@ public class CourseDAO extends DBContext {
             status = "Error Delete" + e.getMessage();
         }
     }
-    
+
     // lọc courses theo phân loại (lọc theo categoryid)
     public List<Course> getCoursesByCategoryId(int categoryId) {
         List<Course> list = new ArrayList<>();
@@ -231,7 +231,7 @@ public class CourseDAO extends DBContext {
         return null;
     }
 
-            }
+}
 //class using{
 //    public static void main(String[] args) {
 //        CourseDAO dao = new CourseDAO();      
