@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>DetailCourse</servlet-name>
-        <servlet-class>Controller.DetailCourseController</servlet-class>
+        <servlet-class>Controller.DetailCourse</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>

@@ -156,45 +156,8 @@ public class CourseDAO extends DBContext {
             status = "Error Delete" + e.getMessage();
         }
     }
-    
-    
+
     // LINHNhat
-    
-    // hiển thị listCourses
-    public List<Course> getAllCourses() {
-        List<Course> list = new ArrayList<>();
-        try {
-            String sql = "select * from Course";
-            Connection conn = new DBContext().getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Course c = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
-                list.add(c);
-            }
-
-        } catch (Exception ex) {
-            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-
-    // hien thi list Categories
-    public List<CourseCategory> getAllCategories() {
-        List<CourseCategory> c = new ArrayList<>();
-        try {
-            Connection conn = new DBContext().getConnection();
-            String sql = "select * from CourseCategory";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                c.add(new CourseCategory(rs.getInt(1), rs.getString(2)));
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return c;
-    }
     // lọc courses theo phân loại (lọc theo categoryid)
     public List<Course> getCoursesByCategoryId(int categoryId) {
         List<Course> list = new ArrayList<>();
@@ -268,7 +231,7 @@ public class CourseDAO extends DBContext {
         }
         return null;
     }
-    
+
     // đếm số course 
     public int getTotalCourses() {
         try {

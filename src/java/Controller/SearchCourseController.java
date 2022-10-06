@@ -36,7 +36,7 @@ public class SearchCourseController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             String keyword= request.getParameter("keyword");
             List<Course> listCourses = new CourseDAO().search(keyword);
-            List<CourseCategory> listCategories = new CourseDAO().getAllCategories();
+            List<CourseCategory> listCategories = new CourseDAO().getCategoryList();
             
             request.setAttribute("listCategories", listCategories);
             request.setAttribute("listCourses", listCourses);

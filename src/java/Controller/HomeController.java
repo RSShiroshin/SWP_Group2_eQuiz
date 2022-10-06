@@ -35,7 +35,7 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         final int PAGE_SIZE = 6;
         // show list categoryCourse
-        List<CourseCategory> listCategories = new CourseDAO().getAllCategories();
+        List<CourseCategory> listCategories = new CourseDAO().getCategoryList();
         request.setAttribute("listCategories", listCategories);
 
         // paging
