@@ -34,10 +34,12 @@ public class SearchCourseController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String keyword= request.getParameter("keyword");
+            String keyword = request.getParameter("keyword");
             List<Course> listCourses = new CourseDAO().search(keyword);
-            List<CourseCategory> listCategories = new CourseDAO().getCategoryList();
-            
+            CourseDAO courseDAO = new CourseDAO();
+            courseDAO.loadCourseCategory();
+            List<CourseCategory> listCategories = courseDAO.getCategoryList();
+
             request.setAttribute("listCategories", listCategories);
             request.setAttribute("listCourses", listCourses);
             request.getRequestDispatcher("View/Home.jsp").forward(request, response);

@@ -36,8 +36,8 @@ public class HomeController extends HttpServlet {
         CourseDAO courseDAO = new CourseDAO();
         courseDAO.loadCourse();
         courseDAO.loadCourseCategory();
-        // show list categoryCourse
-        List<CourseCategory> listCategories = new CourseDAO().getCategoryList();
+        // show list categoryCourse          
+        List<CourseCategory> listCategories = courseDAO.getCategoryList();
         request.setAttribute("listCategories", listCategories);
 
         // paging
@@ -47,7 +47,7 @@ public class HomeController extends HttpServlet {
             page = Integer.parseInt(pageStr);
         }
         
-        
+
         List<Course> listCourses = courseDAO.getCoursesWithPagging(page, PAGE_SIZE);
         int totalCourses = courseDAO.getCourseList().size();
         int totalPage = totalCourses / PAGE_SIZE;
