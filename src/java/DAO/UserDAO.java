@@ -126,9 +126,8 @@ public class UserDAO extends DBContext {
         }
     }
 
-}
 
- public User checkLogin(String username, String password) {
+     public User checkLogin(String username, String password) {
         String sql = "SELECT [userID]\n"
                 + "      ,[userName]\n"
                 + "      ,[password]\n"
@@ -155,6 +154,9 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+}
+
+
 
 class using1 {
 
