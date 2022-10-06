@@ -72,6 +72,22 @@ public class UserDAO extends DBContext {
             status = "Error Load User" + e.getMessage();
         }
     }
+    
+    public ArrayList loadRoleName(){
+        ArrayList roleNameList = new ArrayList<>();
+        String sql = "select *  from [RoleName]";
+         try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String roleName = rs.getString(2);      
+                roleNameList.add(roleName);
+            }
+        } catch (SQLException e) {
+            status = "Error Load User" + e.getMessage();
+        }
+         return roleNameList;
+    }
 
     public void insertUser(String userName, String password, String fullName,
             String email, String avatar, String description, int roleID, boolean statusDB, String registerDay) {
@@ -114,12 +130,54 @@ public class UserDAO extends DBContext {
             status = "Error Insert" + e.getMessage();
         }
     }
+    
+    public void updateUserStatus(int userID, boolean statusDB) {
+        String sql = "update [User] set status = ? where userID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(2, userID);
+            ps.setBoolean(1, statusDB);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Delete" + e.getMessage();
+        }
+    }
 
     public void deleteUser(int userID) {
         String sql = "delete from [User] where userID = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, userID);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Delete" + e.getMessage();
+        }
+    }
+    
+     public void updateUserProfile( int UserID, String userName, String password, String fullName,
+            String email, String description) {
+        String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?, description = ? where userID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(6, UserID);
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            ps.setString(3, fullName);
+            ps.setString(4, email);            
+            ps.setString(5, description);
+//            ps.setDate(9, (java.sql.Date) registerDay);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Insert" + e.getMessage();
+        }
+    }
+     
+     public void updateUserRole(int userID, int roleID) {
+        String sql = "update [User] set roleID = ? where userID = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(2, userID);
+            ps.setInt(1, roleID);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Delete" + e.getMessage();
