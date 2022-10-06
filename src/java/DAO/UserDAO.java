@@ -112,7 +112,6 @@ public class UserDAO extends DBContext{
             status = "Error Insert" + e.getMessage();
         }
     }
-    
     public void updateUser( int UserID, String userName, String password, String fullName,
             String email,String avatar, String description, int roleID, boolean statusDB, String registerDay) {
         String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?,  avatar = ?, description = ?, roleID = ?, status = ?, registerDay = '"+registerDay+"'"
@@ -193,7 +192,7 @@ public class UserDAO extends DBContext{
 class using1{
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();      
-        dao.updateUserProfile(6, "BaoBao", "2002", "BaoBaoCute", "Baobao@gmail.com",  "Ngu vl");
+        dao.updateUser(6, "BaoBao", "2002", "BaoBaoCute", "Baobao@gmail.com", "", "", 2, true, "10/3/2022");
         dao.loadUser();
         System.out.println(userList);
     }
