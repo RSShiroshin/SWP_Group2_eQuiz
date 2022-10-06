@@ -61,8 +61,8 @@
         <servlet-class>Controller.SearchCourseController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailCourse</servlet-name>
-        <servlet-class>Controller.DetailCourse</servlet-class>
+        <servlet-name>DetailCourseController</servlet-name>
+        <servlet-class>Controller.DetailCourseController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -77,8 +77,8 @@
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DetailCourse</servlet-name>
-        <url-pattern>/detail</url-pattern>
+        <servlet-name>DetailCourseController</servlet-name>
+        <url-pattern>/DetailCourseController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

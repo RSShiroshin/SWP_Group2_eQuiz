@@ -30,7 +30,7 @@
                 <h3>List Courses</h3>
                 <div class="star">
                     <c:forEach items="${listCourses}" var="c"> 
-                        <a  href="detail?courseID=${c.courseID}">
+                        <a  href="DetailCourseController?courseID=${c.courseID}">
                             <img class="" src="https://www.studytienganh.vn/upload/2021/06/106293.jpg" height="300px" alt="..." />
                         </a>
                         <div class="starElement">
