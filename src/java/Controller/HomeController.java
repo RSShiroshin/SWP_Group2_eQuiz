@@ -37,7 +37,7 @@ public class HomeController extends HttpServlet {
         courseDAO.loadCourse();
         courseDAO.loadCourseCategory();
         // show list categoryCourse
-        List<CourseCategory> listCategories = new CourseDAO().getCategoryList();
+        List<CourseCategory> listCategories = courseDAO.getCategoryList();
         request.setAttribute("listCategories", listCategories);
 
         // paging

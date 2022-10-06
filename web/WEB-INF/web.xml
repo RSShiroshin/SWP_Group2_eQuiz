@@ -4,9 +4,49 @@
         <servlet-name>CourseManager</servlet-name>
         <servlet-class>Controller.CourseManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeProfileController</servlet-name>
+        <servlet-class>Controller.ChangeProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>Controller.ProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RoleChangeController</servlet-name>
+        <servlet-class>Controller.RoleChangeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserManagerController</servlet-name>
+        <servlet-class>Controller.UserManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserStatusChangeController</servlet-name>
+        <servlet-class>Controller.UserStatusChangeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CourseManager</servlet-name>
         <url-pattern>/CourseManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeProfileController</servlet-name>
+        <url-pattern>/ChangeProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/ProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoleChangeController</servlet-name>
+        <url-pattern>/RoleChangeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagerController</servlet-name>
+        <url-pattern>/UserManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserStatusChangeController</servlet-name>
+        <url-pattern>/UserStatusChangeController</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>HomeController</servlet-name>
@@ -22,7 +62,7 @@
     </servlet>
     <servlet>
         <servlet-name>DetailCourse</servlet-name>
-        <servlet-class>Controller.DetailCourseController</servlet-class>
+        <servlet-class>Controller.DetailCourse</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
