@@ -69,9 +69,18 @@
 
                 <p>Loại Quiz</p>
                 <p>Thư viện của bạn</p>
-                <input type="submit" value="Tạo" name="crate" />
 
-            </div>.
+                <a href="#">
+                    <input type="submit" value="Tạo" name="crate" />
+                </a>
+                <a href="#">
+                    <input type="submit" value="Admin" name="crate" />
+                </a>
+                <a href="#">
+                    <input type="submit" value="Course" name="crate" />
+                </a>
+
+            </div>
             <div class="topR">
                 <form action="search" class="d-flex mx-auto">
                     <input class="form-control me-2" 

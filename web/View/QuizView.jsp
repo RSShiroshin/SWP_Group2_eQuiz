@@ -37,7 +37,6 @@
                                 <input type="radio" name="answer${answer.getQuestionID()}" value="${answer.getAnswerID()}">${answer.getContent()} </br>    
                             </c:if>
                         </c:forEach>
-
                     </div>           
                 </c:forEach>
                 
