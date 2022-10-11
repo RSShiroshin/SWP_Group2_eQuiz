@@ -32,10 +32,6 @@
         <servlet-name>QuizGenerateController</servlet-name>
         <servlet-class>Controller.QuizGenerateController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>loginController</servlet-name>
-        <servlet-class>Controller.loginController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>CourseManager</servlet-name>
         <url-pattern>/CourseManager</url-pattern>
@@ -99,10 +95,6 @@
     <servlet-mapping>
         <servlet-name>QuizGenerateController</servlet-name>
         <url-pattern>/QuizGenerateController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>loginController</servlet-name>
-        <url-pattern>/loginController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
