@@ -1,0 +1,93 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 6, 2022, 12:32:28 AM
+    Author     : ducda
+*/
+.contentSearch{
+    background-color: #f6f7fb;
+}
+
+#courseSearch{
+    margin-left: 20%;
+    /*margin-top: 20px;*/
+    padding-top: 20px;
+}
+
+.topSearch input{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px silver solid;
+    width: 900px;
+    height: 50px;
+    margin-top: 20px;
+    font-size: medium;
+}
+
+.topSearch p{
+    margin-top: 20px;
+    font-size: large;
+}
+
+
+.topSearch {
+    border-top: 1px #939bb4 solid;
+    text-align: center;
+}
+
+.resultCourse{
+    width: 328px;
+    background-color: white;
+    height: 170px;
+    border-radius: 10px;
+    margin: 20px 20px 20px 0;
+}
+.borderRs{
+    display: flex;
+    padding-bottom: 20px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.resultCourse p{
+    margin: 20px 0 10px 20px;
+    padding-top: 10px;
+}
+.resultCourse .NoDefine{
+    padding: 5px 10px;
+    background-color: silver;
+    width: fit-content;
+    border-radius: 20px;
+}
+
+
+
+.author {
+    display: flex;
+    width: 100%;
+}
+
+.resultCourse .author p{
+    width: 60%;
+}
+
+.author .viewDemo{
+    margin-top: 30px;
+}
+
+.author a{
+    width: fit-content;
+    height: 20px;
+    border: 1px #939bb4 solid;
+    border-radius: 5px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    margin-top: 15px;
+    
+}

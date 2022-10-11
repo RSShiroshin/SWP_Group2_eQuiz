@@ -34,13 +34,14 @@ public class DBContext {
     private final String userID = "sa";
     private final String password = "12345";
 }
-class using{
-    public static void main(String[] args) {
-        try{
-            new DBContext().getConnection();
-            System.out.println("Ket noi thanh cong");
-        }catch(Exception e){
-            System.out.println("failed");
-        }
-    }
-}
+
+//class using{
+//    public static void main(String[] args) {
+//        try{
+//            new DBContext().getConnection();
+//            System.out.println("Ket noi thanh cong");
+//        }catch(Exception e){
+//            System.out.println("failed");
+//        }
+//    }
+//}
