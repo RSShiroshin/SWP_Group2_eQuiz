@@ -30,9 +30,9 @@ public class DBContext {
     /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
     private final String serverName = "localhost";
     private final String dbName = "QuizPractiseDB_Demo";
-    private final String portNumber = "1143";
+    private final String portNumber = "2002";
     private final String userID = "sa";
-    private final String password = "12345";
+    private final String password = "khai2112002";
 }
 
 //class using{
