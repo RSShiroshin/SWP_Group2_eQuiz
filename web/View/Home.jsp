@@ -53,36 +53,25 @@
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="topStar">
-                    <h3>List Courses</h3>
-                    <div class="star">
-                        <c:forEach items="${listCourses}" var="c"> 
-                            <div class="starElement">
-                                <a style="text-decoration: none; color: black"  href="detail?courseID=${c.courseID}">
-                                    <img class="" src="https://www.studytienganh.vn/upload/2021/06/106293.jpg" height="100%" width="100%" alt="..." />
-
-                                    <div>
-                                        <p style="margin-top: 10px;">${c.courseName}</p>
-                                    </div>
-                                </a>
-                            </div>.
-
-
-                        </c:forEach>
-                    </div>
-                </div>
-
-                <!--            <div class="topStar">
-                                <h3>Gợi ý</h3>
-                                <div class="star">
-                <c:forEach begin="1" end="8"> 
-                    <div class="starElement">
-                        <p></p>
-                    </div>
-    
-                </c:forEach>
             </div>
-        </div>-->
+
+            <div class="topStar" style="padding-left: 10%;">
+                <h3>List Courses</h3>
+                <div class="star">
+                    <c:forEach items="${listCourses}" var="c"> 
+                        <div class="starElement">
+                            <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
+                                <img class="" src="https://www.studytienganh.vn/upload/2021/06/106293.jpg" height="100%" width="100%" alt="..." />
+
+                                <div>
+                                    <p style="margin-top: 10px;">${c.courseID}-${c.courseName}</p>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </c:forEach>
+                </div>
 
                 <c:choose>
                     <c:when test="${listCourses==null|| listCourses.size()==0}">
@@ -106,10 +95,7 @@
                         </nav>
                     </c:otherwise>
                 </c:choose>
-
             </div>
         </div>
-
-
     </body>
 </html>

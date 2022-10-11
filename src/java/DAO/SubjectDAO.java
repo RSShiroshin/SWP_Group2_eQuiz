@@ -88,13 +88,4 @@ public class SubjectDAO {
     }
 
 }
-class using1{
-    public static void main(String[] args) {
-        SubjectDAO s = new SubjectDAO();
-        s.loadSubject();
-        for (Subject subject : s.getSubjectList()) {
-            System.out.println(subject.getSubjectName());
-        }
-        
-    }
-}
+

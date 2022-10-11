@@ -90,7 +90,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DetailCourseController</servlet-name>
-        <url-pattern>/detail</url-pattern>
+        <url-pattern>/DetailCourseController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>

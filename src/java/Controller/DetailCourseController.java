@@ -32,13 +32,15 @@ public class DetailCourseController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            int courseID = Integer.parseInt(request.getParameter("courseID"));
-            Course listCourses= new CourseDAO().getCourseById(courseID);
+            String courseID = request.getParameter("courseID");
+            CourseDAO courseDAO = new CourseDAO();
+            courseDAO.loadCourse();
+            Course listCourses= courseDAO.getCourseById(courseID);
             
             request.setAttribute("listCourses", listCourses);
-            request.getSession().setAttribute("UrlHistory", "detail?courseID="+courseID);
+            request.getSession().setAttribute("UrlHistory", "DetailCourseController?courseID="+courseID);
             
-            request.getRequestDispatcher("detail.jsp").forward(request, response);
+            request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
         }
     }
 
