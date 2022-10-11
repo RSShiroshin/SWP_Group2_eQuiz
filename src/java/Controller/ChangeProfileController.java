@@ -5,12 +5,14 @@
 package Controller;
 
 import DAO.UserDAO;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -66,6 +68,10 @@ public class ChangeProfileController extends HttpServlet {
         String description = request.getParameter("description");
         
         ud.updateUserProfile(userID, userName, Password, fullName, email, description);
+        User acc = ud.checkLogin(userName, Password);   
+        HttpSession userLogin=request.getSession();
+        userLogin.setAttribute("userLogin", acc);
+        
         request.getRequestDispatcher("ProfileController").forward(request, response);
     }
 

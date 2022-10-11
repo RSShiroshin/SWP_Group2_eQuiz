@@ -12,6 +12,52 @@
         <title>Học phần của bạn | Quizlut</title>
         <link rel="shortcut icon" href="Img/icon.png"/>
         <link href="css/course.css" type="text/css" rel="stylesheet"/>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+            .contentCourse{
+                background-color: #f6f7fb;
+            }
+            .profileName{
+                padding-top: 20px;
+                font-size: larger;
+                font-weight: bold;
+            }
+
+            #topProfile{
+                margin-left: 20%;
+            }
+
+            .titleNo{
+                margin-top: 40px;
+            }
+
+            .quizBorder{
+                display: flex;
+                margin-top: 20px;
+                background-color: white;
+                width: 700px;
+                border-radius: 5px;
+            }
+
+            .quizBorder .quizLeft{
+                width: 200px;
+                /*border: 1px black solid;*/
+                padding: 10px 10px;
+            }
+            .quizBorder .quizLeft p{
+                border-right: 1px black solid;
+
+            }
+            .quizBorder .quizRight{
+                width: 500px;
+                padding: 10px 10px;
+                /*border: 1px black solid;*/
+            }
+        </style>
     </head>
     <body>
         <%@ include file="Header.jsp" %>
@@ -19,6 +65,19 @@
             <div class="profileName">
                 <h2>SWT301 - PT1</h2>
                 <p>Dao Trung Duc</p>
+            </div>
+            <p class="titleNo">Các Môn Trong Course Này (29)</p>
+            <div class="quizDetail">
+                <c:forEach begin="1" end="10">
+                    <div class="quizBorder">
+                        <div class="quizLeft">
+                            <p>Hello anh em nhé,Hello anh em nhé,Hello anh em nhé,</p>
+                        </div>
+                        <div class="quizRight">
+                            <p>Hello anh em nhé</p>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </body>

@@ -16,16 +16,16 @@ import java.util.List;
  *
  * @author DELL
  */
-public class CourseDAO extends DBContext{
+public class CourseDAO extends DBContext {
+
     private Connection con;
     private String status;
-    private ArrayList<Course> courseList ;
+    private ArrayList<Course> courseList;
     private ArrayList<CourseCategory> categoryList;
-    
-    
+
     public CourseDAO() {
         try {
-            con = new DBContext().getConnection();          
+            con = new DBContext().getConnection();
         } catch (Exception ex) {
             status = "Error!!" + ex.getMessage();
         }
@@ -38,20 +38,19 @@ public class CourseDAO extends DBContext{
     public ArrayList<CourseCategory> getCategoryList() {
         return categoryList;
     }
-    
-    
-    public void loadCourse(){
+
+    public void loadCourse() {
         courseList = new ArrayList<>();
         String sql = "select *  from Course";
-         try {
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               
+
                 String courseID = rs.getString(1).trim();
                 String courseName = rs.getString(2).trim();
                 String description = rs.getString(3);
-                int categoryID = rs.getInt(4);               
+                int categoryID = rs.getInt(4);
                 String thumbnail = rs.getString(5);
                 courseList.add(new Course(courseID, courseName, description, categoryID, thumbnail));
             }
@@ -59,25 +58,25 @@ public class CourseDAO extends DBContext{
             status = "Error Load Course" + e.getMessage();
         }
     }
-    
-    
-    public void insertCourse( String courseID, String courseName, String description,
-            int categoryID,String thumbnail) {
+
+    public void insertCourse(String courseID, String courseName, String description,
+            int categoryID, String thumbnail) {
         String sql = "insert into Course values(?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, courseID);
             ps.setString(2, courseName);
             ps.setString(3, description);
-            ps.setInt(4, categoryID);            
+            ps.setInt(4, categoryID);
             ps.setString(5, thumbnail);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
         }
     }
-     public void updateCourse( String courseID, String courseName, String description,
-            int categoryID,String thumbnail) {
+
+    public void updateCourse(String courseID, String courseName, String description,
+            int categoryID, String thumbnail) {
         String sql = "Update Course set courseName = ?, description = ?,categoryID = ?,thumbnail = ? "
                 + "where courseID = ?";
         try {
@@ -85,14 +84,16 @@ public class CourseDAO extends DBContext{
             ps.setString(5, courseID);
             ps.setString(1, courseName);
             ps.setString(2, description);
-            ps.setInt(3, categoryID);            
+            ps.setInt(3, categoryID);
             ps.setString(4, thumbnail);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
         }
     }
-    public void deleteCourse(String courseID){
+
+    //Chỉ được thực hiện khi đã xóa hết các Subject bên trong nó hoặc không có Subject nào tham chiếu đến
+    public void deleteCourse(String courseID) {
         String sql = "delete from Course where courseID = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -102,14 +103,15 @@ public class CourseDAO extends DBContext{
             status = "Error Delete" + e.getMessage();
         }
     }
-    public void loadCourseCategory(){
+
+    public void loadCourseCategory() {
         categoryList = new ArrayList<>();
         String sql = "select * from CourseCategory";
-         try {
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                             
-                int categoryID = rs.getInt(1);               
+            while (rs.next()) {
+                int categoryID = rs.getInt(1);
                 String categoryName = rs.getString(2);
                 categoryList.add(new CourseCategory(categoryID, categoryName));
             }
@@ -117,31 +119,35 @@ public class CourseDAO extends DBContext{
             status = "Error Load CourseCategory" + e.getMessage();
         }
     }
-     public void insertCourseCategory(
+
+    public void insertCourseCategory(
             String categoryName) {
         String sql = "insert into CourseCategory values(?)";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);                                  
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, categoryName);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
         }
     }
-     public void updateCourseCategory( 
-            int categoryID,String thumbnail) {
+
+    public void updateCourseCategory(
+            int categoryID, String thumbnail) {
         String sql = "update CourseCategory set categoryName = ? where categoryID = ?";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);           
-            ps.setInt(2, categoryID);            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(2, categoryID);
             ps.setString(1, thumbnail);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
         }
     }
-      public void deleteCourseCategory(int categoryID){
-            String sql = "delete from CourseCategory where categoryID = ?";
+
+    //Chỉ được thực hiện khi khong có Course nào tham chiếu đến
+    public void deleteCourseCategory(int categoryID) {
+        String sql = "delete from CourseCategory where categoryID = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, categoryID);
@@ -150,8 +156,8 @@ public class CourseDAO extends DBContext{
             status = "Error Delete" + e.getMessage();
         }
     }
-      
-      // lọc courses theo phân loại (lọc theo categoryid)
+
+    // lọc courses theo phân loại (lọc theo categoryid)
     public List<Course> getCoursesByCategoryId(int categoryId) {
         List<Course> list = new ArrayList<>();
         try {
@@ -161,14 +167,14 @@ public class CourseDAO extends DBContext{
             ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4),rs.getString(5)));
+                list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return list;
     }
-    
+
     // hiển thị courses theo phân trang
     public List<Course> getCoursesWithPagging(int page, int PAGE_SIZE) {
         List<Course> list = new ArrayList<>();
@@ -181,14 +187,14 @@ public class CourseDAO extends DBContext{
             ps.setInt(3, PAGE_SIZE);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Course(rs.getString(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5)));
+                list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return list;
     }
-    
+
     // search theo tên course 
     public List<Course> search(String keyword) {
         List<Course> list = new ArrayList<>();
@@ -199,24 +205,24 @@ public class CourseDAO extends DBContext{
             ps.setString(1, "%" + keyword + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Course(rs.getString(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5)));
+                list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return list;
     }
-    
+
     // lấy course theo id để hiển thị detail course (hiển thị các subject trong course)
-    public Course getCourseById(int CourseId) {
+    public Course getCourseById(String CourseId) {
         try {
             String sql = "select * from Course where courseID = ?";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, CourseId);
+            ps.setString(1, CourseId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Course product = new Course(rs.getString(1), rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5));
+                Course product = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
                 return product;
             }
         } catch (Exception e) {
@@ -225,10 +231,10 @@ public class CourseDAO extends DBContext{
         return null;
     }
     
+    public static void main(String[] args) {
+        CourseDAO cd = new CourseDAO();
+        cd.loadCourse();
+        System.out.println(cd.getCourseList());
+    }
+
 }
-//class using{
-//    public static void main(String[] args) {
-//        CourseDAO dao = new CourseDAO();      
-//        dao.loadCourse();
-//    }
-//}

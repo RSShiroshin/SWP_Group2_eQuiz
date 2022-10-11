@@ -6,12 +6,14 @@ package Controller;
 
 import DAO.UserDAO;
 import Model.User;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
@@ -61,35 +63,36 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int userID = 6;
-        String userName = "";
-        String password = "";
-        String fullName = "";
-        String email = "";      
-        String avatar = "";            
-        String description = "";   
-        int roleID = 2;               
-        boolean status = true;
-        Date registerDay;
+        HttpSession userLogin=request.getSession(); 
+//        int userID = userLogin.getAttribute("");
+//        String userName = "";
+//        String password = "";
+//        String fullName = "";
+//        String email = "";      
+//        String avatar = "";            
+//        String description = "";   
+//        int roleID = 2;               
+//        boolean status = true;
+//        Date registerDay;
         
-        User loginUser = null;
-        ud.loadUser();
-        for(User us : ud.getUserList()) {
-           if(us.getUserID() == userID) {
-               userName = us.getUserName();
-               password = us.getPassword();
-               fullName = us.getFullName();
-               email = us.getEmail();
-               if(us.getAvatar() != null)
-                avatar = us.getAvatar();
-               if(us.getDescription()!= null)
-                description = us.getDescription();
-               roleID = us.getRole();
-               status = us.isStatus();
-               registerDay = us.getRegisterDay();
-               loginUser = new User(userID, userName, password, fullName, email, avatar, description, roleID, status, registerDay);
-           }
-        }
+        User loginUser = (User) userLogin.getAttribute("userLogin");
+//        ud.loadUser();
+//        for(User us : ud.getUserList()) {
+//           if(us.getUserID() == userID) {
+//               userName = us.getUserName();
+//               password = us.getPassword();
+//               fullName = us.getFullName();
+//               email = us.getEmail();
+//               if(us.getAvatar() != null)
+//                avatar = us.getAvatar();
+//               if(us.getDescription()!= null)
+//                description = us.getDescription();
+//               roleID = us.getRole();
+//               status = us.isStatus();
+//               registerDay = us.getRegisterDay();
+//               loginUser = new User(userID, userName, password, fullName, email, avatar, description, roleID, status, registerDay);
+//           }
+//        }
         
         request.setAttribute("loginUser", loginUser);
         request.getRequestDispatcher("View/ProfileView.jsp").forward(request, response);
