@@ -28,6 +28,14 @@
         <servlet-name>loginController</servlet-name>
         <servlet-class>Controller.loginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizReviewController</servlet-name>
+        <servlet-class>Controller.QuizReviewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuizGenerateController</servlet-name>
+        <servlet-class>Controller.QuizGenerateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CourseManager</servlet-name>
         <url-pattern>/CourseManager</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizReviewController</servlet-name>
+        <url-pattern>/QuizReviewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizGenerateController</servlet-name>
+        <url-pattern>/QuizGenerateController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
