@@ -24,6 +24,10 @@
         <servlet-name>UserStatusChangeController</servlet-name>
         <servlet-class>Controller.UserStatusChangeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginController</servlet-name>
+        <servlet-class>Controller.loginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CourseManager</servlet-name>
         <url-pattern>/CourseManager</url-pattern>
@@ -61,8 +65,8 @@
         <servlet-class>Controller.SearchCourseController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailCourse</servlet-name>
-        <servlet-class>Controller.DetailCourse</servlet-class>
+        <servlet-name>DetailCourseController</servlet-name>
+        <servlet-class>Controller.DetailCourseController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -77,8 +81,12 @@
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DetailCourse</servlet-name>
+        <servlet-name>DetailCourseController</servlet-name>
         <url-pattern>/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginController</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

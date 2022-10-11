@@ -1,6 +1,6 @@
 <%-- 
-    Document   : courseDetail
-    Created on : Oct 4, 2022, 8:28:25 AM
+    Document   : Profile
+    Created on : Oct 4, 2022, 8:11:58 AM
     Author     : ducda
 --%>
 
@@ -11,13 +11,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Học phần của bạn | Quizlut</title>
         <link rel="shortcut icon" href="Img/icon.png"/>
-        <link href="css/course.css" type="text/css" rel="stylesheet"/>
+        <link href="css/profileCss.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <%@ include file="Header.jsp" %>
         <div id="topProfile">
+            <img src="Img/avt.png" width="70px" height="70px" alt="Avatar"/>
             <div class="profileName">
-                <h2>SWT301 - PT1</h2>
+                <h2>trungduc09_2002</h2>
                 <p>Dao Trung Duc</p>
             </div>.
         </div>

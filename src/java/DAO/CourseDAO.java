@@ -232,7 +232,7 @@ public class CourseDAO extends DBContext {
     }
 
 }
-class using{
+class using4564{
     public static void main(String[] args) {
         CourseDAO dao = new CourseDAO();      
         dao.loadCourseCategory();

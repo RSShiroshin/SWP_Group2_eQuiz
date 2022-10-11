@@ -214,15 +214,4 @@ public class UserDAO extends DBContext {
     }
 }
 
-class using1 {
 
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-
-        dao.loadUser();
-        for (User user : dao.getUserList()) {
-            System.out.println(user.getUserName());
-        }
-
-    }
-}
