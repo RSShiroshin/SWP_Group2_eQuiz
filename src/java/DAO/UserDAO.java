@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import static DAO.UserDAO.userList;
+
 import Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
