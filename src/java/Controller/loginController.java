@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -47,7 +48,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Login.jsp").forward(request, response);
+        request.getRequestDispatcher("View/Login.jsp").forward(request, response);
     }
 
     /**
@@ -61,23 +62,30 @@ public class loginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("uname");
+        String username = request.getParameter("id");
         String password = request.getParameter("pass");
         UserDAO userdao = new UserDAO();       
         User acc = userdao.checkLogin(username, password);
+        
+        HttpSession userLogin=request.getSession(); 
+        
+        
         String error = "";
             if(acc == null) {
             error = "Username or Password is invaild";
             request.setAttribute("error", error);
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("View/Login.jsp").forward(request, response);
             } else {       
-              if(acc.getRole() == 0){
-                   //chuyen huong den trang cua admin
-               } else if(acc.getRole() == 1){
-                   //chuyen huong den trang cua expert
-               } else if(acc.getRole() == 2){
-                //chuyen huong den trang cua customer
-               } 
+                userLogin.setAttribute("userLogin", acc);
+                if(acc.getRole() == 0){
+                     //chuyen huong den trang cua admin
+                     
+                 } else if(acc.getRole() == 1){
+                     //chuyen huong den trang cua expert
+                 } else if(acc.getRole() == 2){
+                  //chuyen huong den trang cua customer
+                  request.getRequestDispatcher("home").forward(request, response);
+                 } 
             }
     }
 
