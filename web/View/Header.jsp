@@ -12,10 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/style.css" type="text/css" rel="stylesheet"/>
         <style>
+            a{
+                text-decoration: none;
+                color: black;
+            }
             body {
                 font-family: Arial, Helvetica, sans-serif;
             }
-
             /* The Modal (background) */
             .modal {
                 display: none; /* Hidden by default */
@@ -30,7 +33,6 @@
                 overflow: auto; /* Enable scroll if needed */
                 border: none;
             }
-
             /* Modal Content */
             .modal-content {
                 background-color: #fefefe;
@@ -40,7 +42,6 @@
                 border-radius: 10px;
                 width: 30%;
             }
-
             /* The Close Button */
             .close {
                 color: #aaaaaa;
@@ -48,7 +49,6 @@
                 font-size: 28px;
                 font-weight: bold;
             }
-
             .close:hover,
             .close:focus {
                 color: #000;
@@ -60,20 +60,36 @@
     <body>
         <div class="header">
             <div class="top">
-                <img src="Img/logo.png" width="95px" height="55px" alt="Quizlut"/>
-                <p>Trang chủ</p>
+                <a href="/QuizPracticeBeta/home">
+                    <img src="Img/logo.png" width="95px" height="55px" alt="Quizlut"/>
+                </a>
+                <a style="" href="/QuizPracticeBeta/home">
+                    <p>Trang chủ</p>
+                </a>
+
                 <p>Loại Quiz</p>
                 <p>Thư viện của bạn</p>
                 <input type="submit" value="Tạo" name="crate" />
-            </div>
+
+            </div>.
             <div class="topR">
-                <input type="search" id="search" placeholder="Học phần, sách,...">
+                <form action="search" class="d-flex mx-auto">
+                    <input class="form-control me-2" 
+                           type="search" 
+                           id="search" placeholder="Tìm kiếm tại đây" name="keyword"
+                           aria-label="Search"
+                           />
+                    <i class="bi bi-search"></i>
+                    </button>
+                </form>
                 <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
             </div>
+            <div>
+
+            </div>
+
 
         </div>
-
-
         <!-- Trigger/Open The Modal -->
 
         <!-- The Modal -->
@@ -97,24 +113,20 @@
 
         <script>
             var modal = document.getElementById("myModal");
-
             var btn = document.getElementById("myBtn");
-
             var span = document.getElementsByClassName("close")[0];
-
             btn.onclick = function () {
                 modal.style.display = "block";
             }
-
             span.onclick = function () {
                 modal.style.display = "none";
             }
-
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
             }
         </script>
+
     </body>
 </html>

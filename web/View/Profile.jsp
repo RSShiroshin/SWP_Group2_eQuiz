@@ -20,7 +20,7 @@
             <div class="profileName">
                 <h2>trungduc09_2002</h2>
                 <p>Dao Trung Duc</p>
-            </div>
+            </div>.
         </div>
     </body>
 </html>

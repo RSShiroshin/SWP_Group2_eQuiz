@@ -32,7 +32,7 @@
                                     <p>name</p>
                                 </div>
                             </div>
-                        </a>
+                        </a>.
 
                     </c:forEach>
                 </div>
