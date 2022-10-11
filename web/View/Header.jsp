@@ -100,13 +100,20 @@
                 <span class="close"></span>
                 <div style="display: flex; margin-bottom: 20px; border-bottom: 1px solid #939bb4">
                     <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
-                    <p style="margin-top: 15px; margin-left: 5px;">dduc11092002@gmail.com</p>
+                    <p style="margin-top: 15px; margin-left: 5px;">${sessionScope.userLogin.getEmail()}</p>
                 </div>
-                <div>
-                    <a href="#" style="text-decoration: none; color: black;display: block;
-                       margin-bottom: 10px;">Hồ sơ</a>
-                    <a href="#" style="text-decoration: none; color: black;">Đăng xuất</a>
-                </div>
+                <c:if test="${sessionScope.userLogin != null}">
+                    <div>
+                        <a href="ProfileController" style="text-decoration: none; color: black;display: block;
+                           margin-bottom: 10px;">Hồ sơ</a>
+                        <a href="LogoutController" style="text-decoration: none; color: black;">Đăng xuất</a>
+                    </div>
+                </c:if>
+                <c:if test="${sessionScope.userLogin == null}">
+                    <div>
+                        <a href="login" style="text-decoration: none; color: black;">Đăng nhap</a>
+                    </div>
+                </c:if>
             </div>
 
         </div>

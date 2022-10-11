@@ -230,5 +230,11 @@ public class CourseDAO extends DBContext {
         }
         return null;
     }
+    
+    public static void main(String[] args) {
+        CourseDAO cd = new CourseDAO();
+        cd.loadCourse();
+        System.out.println(cd.getCourseList());
+    }
 
 }

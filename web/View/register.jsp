@@ -20,8 +20,8 @@
             </div>
             <div class="right">
                 <div class="nameTitle">
-                    <a style="color: black;" href="#">Sign up</a>
-                    <a style="color: #939bb4" href="#">Log in</a>
+                    <a style="color: black;" href="register.jsp">Sign up</a>
+                    <a style="color: #939bb4" href="login">Log in</a>
                 </div>
                 <form action="#" method="post">
                     <div class="infoUser">

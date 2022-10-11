@@ -4,11 +4,10 @@
  */
 package Controller;
 
-import DAO.UserDAO;
-import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,9 +17,9 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author DELL
  */
-public class ChangeProfileController extends HttpServlet {
+@WebServlet(name = "LogoutController", urlPatterns = {"/LogoutController"})
+public class LogoutController extends HttpServlet {
 
-    UserDAO ud = new UserDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,10 +37,10 @@ public class ChangeProfileController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangeProfileController</title>");            
+            out.println("<title>Servlet LogoutController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangeProfileController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,20 +58,10 @@ public class ChangeProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession userLogin = request.getSession();
+        userLogin.removeAttribute("userLogin");
+        request.getRequestDispatcher("home").forward(request, response);
 //        processRequest(request, response);
-        int userID = Integer.parseInt(request.getParameter("userID")) ;
-        String userName = request.getParameter("userName");
-        String Password = request.getParameter("Password");
-        String fullName = request.getParameter("fullName");
-        String email = request.getParameter("email");
-        String description = request.getParameter("description");
-        
-        ud.updateUserProfile(userID, userName, Password, fullName, email, description);
-        User acc = ud.checkLogin(userName, Password);   
-        HttpSession userLogin=request.getSession();
-        userLogin.setAttribute("userLogin", acc);
-        
-        request.getRequestDispatcher("ProfileController").forward(request, response);
     }
 
     /**
@@ -86,9 +75,7 @@ public class ChangeProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-//        processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
