@@ -232,12 +232,3 @@ public class CourseDAO extends DBContext {
     }
 
 }
-class using{
-    public static void main(String[] args) {
-        CourseDAO dao = new CourseDAO();      
-        dao.loadCourseCategory();
-        for (CourseCategory courseCategory : dao.getCategoryList()) {
-            System.out.println(courseCategory.getCategoryName());
-        }
-    }
-}
