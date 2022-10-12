@@ -120,7 +120,7 @@
                 </c:if>
                 <c:if test="${sessionScope.userLogin == null}">
                     <div>
-                        <a href="login" style="text-decoration: none; color: black;">Đăng nhap</a>
+                        <a href="loginController" style="text-decoration: none; color: black;">Đăng nhap</a>
                     </div>
                 </c:if>
             </div>

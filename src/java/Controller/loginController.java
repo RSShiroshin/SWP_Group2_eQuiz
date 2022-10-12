@@ -79,9 +79,10 @@ public class loginController extends HttpServlet {
                 userLogin.setAttribute("userLogin", acc);
                 if(acc.getRole() == 0){
                      //chuyen huong den trang cua admin
-                     
+                     request.getRequestDispatcher("home").forward(request, response);
                  } else if(acc.getRole() == 1){
                      //chuyen huong den trang cua expert
+                     request.getRequestDispatcher("home").forward(request, response);
                  } else if(acc.getRole() == 2){
                   //chuyen huong den trang cua customer
                   request.getRequestDispatcher("home").forward(request, response);
