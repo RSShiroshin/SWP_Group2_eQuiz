@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class="Quiz">
-            <form action="QuizReviewController" method="get">
+            <form action="QuizReviewController" method="post">
                 <c:forEach items="${quizQuestion}" var="question">
                     <div class="QuizQuestion">
                         <p>${question.getContent()}</p>

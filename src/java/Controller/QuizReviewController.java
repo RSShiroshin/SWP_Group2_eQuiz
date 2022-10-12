@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import DAO.QuestionDAO;
+import DAO.QuizDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class QuizReviewController extends HttpServlet {
 
+    QuestionDAO qd = new QuestionDAO();
+    QuizDAO quiz = new QuizDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -55,7 +59,8 @@ public class QuizReviewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
+//        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
+        doPost(request, response);
 //        processRequest(request, response);
     }
 
@@ -70,7 +75,16 @@ public class QuizReviewController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        //take and update user answer trong DB
+        
+        //so sanh user answer vs correct answer
+        
+        //tinhs score and update quiz score in DB
+        
+        //set attribute r nhay sang trang quiz review
+        
+        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
     }
 
     /**
