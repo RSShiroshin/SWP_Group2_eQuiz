@@ -5,15 +5,21 @@
 package Controller;
 
 import DAO.QuestionDAO;
+import DAO.QuizDAO;
 import Model.Answer;
 import Model.Question;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 /**
@@ -23,6 +29,7 @@ import java.util.Random;
 public class QuizGenerateController extends HttpServlet {
 
     QuestionDAO qd = new QuestionDAO();
+    QuizDAO quiz = new QuizDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -63,8 +70,18 @@ public class QuizGenerateController extends HttpServlet {
             throws ServletException, IOException {
         qd.loadQuestion();
         qd.loadAnswer();
+        //Lay user dang tao quiz
+//        HttpSession userSes = request.getSession();
+//        User userLogin = (User) userSes.getAttribute("userLogin");
+        
+        //get current time start
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        String timeStart = dateFormat.format(cal.getTime());
+        //get Score
+        float score = 0;
                 
-        ArrayList<Question> questionList = qd.getSubjectQuestion("ACC101");
+        ArrayList<Question> questionList = qd.getSubjectQuestion("ACC101"); //sau la truyen ID cua subject
         ArrayList<Question> quizQuestion = new ArrayList<>();
         ArrayList<Answer>  quizAnswer = new ArrayList<>();
         
@@ -72,6 +89,11 @@ public class QuizGenerateController extends HttpServlet {
 //        int questionNum = Integer.parseInt(request.getParameter("questionNum")) ;
         int questionNum = 10;
         String subject = "ACC101";
+//        quiz.insertQuiz(subject, userLogin.getUserID(), timeStart, score);
+        quiz.insertQuiz(subject, 6, timeStart, score);
+        
+//        int newQuizID = quiz.getLatestQuiz(userLogin.getUserID()).getQuizID();
+        int newQuizID = quiz.getLatestQuiz(6);
         //Random cac cau hoi
         ArrayList<Integer> numbers = new ArrayList<Integer>();   
         Random randomGenerator = new Random();
@@ -87,9 +109,13 @@ public class QuizGenerateController extends HttpServlet {
          for (Integer number : numbers) {
             for (Question q : questionList) {
                 if(q.getQuestionID() == (number+1)) {
+                    //add cau hoi vao quiz
+                    //vi moi tao nen user answer = 0
                     quizQuestion.add(q);
+                    quiz.insertQuizHistory(newQuizID, q.getQuestionID(), 0);
                     ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(q.getQuestionID());
                     for (Answer a : questionAnswer) {
+                        //add cau tra loi vao question trong quiz
                         quizAnswer.add(a);
                     }
                 }

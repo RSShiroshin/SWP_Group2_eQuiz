@@ -14,13 +14,13 @@ public class Quiz {
     private int quizID;
     private String subjectID;
     private int userID;
-    private Date timeStart;
+    private String timeStart;
     private float score;
 
     public Quiz() {
     }
 
-    public Quiz(int quizID, String subjectID, int userID, Date timeStart, float score) {
+    public Quiz(int quizID, String subjectID, int userID, String timeStart, float score) {
         this.quizID = quizID;
         this.subjectID = subjectID;
         this.userID = userID;
@@ -52,11 +52,11 @@ public class Quiz {
         this.userID = userID;
     }
 
-    public Date getTimeStart() {
+    public String getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(Date timeStart) {
+    public void setTimeStart(String timeStart) {
         this.timeStart = timeStart;
     }
 
