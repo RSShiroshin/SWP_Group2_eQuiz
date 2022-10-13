@@ -6,12 +6,16 @@ package Controller;
 
 import DAO.QuestionDAO;
 import DAO.QuizDAO;
+import Model.Answer;
+import Model.Question;
+import Model.QuizCheck;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -76,15 +80,50 @@ public class QuizReviewController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        int quizID = Integer.parseInt(request.getParameter("quizID"));
+        ArrayList<Integer> quizQuestion = quiz.getQuizQuestion(quizID);
+        
         //take and update user answer trong DB
+        ArrayList<Integer> questionList = new ArrayList<>(); 
+        ArrayList<Integer> answerList = new ArrayList<>();
+        for (int ques : quizQuestion) {
+            int questionID = Integer.parseInt(request.getParameter("question"+ques+""));
+            questionList.add(questionID);
+        }
+        for (int ans : quizQuestion) {
+            if(request.getParameter("answer"+ans+"") != null){
+                int answerID = Integer.parseInt(request.getParameter("answer"+ans+""));
+                answerList.add(answerID);
+            } else {
+                int answerID = 0;
+                answerList.add(answerID);
+            }
+        }
+        
+        for(int i =0;i<questionList.size();i++) {
+            quiz.updateUserAnswer(quizID, questionList.get(i), answerList.get(i));
+        }
         
         //so sanh user answer vs correct answer
+        ArrayList<QuizCheck> check = quiz.getQuizCheck(quizID);
+        int countCorrect = 0;
+        for(int i =0; i< check.size();i++) {
+            if(check.get(i).isIsAnswer()==true) {
+                quiz.updateUserIsCorrect(quizID, check.get(i).getQuestionID(), true);
+                countCorrect++;
+            }
+        }   
+        float score = (float) (countCorrect*10)/check.size();
+        
         
         //tinhs score and update quiz score in DB
+        quiz.updateQuizScore(quizID, score);
         
         //set attribute r nhay sang trang quiz review
-        
-        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
+        request.setAttribute("quizReviewID", quizID); 
+
+        request.getRequestDispatcher("QuizViewScoreController").forward(request, response);
+//        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response); 
     }
 
     /**

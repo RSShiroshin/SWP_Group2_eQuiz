@@ -28,6 +28,7 @@
     <body>
         <div class="Quiz">
             <form action="QuizReviewController" method="post">
+                <input type = "text" name="quizID" value="${quizID}">
                 <c:forEach items="${quizQuestion}" var="question">
                     <div class="QuizQuestion">
                         <p>${question.getContent()}</p>

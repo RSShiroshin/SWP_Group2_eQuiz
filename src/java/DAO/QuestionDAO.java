@@ -80,6 +80,26 @@ public class QuestionDAO {
          return q;
     }
     
+    public Question getQuestion(int questionId){
+        Question q = null;
+        String sql = "select *  from Question where questionID = '"+questionId+"' ";
+         try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               int questionID = rs.getInt(1);
+               String subjectID = rs.getString(2);
+               String content = rs.getString(3);  
+               String explain = rs.getString(4);  
+               q = new Question(questionID, questionID, content, explain);
+            }
+        } catch (SQLException e) {
+            status = "Error Load Course" + e.getMessage();
+        }
+         return q;
+    }
+    
     //========== ANSWER ===================================================================================
     public void loadAnswer(){
         answerList = new ArrayList<>();
