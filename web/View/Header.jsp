@@ -73,7 +73,7 @@
                 <a href="#">
                     <input type="submit" value="Tạo" name="crate" />
                 </a>
-                <a href="#">
+                <a href="CourseManagerController">
                     <input type="submit" value="Admin" name="crate" />
                 </a>
                 <a href="CourseManagerController">

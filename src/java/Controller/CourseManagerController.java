@@ -4,6 +4,9 @@
  */
 package Controller;
 
+import DAO.CourseDAO;
+import DAO.SubjectDAO;
+import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +20,13 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class CourseManagerController extends HttpServlet {
 
+    CourseDAO cdao;
+    SubjectDAO sdao;
+    @Override
+    public void init() {
+        cdao = new CourseDAO();
+        sdao = new SubjectDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,9 +64,15 @@ public class CourseManagerController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        request.getRequestDispatcher("View/AddCourse.jsp").forward(request, response);
+            throws ServletException, IOException {                       
+         
+        cdao.loadCourse();
+        cdao.loadCourseCategory();
+        sdao.loadSubject();
+        request.setAttribute("clist", cdao.getCourseList());
+        request.setAttribute("cclist", cdao.getCategoryList());
+        request.setAttribute("slist", sdao.getSubjectList());        
+        request.getRequestDispatcher("View/CourseManager.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +86,13 @@ public class CourseManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String courseID = request.getParameter("id");
+        String courseName = request.getParameter("name");
+        int categoryID = Integer.parseInt(request.getParameter("category"));
+        String description = request.getParameter("description");
+        String thumbnail = request.getParameter("thumbnail");             
+        cdao.insertCourse(courseID, courseName, description, categoryID, thumbnail);
+        doGet(request, response);
     }
 
     /**
