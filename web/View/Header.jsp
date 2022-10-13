@@ -73,10 +73,10 @@
                 <a href="#">
                     <input type="submit" value="Tạo" name="crate" />
                 </a>
-                <a href="#">
+                <a href="CourseManagerController">
                     <input type="submit" value="Admin" name="crate" />
                 </a>
-                <a href="#">
+                <a href="CourseManagerController">
                     <input type="submit" value="Course" name="crate" />
                 </a>
 
@@ -120,7 +120,7 @@
                 </c:if>
                 <c:if test="${sessionScope.userLogin == null}">
                     <div>
-                        <a href="login" style="text-decoration: none; color: black;">Đăng nhap</a>
+                        <a href="loginController" style="text-decoration: none; color: black;">Đăng nhap</a>
                     </div>
                 </c:if>
             </div>

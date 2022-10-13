@@ -16,21 +16,18 @@
     <body>
         <div class="contentLogin">
             <div class="left">
-
+                
             </div>
             <div class="right">
                 <div class="nameTitle">
-                     <a style="color: black;" href="../View/register.jsp">Sign up</a>
-                    <a style="color: #939bb4" href="../View/Login.jsp">Log in</a>
+                      <a style="color: black;" href="${pageContext.request.contextPath}/View/register.jsp">Sign up</a>
+                    <a style="color: #939bb4" href="${pageContext.request.contextPath}/View/Login.jsp">Log in</a>
                 </div>
-                <form action="#" method="post">
+                <form action="loginController" method="post">
                     <div class="infoUser">
-                        <input type="text" name="user" placeholder="Nhập tên đăng nhập của bạn">
-                        <input type="text" name="email" placeholder="Nhập địa chỉ email của bạn">
+                        <input type="text" name="id" placeholder="Nhập địa chỉ email hoặc tên người dùng của bạn">
                         <input type="password" name="pass" placeholder="Nhập mật khẩu">
-                        <input type="password" name="repass" placeholder="Nhập lại mật khẩu">
-                        <input type="text" name="fullname" placeholder="Nhập tên đầy đủ của bạn">
-                         <input type="submit" value="Đăng ký">
+                        <input type="submit" value="Log In">
 
                     </div>
                 </form>
