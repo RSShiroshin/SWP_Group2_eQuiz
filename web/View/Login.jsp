@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Học phần của bạn | Quizlut</title>
         <link rel="shortcut icon" href="Img/icon.png"/>
-        <link href="css/profileCss.css" type="text/css" rel="stylesheet"/>
+        <link href="${pageContext.request.contextPath}/css/profileCss.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <div class="contentLogin">
@@ -20,8 +20,8 @@
             </div>
             <div class="right">
                 <div class="nameTitle">
-                    <a style="color: #939bb4;" href="#">Sign up</a>
-                    <a style="color: black" href="#">Log in</a>
+                      <a style="color: black;" href="${pageContext.request.contextPath}/View/register.jsp">Sign up</a>
+                    <a style="color: #939bb4" href="${pageContext.request.contextPath}/View/Login.jsp">Log in</a>
                 </div>
                 <form action="loginController" method="post">
                     <div class="infoUser">
