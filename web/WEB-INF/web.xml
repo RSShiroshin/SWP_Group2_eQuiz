@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>CourseManager</servlet-name>
-        <servlet-class>Controller.CourseManager</servlet-class>
+        <servlet-name>CourseManagerController</servlet-name>
+        <servlet-class>Controller.CourseManagerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangeProfileController</servlet-name>
@@ -40,10 +40,10 @@
         <servlet-name>QuizViewScoreController</servlet-name>
         <servlet-class>Controller.QuizViewScoreController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>CourseManager</servlet-name>
-        <url-pattern>/CourseManager</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>SubjectManagerController</servlet-name>
+        <servlet-class>Controller.SubjectManagerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -111,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>QuizViewScoreController</servlet-name>
         <url-pattern>/QuizViewScoreController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseManagerController</servlet-name>
+        <url-pattern>/CourseManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectManagerController</servlet-name>
+        <url-pattern>/SubjectManagerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

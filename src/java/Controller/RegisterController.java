@@ -84,7 +84,7 @@ public class RegisterController extends HttpServlet {
         String description = "";
         //String date_raw = "2022-13-10";
         Date date = Date.valueOf("2022-10-13");
-        userDAO.insertUser(username, password, fullname, email, avatar, description, role, status, date);
+        userDAO.insertUser(username, password, fullname, email, avatar, description, role, status, date.toString());
         processRequest(request, response);
         response.sendRedirect("/View/Login.jsp");
         

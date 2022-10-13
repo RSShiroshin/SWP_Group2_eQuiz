@@ -4,27 +4,30 @@
  */
 package Controller;
 
-import DAO.QuestionDAO;
-import DAO.QuizDAO;
-import Model.Answer;
-import Model.Question;
-import Model.QuizHistory;
+import DAO.CourseDAO;
+import DAO.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author DELL
  */
-public class QuizViewScoreController extends HttpServlet {
+public class SubjectManagerController extends HttpServlet {
 
-    QuestionDAO qd = new QuestionDAO();
-    QuizDAO quiz = new QuizDAO();
+    SubjectDAO sdao;
+    CourseDAO cdao;
+
+    @Override
+    public void init() {
+        sdao = new SubjectDAO();
+        cdao = new CourseDAO();
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,10 +45,10 @@ public class QuizViewScoreController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuizViewScoreController</title>");            
+            out.println("<title>Servlet SubjectManagerController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet QuizViewScoreController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SubjectManagerController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,29 +66,13 @@ public class QuizViewScoreController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int quizID = (int) request.getAttribute("quizReviewID");
-        ArrayList<Integer> quizQuestionID = quiz.getQuizQuestion(quizID);
-        ArrayList<Question> quizQuestion = new ArrayList<>();
-        ArrayList<Answer>  quizAnswer = new ArrayList<>();
-        
-        for (Integer id : quizQuestionID) {
-            quizQuestion.add(qd.getQuestion(id));
-            ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(qd.getQuestion(id).getQuestionID());
-            for (Answer a : questionAnswer) {
-            //add cau tra loi vao question trong quiz
-                quizAnswer.add(a);
-            }
-        }
-        
-        ArrayList<QuizHistory> check = quiz.getQuizHistory(quizID);
-        
-        request.setAttribute("quizReviewID", quizID);
-        request.setAttribute("quizQuestion", quizQuestion);
-        request.setAttribute("quizAnswer", quizAnswer);
-        request.setAttribute("check", check);
-        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
-//        processRequest(request, response);
+        sdao.loadSubject();
+        String courseID = request.getParameter("courseID");
+
+        request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
+        request.setAttribute("course", cdao.getCourseById(courseID));
+        request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
+        request.getRequestDispatcher("View/SubjectManager.jsp").forward(request, response);
     }
 
     /**
@@ -99,7 +86,11 @@ public class QuizViewScoreController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
+        String courseID = request.getParameter("courseID");
+        String subjectID = request.getParameter("id");
+        String subjectName = request.getParameter("name");
+        String description = request.getParameter("description");
+        sdao.insertSubject(subjectID, subjectName, description, courseID);
         doGet(request, response);
     }
 

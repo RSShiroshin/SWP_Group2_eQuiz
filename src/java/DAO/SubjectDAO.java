@@ -86,6 +86,15 @@ public class SubjectDAO {
             status = "Error Delete" + e.getMessage();
         }
     }
+    public ArrayList<Subject> getSubjectListByCourseID(String courseID){
+        ArrayList<Subject> subjectByCourse = new ArrayList<>();
+        for (Subject subject : getSubjectList()) {
+            if(subject.getCourseID().equals(courseID)){
+                subjectByCourse.add(subject);
+            }
+        }
+        return subjectByCourse;
+    }
 
 }
 

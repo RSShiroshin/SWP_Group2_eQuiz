@@ -29,7 +29,7 @@
                 <c:forEach items="${clist}" var="c">
                     <tr>
                         <td>${c.courseID}</td>
-                        <td>${c.courseName}</td>
+                        <td><a href="SubjectManagerController?courseID=${c.courseID}">${c.courseName}</a></td>
                         <td>${c.description}</td>
                        <td><c:forEach items="${cclist}" var="cc">
                                         <c:if test="${c.categoryID==cc.categoryID}">
@@ -42,6 +42,7 @@
                 </c:forEach>
             </table>
         </div>
+       
         <div>
            <form action="CourseManagerController" method="post">
                         <div class="modal-header">						
@@ -76,8 +77,7 @@
                             
 
                         </div>
-                        <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <div class="modal-footer">                           
                             <input type="submit" class="btn btn-success" value="Add">
                         </div>
                     </form>
