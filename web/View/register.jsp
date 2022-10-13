@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Học phần của bạn | Quizlut</title>
         <link rel="shortcut icon" href="Img/icon.png"/>
-        <link href="css/profileCss.css" type="text/css" rel="stylesheet"/>
+        <link href="${pageContext.request.contextPath}/css/profileCss.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
         <div class="contentLogin">
@@ -20,18 +20,17 @@
             </div>
             <div class="right">
                 <div class="nameTitle">
-                    <a style="color: black;" href="register.jsp">Sign up</a>
-                    <a style="color: #939bb4" href="login">Log in</a>
+                     <a style="color: black;" href="../View/register.jsp">Sign up</a>
+                    <a style="color: #939bb4" href="../View/Login.jsp">Log in</a>
                 </div>
                 <form action="#" method="post">
                     <div class="infoUser">
                         <input type="text" name="user" placeholder="Nhập tên đăng nhập của bạn">
-                        <input type="text" name="id" placeholder="Nhập địa chỉ email của bạn">
+                        <input type="text" name="email" placeholder="Nhập địa chỉ email của bạn">
                         <input type="password" name="pass" placeholder="Nhập mật khẩu">
                         <input type="password" name="repass" placeholder="Nhập lại mật khẩu">
-                        <input type="text" name="name" placeholder="Nhập của bạn">
-                        <button type="button">Sign up</button>.
-                        <button type="button">Sign up</button>
+                        <input type="text" name="fullname" placeholder="Nhập tên đầy đủ của bạn">
+                         <input type="submit" value="Đăng ký">
 
                     </div>
                 </form>
