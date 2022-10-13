@@ -10,14 +10,14 @@ package Model;
  */
 public class Question {
     private int questionID;
-    private int subjectID;
+    private String subjectID;
     private String content;
     private String explain;
 
     public Question() {
     }
 
-    public Question(int questionID, int subjectID, String content, String explain) {
+    public Question(int questionID, String subjectID, String content, String explain) {
         this.questionID = questionID;
         this.subjectID = subjectID;
         this.content = content;
@@ -32,11 +32,11 @@ public class Question {
         this.questionID = questionID;
     }
 
-    public int getSubjectID() {
+    public String getSubjectID() {
         return subjectID;
     }
 
-    public void setSubjectID(int subjectID) {
+    public void setSubjectID(String subjectID) {
         this.subjectID = subjectID;
     }
 

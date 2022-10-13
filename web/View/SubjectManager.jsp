@@ -75,7 +75,7 @@
                             <p>${s.subjectID}</p>
                         </div>
                         <div class="quizRight">
-                            <p>${s.subjectName}</p>
+                            <p><a href="QuestionManagerController?subjectID=${s.subjectID}">${s.subjectName}</a></p>
                         </div>
                     </div>
                 </c:forEach>

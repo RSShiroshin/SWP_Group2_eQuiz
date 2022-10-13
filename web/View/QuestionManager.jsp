@@ -113,18 +113,9 @@
         <%@ include file="Header.jsp" %>
         <div class="contentCourse">
             <div class="addCourse">
-                <p style="font-size: larger; padding-top: 20px;">Tạo học phần mới</p>
-                <form action="#" method="post">
-                    <div class="infoUserR">
-                        <input type="text" name="user" placeholder="Nhập tiêu đề">
-                        <p>TIÊU ĐỀ</p>
-                        <input type="text" name="name" placeholder="Thêm mô tả">
-                        <p>MÔ TẢ</p>
-                    </div>
-                </form>..
+                
                 <div class="addImg">
-                    <h2>Thêm hình ảnh</h2>
-                    <input type="file" id="id" accept="image/png,image/jpeg">
+                    
                 </div>
                 <div class="addQuiz">
                     <form action="#">
@@ -144,7 +135,7 @@
                         </c:forEach>
                         <input type="button" value="+THÊM THẺ" class="addTag">
                         <div class="createCourse">
-                            <input type="button" value="TẠO" >
+                            <input type="button" value="ADD" >
                         </div>
                     </form>
 

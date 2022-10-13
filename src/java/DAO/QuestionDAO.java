@@ -6,7 +6,6 @@ package DAO;
 
 import Model.Answer;
 import Model.Question;
-import Model.Subject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,7 +52,7 @@ public class QuestionDAO {
                String subjectID = rs.getString(2);
                String content = rs.getString(3);  
                String explain = rs.getString(4);  
-               questionList.add(new Question(questionID, questionID, content, explain));
+               questionList.add(new Question(questionID, subjectID, content, explain));
             }
         } catch (SQLException e) {
             status = "Error Load Course" + e.getMessage();
@@ -62,17 +61,17 @@ public class QuestionDAO {
     
     public ArrayList<Question> getSubjectQuestion(String subject){
         ArrayList<Question> q = new ArrayList<>();
-        String sql = "select *  from Question where SubjectID = '"+subject+"' ";
+        String sql = "select *  from Question where SubjectID = ? ";
          try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
+            ps.setString(1, subject);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                int questionID = rs.getInt(1);
                String subjectID = rs.getString(2);
                String content = rs.getString(3);  
                String explain = rs.getString(4);  
-               q.add(new Question(questionID, questionID, content, explain));
+               q.add(new Question(questionID, subjectID, content, explain));
             }
         } catch (SQLException e) {
             status = "Error Load Course" + e.getMessage();
@@ -82,17 +81,17 @@ public class QuestionDAO {
     
     public Question getQuestion(int questionId){
         Question q = null;
-        String sql = "select *  from Question where questionID = '"+questionId+"' ";
+        String sql = "select *  from Question where questionID = ?";
          try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
+            ps.setInt(1, questionId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                int questionID = rs.getInt(1);
                String subjectID = rs.getString(2);
                String content = rs.getString(3);  
                String explain = rs.getString(4);  
-               q = new Question(questionID, questionID, content, explain);
+               q = new Question(questionID, subjectID, content, explain);
             }
         } catch (SQLException e) {
             status = "Error Load Course" + e.getMessage();
@@ -122,10 +121,10 @@ public class QuestionDAO {
     
     public ArrayList<Answer> getQuestionAnswer(int question){
         ArrayList<Answer> answer = new ArrayList<>();
-        String sql = "select *  from Answer where QuestionID = '"+question+"' ";
+        String sql = "select *  from Answer where QuestionID = ? ";
          try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
+            ps.setInt(1, question);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                int answerID = rs.getInt(1);

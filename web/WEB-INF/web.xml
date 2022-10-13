@@ -44,6 +44,10 @@
         <servlet-name>SubjectManagerController</servlet-name>
         <servlet-class>Controller.SubjectManagerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuestionManagerController</servlet-name>
+        <servlet-class>Controller.QuestionManagerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>SubjectManagerController</servlet-name>
         <url-pattern>/SubjectManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionManagerController</servlet-name>
+        <url-pattern>/QuestionManagerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
