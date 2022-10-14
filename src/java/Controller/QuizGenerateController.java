@@ -95,7 +95,7 @@ public class QuizGenerateController extends HttpServlet {
 //        int newQuizID = quiz.getLatestQuiz(userLogin.getUserID()).getQuizID();
         int newQuizID = quiz.getLatestQuiz(6);
         //Random cac cau hoi
-        ArrayList<Integer> numbers = new ArrayList<Integer>();   
+        ArrayList<Integer> numbers = new ArrayList<>();   
         Random randomGenerator = new Random();
         while (numbers.size() < questionNum) {
 
