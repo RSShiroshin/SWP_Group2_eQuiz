@@ -89,7 +89,7 @@ public class QuestionManagerController extends HttpServlet {
         String question = request.getParameter("question");
         qdao.insertQuestion(subjectID, question, "");
         qdao.loadQuestion();
-        int questionID = qdao.getQuestionBySubjectID("SSL101").get(qdao.getQuestionBySubjectID("SSL101").size()-1).getQuestionID();        
+        int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size()-1).getQuestionID();        
         for (int i = 1; i <= Integer.parseInt(numAns); i++) {
             qdao.insertAnswerByQuestionID(questionID, request.getParameter("ans"+i));
         }
