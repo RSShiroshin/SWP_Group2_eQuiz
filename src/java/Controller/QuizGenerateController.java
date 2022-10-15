@@ -81,7 +81,7 @@ public class QuizGenerateController extends HttpServlet {
         //get Score
         float score = 0;
                 
-        ArrayList<Question> questionList = qd.getSubjectQuestion("ACC101"); //sau la truyen ID cua subject
+        ArrayList<Question> questionList = qd.getQuestionBySubjectID("ACC101"); //sau la truyen ID cua subject
         ArrayList<Question> quizQuestion = new ArrayList<>();
         ArrayList<Answer>  quizAnswer = new ArrayList<>();
         

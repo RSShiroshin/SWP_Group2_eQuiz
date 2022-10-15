@@ -59,7 +59,7 @@ public class QuestionDAO {
         }
     }
     
-    public ArrayList<Question> getSubjectQuestion(String subject){
+    public ArrayList<Question> getQuestionBySubjectID(String subject){
         ArrayList<Question> q = new ArrayList<>();
         String sql = "select *  from Question where SubjectID = ? ";
          try {
@@ -87,16 +87,29 @@ public class QuestionDAO {
             ps.setInt(1, questionId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               int questionID = rs.getInt(1);
-               String subjectID = rs.getString(2);
-               String content = rs.getString(3);  
-               String explain = rs.getString(4);  
-               q = new Question(questionID, subjectID, content, explain);
+                int questionID = rs.getInt(1);
+                String subjectID = rs.getString(2);
+                String content = rs.getString(3);
+                String explain = rs.getString(4);
+                q = new Question(questionID, subjectID, content, explain);
             }
         } catch (SQLException e) {
             status = "Error Load Course" + e.getMessage();
         }
          return q;
+    }
+    
+    public void insertQuestion(String subjectID,String content,String explain){
+        String sql = "insert into Question values(?,?,?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);                                             
+            ps.setString(1, subjectID);
+            ps.setString(2, content);
+            ps.setString(3, explain);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Insert" + e.getMessage();
+        }
     }
     
     //========== ANSWER ===================================================================================
@@ -138,50 +151,68 @@ public class QuestionDAO {
         }
          return answer;
     }
+    public void insertAnswerByQuestionID(int questionID,String content){
+        String sql = "insert into Answer values(?,?,?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);                                             
+            ps.setInt(1, questionID);
+            ps.setString(2, content);
+            ps.setBoolean(3, false);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Insert" + e.getMessage();
+        }
+    }
     
 }
 
 class using2{
     public static void main(String[] args) {
         QuestionDAO qd = new QuestionDAO();
-        ArrayList<Question> questionList = qd.getSubjectQuestion("ACC101");
-        ArrayList<Question> quizQuestion = new ArrayList<>();
-        ArrayList<Answer>  quizAnswer = new ArrayList<>();
-        
-//        String subject = request.getParameter("SubjectID");
-//        int questionNum = Integer.parseInt(request.getParameter("questionNum")) ;
-        int questionNum = 5;
-        String subject = "ACC101";
-        //Random cac cau hoi
-        ArrayList<Integer> numbers = new ArrayList<Integer>();   
-        Random randomGenerator = new Random();
-        while (numbers.size() < questionNum) {
-
-            int random = randomGenerator.nextInt(questionList.size());
-            System.out.println(random);
-            if (!numbers.contains(random)) {
-                numbers.add(random);
-            }
+//        ArrayList<Question> questionList = qd.getQuestionBySubjectID("ACC101");
+//        ArrayList<Question> quizQuestion = new ArrayList<>();
+//        ArrayList<Answer>  quizAnswer = new ArrayList<>();
+//        
+////        String subject = request.getParameter("SubjectID");
+////        int questionNum = Integer.parseInt(request.getParameter("questionNum")) ;
+//        int questionNum = 5;
+//        String subject = "ACC101";
+//        //Random cac cau hoi
+//        ArrayList<Integer> numbers = new ArrayList<Integer>();   
+//        Random randomGenerator = new Random();
+//        while (numbers.size() < questionNum) {
+//
+//            int random = randomGenerator.nextInt(questionList.size());
+//            System.out.println(random);
+//            if (!numbers.contains(random)) {
+//                numbers.add(random);
+//            }
+//        }
+//        
+//        //add cau hoi cho quiz
+//        for (Question q : questionList) {
+//            for (Integer number : numbers) {
+//                if(q.getQuestionID() == (number+1)) {
+//                    quizQuestion.add(q);
+//                    ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(q.getQuestionID());
+//                    for (Answer a : questionAnswer) {
+//                        quizAnswer.add(a);
+//                    }
+//                }
+//            }         
+//        }
+//        
+//        for (Question question : quizQuestion) {
+//            System.out.println(question.getContent());
+//        }
+////        System.out.println(quizQuestion);
+////        System.out.println(quizAnswer);
+        qd.loadQuestion();
+        for (Question question : qd.getQuestionBySubjectID("SSL101")) {
+            System.out.println(question.getQuestionID());
         }
-        
-        //add cau hoi cho quiz
-        for (Question q : questionList) {
-            for (Integer number : numbers) {
-                if(q.getQuestionID() == (number+1)) {
-                    quizQuestion.add(q);
-                    ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(q.getQuestionID());
-                    for (Answer a : questionAnswer) {
-                        quizAnswer.add(a);
-                    }
-                }
-            }         
-        }
-        
-        for (Question question : quizQuestion) {
-            System.out.println(question.getContent());
-        }
-//        System.out.println(quizQuestion);
-//        System.out.println(quizAnswer);
+        Question q = qd.getQuestionBySubjectID("SSL101").get(qd.getQuestionBySubjectID("SSL101").size()-1);
+        System.out.println(q.getQuestionID());
         
     }
 }

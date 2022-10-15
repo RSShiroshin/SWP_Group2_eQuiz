@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import DAO.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +17,11 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author DELL
  */
 public class QuestionManagerController extends HttpServlet {
-
+    QuestionDAO qdao ;
+    @Override
+    public void init() {
+        qdao = new QuestionDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,6 +61,15 @@ public class QuestionManagerController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String subjectID = request.getParameter("subjectID");
+        String numAns = request.getParameter("numAns");
+        if(numAns==null){
+            numAns = "4";
+        }
+        
+        
+        
+        request.setAttribute("subjectID", subjectID);
+        request.setAttribute("numAns", numAns);
         request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
     }
 
@@ -70,7 +84,16 @@ public class QuestionManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String subjectID = request.getParameter("subjectID");
+        String numAns = request.getParameter("numAns");
+        String question = request.getParameter("question");
+        qdao.insertQuestion(subjectID, question, "");
+        qdao.loadQuestion();
+        int questionID = qdao.getQuestionBySubjectID("SSL101").get(qdao.getQuestionBySubjectID("SSL101").size()-1).getQuestionID();        
+        for (int i = 1; i <= Integer.parseInt(numAns); i++) {
+            qdao.insertAnswerByQuestionID(questionID, request.getParameter("ans"+i));
+        }
+        response.sendRedirect("QuestionManagerController");
     }
 
     /**

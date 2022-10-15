@@ -40,7 +40,7 @@
             }
             .contentCourse{
                 background-color: #f6f7fb;
-                height: fit-content;    
+                height: fit-content;
             }
             .addCourse{
                 margin-left: 20%;
@@ -92,10 +92,10 @@
                 border-radius: 8px;
                 float: right;
                 margin-bottom: 20px;
-                
+
             }
             .createCourse{
-                
+
             }
             .addTag{
                 /*display: block;*/
@@ -113,30 +113,33 @@
         <%@ include file="Header.jsp" %>
         <div class="contentCourse">
             <div class="addCourse">
-                
+
                 <div class="addImg">
-                    
+                    <form action="QuestionManagerController" method="get">
+                        <input type="hidden" name="subjectID" value="${subjectID}">
+                        <p>numAns</p>
+                        <input type="text" name="numAns">
+                        <input type="submit" value="Submit">
+                    </form>
                 </div>
                 <div class="addQuiz">
-                    <form action="#">
-                        <c:forEach begin="1" end="10">
-                            <div class="question">
-                                <div class="quesLeft">
-                                    <p>1</p>
-                                    <input type="text" id="id">
-                                    <p>THUẬT NGỮ</p>
-                                </div>
-                                <div class="quesRight">
-                                    <p>xoá</p>
-                                    <input type="text" id="id">
-                                    <p>ĐỊNH NGHĨA</p>
-                                </div>
-                            </div>
+                    <form action="QuestionManagerController" method="post">
+                        <input type="hidden" name="numAns" value="${numAns}">
+                        <input type="hidden" name="subjectID" value="${subjectID}">
+                        <input type="text" id="id" name = "question">
+                        <p>THUẬT NGỮ</p>
+
+
+                        <c:forEach begin="1" end="${numAns}" var="i">
+                            <input type="text" id="id" name="ans${i}"><br>
                         </c:forEach>
-                        <input type="button" value="+THÊM THẺ" class="addTag">
-                        <div class="createCourse">
-                            <input type="button" value="ADD" >
-                        </div>
+
+                        <p>ĐỊNH NGHĨA</p>
+                        
+                        <input type="submit" value="Submit">
+
+
+
                     </form>
 
 
