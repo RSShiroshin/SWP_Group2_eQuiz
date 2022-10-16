@@ -117,24 +117,30 @@
                 <div class="addImg">
                     <form action="QuestionManagerController" method="get">
                         <input type="hidden" name="subjectID" value="${subjectID}">
+                        <p>numQues</p>
+                        <input type="text" name="numQues">
                         <p>numAns</p>
-                        <input type="text" name="numAns">
+                        <input type="text" name="numAns">                        
                         <input type="submit" value="Submit">
                     </form>
                 </div>
                 <div class="addQuiz">
                     <form action="QuestionManagerController" method="post">
                         <input type="hidden" name="numAns" value="${numAns}">
-                        <input type="hidden" name="subjectID" value="${subjectID}">
-                        <input type="text" id="id" name = "question">
-                        <p>THUẬT NGỮ</p>
+                        <input type="hidden" name="numQues" value="${numQues}">
+                        <input type="hidden" name="subjectID" value="${subjectID}">                       
+                        
 
+                        <c:forEach begin="1" end="${numQues}" var="j">
+                            <input type="text" name="ques${j}"><br>
+                            <p>THUẬT NGỮ</p>
+                            <c:forEach begin="1" end="${numAns}" var="i">
+                            <input type="text" id="id" name="ques${j}ans${i}"><br>
+                            </c:forEach>
+                            <p>ĐỊNH NGHĨA</p>
+                        </c:forEach>                        
 
-                        <c:forEach begin="1" end="${numAns}" var="i">
-                            <input type="text" id="id" name="ans${i}"><br>
-                        </c:forEach>
-
-                        <p>ĐỊNH NGHĨA</p>
+                        <
                         
                         <input type="submit" value="Submit">
 

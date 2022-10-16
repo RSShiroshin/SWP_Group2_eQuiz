@@ -17,11 +17,14 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author DELL
  */
 public class QuestionManagerController extends HttpServlet {
-    QuestionDAO qdao ;
+
+    QuestionDAO qdao;
+
     @Override
     public void init() {
         qdao = new QuestionDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +42,7 @@ public class QuestionManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuestionManagerController</title>");            
+            out.println("<title>Servlet QuestionManagerController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet QuestionManagerController at " + request.getContextPath() + "</h1>");
@@ -62,14 +65,17 @@ public class QuestionManagerController extends HttpServlet {
             throws ServletException, IOException {
         String subjectID = request.getParameter("subjectID");
         String numAns = request.getParameter("numAns");
-        if(numAns==null){
+        String numQues = request.getParameter("numQues");
+        if (numAns == null) {
             numAns = "4";
         }
-        
-        
-        
+        if (numQues == null) {
+            numQues = "1";
+        }
+
         request.setAttribute("subjectID", subjectID);
         request.setAttribute("numAns", numAns);
+        request.setAttribute("numQues", numQues);
         request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
     }
 
@@ -86,12 +92,14 @@ public class QuestionManagerController extends HttpServlet {
             throws ServletException, IOException {
         String subjectID = request.getParameter("subjectID");
         String numAns = request.getParameter("numAns");
-        String question = request.getParameter("question");
-        qdao.insertQuestion(subjectID, question, "");
-        qdao.loadQuestion();
-        int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size()-1).getQuestionID();        
-        for (int i = 1; i <= Integer.parseInt(numAns); i++) {
-            qdao.insertAnswerByQuestionID(questionID, request.getParameter("ans"+i));
+        String numQues = request.getParameter("numQues");
+        for (int j = 1; j <= Integer.parseInt(numQues); j++) {
+            qdao.insertQuestion(subjectID, request.getParameter("ques"+j), "");
+            qdao.loadQuestion();
+            int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
+            for (int i = 1; i <= Integer.parseInt(numAns); i++) {
+                qdao.insertAnswerByQuestionID(questionID, request.getParameter("ques"+j+"ans" + i));
+            }
         }
         response.sendRedirect("QuestionManagerController");
     }

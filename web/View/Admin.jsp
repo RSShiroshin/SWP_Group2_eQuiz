@@ -39,7 +39,8 @@
                         <td>1</td>
                         <td>active</td>
                     </tr>
-                </c:forEach>.
+                </c:forEach>
+
             </table>
         </div>
 
