@@ -17,7 +17,7 @@ import java.util.Arrays;
  *
  * @author hello
  */
-public class loginController extends HttpServlet {
+public class LoginController extends HttpServlet {
 
      UserDAO userDAO;
 
