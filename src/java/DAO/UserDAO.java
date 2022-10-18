@@ -11,7 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+
 
 /**
  *
@@ -90,8 +91,8 @@ public class UserDAO extends DBContext {
     }
 
     public void insertUser(String userName, String password, String fullName,
-            String email, String avatar, String description, int roleID, boolean statusDB, String registerDay) {
-        String sql = "insert into [User] values(?,?,?,?,?,?,?,?,'" + registerDay + "')";
+            String email, String avatar, String description, int roleID, boolean statusDB, Date registerDay) {
+        String sql = "insert into [User] values(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, userName);
@@ -102,7 +103,7 @@ public class UserDAO extends DBContext {
             ps.setString(6, description);
             ps.setInt(7, roleID);
             ps.setBoolean(8, statusDB);
-//            ps.setDate(9, registerDay);
+            ps.setDate(9, registerDay);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
@@ -213,5 +214,35 @@ public class UserDAO extends DBContext {
         return null;
     }
 }
+
+ public User checkDupAcc(String username,String fullname,String email) {
+        String sql = "SELECT [userID]\n"
+                + "      ,[userName]\n"
+                + "      ,[password]\n"
+                + "      ,[fullName]\n"
+                + "      ,[email]\n"
+                + "      ,[avatar]\n"
+                + "      ,[description]\n"
+                + "      ,[roleID]\n"
+                + "      ,[status]\n"
+                + "      ,[registerDay]\n"
+                + "  FROM [dbo].[User]\n"
+                + "  WHERE Username = ? OR fullName =? OR email = ?";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, fullname);
+            st.setString(3, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                User acc = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
+                return acc;
+            }
+        } catch (SQLException ex) {
+
+        }
+        return null;
+    }
+
 
 
