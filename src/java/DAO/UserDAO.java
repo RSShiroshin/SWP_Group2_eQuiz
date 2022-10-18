@@ -74,8 +74,8 @@ public class UserDAO extends DBContext {
         }
     }
     
-    public ArrayList loadRoleName(){
-        ArrayList roleNameList = new ArrayList<>();
+    public ArrayList<String> loadRoleName(){
+        ArrayList<String> roleNameList = new ArrayList<>();
         String sql = "select *  from [RoleName]";
          try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -159,6 +159,7 @@ public class UserDAO extends DBContext {
             String email, String description) {
         String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?, description = ? where userID = ?";
         try {
+            String status = "";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(6, UserID);
             ps.setString(1, userName);
@@ -187,26 +188,25 @@ public class UserDAO extends DBContext {
 
 
      public User checkLogin(String username, String password) {
-        String sql = "SELECT [userID]\n"
-                + "      ,[userName]\n"
-                + "      ,[password]\n"
-                + "      ,[fullName]\n"
-                + "      ,[email]\n"
-                + "      ,[avatar]\n"
-                + "      ,[description]\n"
-                + "      ,[roleID]\n"
-                + "      ,[status]\n"
-                + "      ,[registerDay]\n"
-                + "  FROM [dbo].[User]\n"
-                + "  WHERE Username = ? AND [Password] = ?";
+        String sql = " SELECT [userID]\n" +
+"                      ,[userName]\n" +
+"                      ,[password]\n" +
+"                      ,[fullName]\n" +
+"                      ,[email]\n" +
+"                      ,[avatar]\n" +
+"                      ,[description]\n" +
+"                      ,[roleID]\n" +
+"                      ,[status]\n" +
+"                      ,[registerDay]\n" +
+"                  FROM [dbo].[User]\n" +
+"                  WHERE Username = ? AND [Password] = ?";
         try {
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, username);
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                User acc = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
-                return acc;
+                return new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
             }
         } catch (SQLException ex) {
 

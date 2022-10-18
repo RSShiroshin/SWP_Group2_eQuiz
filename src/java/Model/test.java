@@ -6,12 +6,8 @@ package Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,9 +16,24 @@ import java.util.logging.Logger;
 public class test {
 
     public static void main(String[] args) {
-        String data = "thương thiên phách huyết";        
+        String data = "";
+        read();
     }
     static ArrayList<String> list = new ArrayList<>();
 
-    
+    public static void read() {
+        try {
+            File myObj = new File("D:\\demo.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
 }

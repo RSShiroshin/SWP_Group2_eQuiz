@@ -125,22 +125,29 @@
                     </form>
                 </div>
                 <div class="addQuiz">
-                    <form action="QuestionManagerController" method="post">
-                        <input type="hidden" name="numAns" value="${numAns}">
-                        <input type="hidden" name="numQues" value="${numQues}">
+                    <form action="QuestionManagerController" method="post">                        
+                        <input type="hidden" name="numQues" value="${cookie.numQues.getValue()}">
                         <input type="hidden" name="subjectID" value="${subjectID}">                       
-                        
 
-                        <c:forEach begin="1" end="${numQues}" var="j">
-                            <input type="text" name="ques${j}"><br>
+
+                        <div id="content">
+                            <input type="text" name="ques1"><br>
                             <p>THUẬT NGỮ</p>
-                            <c:forEach begin="1" end="${numAns}" var="i">
-                            <input type="text" id="id" name="ques${j}ans${i}"><br>
-                            </c:forEach>
+                            <div id="addQ">
+                            <input type="text" id="id" name="ques1ans1"><br>
+                            <input type="text" id="id" name="ques1ans2"><br> 
+                            <input type="text" id="id" name="ques1ans3"><br> 
+                            <input type="text" id="id" name="ques1ans4"><br>
+                            </div>
+                            <button type="button" id="demo1">Add Ques</button>
                             <p>ĐỊNH NGHĨA</p>
-                        </c:forEach>                        
+                        </div>
+                        <div>                            
+                            <button type="button" id="demo">Change Content</button>
+                        </div>
 
-                        <
+
+
                         
                         <input type="submit" value="Submit">
 
@@ -153,5 +160,34 @@
             </div>
         </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#demo").click(function () {
+                    $.ajax({
+                        url: "Ajaxdemo",
+                        type: 'GET',
+                        data: {quesNum: "${cookie.numQues.getValue()}"},
+                        success: function (data) {
+                            var row = document.getElementById("content");
+                            row.innerHTML += data;
+                        }
+                    });
+                });
+            });
+            $(document).ready(function () {
+                $("#demo1").click(function () {
+                    $.ajax({
+                        url: "Ajaxdemo",
+                        type: 'POST',
+                        data: {quesNum: "${cookie.numQues.getValue()}"},
+                        success: function (data) {
+                            var row = document.getElementById("addQ");
+                            row.innerHTML += data;
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

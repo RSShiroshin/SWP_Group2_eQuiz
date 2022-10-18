@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import DAO.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,14 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class QuestionManagerController extends HttpServlet {
-
-    QuestionDAO qdao;
-
-    @Override
-    public void init() {
-        qdao = new QuestionDAO();
-    }
+public class Ajaxdemo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +35,10 @@ public class QuestionManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuestionManagerController</title>");
+            out.println("<title>Servlet Ajaxdemo</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet QuestionManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Ajaxdemo at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,16 +56,39 @@ public class QuestionManagerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String subjectID = request.getParameter("subjectID");
-        String numQues = request.getParameter("numQues");      
-        if (numQues == null) {
-            numQues = "1";
+
+        Cookie cookie = getCookie(request, "numQues");
+
+        if (cookie != null) {
+            cookie.setValue(String.valueOf(Integer.parseInt(cookie.getValue()) + 1));
+            response.addCookie(cookie);
         }
-        Cookie quesNum=new Cookie("numQues",String.valueOf(numQues));
-        response.addCookie(quesNum);
-        request.setAttribute("subjectID", subjectID);        
-        
-        request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
+        PrintWriter out = response.getWriter();
+
+        out.println("<input type=\"text\" name=\"ques" + cookie.getValue() + "\"><br>\n"
+                + "                            <p>THUẬT NGỮ</p>\n"
+                + "                            <div id=\"addQ\">\n"
+                + "                            <input type=\"text\" id=\"id\" name=\"ques" + cookie.getValue() + "ans1\"><br>\n"
+                + "                            <input type=\"text\" id=\"id\" name=\"ques" + cookie.getValue() + "ans2\"><br> \n"
+                + "                            <input type=\"text\" id=\"id\" name=\"ques" + cookie.getValue() + "ans3\"><br> \n"
+                + "                            <input type=\"text\" id=\"id\" name=\"ques" + cookie.getValue() + "ans4\"><br> \n"
+                + "                            <input type=\"text\" id=\"id\" name=\"ques1ans4\"><br>\n"
+                + "                            </div>\n"
+                + "                            <button type=\"button\" id=\"demo1\">Add Ques</button>\n"
+                + "                            <p>ĐỊNH NGHĨA</p>");
+
+    }
+
+    public static Cookie getCookie(HttpServletRequest request, String name) {
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals(name)) {
+                    return cookie;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -87,18 +102,14 @@ public class QuestionManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String subjectID = request.getParameter("subjectID");
-        String numAns = request.getParameter("numAns");
-        String numQues = request.getParameter("numQues");
-        for (int j = 1; j <= Integer.parseInt(numQues); j++) {
-            qdao.insertQuestion(subjectID, request.getParameter("ques"+j), "");
-            qdao.loadQuestion();
-            int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
-            for (int i = 1; i <= Integer.parseInt(numAns); i++) {
-                qdao.insertAnswerByQuestionID(questionID, request.getParameter("ques"+j+"ans" + i));
-            }
+        PrintWriter out = response.getWriter();
+        Cookie cookie = getCookie(request, "numQues");
+
+        if (cookie != null) {
+            cookie.setValue(String.valueOf(Integer.parseInt(cookie.getValue()) + 1));
+            response.addCookie(cookie);
         }
-        response.sendRedirect("QuestionManagerController");
+        out.println("<input type=\"text\" id=\"id\" name=\"ques1ans\"><br>");
     }
 
     /**

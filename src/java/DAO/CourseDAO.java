@@ -222,8 +222,8 @@ public class CourseDAO extends DBContext {
             ps.setString(1, CourseId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Course product = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
-                return product;
+                Course course = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+                return course;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
