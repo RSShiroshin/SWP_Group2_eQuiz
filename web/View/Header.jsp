@@ -71,10 +71,10 @@
                     <a href="CourseManagerController"><p>Course Management</p></a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1}" >
-                    <a href="LibraryExpertController?userID=${sessionScope.acc.userID}"><p>Thư viện của bạn</p></a>
+                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 2}" >
-                    <a href="LibraryExpertController?userID=${sessionScope.acc.userID}"><p>Thư viện của bạn</p></a>
+                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                 </c:if>
 
             </div>
@@ -117,7 +117,7 @@
                 </c:if>
                 <c:if test="${sessionScope.userLogin == null}">
                     <div>
-                        <a href="login" style="text-decoration: none; color: black;">Đăng nhap</a>
+                        <a href="login" style="text-decoration: none; color: black;">Đăng nhập</a>
                     </div>
                 </c:if>
             </div>
