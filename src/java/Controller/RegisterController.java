@@ -32,10 +32,11 @@ public class RegisterController extends HttpServlet {
     }
 
     public static void SendEmail(String getEmail) throws MessagingException, UnsupportedEncodingException {
-
-        final String fromEmail = "doraemonbiz2010@gmail.com";
+        
+        //Email cua ban
+        final String fromEmail = ""; 
         // Mat khai email cua ban
-        final String password = "FPT19032001K15f";
+        final String password = "";
         // dia chi email nguoi nhan
         final String toEmail = "" + getEmail;
 
