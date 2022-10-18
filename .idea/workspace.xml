@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9d9e73d3-bead-4f27-8905-bccbd37e2f75" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jakarta_servlet_jsp_jstl_2_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jakarta_servlet_jsp_jstl_api_2_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/sqljdbc42.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/ChangeProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/ChangeProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/CourseManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/CourseManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/QuizGenerateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/QuizGenerateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/QuizReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/QuizReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/QuizViewScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/QuizViewScoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/RoleChangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/RoleChangeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/UserManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/UserManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/UserStatusChangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/UserStatusChangeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/loginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/DAO/CourseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/CourseDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/DAO/QuestionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/QuestionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/Model/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Model/Quiz.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2GAoa9NnNj0JWyqLK1YaWk6YneC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/Apache Software Foundation/Tomcat 10.0/lib&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9d9e73d3-bead-4f27-8905-bccbd37e2f75" name="Changes" comment="" />
+      <created>1665840810910</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1665840810910</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/DAO/UserDAO.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/Controller/QuizGenerateController.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/Controller/UserManagerController.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class RoleChangeController extends HttpServlet {
 
-    UserDAO ud = new UserDAO();
+    final UserDAO ud = new UserDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

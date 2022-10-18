@@ -23,8 +23,8 @@ import java.util.ArrayList;
  */
 public class QuizViewScoreController extends HttpServlet {
 
-    QuestionDAO qd = new QuestionDAO();
-    QuizDAO quiz = new QuizDAO();
+    final QuestionDAO qd = new QuestionDAO();
+    final QuizDAO quiz = new QuizDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

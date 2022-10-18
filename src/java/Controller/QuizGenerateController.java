@@ -8,14 +8,14 @@ import DAO.QuestionDAO;
 import DAO.QuizDAO;
 import Model.Answer;
 import Model.Question;
-import Model.User;
+//import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ import java.util.Random;
  */
 public class QuizGenerateController extends HttpServlet {
 
-    QuestionDAO qd = new QuestionDAO();
-    QuizDAO quiz = new QuizDAO();
+    final QuestionDAO qd = new QuestionDAO();
+    final QuizDAO quiz = new QuizDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

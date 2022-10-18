@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class QuizReviewController extends HttpServlet {
 
     QuestionDAO qd = new QuestionDAO();
-    QuizDAO quiz = new QuizDAO();
+    final QuizDAO quiz = new QuizDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -107,9 +107,9 @@ public class QuizReviewController extends HttpServlet {
         //so sanh user answer vs correct answer
         ArrayList<QuizCheck> check = quiz.getQuizCheck(quizID);
         int countCorrect = 0;
-        for(int i =0; i< check.size();i++) {
-            if(check.get(i).isIsAnswer()==true) {
-                quiz.updateUserIsCorrect(quizID, check.get(i).getQuestionID(), true);
+        for (QuizCheck quizCheck : check) {
+            if (quizCheck.isIsAnswer() == true) {
+                quiz.updateUserIsCorrect(quizID, quizCheck.getQuestionID(), true);
                 countCorrect++;
             }
         }   
