@@ -1,25 +1,69 @@
 package Controller;
 
 import DAO.UserDAO;
+import Model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.Properties;
 
 /**
  *
  * @author hello
  */
 public class RegisterController extends HttpServlet {
-    
+
     UserDAO userDAO;
-    
+
     @Override
     public void init() {
         userDAO = new UserDAO();
+    }
+
+    public static void SendEmail(String getEmail) throws MessagingException, UnsupportedEncodingException {
+
+        final String fromEmail = "doraemonbiz2010@gmail.com";
+        // Mat khai email cua ban
+        final String password = "FPT19032001K15f";
+        // dia chi email nguoi nhan
+        final String toEmail = "" + getEmail;
+
+        final String subject = "Java Example Test";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.port", "587"); //TLS Port
+        props.put("mail.smtp.auth", "true"); //enable authentication
+        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        });
+
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(fromEmail));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+        message.setSubject(subject);
+
+        message.setSubject("HTML Message");
+        String htmlContent = "<h1>Html Tag</h1>";
+        message.setContent(htmlContent, "text/html");
+
+        Transport.send(message);
     }
 
     /**
@@ -33,19 +77,19 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+//        response.setContentType("text/html;charset=UTF-8");
+//        try ( PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet RegisterController</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,7 +104,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/View/register.jsp").forward(request, response);
+        request.getRequestDispatcher("View/register.jsp").forward(request, response);
     }
 
     /**
@@ -73,21 +117,54 @@ public class RegisterController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, UnsupportedEncodingException {
         String username = request.getParameter("user");
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
-        String fullname = request.getParameter("fullname");
+        String rePassword = request.getParameter("repass");
+        String error = "";
         int role = 2;
         boolean status = false;
         String avatar = "";
         String description = "";
-        //String date_raw = "2022-13-10";
-        Date date = Date.valueOf("2022-10-13");
-        userDAO.insertUser(username, password, fullname, email, avatar, description, role, status, date.toString());
-        processRequest(request, response);
-        response.sendRedirect("/View/Login.jsp");
-        
+        String date_raw = "2022-10-18";
+        String fullname = request.getParameter("fullname");
+        Date date = Date.valueOf(date_raw);
+        UserDAO userdao = new UserDAO();
+        User acc = userdao.checkDupAcc(username,fullname,email);
+        if (acc != null) {
+            error = "Account is existed!";
+            request.setAttribute("error", error);
+            request.getRequestDispatcher("View/register.jsp").forward(request, response);
+        } else {
+            if (!password.equals(rePassword)) {
+                error = "Re-enter password isn't match! please try again";
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("View/register.jsp").forward(request, response);
+            } else {
+                String sha256Pass = "";
+                try {
+                    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                    byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+                    sha256Pass = convertByteToString(hash);
+                } catch (NoSuchAlgorithmException ex) {
+                    System.out.println("" + ex);
+                }
+                try {
+                    SendEmail(email);
+                } catch (MessagingException ex) {
+                    System.out.println("" + ex);
+                }
+                userDAO.insertUser(username, sha256Pass, fullname, email, avatar, description, role, status, date);
+                processRequest(request, response);
+                response.sendRedirect("View/Login.jsp");
+            }
+        }
+    }
+
+    public static String convertByteToString(byte[] byteValue) {
+        String stringValue = "" + Arrays.toString(byteValue);
+        return (stringValue);
     }
 
     /**
