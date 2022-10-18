@@ -23,7 +23,7 @@
                       <a style="color: black;" href="${pageContext.request.contextPath}/View/register.jsp">Sign up</a>
                     <a style="color: #939bb4" href="${pageContext.request.contextPath}/View/Login.jsp">Log in</a>
                 </div>
-                <form action="loginController" method="post">
+                <form action="login" method="post">
                     <div class="infoUser">
                         <input type="text" name="id" placeholder="Nhập địa chỉ email hoặc tên người dùng của bạn">
                         <input type="password" name="pass" placeholder="Nhập mật khẩu">

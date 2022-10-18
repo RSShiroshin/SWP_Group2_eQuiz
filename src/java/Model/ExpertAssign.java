@@ -9,5 +9,32 @@ package Model;
  * @author Admin
  */
 public class ExpertAssign {
-    
+
+    private int userID;
+    private String subjectID;
+
+    public ExpertAssign() {
+    }
+
+    public ExpertAssign(int userID, String subjectID) {
+        this.userID = userID;
+        this.subjectID = subjectID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getSubjectID() {
+        return subjectID;
+    }
+
+    public void setSubjectID(String subjectID) {
+        this.subjectID = subjectID;
+    }
+
 }

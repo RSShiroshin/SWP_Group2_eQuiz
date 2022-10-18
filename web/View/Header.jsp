@@ -67,18 +67,15 @@
                     <p>Trang chủ</p>
                 </a>
 
-                <p>Loại Quiz</p>
-                <p>Thư viện của bạn</p>
-
-                <a href="#">
-                    <input type="submit" value="Tạo" name="crate" />
-                </a>
-                <a href="CourseManagerController">
-                    <input type="submit" value="Admin" name="crate" />
-                </a>
-                <a href="CourseManagerController">
-                    <input type="submit" value="Course" name="crate" />
-                </a>
+                <c:if test="${sessionScope.acc.getRole() == 0}" >
+                    <a href="CourseManagerController"><p>Course Management</p></a>
+                </c:if>
+                <c:if test="${sessionScope.acc.getRole() == 1}" >
+                    <a href="LibraryExpertController?userID=${sessionScope.acc.userID}"><p>Thư viện của bạn</p></a>
+                </c:if>
+                <c:if test="${sessionScope.acc.getRole() == 2}" >
+                    <a href="LibraryExpertController?userID=${sessionScope.acc.userID}"><p>Thư viện của bạn</p></a>
+                </c:if>
 
             </div>
             <div class="topR">
@@ -120,7 +117,7 @@
                 </c:if>
                 <c:if test="${sessionScope.userLogin == null}">
                     <div>
-                        <a href="loginController" style="text-decoration: none; color: black;">Đăng nhap</a>
+                        <a href="login" style="text-decoration: none; color: black;">Đăng nhap</a>
                     </div>
                 </c:if>
             </div>

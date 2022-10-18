@@ -213,7 +213,7 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
-}
+
 
  public User checkDupAcc(String username,String fullname,String email) {
         String sql = "SELECT [userID]\n"
@@ -244,5 +244,5 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-
+}
 
