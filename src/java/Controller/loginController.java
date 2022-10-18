@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 /**
  *
@@ -64,8 +68,16 @@ public class loginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("id");
         String password = request.getParameter("pass");
+        String sha256Pass = "";
+         try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            sha256Pass = convertByteToString(hash);
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("" + ex);
+        }
         UserDAO userdao = new UserDAO();       
-        User acc = userdao.checkLogin(username, password);
+        User acc = userdao.checkLogin(username, sha256Pass);
         
         HttpSession userLogin=request.getSession(); 
         
@@ -79,13 +91,13 @@ public class loginController extends HttpServlet {
                 userLogin.setAttribute("userLogin", acc);
                 if(acc.getRole() == 0){
                      //chuyen huong den trang cua admin
-                     request.getRequestDispatcher("home").forward(request, response);
+                     request.getRequestDispatcher("home.html").forward(request, response);
                  } else if(acc.getRole() == 1){
                      //chuyen huong den trang cua expert
-                     request.getRequestDispatcher("home").forward(request, response);
+                     request.getRequestDispatcher("home.html").forward(request, response);
                  } else if(acc.getRole() == 2){
                   //chuyen huong den trang cua customer
-                  request.getRequestDispatcher("home").forward(request, response);
+                  request.getRequestDispatcher("home.html").forward(request, response);
                  } 
             }
     }
@@ -99,5 +111,11 @@ public class loginController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public static String
+            convertByteToString(byte[] byteValue) {
+        String stringValue = "" + Arrays.toString(byteValue);
+        return (stringValue);
+    }
 
 }
