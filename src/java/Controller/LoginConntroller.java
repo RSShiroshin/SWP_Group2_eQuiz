@@ -77,25 +77,25 @@ public class LoginConntroller extends HttpServlet {
 //            System.out.println("" + ex);
 //        }
         UserDAO userdao = new UserDAO();       
-        User acc = userdao.checkLogin(username, password);
+        User userLogin = userdao.checkLogin(username, password);
         
-        HttpSession userLogin=request.getSession(); 
+        HttpSession session=request.getSession(); 
         
         
         String error = "";
-            if(acc == null) {
+            if(userLogin == null) {
             error = "Username or Password is invaild";
             request.setAttribute("error", error);
             request.getRequestDispatcher("View/Login.jsp").forward(request, response);
             } else {       
-                userLogin.setAttribute("acc", acc);
-                if(acc.getRole() == 0){
+                session.setAttribute("userLogin", userLogin);
+                if(userLogin.getRole() == 0){
                      //chuyen huong den trang cua admin
                      request.getRequestDispatcher("home").forward(request, response);
-                 } else if(acc.getRole() == 1){
+                 } else if(userLogin.getRole() == 1){
                      //chuyen huong den trang cua expert
                      request.getRequestDispatcher("home").forward(request, response);
-                 } else if(acc.getRole() == 2){
+                 } else if(userLogin.getRole() == 2){
                   //chuyen huong den trang cua customer
                   request.getRequestDispatcher("home").forward(request, response);
                  } 

@@ -67,13 +67,13 @@
                     <p>Trang chủ</p>
                 </a>
 
-                <c:if test="${sessionScope.acc.getRole() == 0}" >
+                <c:if test="${sessionScope.userLogin.getRole() == 0}" >
                     <a href="CourseManagerController"><p>Course Management</p></a>
                 </c:if>
-                <c:if test="${sessionScope.acc.getRole() == 1}" >
+                <c:if test="${sessionScope.userLogin.getRole() == 1}" >
                     <a href="LibraryExpertController?userID=${sessionScope.acc.userID}"><p>Thư viện của bạn</p></a>
                 </c:if>
-                <c:if test="${sessionScope.acc.getRole() == 2}" >
+                <c:if test="${sessionScope.userLogin.getRole() == 2}" >
                     <a href="LibraryExpertController?userID=${sessionScope.acc.userID}"><p>Thư viện của bạn</p></a>
                 </c:if>
 
