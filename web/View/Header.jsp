@@ -66,6 +66,10 @@
                 <a style="" href="/QuizPracticeBeta/home">
                     <p>Trang chủ</p>
                 </a>
+                
+                <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
+                    <p>Profile Management</p>
+                </a>
 
                 <c:if test="${sessionScope.userLogin.getRole() == 0}" >
                     <a href="CourseManagerController"><p>Course Management</p></a>

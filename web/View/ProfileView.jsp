@@ -46,9 +46,9 @@
                 </form>
             </div>
             
-            <div class="profileCourse" style="display: block; margin-top: 16px; border: 1px solid">
+<!--            <div class="profileCourse" style="display: block; margin-top: 16px; border: 1px solid">
                 <p>load cac course da dang ky o duoi</p>
-            </div>
+            </div>-->
         </div>
         
     </body>
