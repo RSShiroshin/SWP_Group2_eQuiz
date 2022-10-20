@@ -67,18 +67,25 @@
                     <p>Trang chủ</p>
                 </a>
                 
-                <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                    <p>Profile Management</p>
-                </a>
+                
 
                 <c:if test="${sessionScope.userLogin.getRole() == 0}" >
                     <a href="CourseManagerController"><p>Course Management</p></a>
+                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
+                    <p>Profile Management</p>
+                </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
+                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
+                    <p>Profile Management</p>
+                </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 2}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
+                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
+                    <p>Profile Management</p>
+                </a>
                 </c:if>
 
             </div>

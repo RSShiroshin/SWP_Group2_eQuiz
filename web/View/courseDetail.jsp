@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -62,10 +63,6 @@
     <body>
         <%@ include file="Header.jsp" %>        
         <div id="topProfile">
-            <div class="profileName">
-                <h2>${course.courseID}</h2>
-                <p>${course.courseName}</p>
-            </div>
             <p class="titleNo">Các Môn Trong Course Này (${num})</p>
             <div class="quizDetail">
                 <c:forEach items="${slist}" var="s">
@@ -74,7 +71,7 @@
                             <p>${s.subjectID}</p>
                         </div>
                         <div class="quizRight">
-                            <p>${s.subjectName}</p>
+                            <a href="SubjectDetail?subjectID=${s.subjectID}"><p>${s.subjectName}</p></a>
                         </div>
                     </div>
                 </c:forEach>

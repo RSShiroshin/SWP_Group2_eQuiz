@@ -208,8 +208,8 @@ class using2{
 ////        System.out.println(quizQuestion);
 ////        System.out.println(quizAnswer);
         qd.loadQuestion();
-        for (Question question : qd.getQuestionBySubjectID("SSL101")) {
-            System.out.println(question.getQuestionID());
+        for (Question question : qd.getQuestionBySubjectID("SWT301")) {
+            System.out.println(question.getContent());
         }
         Question q = qd.getQuestionBySubjectID("SSL101").get(qd.getQuestionBySubjectID("SSL101").size()-1);
         System.out.println(q.getQuestionID());

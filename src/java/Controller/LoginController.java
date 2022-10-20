@@ -68,36 +68,36 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("id");
         String password = request.getParameter("pass");
-        String sha256Pass = "";
-         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            sha256Pass = convertByteToString(hash);
-        } catch (NoSuchAlgorithmException ex) {
-            System.out.println("" + ex);
-        }
+//        String sha256Pass = "";
+//         try {
+//            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+//            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+//            sha256Pass = convertByteToString(hash);
+//        } catch (NoSuchAlgorithmException ex) {
+//            System.out.println("" + ex);
+//        }
         UserDAO userdao = new UserDAO();       
-        User acc = userdao.checkLogin(username, sha256Pass);
+        User userLogin = userdao.checkLogin(username, password);
         
-        HttpSession userLogin=request.getSession(); 
+        HttpSession session=request.getSession(); 
         
         
         String error = "";
-            if(acc == null) {
+            if(userLogin == null) {
             error = "Username or Password is invaild";
             request.setAttribute("error", error);
             request.getRequestDispatcher("View/Login.jsp").forward(request, response);
             } else {       
-                userLogin.setAttribute("userLogin", acc);
-                if(acc.getRole() == 0){
+                session.setAttribute("userLogin", userLogin);
+                if(userLogin.getRole() == 0){
                      //chuyen huong den trang cua admin
-                     request.getRequestDispatcher("home.html").forward(request, response);
-                 } else if(acc.getRole() == 1){
+                     request.getRequestDispatcher("home").forward(request, response);
+                 } else if(userLogin.getRole() == 1){
                      //chuyen huong den trang cua expert
-                     request.getRequestDispatcher("home.html").forward(request, response);
-                 } else if(acc.getRole() == 2){
+                     request.getRequestDispatcher("home").forward(request, response);
+                 } else if(userLogin.getRole() == 2){
                   //chuyen huong den trang cua customer
-                  request.getRequestDispatcher("home.html").forward(request, response);
+                  request.getRequestDispatcher("home").forward(request, response);
                  } 
             }
     }
