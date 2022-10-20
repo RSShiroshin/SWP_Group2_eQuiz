@@ -4,14 +4,14 @@
  */
 package Controller;
 
-import DAO.CourseDAO;
-import Model.Course;
+import DAO.SubjectDAO;
+import Model.Subject;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -31,17 +31,13 @@ public class DetailCourseController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            String courseID = request.getParameter("courseID");
-            CourseDAO courseDAO = new CourseDAO();
-            courseDAO.loadCourse();
-            Course listCourses= courseDAO.getCourseById(courseID);
-            
-            request.setAttribute("listCourses", listCourses);
-            request.getSession().setAttribute("UrlHistory", "DetailCourseController?courseID="+courseID);
-            
-            request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
-        }
+        String courseID = request.getParameter("courseID");
+        SubjectDAO sdao = new SubjectDAO();
+        sdao.loadSubject();
+        ArrayList<Subject> slist = sdao.getSubjectListByCourseID(courseID);
+        request.setAttribute("num", slist.size());
+        request.setAttribute("slist", slist);
+        request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

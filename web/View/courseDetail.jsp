@@ -60,21 +60,21 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="Header.jsp" %>        
         <div id="topProfile">
             <div class="profileName">
-                <h2>SWT301 - PT1</h2>
-                <p>Dao Trung Duc</p>
+                <h2>${course.courseID}</h2>
+                <p>${course.courseName}</p>
             </div>
-            <p class="titleNo">Các Môn Trong Course Này (29)</p>
+            <p class="titleNo">Các Môn Trong Course Này (${num})</p>
             <div class="quizDetail">
-                <c:forEach begin="1" end="10">
+                <c:forEach items="${slist}" var="s">
                     <div class="quizBorder">
                         <div class="quizLeft">
-                            <p>Hello anh em nhé,Hello anh em nhé,Hello anh em nhé,</p>
+                            <p>${s.subjectID}</p>
                         </div>
                         <div class="quizRight">
-                            <p>Hello anh em nhé</p>
+                            <p>${s.subjectName}</p>
                         </div>
                     </div>
                 </c:forEach>
