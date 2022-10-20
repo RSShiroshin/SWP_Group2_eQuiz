@@ -18,7 +18,11 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class DetailCourseController extends HttpServlet {
-
+    SubjectDAO sdao ;
+    @Override
+    public void init() {        
+        sdao = new SubjectDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,12 +35,12 @@ public class DetailCourseController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String courseID = request.getParameter("courseID");
-        SubjectDAO sdao = new SubjectDAO();
+        String courseID = request.getParameter("courseID");        
         sdao.loadSubject();
         ArrayList<Subject> slist = sdao.getSubjectListByCourseID(courseID);
         request.setAttribute("num", slist.size());
         request.setAttribute("slist", slist);
+        sdao.closeConnection();
         request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
     }
 

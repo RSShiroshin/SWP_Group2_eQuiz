@@ -68,10 +68,12 @@ public class SubjectManagerController extends HttpServlet {
             throws ServletException, IOException {
         sdao.loadSubject();
         String courseID = request.getParameter("courseID");
-
+        
         request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
         request.setAttribute("course", cdao.getCourseById(courseID));
         request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
+        sdao.closeConnection();
+        cdao.closeConnection();
         request.getRequestDispatcher("View/SubjectManager.jsp").forward(request, response);
     }
 

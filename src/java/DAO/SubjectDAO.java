@@ -20,7 +20,7 @@ public class SubjectDAO {
     private Connection con;
     private String status;
     private ArrayList<Subject> subjectList;
-    
+
     public SubjectDAO() {
         try {
             con = new DBContext().getConnection();
@@ -32,30 +32,27 @@ public class SubjectDAO {
     public ArrayList<Subject> getSubjectList() {
         return subjectList;
     }
-    
-    public void loadSubject(){
+
+    public void loadSubject() {
         subjectList = new ArrayList<>();
         String sql = "select *  from Subject";
-         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-            ResultSet rs = ps.executeQuery();
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
             while (rs.next()) {
-               String subjectID = rs.getString(1);
-               String subjectName = rs.getString(2);
-               String description = rs.getString(3);  
-               String courseID = rs.getString(4);  
-               subjectList.add(new Subject(subjectID, subjectName, description, courseID));
+                String subjectID = rs.getString(1);
+                String subjectName = rs.getString(2);
+                String description = rs.getString(3);
+                String courseID = rs.getString(4);
+                subjectList.add(new Subject(subjectID, subjectName, description, courseID));
             }
         } catch (SQLException e) {
-            status = "Error Load Course" + e.getMessage();
+            status = "Error Load Subject" + e.getMessage();
         }
     }
-    public void insertSubject(String subjectID,String subjectName,String description,String courseID) {
+
+    public void insertSubject(String subjectID, String subjectName, String description, String courseID) {
         String sql = "insert into Subject values(?,?,?,?)";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);                                  
-             ps.setString(4, courseID);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setString(4, courseID);
             ps.setString(1, subjectID);
             ps.setString(2, subjectName);
             ps.setString(3, subjectName);
@@ -64,37 +61,45 @@ public class SubjectDAO {
             status = "Error Insert" + e.getMessage();
         }
     }
-    public void updateSubject(String subjectID,String subjectName,String description) {
+
+    public void updateSubject(String subjectID, String subjectName, String description) {
         String sql = "Update Subject set subjectName = ?,description = ? where subjectID = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setString(3, subjectID);
             ps.setString(1, subjectName);
-            ps.setString(2, description);            
+            ps.setString(2, description);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
         }
     }
+
     public void deleteSubject(String subjectID) {
         String sql = "delete from Subject where subjectID = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setString(1, subjectID);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Delete" + e.getMessage();
         }
     }
-    public ArrayList<Subject> getSubjectListByCourseID(String courseID){
+
+    public ArrayList<Subject> getSubjectListByCourseID(String courseID) {
         ArrayList<Subject> subjectByCourse = new ArrayList<>();
         for (Subject subject : getSubjectList()) {
-            if(subject.getCourseID().equals(courseID)){
+            if (subject.getCourseID().equals(courseID)) {
                 subjectByCourse.add(subject);
             }
         }
         return subjectByCourse;
     }
 
-}
+    public void closeConnection() {
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            status = "Error!!" + ex.getMessage();
+        }
+    }
 
+}

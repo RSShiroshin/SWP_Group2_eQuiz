@@ -21,7 +21,12 @@ import java.util.ArrayList;
  */
 public class UserManagerController extends HttpServlet {
 
-    final UserDAO ud = new UserDAO();
+    UserDAO ud;
+
+    @Override
+    public void init() {
+        ud = new UserDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,14 +66,13 @@ public class UserManagerController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ud.loadUser();
-        ArrayList<User> userList = new ArrayList<>();
-        ArrayList roleNameList = new ArrayList<>();
-        
+        ArrayList<User> userList;
+        ArrayList roleNameList;       
         userList = ud.getUserList();
-        roleNameList = ud.loadRoleName();
-        
+        roleNameList = ud.loadRoleName();       
         request.setAttribute("userList", userList);
         request.setAttribute("roleNameList", roleNameList);
+        ud.closeConnection();
         request.getRequestDispatcher("View/UserManagerView.jsp").forward(request, response);
     }
 

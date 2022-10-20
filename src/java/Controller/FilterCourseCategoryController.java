@@ -20,7 +20,11 @@ import java.util.List;
  * @author Admin
  */
 public class FilterCourseCategoryController extends HttpServlet {
-
+    CourseDAO courseDAO ;
+    @Override
+    public void init() {
+        courseDAO = new CourseDAO();        
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,13 +40,12 @@ public class FilterCourseCategoryController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-            List<Course> listCourses = new CourseDAO().getCoursesByCategoryId(categoryId);
-            request.setAttribute("listCourses", listCourses);
-            CourseDAO courseDAO = new CourseDAO();
+            List<Course> listCourses = courseDAO.getCoursesByCategoryId(categoryId);
+            request.setAttribute("listCourses", listCourses);           
             courseDAO.loadCourseCategory();
             List<CourseCategory> listCategories = courseDAO.getCategoryList();
             request.setAttribute("listCategories", listCategories);
-
+            courseDAO.closeConnection();
             request.getRequestDispatcher("View/Home.jsp").forward(request, response);
 
         }

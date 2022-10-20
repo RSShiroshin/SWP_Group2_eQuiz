@@ -28,8 +28,13 @@ import java.util.Random;
  */
 public class QuizGenerateController extends HttpServlet {
 
-    final QuestionDAO qd = new QuestionDAO();
-    final QuizDAO quiz = new QuizDAO();
+    QuestionDAO qd ;
+    QuizDAO quiz ;
+    @Override
+    public void init() {
+        qd = new QuestionDAO();
+        quiz = new QuizDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -125,6 +130,7 @@ public class QuizGenerateController extends HttpServlet {
         request.setAttribute("quizID", newQuizID);
         request.setAttribute("quizQuestion", quizQuestion);
         request.setAttribute("quizAnswer", quizAnswer);
+        quiz.closeConnection();
         request.getRequestDispatcher("View/QuizView.jsp").forward(request, response);
         
 //        processRequest(request, response);

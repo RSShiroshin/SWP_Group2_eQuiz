@@ -4,7 +4,6 @@
  */
 package DAO;
 
-
 import Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
-
 
 /**
  *
@@ -43,9 +41,7 @@ public class UserDAO extends DBContext {
     public void loadUser() {
         userList = new ArrayList<>();
         String sql = "select *  from [User]";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
             while (rs.next()) {
 
                 int userID = rs.getInt(1);
@@ -73,28 +69,25 @@ public class UserDAO extends DBContext {
             status = "Error Load User" + e.getMessage();
         }
     }
-    
-    public ArrayList<String> loadRoleName(){
+
+    public ArrayList<String> loadRoleName() {
         ArrayList<String> roleNameList = new ArrayList<>();
         String sql = "select *  from [RoleName]";
-         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
             while (rs.next()) {
-                String roleName = rs.getString(2);      
+                String roleName = rs.getString(2);
                 roleNameList.add(roleName);
             }
         } catch (SQLException e) {
             status = "Error Load User" + e.getMessage();
         }
-         return roleNameList;
+        return roleNameList;
     }
 
     public void insertUser(String userName, String password, String fullName,
             String email, String avatar, String description, int roleID, boolean statusDB, Date registerDay) {
         String sql = "insert into [User] values(?,?,?,?,?,?,?,?,?)";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setString(1, userName);
             ps.setString(2, password);
             ps.setString(3, fullName);
@@ -114,8 +107,7 @@ public class UserDAO extends DBContext {
             String email, String avatar, String description, int roleID, boolean statusDB, String registerDay) {
         String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?,  avatar = ?, description = ?, roleID = ?, status = ?, registerDay = '" + registerDay + "'"
                 + "where userID = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setInt(9, UserID);
             ps.setString(1, userName);
             ps.setString(2, password);
@@ -131,11 +123,10 @@ public class UserDAO extends DBContext {
             status = "Error Insert" + e.getMessage();
         }
     }
-    
+
     public void updateUserStatus(int userID, boolean statusDB) {
         String sql = "update [User] set status = ? where userID = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setInt(2, userID);
             ps.setBoolean(1, statusDB);
             ps.execute();
@@ -146,26 +137,23 @@ public class UserDAO extends DBContext {
 
     public void deleteUser(int userID) {
         String sql = "delete from [User] where userID = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setInt(1, userID);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Delete" + e.getMessage();
         }
     }
-    
-     public void updateUserProfile( int UserID, String userName, String password, String fullName,
+
+    public void updateUserProfile(int UserID, String userName, String password, String fullName,
             String email, String description) {
         String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?, description = ? where userID = ?";
-        try {
-            String status = "";
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setInt(6, UserID);
             ps.setString(1, userName);
             ps.setString(2, password);
             ps.setString(3, fullName);
-            ps.setString(4, email);            
+            ps.setString(4, email);
             ps.setString(5, description);
 //            ps.setDate(9, (java.sql.Date) registerDay);
             ps.execute();
@@ -173,11 +161,10 @@ public class UserDAO extends DBContext {
             status = "Error Insert" + e.getMessage();
         }
     }
-     
-     public void updateUserRole(int userID, int roleID) {
+
+    public void updateUserRole(int userID, int roleID) {
         String sql = "update [User] set roleID = ? where userID = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setInt(2, userID);
             ps.setInt(1, roleID);
             ps.execute();
@@ -186,27 +173,26 @@ public class UserDAO extends DBContext {
         }
     }
 
-
-     public User checkLogin(String username, String password) {
-        String sql = " SELECT [userID]\n" +
-"                      ,[userName]\n" +
-"                      ,[password]\n" +
-"                      ,[fullName]\n" +
-"                      ,[email]\n" +
-"                      ,[avatar]\n" +
-"                      ,[description]\n" +
-"                      ,[roleID]\n" +
-"                      ,[status]\n" +
-"                      ,[registerDay]\n" +
-"                  FROM [dbo].[User]\n" +
-"                  WHERE Username = ? AND [Password] = ?";
-        try {
-            PreparedStatement st = con.prepareStatement(sql);
+    public User checkLogin(String username, String password) {
+        String sql = " SELECT [userID]\n"
+                + "                      ,[userName]\n"
+                + "                      ,[password]\n"
+                + "                      ,[fullName]\n"
+                + "                      ,[email]\n"
+                + "                      ,[avatar]\n"
+                + "                      ,[description]\n"
+                + "                      ,[roleID]\n"
+                + "                      ,[status]\n"
+                + "                      ,[registerDay]\n"
+                + "                  FROM [dbo].[User]\n"
+                + "                  WHERE Username = ? AND [Password] = ?";
+        try ( PreparedStatement st = con.prepareStatement(sql);) {
             st.setString(1, username);
             st.setString(2, password);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
+            try ( ResultSet rs = st.executeQuery();) {
+                if (rs.next()) {
+                    return new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
+                }
             }
         } catch (SQLException ex) {
 
@@ -214,8 +200,7 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-
- public User checkDupAcc(String username,String fullname,String email) {
+    public User checkDupAcc(String username, String fullname, String email) {
         String sql = "SELECT [userID]\n"
                 + "      ,[userName]\n"
                 + "      ,[password]\n"
@@ -228,15 +213,15 @@ public class UserDAO extends DBContext {
                 + "      ,[registerDay]\n"
                 + "  FROM [dbo].[User]\n"
                 + "  WHERE Username = ? OR fullName =? OR email = ?";
-        try {
-            PreparedStatement st = con.prepareStatement(sql);
+        try ( PreparedStatement st = con.prepareStatement(sql);) {
             st.setString(1, username);
             st.setString(2, fullname);
             st.setString(3, email);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                User acc = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
-                return acc;
+            try ( ResultSet rs = st.executeQuery();) {
+                if (rs.next()) {
+                    User acc = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
+                    return acc;
+                }
             }
         } catch (SQLException ex) {
 
@@ -244,5 +229,12 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-}
+    public void closeConnection() {
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            status = "Error!!" + ex.getMessage();
+        }
+    }
 
+}

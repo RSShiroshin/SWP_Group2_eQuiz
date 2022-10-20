@@ -21,7 +21,12 @@ import java.io.PrintWriter;
  */
 public class ChangeProfileController extends HttpServlet {
 
-    final UserDAO ud = new UserDAO();
+    private UserDAO ud;
+    @Override
+    public void init() {
+        ud = new UserDAO();
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +44,7 @@ public class ChangeProfileController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangeProfileController</title>");            
+            out.println("<title>Servlet ChangeProfileController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ChangeProfileController at " + request.getContextPath() + "</h1>");
@@ -61,18 +66,18 @@ public class ChangeProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        int userID = Integer.parseInt(request.getParameter("userID")) ;
+        int userID = Integer.parseInt(request.getParameter("userID"));
         String userName = request.getParameter("userName");
         String Password = request.getParameter("Password");
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String description = request.getParameter("description");
-        
+
         ud.updateUserProfile(userID, userName, Password, fullName, email, description);
-        User acc = ud.checkLogin(userName, Password);   
-        HttpSession userLogin=request.getSession();
+        User acc = ud.checkLogin(userName, Password);
+        HttpSession userLogin = request.getSession();
         userLogin.setAttribute("userLogin", acc);
-        
+        ud.closeConnection();
         request.getRequestDispatcher("ProfileController").forward(request, response);
     }
 
@@ -87,8 +92,7 @@ public class ChangeProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
 //        processRequest(request, response);
     }
 

@@ -19,7 +19,11 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Admin
  */
 public class HomeController extends HttpServlet {
-
+    CourseDAO courseDAO ;
+    @Override
+    public void init() {
+        courseDAO = new CourseDAO();        
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,8 +36,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        final int PAGE_SIZE = 6;
-        CourseDAO courseDAO = new CourseDAO();
+        final int PAGE_SIZE = 6;       
         courseDAO.loadCourse();
         courseDAO.loadCourseCategory();
         // show list categoryCourse
@@ -54,14 +57,13 @@ public class HomeController extends HttpServlet {
         if (totalCourses % PAGE_SIZE != 0) {
             totalPage += 1;
         }
-
+        
         //
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
-
         request.setAttribute("listCourses", listCourses);
-
         request.getSession().setAttribute("UrlHistory", "home");
+        courseDAO.closeConnection();
         request.getRequestDispatcher("View/Home.jsp").forward(request, response);
     }
 

@@ -24,7 +24,11 @@ import java.util.Date;
  */
 public class ProfileController extends HttpServlet {
 
-    UserDAO ud = new UserDAO();
+    UserDAO ud ;
+    @Override
+    public void init() {
+        ud = new UserDAO(); 
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -95,6 +99,7 @@ public class ProfileController extends HttpServlet {
 //        }
         
         request.setAttribute("loginUser", loginUser);
+        ud.closeConnection();
         request.getRequestDispatcher("View/ProfileView.jsp").forward(request, response);
     }
 

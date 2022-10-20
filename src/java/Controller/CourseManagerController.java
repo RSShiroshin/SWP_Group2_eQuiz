@@ -69,9 +69,12 @@ public class CourseManagerController extends HttpServlet {
         cdao.loadCourse();
         cdao.loadCourseCategory();
         sdao.loadSubject();
+        
         request.setAttribute("clist", cdao.getCourseList());
         request.setAttribute("cclist", cdao.getCategoryList());
-        request.setAttribute("slist", sdao.getSubjectList());        
+        request.setAttribute("slist", sdao.getSubjectList());  
+        cdao.closeConnection();
+        sdao.closeConnection();
         request.getRequestDispatcher("View/CourseManager.jsp").forward(request, response);
     }
 

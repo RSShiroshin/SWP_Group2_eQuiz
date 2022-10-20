@@ -23,7 +23,13 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class LibraryExpertController extends HttpServlet {
-
+    CourseDAO cd;
+    SubjectDAO sd;
+    @Override
+    public void init() {
+        cd = new CourseDAO();  
+        sd = new SubjectDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,16 +63,15 @@ public class LibraryExpertController extends HttpServlet {
          HttpSession acc=request.getSession(); 
          request.setAttribute("acc", acc);
          
-        String userID = request.getParameter("userID");
-        SubjectDAO sd = new SubjectDAO();
-        ExpertAssignDAO ex = new ExpertAssignDAO();
-        CourseDAO cd = new CourseDAO();
+        String userID = request.getParameter("userID");        
+        ExpertAssignDAO ex = new ExpertAssignDAO();        
         sd.loadSubject();
         ex.loadExpertAssign();
         ex.loadCustomerAssign();
         cd.loadCourse();
         User u = checkRole(Integer.parseInt(userID));
         ArrayList<ExpertAssign> lstEA = new ArrayList<>();
+        
         if (u != null && u.getRole() == 1) {
             for (ExpertAssign expert : ex.getExpertAssignList()) {
                 if (u.getUserID() == expert.getUserID()) {
@@ -81,10 +86,13 @@ public class LibraryExpertController extends HttpServlet {
                 }
             }
         }
+        
         request.setAttribute("role", u.getRole());
         request.setAttribute("lstSubject", sd.getSubjectList());
         request.setAttribute("lstCourse", cd.getCourseList());
         request.setAttribute("lstEA", lstEA);
+        cd.closeConnection();
+        sd.closeConnection();
         request.getRequestDispatcher("View/ExpertAssign.jsp").forward(request, response);
 
     }

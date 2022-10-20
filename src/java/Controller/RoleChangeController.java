@@ -18,7 +18,12 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class RoleChangeController extends HttpServlet {
 
-    final UserDAO ud = new UserDAO();
+    UserDAO ud;
+
+    @Override
+    public void init() {
+        ud = new UserDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -63,6 +68,7 @@ public class RoleChangeController extends HttpServlet {
         if(roleID >2)
             roleID = 1;
         ud.updateUserRole(userID, roleID);
+        ud.closeConnection();
         request.getRequestDispatcher("UserManagerController").forward(request, response);
     }
 

@@ -18,7 +18,12 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class UserStatusChangeController extends HttpServlet {
 
-    final UserDAO ud = new UserDAO();
+    UserDAO ud;
+
+    @Override
+    public void init() {
+        ud = new UserDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,6 +66,7 @@ public class UserStatusChangeController extends HttpServlet {
         boolean status = request.getParameter("status").equals("true");
         status = !status;
         ud.updateUserStatus(userID, status);
+        ud.closeConnection();
         request.getRequestDispatcher("UserManagerController").forward(request, response);
 //        processRequest(request, response);
     }

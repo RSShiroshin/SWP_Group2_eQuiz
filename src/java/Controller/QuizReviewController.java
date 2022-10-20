@@ -23,8 +23,13 @@ import java.util.ArrayList;
  */
 public class QuizReviewController extends HttpServlet {
 
-    QuestionDAO qd = new QuestionDAO();
-    final QuizDAO quiz = new QuizDAO();
+    QuestionDAO qd ;
+    QuizDAO quiz ;
+    @Override
+    public void init() {
+        qd = new QuestionDAO();
+        quiz = new QuizDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -121,7 +126,7 @@ public class QuizReviewController extends HttpServlet {
         
         //set attribute r nhay sang trang quiz review
         request.setAttribute("quizReviewID", quizID); 
-
+        quiz.closeConnection();
         request.getRequestDispatcher("QuizViewScoreController").forward(request, response);
 //        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response); 
     }

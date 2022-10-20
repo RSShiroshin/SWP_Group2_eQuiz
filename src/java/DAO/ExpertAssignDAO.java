@@ -48,9 +48,7 @@ public class ExpertAssignDAO {
 
     public void loadExpertAssign() {
         String sql = "select *  from ExpertAssign";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
             while (rs.next()) {
                 int courseID = rs.getInt(1);
                 String courseName = rs.getString(2).trim();
@@ -63,9 +61,7 @@ public class ExpertAssignDAO {
 
     public void loadCustomerAssign() {
         String sql = "select *  from Register";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
             while (rs.next()) {
                 int courseID = rs.getInt(1);
                 String courseName = rs.getString(2).trim();
@@ -73,6 +69,14 @@ public class ExpertAssignDAO {
             }
         } catch (SQLException e) {
             status = "Error Load ExpertAssign" + e.getMessage();
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            status = "Error!!" + ex.getMessage();
         }
     }
 }

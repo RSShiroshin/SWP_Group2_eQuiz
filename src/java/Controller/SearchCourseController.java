@@ -21,6 +21,13 @@ import java.util.List;
  */
 public class SearchCourseController extends HttpServlet {
 
+    CourseDAO courseDAO;
+
+    @Override
+    public void init() {
+        courseDAO = new CourseDAO();
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,13 +42,12 @@ public class SearchCourseController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String keyword = request.getParameter("keyword");
-            List<Course> listCourses = new CourseDAO().search(keyword);
-            CourseDAO courseDAO = new CourseDAO();
+            List<Course> listCourses = courseDAO.search(keyword);            
             courseDAO.loadCourseCategory();
-            List<CourseCategory> listCategories = courseDAO.getCategoryList();
-
+            List<CourseCategory> listCategories = courseDAO.getCategoryList();           
             request.setAttribute("listCategories", listCategories);
             request.setAttribute("listCourses", listCourses);
+            courseDAO.closeConnection();
             request.getRequestDispatcher("View/Home.jsp").forward(request, response);
         }
     }

@@ -115,6 +115,7 @@ public class RegisterController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.io.UnsupportedEncodingException
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -123,7 +124,7 @@ public class RegisterController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
         String rePassword = request.getParameter("repass");
-        String error = "";
+        String error;
         int role = 2;
         boolean status = false;
         String avatar = "";
@@ -131,16 +132,17 @@ public class RegisterController extends HttpServlet {
         String date_raw = "2022-10-18";
         String fullname = request.getParameter("fullname");
         Date date = Date.valueOf(date_raw);
-        UserDAO userdao = new UserDAO();
-        User acc = userdao.checkDupAcc(username,fullname,email);
+        User acc = userDAO.checkDupAcc(username,fullname,email);
         if (acc != null) {
             error = "Account is existed!";
             request.setAttribute("error", error);
+            userDAO.closeConnection();
             request.getRequestDispatcher("View/register.jsp").forward(request, response);
         } else {
             if (!password.equals(rePassword)) {
                 error = "Re-enter password isn't match! please try again";
                 request.setAttribute("error", error);
+                userDAO.closeConnection();
                 request.getRequestDispatcher("View/register.jsp").forward(request, response);
             } else {
                 String sha256Pass = "";
@@ -158,6 +160,7 @@ public class RegisterController extends HttpServlet {
                 }
                 userDAO.insertUser(username, sha256Pass, fullname, email, avatar, description, role, status, date);
                 processRequest(request, response);
+                userDAO.closeConnection();
                 response.sendRedirect("View/Login.jsp");
             }
         }
