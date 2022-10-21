@@ -107,6 +107,56 @@
                 margin-bottom: 20px;
                 background-color: white;
             }
+
+            #addQ input{
+                width: 100%;
+                height: 50px;
+                margin-top: 10px;
+                border: none;
+                border-bottom: 1px solid black;
+                margin-bottom: 10px;
+                border-radius: 8px;
+            }
+
+
+
+            #addQ1 input{
+                width: 80%;
+                height: 50px;
+                margin-top: 10px;
+                border: none;
+                border-bottom: 1px solid black;
+                margin-bottom: 10px;
+                border-radius: 8px;
+
+            }
+            
+            input:focus{
+                outline: none !important;
+            }
+            #content,#content1 {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .addQuiz{
+                width: 100%;
+            }
+
+            #demo{
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+
+            #btnSubmit{
+                width: 200px;
+                height: 50px;
+                border: none;
+                background-color: #4255ff;
+                color: white;
+                border-radius: 8px;
+            }
         </style>
     </head>
     <body>
@@ -130,30 +180,35 @@
                         <input type="hidden" name="subjectID" value="${subjectID}">                       
 
 
+                        <div id="content1"></div>
                         <div id="content">
-                            <input type="text" name="ques1"><br>
-                            <p>THUẬT NGỮ</p>
-                            <div id="addQ">
-                            <input type="text" id="id" name="ques1ans1"><br>
-                            <input type="text" id="id" name="ques1ans2"><br> 
-                            <input type="text" id="id" name="ques1ans3"><br> 
-                            <input type="text" id="id" name="ques1ans4"><br>
+                            <div id="addQ1" style="width: 50%;  margin-top: 40px;">
+                                <input type="text" id="q1" name="ques1" placeholder="Câu hỏi"><br>
+                                <p>THUẬT NGỮ </p>
                             </div>
-                            <button type="button" id="demo1">Add Ques</button>
-                            <p>ĐỊNH NGHĨA</p>
+                            <div id="addQ2" style="width: 50%;  margin-top: 40px;">
+                                <div id="addQ">
+                                    <input type="text" id="id1" name="ques1ans1" placeholder="Đáp án A"><br>
+                                    <input type="text" id="id2" name="ques1ans2" placeholder="Đáp án B"><br> 
+                                    <input type="text" id="id3" name="ques1ans3" placeholder="Đáp án C"><br> 
+                                    <input type="text" id="id4" name="ques1ans4" placeholder="Đáp án D"><br>
+                                </div>
+                                <!--<button type="button" id="demo1">Add Ques</button>-->
+                                <p>ĐỊNH NGHĨA</p>
+                            </div>
                         </div>
+
                         <div>                            
-                            <button type="button" id="demo">Change Content</button>
+                            <button style="width: 100%; height: 80px;
+                                    background-color: white; border: 1px dotted black;
+                                    border-radius: 8px; cursor: pointer;
+                                    font-size: 50px; font-weight: 100" onclick="addMore()" type="button" id="demo">+</button>
                         </div>
-
-
-
-                        
-                        <input type="submit" value="Submit">
-
-
-
+                        <input id="btnSubmit" type="submit" value="Submit">
                     </form>
+
+
+
 
 
                 </div>
@@ -162,32 +217,43 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $("#demo").click(function () {
-                    $.ajax({
-                        url: "Ajaxdemo",
-                        type: 'GET',
-                        data: {quesNum: "${cookie.numQues.getValue()}"},
-                        success: function (data) {
-                            var row = document.getElementById("content");
-                            row.innerHTML += data;
-                        }
-                    });
-                });
-            });
-            $(document).ready(function () {
-                $("#demo1").click(function () {
-                    $.ajax({
-                        url: "Ajaxdemo",
-                        type: 'POST',
-                        data: {quesNum: "${cookie.numQues.getValue()}"},
-                        success: function (data) {
-                            var row = document.getElementById("addQ");
-                            row.innerHTML += data;
-                        }
-                    });
-                });
-            });
+
+
+                                        function addMore() {
+
+                                            var q = document.getElementById("q1").value;
+                                            var a1 = document.getElementById("id1").value;
+                                            var a2 = document.getElementById("id2").value;
+                                            var a3 = document.getElementById("id3").value;
+                                            var a4 = document.getElementById("id4").value;
+                                            $.ajax({
+                                                url: "Ajaxdemo",
+                                                type: "get", //send it through get method
+                                                data: {quesNum: "${cookie.numQues.getValue()}",
+                                                    q1: q,
+                                                    a1: a1,
+                                                    a2: a2,
+                                                    a3: a3,
+                                                    a4: a4
+                                                },
+                                                success: function (data) {
+                                                    var row = document.getElementById("content1");
+                                                    row.innerHTML += data;
+                                                    document.getElementById("q1").value = "";
+                                                    document.getElementById("id1").value = "";
+                                                    document.getElementById("id2").value = "";
+                                                    document.getElementById("id3").value = "";
+                                                    document.getElementById("id4").value = "";
+                                                },
+                                                error: function (xhr) {
+                                                    //Do Something to handle error
+                                                }
+                                            });
+                                        }
+
+
         </script>
+
+
     </body>
 </html>

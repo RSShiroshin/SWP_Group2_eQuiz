@@ -69,9 +69,13 @@ public class QuestionManagerController extends HttpServlet {
         if (numQues == null) {
             numQues = "1";
         }
+        int numAns = 4;
         Cookie quesNum=new Cookie("numQues",String.valueOf(numQues));
+        Cookie ansNum=new Cookie("numAns",String.valueOf(numAns));
         response.addCookie(quesNum);
+        response.addCookie(ansNum);
         request.setAttribute("subjectID", subjectID);        
+        
         
         request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
     }
