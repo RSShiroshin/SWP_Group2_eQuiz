@@ -72,7 +72,7 @@ public class UserManagerController extends HttpServlet {
         roleNameList = ud.loadRoleName();       
         request.setAttribute("userList", userList);
         request.setAttribute("roleNameList", roleNameList);
-        ud.closeConnection();
+
         request.getRequestDispatcher("View/UserManagerView.jsp").forward(request, response);
     }
 

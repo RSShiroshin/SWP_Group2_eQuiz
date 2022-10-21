@@ -47,7 +47,7 @@ public class SearchCourseController extends HttpServlet {
             List<CourseCategory> listCategories = courseDAO.getCategoryList();           
             request.setAttribute("listCategories", listCategories);
             request.setAttribute("listCourses", listCourses);
-            courseDAO.closeConnection();
+
             request.getRequestDispatcher("View/Home.jsp").forward(request, response);
         }
     }

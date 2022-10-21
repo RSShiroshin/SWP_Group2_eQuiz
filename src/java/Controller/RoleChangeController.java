@@ -68,7 +68,7 @@ public class RoleChangeController extends HttpServlet {
         if(roleID >2)
             roleID = 1;
         ud.updateUserRole(userID, roleID);
-        ud.closeConnection();
+
         request.getRequestDispatcher("UserManagerController").forward(request, response);
     }
 

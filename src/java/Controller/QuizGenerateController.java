@@ -130,7 +130,7 @@ public class QuizGenerateController extends HttpServlet {
         request.setAttribute("quizID", newQuizID);
         request.setAttribute("quizQuestion", quizQuestion);
         request.setAttribute("quizAnswer", quizAnswer);
-        quiz.closeConnection();
+
         request.getRequestDispatcher("View/QuizView.jsp").forward(request, response);
         
 //        processRequest(request, response);

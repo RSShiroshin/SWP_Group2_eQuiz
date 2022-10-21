@@ -89,7 +89,7 @@ public class QuizViewScoreController extends HttpServlet {
         request.setAttribute("quizQuestion", quizQuestion);
         request.setAttribute("quizAnswer", quizAnswer);
         request.setAttribute("check", check);
-        quiz.closeConnection();
+
         request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
 //        processRequest(request, response);
     }

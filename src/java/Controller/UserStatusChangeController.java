@@ -66,7 +66,7 @@ public class UserStatusChangeController extends HttpServlet {
         boolean status = request.getParameter("status").equals("true");
         status = !status;
         ud.updateUserStatus(userID, status);
-        ud.closeConnection();
+
         request.getRequestDispatcher("UserManagerController").forward(request, response);
 //        processRequest(request, response);
     }

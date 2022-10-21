@@ -40,7 +40,7 @@ public class DetailCourseController extends HttpServlet {
         ArrayList<Subject> slist = sdao.getSubjectListByCourseID(courseID);
         request.setAttribute("num", slist.size());
         request.setAttribute("slist", slist);
-        sdao.closeConnection();
+
         request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
     }
 

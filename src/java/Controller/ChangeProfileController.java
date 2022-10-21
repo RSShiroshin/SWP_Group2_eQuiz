@@ -77,7 +77,7 @@ public class ChangeProfileController extends HttpServlet {
         User acc = ud.checkLogin(userName, Password);
         HttpSession userLogin = request.getSession();
         userLogin.setAttribute("userLogin", acc);
-        ud.closeConnection();
+
         request.getRequestDispatcher("ProfileController").forward(request, response);
     }
 

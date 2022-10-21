@@ -99,7 +99,7 @@ public class ProfileController extends HttpServlet {
 //        }
         
         request.setAttribute("loginUser", loginUser);
-        ud.closeConnection();
+
         request.getRequestDispatcher("View/ProfileView.jsp").forward(request, response);
     }
 

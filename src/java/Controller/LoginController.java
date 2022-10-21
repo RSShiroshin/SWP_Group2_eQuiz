@@ -90,7 +90,7 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("View/Login.jsp").forward(request, response);
             } else {       
                 session.setAttribute("userLogin", userLogin);                
-                userdao.closeConnection();
+
                 if(userLogin.getRole() == 0){
                      //chuyen huong den trang cua admin
                      request.getRequestDispatcher("home").forward(request, response);

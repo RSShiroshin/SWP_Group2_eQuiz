@@ -126,7 +126,7 @@ public class QuizReviewController extends HttpServlet {
         
         //set attribute r nhay sang trang quiz review
         request.setAttribute("quizReviewID", quizID); 
-        quiz.closeConnection();
+
         request.getRequestDispatcher("QuizViewScoreController").forward(request, response);
 //        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response); 
     }

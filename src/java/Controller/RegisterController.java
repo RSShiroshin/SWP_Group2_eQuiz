@@ -160,7 +160,7 @@ public class RegisterController extends HttpServlet {
                 }
                 userDAO.insertUser(username, sha256Pass, fullname, email, avatar, description, role, status, date);
                 processRequest(request, response);
-                userDAO.closeConnection();
+
                 response.sendRedirect("View/Login.jsp");
             }
         }

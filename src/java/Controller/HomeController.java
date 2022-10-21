@@ -63,8 +63,9 @@ public class HomeController extends HttpServlet {
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("listCourses", listCourses);
         request.getSession().setAttribute("UrlHistory", "home");
-        courseDAO.closeConnection();
+//        
         request.getRequestDispatcher("View/Home.jsp").forward(request, response);
+
     }
 
     @Override
