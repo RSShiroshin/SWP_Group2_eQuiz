@@ -36,11 +36,11 @@
             /* Modal Content */
             .modal-content {
                 background-color: #fefefe;
-                margin-left: 500px;
+                margin-left: 440px;
                 padding: 20px;
                 border: 1px solid #939bb4;
                 border-radius: 10px;
-                width: 30%;
+                width: 300px;
             }
             /* The Close Button */
             .close {
@@ -149,22 +149,15 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close"></span>
-                <div style="display: flex; margin-bottom: 20px; border-bottom: 1px solid #939bb4">
+                <div style="display: flex; margin-bottom: 20px; border-bottom: 1px solid #939bb4; padding-bottom: 10px;">
                     <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
-                    <p style="margin-top: 15px; margin-left: 5px;">${sessionScope.userLogin.getEmail()}</p>
+                    <p style="margin-top: 15px; margin-left: 5px;font-size: large">${sessionScope.userLogin.getEmail()}</p>
                 </div>
-                <c:if test="${sessionScope.userLogin != null}">
                     <div>
                         <a href="ProfileController" style="text-decoration: none; color: black;display: block;
                            margin-bottom: 10px;">Hồ sơ</a>
                         <a href="LogoutController" style="text-decoration: none; color: black;">Đăng xuất</a>
                     </div>
-                </c:if>
-                <c:if test="${sessionScope.userLogin == null}">
-                    <div>
-                        <a href="login" style="text-decoration: none; color: black;">Đăng nhập</a>
-                    </div>
-                </c:if>
             </div>
 
         </div>
