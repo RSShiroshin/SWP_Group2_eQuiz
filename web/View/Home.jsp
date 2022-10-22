@@ -39,6 +39,18 @@
                 padding-left: 60px;
                 padding-top: 20px;
             }
+            ul li {
+                list-style-type: none;
+                margin-right: 10px;
+                padding: 5px 20px;
+                background-color: orange;
+                border-radius: 8px;
+            }
+            .page ul{
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+            }
         </style>
     </head>
     <body>
@@ -91,19 +103,21 @@
                         <div style="text-align: center">Không tìm thấy kết quả nào</div>
                     </c:when>                         
                     <c:otherwise>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination d-flex justify-content-center">
-                                <c:if test="${page>1}">
-                                    <li class="page-item"><a class="page-link" href="home?page=${page-1}"><</a></li>
-                                    </c:if>
-                                    <c:forEach begin="1" end="${totalPage}" var="i">                                
-                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="home?page=${i}">${i}</a></li>
-                                    </c:forEach>
-                                    <c:if test="${page<totalPage}">
-                                    <li class="page-item"><a class="page-link" href="home?page=${page+1}">></a></li>
-                                    </c:if>
-                            </ul>
-                        </nav>
+                        <div class="page">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination d-flex justify-content-center">
+                                    <c:if test="${page>1}">
+                                        <li class="page-item"><a class="page-link" href="home?page=${page-1}"><</a></li>
+                                        </c:if>
+                                        <c:forEach begin="1" end="${totalPage}" var="i">                                
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="home?page=${i}">${i}</a></li>
+                                        </c:forEach>
+                                        <c:if test="${page<totalPage}">
+                                        <li class="page-item"><a class="page-link" href="home?page=${page+1}">></a></li>
+                                        </c:if>
+                                </ul>
+                            </nav>
+                        </div>
                     </c:otherwise>
                 </c:choose>
 

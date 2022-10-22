@@ -54,6 +54,32 @@
                 color: #000;
                 text-decoration: none;
                 cursor: pointer;
+
+            }
+            .btn-option{
+                margin-top: 20px;
+                margin-left: 10px;
+            }
+            .btn-option a{
+                padding: 10px 15px;
+                background-color: orange;
+                border-radius: 8px;
+            }
+            .topR input:focus{
+                outline: none;
+                background-color: silver;
+                width: 400px;
+            }
+
+            .topR input{
+                border: none;
+                background-color: silver;
+                color: black;
+                height: 40px;
+                width: 300px;
+                border-radius: 8px;
+                margin-top: 10px;
+                padding-left: 10px;
             }
         </style>
     </head>
@@ -66,26 +92,26 @@
                 <a style="" href="/QuizPracticeBeta/home">
                     <p>Trang chủ</p>
                 </a>
-                
-                
+
+
 
                 <c:if test="${sessionScope.userLogin.getRole() == 0}" >
                     <a href="CourseManagerController"><p>Course Management</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                    <p>Profile Management</p>
-                </a>
+                        <p>Profile Management</p>
+                    </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                    <p>Profile Management</p>
-                </a>
+                        <p>Profile Management</p>
+                    </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 2}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                    <p>Profile Management</p>
-                </a>
+                        <p>Profile Management</p>
+                    </a>
                 </c:if>
 
             </div>
@@ -99,7 +125,15 @@
                     <i class="bi bi-search"></i>
                     </button>
                 </form>
-                <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
+                <c:if test="${sessionScope.userLogin != null}">
+                    <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
+                </c:if>
+                <c:if test="${sessionScope.userLogin == null}">
+                    <div class="btn-option">
+                        <a href="login">Đăng Nhập</a>
+                        <a href="login">Đăng Ký</a>
+                    </div>
+                </c:if>
             </div>
             <div>
 

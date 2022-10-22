@@ -52,6 +52,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-top: 10px;
 }
 
+.topR input:focus{
+    outline: none;
+    background-color: silver;
+    width: 400px;
+}
+
 .topR{
     margin-right: 50px;
     justify-content: right;
