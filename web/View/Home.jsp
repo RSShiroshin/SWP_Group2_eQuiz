@@ -39,6 +39,7 @@
                 padding-left: 60px;
                 padding-top: 20px;
             }
+            
         </style>
     </head>
     <body>
@@ -109,7 +110,7 @@
 
             </div>
         </div>
-
-
+        
+        <%@ include file="FooterContact.jsp" %>
     </body>
 </html>

@@ -4,12 +4,19 @@
  */
 package Controller;
 
+import Model.User;
+import Utility.Utility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.naming.Context;
 
 /**
  *
@@ -17,6 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class Contact extends HttpServlet {
 
+    Utility u;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -55,7 +63,8 @@ public class Contact extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -69,7 +78,21 @@ public class Contact extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        HttpSession ses = request.getSession();
+        String subject = request.getParameter("subject");
+        String message = request.getParameter("message");
+        User userLogin = new User();
+        if (ses.getAttribute("userLogin") != null) {
+            userLogin = (User) ses.getAttribute("userLogin");
+        }
+        try {               
+                u.sendEmail("khaihay78@gmail.com", "User "+userLogin.getUserName()+" about "+subject+"", message);
+            } catch (MessagingException ex) {
+//                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println(ex);
+            }
+        request.getRequestDispatcher("home").forward(request, response);
     }
 
     /**
