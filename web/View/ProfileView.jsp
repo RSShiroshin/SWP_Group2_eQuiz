@@ -98,6 +98,10 @@
                 font-weight: bold;
                 margin-right: 10px;
             }
+            body
+            {
+                background-color: #f6f7fb;
+            }
         </style>
     </head>
     <body>
