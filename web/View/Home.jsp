@@ -51,17 +51,29 @@
                 justify-content: center;
                 margin-top: 10px;
             }
+            .catename{
+                border: 1px solid silver;
+                padding: 2px 4px;
+                border-radius: 8px;
+            }
+            .catename:hover{
+                background-color: silver;
+                color: white;
+            }
+            body{
+                background-color: #f6f7fb;
+            }
         </style>
     </head>
     <body>
         <%@ include file="Header.jsp" %>
         <div class="HomeContent">
             <div style="padding-left: 10%;">
-                <div class="cate col-md-3 mb-5">
-                    <h3>Course Categories</h3>
-                    <ul class="list-group">
+                <div style="display: flex" class="cate col-md-3 mb-5">
+                    <h3 style="margin-top: 10px; margin-right: 10px;">Categories: </h3>
+                    <ul style="margin-top: 10px;" class="list-group">
                         <c:forEach items="${listCategories}" var="cc">
-                            <a href="filter-category?categoryId=${cc.categoryID}">${cc.categoryName}</a>
+                            <a class="catename" href="filter-category?categoryId=${cc.categoryID}">${cc.categoryName}</a>
                         </c:forEach>
                     </ul>
                 </div>
@@ -69,7 +81,7 @@
                     <h3>List Courses</h3>
                     <div class="star">
                         <c:forEach items="${listCourses}" var="c"> 
-                            <div class="starElement">
+                            <div style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" class="starElement">
                                 <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
                                     <img class="" src="https://www.studytienganh.vn/upload/2021/06/106293.jpg" height="100%" width="100%" alt="..." />
 

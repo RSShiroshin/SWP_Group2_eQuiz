@@ -4,13 +4,18 @@
  */
 package Controller;
 
+import DAO.CourseDAO;
 import DAO.SubjectDAO;
+import Model.Course;
+import Model.Register;
 import Model.Subject;
+import Model.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -19,9 +24,11 @@ import java.util.ArrayList;
  */
 public class DetailCourseController extends HttpServlet {
     SubjectDAO sdao ;
+    CourseDAO courseDAO ;
     @Override
     public void init() {        
         sdao = new SubjectDAO();
+        courseDAO = new CourseDAO();
     }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +42,33 @@ public class DetailCourseController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        courseDAO.loadCourse();
+        courseDAO.loadCourseRegister();
         String courseID = request.getParameter("courseID");        
         sdao.loadSubject();
         ArrayList<Subject> slist = sdao.getSubjectListByCourseID(courseID);
+        courseDAO.loadCourse();
+        ArrayList<Course> clist = courseDAO.getCourseList();
+        
         request.setAttribute("num", slist.size());
         request.setAttribute("slist", slist);
+        request.setAttribute("courseList", clist);
+        User user = (User) session.getAttribute("userLogin");
+        int check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
+        request.setAttribute("statusRegister", check);
+        request.setAttribute("cId", courseID);
 
         request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
+    }
+    
+    public int checkRegister(ArrayList<Register> res, int usid, String cid){
+        for (Register re : res) {
+            if(re.getCourseID().equals(cid) && re.getUserID()==usid){
+                return 1;
+            }
+        }
+        return 0;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

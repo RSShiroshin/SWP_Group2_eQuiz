@@ -81,6 +81,9 @@
                 margin-top: 10px;
                 padding-left: 10px;
             }
+            .header{
+                background-color: white;
+            }
         </style>
     </head>
     <body>

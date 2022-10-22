@@ -22,6 +22,7 @@ public class CourseDAO extends DBContext {
     private String status;
     private ArrayList<Course> courseList;
     private ArrayList<CourseCategory> categoryList;
+    private ArrayList<Register> registerList;
 
     public CourseDAO() {
         try {
@@ -37,6 +38,9 @@ public class CourseDAO extends DBContext {
 
     public ArrayList<CourseCategory> getCategoryList() {
         return categoryList;
+    }
+    public ArrayList<Register> getCourseRegister() {
+        return registerList;
     }
 
     public void loadCourse() {
@@ -188,12 +192,13 @@ public class CourseDAO extends DBContext {
     public List<Course> search(String keyword) {
         List<Course> list = new ArrayList<>();
         String sql = "select * from Course where courseName like ?";
-        try(PreparedStatement ps = con.prepareStatement(sql);) {                                
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setString(1, "%" + keyword + "%");
-            try(ResultSet rs = ps.executeQuery();){            
-            while (rs.next()) {
-                list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
-            }}
+            try ( ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -203,19 +208,21 @@ public class CourseDAO extends DBContext {
     // lấy course theo id để hiển thị detail course (hiển thị các subject trong course)
     public Course getCourseById(String CourseId) {
         String sql = "select * from Course where courseID = ?";
-        try(PreparedStatement ps = con.prepareStatement(sql);) {                                  
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setString(1, CourseId);
-            try(ResultSet rs = ps.executeQuery();){           
-            while (rs.next()) {
-                Course course = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
-                return course;
-            }}
+            try ( ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    Course course = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+                    return course;
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
-    public void closeConnection(){
+
+    public void closeConnection() {
         try {
             con.close();
         } catch (SQLException ex) {
@@ -227,6 +234,33 @@ public class CourseDAO extends DBContext {
         CourseDAO cd = new CourseDAO();
         cd.loadCourse();
         System.out.println(cd.getCourseList());
+    }
+
+    //load register course
+    public void loadCourseRegister() {
+        registerList = new ArrayList<>();
+        String sql = "select * from Register";
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
+            while (rs.next()) {
+                int usID = rs.getInt(1);
+                String courseID = rs.getString(2);
+                registerList.add(new Register(usID, courseID));
+            }
+        } catch (SQLException e) {
+            status = "Error Load registerList" + e.getMessage();
+        }
+    }
+
+    //insert course register
+    public void insertCourseRegister(int usid, String courseId) {
+        String sql = "insert into Register values(?,?)";
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setInt(1, usid);
+            ps.setString(2, courseId);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Insert" + e.getMessage();
+        }
     }
 
 }
