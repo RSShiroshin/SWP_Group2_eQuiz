@@ -42,12 +42,13 @@
                 background-color: white;
                 width: 700px;
                 border-radius: 5px;
+                justify-content: center;
             }
 
             .quizBorder .quizLeft{
                 width: 200px;
                 /*border: 1px black solid;*/
-                padding: 10px 10px;
+                padding: 20px 20px;
             }
             .quizBorder .quizLeft p{
                 border-right: 1px black solid;
@@ -55,8 +56,11 @@
             }
             .quizBorder .quizRight{
                 width: 500px;
-                padding: 10px 10px;
+                padding: 20px 10px;
                 /*border: 1px black solid;*/
+            }
+            body{
+                background-color: #f6f7fb;
             }
         </style>
     </head>
@@ -68,7 +72,7 @@
                 <c:forEach items="${slist}" var="s">
                     <div class="quizBorder">
                         <div class="quizLeft">
-                            <p>${s.subjectID}</p>
+                            <p style="font-size: large">${s.subjectID}</p>
                         </div>
                         <div class="quizRight">
                             <a href="SubjectDetail?subjectID=${s.subjectID}"><p>${s.subjectName}</p></a>
