@@ -24,6 +24,7 @@
                 margin-top: 40px;
                 padding-bottom: 50px;
                 text-align: center;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
 
             .list-group{
@@ -45,12 +46,15 @@
                 padding: 5px 20px;
                 background-color: orange;
                 border-radius: 8px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
             .page ul{
                 display: flex;
                 justify-content: center;
-                margin-top: 10px;
+                margin-top: 40px;
+
             }
+            
             .catename{
                 border: 1px solid silver;
                 padding: 2px 4px;
@@ -62,6 +66,9 @@
             }
             body{
                 background-color: #f6f7fb;
+            }
+            .starElement:hover{
+                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
             }
         </style>
     </head>
@@ -81,7 +88,7 @@
                     <h3>List Courses</h3>
                     <div class="star">
                         <c:forEach items="${listCourses}" var="c"> 
-                            <div style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" class="starElement">
+                            <div class="starElement">
                                 <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
                                     <img class="" src="https://www.studytienganh.vn/upload/2021/06/106293.jpg" height="100%" width="100%" alt="..." />
 
