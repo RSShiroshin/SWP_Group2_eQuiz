@@ -84,10 +84,10 @@ public class LoginController extends HttpServlet {
         
         String error = "";
             if(userLogin == null) {
-            error = "Username or Password is invaild";
-            request.setAttribute("error", error);
+            error = "Username or password incorrect";
+            request.setAttribute("message", error);
             userdao.closeConnection();
-            request.getRequestDispatcher("View/Login.jsp").forward(request, response);
+                doGet(request, response);
             } else {       
                 session.setAttribute("userLogin", userLogin);                
 

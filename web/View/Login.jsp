@@ -25,6 +25,7 @@
                 </div>
                 <form action="login" method="post">
                     <div class="infoUser">
+                        <p style="color: red; background-color: #fcd3d3; width: fit-content">${message}</p>
                         <input type="text" name="id" placeholder="Nhập địa chỉ email hoặc tên người dùng của bạn">
                         <input type="password" name="pass" placeholder="Nhập mật khẩu">
                         <input type="submit" value="Log In">
