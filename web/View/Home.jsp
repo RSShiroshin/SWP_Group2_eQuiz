@@ -126,13 +126,13 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination d-flex justify-content-center">
                                     <c:if test="${page>1}">
-                                        <li class="page-item"><a class="page-link" href="home?page=${page-1}"><</a></li>
+                                        <li class="page-item"><a class="page-link" href="home?page=${page-1}">Pre</a></li>
                                         </c:if>
                                         <c:forEach begin="1" end="${totalPage}" var="i">                                
                                         <li class="page-item ${i==page?"active":""}"><a class="page-link" href="home?page=${i}">${i}</a></li>
                                         </c:forEach>
                                         <c:if test="${page<totalPage}">
-                                        <li class="page-item"><a class="page-link" href="home?page=${page+1}">></a></li>
+                                        <li class="page-item"><a class="page-link" href="home?page=${page+1}">Next</a></li>
                                         </c:if>
                                 </ul>
                             </nav>

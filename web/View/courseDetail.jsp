@@ -170,7 +170,7 @@
             <p class="titleNo">Các Môn Trong Course Này (${num})</p>
             <div class="quizDetail">
                 <c:forEach items="${slist}" var="s">
-                    <button class="open-button" onclick="openForm()">
+                    <button class="open-button" onclick="openForm(${s.subjectID})">
                         <div class="quizBorder">
                             <div class="quizLeft">
                                 <p style="font-size: large">${s.subjectID}</p>
@@ -180,24 +180,13 @@
                                 <a><p>${s.getDescription()}</p></a>
                             </div>
                         </div>
+                        <div>
+                            
+                        </div>
                     </button>
+
                     <!--//pup up-->
-                    <div class="form-popup" id="myForm">
-                        <form action="#" class="form-container">
-                            <h2 style="margin-bottom: 30px; text-align: center">${s.subjectName}</h2>
 
-                            <div>
-                                <div>
-                                    <p></p>
-                                </div>
-                                <div>
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                        </form>
-                    </div>
                 </c:forEach>
             </div>
             <!--pup up-->
@@ -206,7 +195,7 @@
 
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
+        <script type="text/javascript">
 
 
                         function enroll() {
@@ -231,8 +220,8 @@
                             });
                         }
 
-                        function openForm() {
-                            document.getElementById("myForm").style.display = "block";
+                        function openForm(e) {
+                            document.getElementById(e).style.display = "block";
                         }
 
                         function closeForm() {
