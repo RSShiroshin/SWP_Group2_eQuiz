@@ -25,13 +25,14 @@
                 position: fixed; /* Stay in place */
                 z-index: 1; /* Sit on top */
                 padding-top: 70px; /* Location of the box */
-                margin-left: 700px;
+                margin-left: 750px;
                 left: 0;
                 top: 0;
                 width: fit-content; /* Full width */
                 height: 100%; /* Full height */
                 overflow: auto; /* Enable scroll if needed */
                 border: none;
+                
             }
             /* Modal Content */
             .modal-content {
@@ -41,6 +42,7 @@
                 border: 1px solid #939bb4;
                 border-radius: 10px;
                 width: 300px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
             /* The Close Button */
             .close {
@@ -102,6 +104,9 @@
                     <a href="CourseManagerController"><p>Course Management</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
                         <p>Profile Management</p>
+                    </a>
+                    <a style="color: darkblue;" href="UserManagerController">
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">User Manager</p>
                     </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1}" >
