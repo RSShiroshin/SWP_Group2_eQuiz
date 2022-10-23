@@ -67,13 +67,13 @@
             }
             .topR input:focus{
                 outline: none;
-                background-color: silver;
+                background-color: #f0f0f0;
                 width: 400px;
             }
 
             .topR input{
                 border: none;
-                background-color: silver;
+                background-color: #f0f0f0;
                 color: black;
                 height: 40px;
                 width: 300px;
@@ -133,8 +133,8 @@
                 </c:if>
                 <c:if test="${sessionScope.userLogin == null}">
                     <div class="btn-option">
-                        <a href="login">Đăng Nhập</a>
-                        <a href="login">Đăng Ký</a>
+                        <a style="color: white" href="login">Đăng Nhập</a>
+                        <a style="color: white" href="RegisterController">Đăng Ký</a>
                     </div>
                 </c:if>
             </div>

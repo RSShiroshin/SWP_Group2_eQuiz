@@ -60,6 +60,10 @@
         <servlet-name>SubjectDetail</servlet-name>
         <servlet-class>Controller.SubjectDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>Controller.RegisterController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>SubjectDetail</servlet-name>
         <url-pattern>/SubjectDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/RegisterController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
