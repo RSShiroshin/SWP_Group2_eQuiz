@@ -90,7 +90,7 @@
                         <c:forEach items="${listCourses}" var="c"> 
                             <div class="starElement">
                                 <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
-                                    <img class="" src="https://www.studytienganh.vn/upload/2021/06/106293.jpg" height="100%" width="100%" alt="..." />
+                                    <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
 
                                     <div>
                                         <p style="margin-top: 10px;">${c.courseName}</p>
