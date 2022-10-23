@@ -17,7 +17,7 @@
         <style>
             .starElement{
                 width: 310px;
-                height: 156px;
+                height: 200px;
                 background-color: white;
                 border-radius: 8px;
                 margin-left: 60px;
