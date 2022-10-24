@@ -25,12 +25,13 @@ import javax.mail.internet.MimeMessage;
 public class Utility {
     
     
-    public static void sendEmail( String toAddress, String subject, String message) throws AddressException,
+    public static void sendEmail(String toAddress, String subject, String message) throws AddressException,
             MessagingException {
         
         String host = "smtp.gmail.com";
         String port = "587";
         String userName = "khainqhe160324@fpt.edu.vn";
+//        String userName = fromAddress;
         String password = "khai2112002";
         // sets SMTP server properties
         Properties properties = new Properties();

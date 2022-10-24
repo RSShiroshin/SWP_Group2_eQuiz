@@ -92,13 +92,13 @@ public class QuizGenerateController extends HttpServlet {
         
 //        String subject = request.getParameter("SubjectID");
 //        int questionNum = Integer.parseInt(request.getParameter("questionNum")) ;
-        int questionNum = 50;
+        int questionNum = 20;
         String subject = "SWT301";
 //        quiz.insertQuiz(subject, userLogin.getUserID(), timeStart, score);
-        quiz.insertQuiz(subject, 6, timeStart, score);
+        quiz.insertQuiz(subject, 5, timeStart, score);
         
 //        int newQuizID = quiz.getLatestQuiz(userLogin.getUserID()).getQuizID();
-        int newQuizID = quiz.getLatestQuiz(6);
+        int newQuizID = quiz.getLatestQuiz(5);
         //Random cac cau hoi
         ArrayList<Integer> numbers = new ArrayList<>();   
         Random randomGenerator = new Random();
