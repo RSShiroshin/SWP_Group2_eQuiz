@@ -77,11 +77,13 @@
                 border: none;
                 background-color: #f0f0f0;
                 color: black;
+                font-weight: 500;
                 height: 40px;
                 width: 300px;
                 border-radius: 8px;
                 margin-top: 10px;
                 padding-left: 10px;
+                font-size: 15px;
             }
             .header{
                 background-color: white;
@@ -101,9 +103,9 @@
 
 
                 <c:if test="${sessionScope.userLogin.getRole() == 0}" >
-                    <a href="CourseManagerController"><p>Course Management</p></a>
+                    <a href="CourseManagerController"><p>Course Managert</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Management</p>
+                        <p>Profile Manager</p>
                     </a>
                     <a style="color: darkblue;" href="UserManagerController">
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">User Manager</p>
@@ -112,13 +114,16 @@
                 <c:if test="${sessionScope.userLogin.getRole() == 1}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Management</p>
+                        <p>Profile Manager</p>
+                    </a>
+                    <a style="color: darkblue;" href="UserManagerController">
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Course Manager</p>
                     </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 2}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Management</p>
+                        <p>Profile Manager</p>
                     </a>
                 </c:if>
 
@@ -127,7 +132,7 @@
                 <form action="search" class="d-flex mx-auto">
                     <input class="form-control me-2" 
                            type="search" 
-                           id="search" placeholder="Tìm kiếm tại đây" name="keyword"
+                           id="search" placeholder="Tìm kiếm học phần, môn học" name="keyword"
                            aria-label="Search"
                            />
                     <i class="bi bi-search"></i>
