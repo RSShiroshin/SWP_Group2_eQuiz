@@ -25,22 +25,24 @@
                 position: fixed; /* Stay in place */
                 z-index: 1; /* Sit on top */
                 padding-top: 70px; /* Location of the box */
-                margin-left: 700px;
+                margin-left: 750px;
                 left: 0;
                 top: 0;
                 width: fit-content; /* Full width */
                 height: 100%; /* Full height */
                 overflow: auto; /* Enable scroll if needed */
                 border: none;
+                
             }
             /* Modal Content */
             .modal-content {
                 background-color: #fefefe;
-                margin-left: 500px;
+                margin-left: 440px;
                 padding: 20px;
                 border: 1px solid #939bb4;
                 border-radius: 10px;
-                width: 30%;
+                width: 300px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
             /* The Close Button */
             .close {
@@ -54,6 +56,37 @@
                 color: #000;
                 text-decoration: none;
                 cursor: pointer;
+
+            }
+            .btn-option{
+                margin-top: 20px;
+                margin-left: 10px;
+            }
+            .btn-option a{
+                padding: 10px 15px;
+                background-color: orange;
+                border-radius: 8px;
+            }
+            .topR input:focus{
+                outline: none;
+                background-color: #f0f0f0;
+                width: 400px;
+            }
+
+            .topR input{
+                border: none;
+                background-color: #f0f0f0;
+                color: black;
+                font-weight: 500;
+                height: 40px;
+                width: 300px;
+                border-radius: 8px;
+                margin-top: 10px;
+                padding-left: 10px;
+                font-size: 15px;
+            }
+            .header{
+                background-color: white;
             }
         </style>
     </head>
@@ -66,26 +99,32 @@
                 <a style="" href="/QuizPracticeBeta/home">
                     <p>Trang chủ</p>
                 </a>
-                
-                
+
+
 
                 <c:if test="${sessionScope.userLogin.getRole() == 0}" >
-                    <a href="CourseManagerController"><p>Course Management</p></a>
+                    <a href="CourseManagerController"><p>Course Managert</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                    <p>Profile Management</p>
-                </a>
+                        <p>Profile Manager</p>
+                    </a>
+                    <a style="color: darkblue;" href="UserManagerController">
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">User Manager</p>
+                    </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                    <p>Profile Management</p>
-                </a>
+                        <p>Profile Manager</p>
+                    </a>
+                    <a style="color: darkblue;" href="UserManagerController">
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Course Manager</p>
+                    </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 2}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                    <p>Profile Management</p>
-                </a>
+                        <p>Profile Manager</p>
+                    </a>
                 </c:if>
 
             </div>
@@ -93,13 +132,21 @@
                 <form action="search" class="d-flex mx-auto">
                     <input class="form-control me-2" 
                            type="search" 
-                           id="search" placeholder="Tìm kiếm tại đây" name="keyword"
+                           id="search" placeholder="Tìm kiếm học phần, môn học" name="keyword"
                            aria-label="Search"
                            />
                     <i class="bi bi-search"></i>
                     </button>
                 </form>
-                <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
+                <c:if test="${sessionScope.userLogin != null}">
+                    <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
+                </c:if>
+                <c:if test="${sessionScope.userLogin == null}">
+                    <div class="btn-option">
+                        <a style="color: white" href="login">Đăng Nhập</a>
+                        <a style="color: white" href="RegisterController">Đăng Ký</a>
+                    </div>
+                </c:if>
             </div>
             <div>
 
@@ -115,22 +162,15 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close"></span>
-                <div style="display: flex; margin-bottom: 20px; border-bottom: 1px solid #939bb4">
+                <div style="display: flex; margin-bottom: 20px; border-bottom: 1px solid #939bb4; padding-bottom: 10px;">
                     <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
-                    <p style="margin-top: 15px; margin-left: 5px;">${sessionScope.userLogin.getEmail()}</p>
+                    <p style="margin-top: 15px; margin-left: 5px;font-size: large">${sessionScope.userLogin.getEmail()}</p>
                 </div>
-                <c:if test="${sessionScope.userLogin != null}">
                     <div>
                         <a href="ProfileController" style="text-decoration: none; color: black;display: block;
                            margin-bottom: 10px;">Hồ sơ</a>
                         <a href="LogoutController" style="text-decoration: none; color: black;">Đăng xuất</a>
                     </div>
-                </c:if>
-                <c:if test="${sessionScope.userLogin == null}">
-                    <div>
-                        <a href="login" style="text-decoration: none; color: black;">Đăng nhập</a>
-                    </div>
-                </c:if>
             </div>
 
         </div>

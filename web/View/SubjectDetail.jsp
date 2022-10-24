@@ -11,6 +11,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+
+        </style>
     </head>
     <body>
         <%@ include file="Header.jsp" %>
@@ -25,9 +28,9 @@
 
                 <c:forEach items="${listQuestion}" var="q">
                     <tr>
-                        <td>${q.questionID}</td>
-                        <td>${q.content}</td>
-                        <td>${q.explain}</td>
+                        <td style="width: 3%; text-align: center; border-right: 1px solid black">${q.questionID}</td>
+                        <td style="width: 45%; border-right: 1px solid black;padding: 10px 5px">${q.content}</td>
+                        <td style="width: 30%; border-right: 1px solid black">${q.explain}</td>
                         <td><c:forEach items="${listSubject}" var="cc">
                                 <c:if test="${q.subjectID==cc.subjectID}">
                                     ${cc.subjectName}

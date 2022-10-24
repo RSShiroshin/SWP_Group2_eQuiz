@@ -17,13 +17,14 @@
         <style>
             .starElement{
                 width: 310px;
-                height: 156px;
+                height: 200px;
                 background-color: white;
                 border-radius: 8px;
                 margin-left: 60px;
                 margin-top: 40px;
                 padding-bottom: 50px;
                 text-align: center;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
 
             .list-group{
@@ -39,17 +40,47 @@
                 padding-left: 60px;
                 padding-top: 20px;
             }
+            ul li {
+                list-style-type: none;
+                margin-right: 10px;
+                padding: 5px 20px;
+                background-color: orange;
+                border-radius: 8px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            }
+            .page ul{
+                display: flex;
+                justify-content: center;
+                margin-top: 40px;
+
+            }
+            
+            .catename{
+                border: 1px solid silver;
+                padding: 2px 4px;
+                border-radius: 8px;
+            }
+            .catename:hover{
+                background-color: silver;
+                color: white;
+            }
+            body{
+                background-color: #f6f7fb;
+            }
+            .starElement:hover{
+                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+            }
         </style>
     </head>
     <body>
         <%@ include file="Header.jsp" %>
         <div class="HomeContent">
             <div style="padding-left: 10%;">
-                <div class="cate col-md-3 mb-5">
-                    <h3>Course Categories</h3>
-                    <ul class="list-group">
+                <div style="display: flex" class="cate col-md-3 mb-5">
+                    <h3 style="margin-top: 10px; margin-right: 10px;">Categories: </h3>
+                    <ul style="margin-top: 10px;" class="list-group">
                         <c:forEach items="${listCategories}" var="cc">
-                            <a href="filter-category?categoryId=${cc.categoryID}">${cc.categoryName}</a>
+                            <a class="catename" href="filter-category?categoryId=${cc.categoryID}">${cc.categoryName}</a>
                         </c:forEach>
                     </ul>
                 </div>
@@ -59,7 +90,7 @@
                         <c:forEach items="${listCourses}" var="c"> 
                             <div class="starElement">
                                 <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
-                                    <img class="" src="https://www.studytienganh.vn/upload/2021/06/106293.jpg" height="100%" width="100%" alt="..." />
+                                    <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
 
                                     <div>
                                         <p style="margin-top: 10px;">${c.courseName}</p>
@@ -91,19 +122,21 @@
                         <div style="text-align: center">Không tìm thấy kết quả nào</div>
                     </c:when>                         
                     <c:otherwise>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination d-flex justify-content-center">
-                                <c:if test="${page>1}">
-                                    <li class="page-item"><a class="page-link" href="home?page=${page-1}"><</a></li>
-                                    </c:if>
-                                    <c:forEach begin="1" end="${totalPage}" var="i">                                
-                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="home?page=${i}">${i}</a></li>
-                                    </c:forEach>
-                                    <c:if test="${page<totalPage}">
-                                    <li class="page-item"><a class="page-link" href="home?page=${page+1}">></a></li>
-                                    </c:if>
-                            </ul>
-                        </nav>
+                        <div class="page">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination d-flex justify-content-center">
+                                    <c:if test="${page>1}">
+                                        <li class="page-item"><a class="page-link" href="home?page=${page-1}">Pre</a></li>
+                                        </c:if>
+                                        <c:forEach begin="1" end="${totalPage}" var="i">                                
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="home?page=${i}">${i}</a></li>
+                                        </c:forEach>
+                                        <c:if test="${page<totalPage}">
+                                        <li class="page-item"><a class="page-link" href="home?page=${page+1}">Next</a></li>
+                                        </c:if>
+                                </ul>
+                            </nav>
+                        </div>
                     </c:otherwise>
                 </c:choose>
 
