@@ -61,8 +61,8 @@
         <servlet-class>Controller.SubjectDetail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>Controller.RegisterController</servlet-class>
+        <servlet-name>Contact</servlet-name>
+        <servlet-class>Controller.Contact</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
@@ -157,8 +157,8 @@
         <url-pattern>/SubjectDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
-        <url-pattern>/RegisterController</url-pattern>
+        <servlet-name>Contact</servlet-name>
+        <url-pattern>/Contact</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

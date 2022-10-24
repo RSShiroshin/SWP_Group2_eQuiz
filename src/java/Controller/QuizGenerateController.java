@@ -92,7 +92,7 @@ public class QuizGenerateController extends HttpServlet {
         
 //        String subject = request.getParameter("SubjectID");
 //        int questionNum = Integer.parseInt(request.getParameter("questionNum")) ;
-        int questionNum = 10;
+        int questionNum = 20;
         String subject = "SWT301";
 //        quiz.insertQuiz(subject, userLogin.getUserID(), timeStart, score);
         quiz.insertQuiz(subject, 5, timeStart, score);
