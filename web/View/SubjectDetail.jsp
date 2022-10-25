@@ -13,6 +13,9 @@
         <title>JSP Page</title>
         <style>
 
+            body{
+                background-color: #f6f7fb;
+            }
         </style>
     </head>
     <body>
