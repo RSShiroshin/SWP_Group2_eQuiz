@@ -57,6 +57,8 @@
                         <td>aaaa</td>                        
                         <td style=""><input style="width: 100%; padding: 10px 0; border: none; outline: none;
                                             background-color: #00ff33; border-radius: 8px; cursor: pointer; color: #4255ff" onclick="update('${c.courseID}')" type="button" value="Update"></td>                        
+                        <td style=""><input style="width: 100%; padding: 10px 0; border: none; outline: none;
+                                            background-color: #00ff33; border-radius: 8px; cursor: pointer; color: #4255ff" type="button" value="Delete"></td>                        
                     </tr>
                 </c:forEach>
             </table>
