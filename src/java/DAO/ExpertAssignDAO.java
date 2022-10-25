@@ -4,10 +4,7 @@
  */
 package DAO;
 
-import static DAO.UserDAO.userList;
-import Model.Course;
 import Model.ExpertAssign;
-import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,10 +22,7 @@ public class ExpertAssignDAO {
     private Connection con;
     private String status;
 
-    public ExpertAssignDAO(ArrayList<ExpertAssign> listExpertAssign) {
-        this.listExpertAssign = listExpertAssign;
-        this.listCustomerAssign = listCustomerAssign;
-    }
+    
 
     public ArrayList<ExpertAssign> getExpertAssignList() {
         return listExpertAssign;

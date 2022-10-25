@@ -8,7 +8,6 @@ import DAO.CourseDAO;
 import DAO.QuestionDAO;
 import DAO.SubjectDAO;
 import Model.Course;
-import Model.Question;
 import Model.Register;
 import Model.Subject;
 import Model.User;
@@ -60,16 +59,20 @@ public class DetailCourseController extends HttpServlet {
         SubjectDAO sDAO = new SubjectDAO();
         sDAO.loadSubject();
         List<Subject> listSubject = sDAO.getSubjectList();
-        
-        
-        
+
         request.setAttribute("listSubject", listSubject);
         request.setAttribute("num", slist.size());
         request.setAttribute("slist", slist);
         request.setAttribute("courseList", clist);
         User user = (User) session.getAttribute("userLogin");
-        int check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
-        request.setAttribute("statusRegister", check);
+        int check = 0;
+        if (user == null) {
+            request.setAttribute("statusRegister", check);
+        } else {
+            check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
+            request.setAttribute("statusRegister", check);
+        }
+
         request.setAttribute("cId", courseID);
 
         request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
