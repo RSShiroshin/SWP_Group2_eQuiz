@@ -4,6 +4,7 @@ import DAO.UserDAO;
 import Model.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,13 +20,12 @@ import java.util.Arrays;
  */
 public class LoginController extends HttpServlet {
 
-     UserDAO userDAO;
+    UserDAO userDAO;
 
     @Override
     public void init() {
         userDAO = new UserDAO();
     }
-
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -76,32 +76,40 @@ public class LoginController extends HttpServlet {
 //        } catch (NoSuchAlgorithmException ex) {
 //            System.out.println("" + ex);
 //        }
-        UserDAO userdao = new UserDAO();       
+        UserDAO userdao = new UserDAO();
         User userLogin = userdao.checkLogin(username, password);
-        
-        HttpSession session=request.getSession(); 
-        
-        
+
+        HttpSession session = request.getSession();
+
         String error = "";
-            if(userLogin == null) {
+        if (userLogin == null) {
             error = "Username or password incorrect";
             request.setAttribute("message", error);
             userdao.closeConnection();
-                doGet(request, response);
-            } else {       
-                session.setAttribute("userLogin", userLogin);                
-
-                if(userLogin.getRole() == 0){
-                     //chuyen huong den trang cua admin
-                     request.getRequestDispatcher("home").forward(request, response);
-                 } else if(userLogin.getRole() == 1){
-                     //chuyen huong den trang cua expert
-                     request.getRequestDispatcher("home").forward(request, response);
-                 } else if(userLogin.getRole() == 2){
-                  //chuyen huong den trang cua customer
-                  request.getRequestDispatcher("home").forward(request, response);
-                 } 
+            doGet(request, response);
+        } else {
+            session.setAttribute("userLogin", userLogin);
+            Cookie[] cookies = request.getCookies();
+            String name = "link";
+            String value = "";
+            for (int i = 0; i < cookies.length; i++) {
+                if (name.equals(cookies[i].getName())) {
+                    value = cookies[i].getValue();
+                    break;
+                }
             }
+
+            if (userLogin.getRole() == 0) {
+                //chuyen huong den trang cua admin
+                request.getRequestDispatcher(value).forward(request, response);
+            } else if (userLogin.getRole() == 1) {
+                //chuyen huong den trang cua expert
+                request.getRequestDispatcher(value).forward(request, response);
+            } else if (userLogin.getRole() == 2) {
+                //chuyen huong den trang cua customer
+                request.getRequestDispatcher(value).forward(request, response);
+            }
+        }
     }
 
     /**
@@ -113,7 +121,7 @@ public class LoginController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
     public static String
             convertByteToString(byte[] byteValue) {
         String stringValue = "" + Arrays.toString(byteValue);

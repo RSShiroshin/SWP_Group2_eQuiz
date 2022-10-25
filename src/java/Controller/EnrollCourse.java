@@ -37,7 +37,7 @@ public class EnrollCourse extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EnrollCourse</title>");            
+            out.println("<title>Servlet EnrollCourse</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet EnrollCourse at " + request.getContextPath() + "</h1>");
@@ -59,13 +59,17 @@ public class EnrollCourse extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-            String cid = request.getParameter("cid");
-            HttpSession session=request.getSession();
-            User u = (User) session.getAttribute("userLogin");
+        String cid = request.getParameter("cid");
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("userLogin");
+        if (u == null) {
+            response.sendRedirect("login");
+        } else {
             CourseDAO cd = new CourseDAO();
             cd.insertCourseRegister(u.getUserID(), cid);
             response.sendRedirect("DetailCourseController?courseID=" + cid);
-            
+        }
+
     }
 
     /**

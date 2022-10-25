@@ -14,6 +14,7 @@ import Model.Subject;
 import Model.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,6 +50,7 @@ public class DetailCourseController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+
         courseDAO.loadCourse();
         courseDAO.loadCourseRegister();
         String courseID = request.getParameter("courseID");
@@ -61,10 +63,20 @@ public class DetailCourseController extends HttpServlet {
         sDAO.loadSubject();
         List<Subject> listSubject = sDAO.getSubjectList();
         User user = (User) session.getAttribute("userLogin");
-        int check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
-        
-        
-        
+        int check = 0;
+        if (user == null) {
+            check = 0;
+        } else {
+            check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
+        }
+        String link = "/DetailCourseController?courseID="+courseID;
+        Cookie cookie = DetailCourseController.getCookie(request, "link");
+
+        if (cookie != null) {
+            cookie.setValue(link);
+            response.addCookie(cookie);
+        }
+
         request.setAttribute("listSubject", listSubject);
         request.setAttribute("num", slist.size());
         request.setAttribute("slist", slist);
@@ -74,6 +86,20 @@ public class DetailCourseController extends HttpServlet {
 
         request.getRequestDispatcher("View/courseDetail.jsp").forward(request, response);
     }
+
+//   start cookie
+    public static Cookie getCookie(HttpServletRequest request, String name) {
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals(name)) {
+                    return cookie;
+                }
+            }
+        }
+
+        return null;
+    }
+//    end cookie
 
     public int checkRegister(ArrayList<Register> res, int usid, String cid) {
         for (Register re : res) {

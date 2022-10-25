@@ -58,32 +58,95 @@
                 padding: 10px 10px;
                 /*border: 1px black solid;*/
             }
+            .starElement{
+                width: 310px;
+                height: fit-content;
+                background-color: white;
+                border-radius: 8px;
+                margin-right: 60px;
+                margin-top: 40px;
+                padding-bottom: 50px;
+                text-align: center;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            }
+            .quizDetail {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            body{
+                background-color: #f6f7fb;
+            }
         </style>
     </head>
     <body>
         <%@ include file="Header.jsp" %>
         <div id="topProfile">
-            <div class="profileName">
-                <h2>${course.courseID}</h2>
-                <p>${course.courseName}</p>
+            <div style="height: 150px; background-color: darkcyan; margin-left: -25%; color: white; display: flex">
+                <div style="width: 70%">
+                    <p style="margin-left: 30%; padding-top: 20px;font-size: 20px">${num} Môn Trong Course Này</p>
+                    <%--<c:forEach items="${courseList}" var="c">--%>
+                    <p style="margin-left: 30%; padding-top: 20px; font-size: 50px">${course.courseName}</p>
+                    <%--</c:forEach>--%>
+                </div>
+                <div>
+                    <!--dung ajax de xu ly dang ky-->
+                    <c:if test="${statusRegister == 1}">
+                        <div  style="margin-top: 60px;">                            
+                            <a style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;
+                               border-radius: 8px; margin-left: -100px;
+                               cursor: pointer;" href="#">Go To Course</a>
+                        </div>
+                    </c:if>
+                    <c:if test="${statusRegister == 0}">
+                        <div style="margin-top: 60px;">                            
+                            <a style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;
+                               border-radius: 8px; margin-left: -100px;
+                               cursor: pointer;" href="EnrollCourse?cid=${cId}">ENROLL</a>
+                        </div>
+                    </c:if>
+                </div>
             </div>
+            <div id="content1"></div>
             <p class="titleNo">Các Môn Trong Course Này (${num})</p>
             <div class="quizDetail">
                 <c:forEach items="${slist}" var="s">
-                    <div class="quizBorder">
-                        <div class="quizLeft">
-                            <p>${s.subjectID}</p>
-                        </div>
-                        <div class="quizRight">
-                            <p><a href="QuestionManagerController?subjectID=${s.subjectID}">${s.subjectName}</a></p>
-                        </div>
+
+
+                    <div class="starElement">
+                        <a style="text-decoration: none; color: black"  href="#">
+                            <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="" />
+                            <div>
+                                <p style="margin-top: 10px; font-weight: bold">${s.subjectID}</p>
+                                <p style="margin-top: 10px;">${s.subjectName}</p>
+                            </div>
+                        </a>
                     </div>
+
+
+
+                    <!--//pup up-->
+
                 </c:forEach>
             </div>
+            <!--pup up-->
+
+
+
+        </div>
+            <div style="text-align: center; margin-top: 50px; ">
+                <button style="padding: 10px 20px; background-color: #4255ff; color: white; border: none; border-radius: 8px;
+                        font-size: 20px; cursor: pointer">Add Subject</button>
         </div>
 
 
-        <div>
+
+
+
+
+
+
+
+        <div style="display: none">
             <form action="SubjectManagerController" method="post">
                 <div class="modal-header">						
                     <h4 class="modal-title">Add Subject</h4>

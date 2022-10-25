@@ -133,6 +133,21 @@
             .form-container .btn:hover, .open-button:hover {
                 opacity: 1;
             }
+            .starElement{
+                width: 310px;
+                height: fit-content;
+                background-color: white;
+                border-radius: 8px;
+                margin-right: 60px;
+                margin-top: 40px;
+                padding-bottom: 50px;
+                text-align: center;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            }
+            .quizDetail {
+                display: flex;
+                flex-wrap: wrap;
+            }
         </style>
     </head>
     <body>
@@ -152,16 +167,17 @@
                 <div>
                     <!--dung ajax de xu ly dang ky-->
                     <c:if test="${statusRegister == 1}">
-                        <div>                            
-                            <button style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;
-                                    border-radius: 8px; margin-top: 40px; margin-left: -100px;" type="button">Go to Course</button>
+                        <div  style="margin-top: 60px;">                            
+                            <a style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;
+                               border-radius: 8px; margin-left: -100px;
+                               cursor: pointer;" href="#">Go To Course</a>
                         </div>
                     </c:if>
                     <c:if test="${statusRegister == 0}">
                         <div style="margin-top: 60px;">                            
                             <a style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;
-                                    border-radius: 8px; margin-left: -100px;
-                                    cursor: pointer;" href="EnrollCourse?cid=${cId}">ENROLL</a>
+                               border-radius: 8px; margin-left: -100px;
+                               cursor: pointer;" href="EnrollCourse?cid=${cId}">ENROLL</a>
                         </div>
                     </c:if>
                 </div>
@@ -170,20 +186,19 @@
             <p class="titleNo">Các Môn Trong Course Này (${num})</p>
             <div class="quizDetail">
                 <c:forEach items="${slist}" var="s">
-                    <button class="open-button" onclick="openForm(${s.subjectID})">
-                        <div class="quizBorder">
-                            <div class="quizLeft">
-                                <p style="font-size: large">${s.subjectID}</p>
+                    
+
+                    <div class="starElement">
+                        <a style="text-decoration: none; color: black"  href="#">
+                            <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="" />
+                            <div>
+                                <p style="margin-top: 10px; font-weight: bold">${s.subjectID}</p>
+                                <p style="margin-top: 10px;">${s.subjectName}</p>
                             </div>
-                            <div class="quizRight">
-                                <a><p>${s.subjectName}</p></a>
-                                <a><p>${s.getDescription()}</p></a>
-                            </div>
-                        </div>
-                        <div>
+                        </a>
+                    </div>
                             
-                        </div>
-                    </button>
+                            
 
                     <!--//pup up-->
 
@@ -198,35 +213,36 @@
         <script type="text/javascript">
 
 
-                        function enroll() {
+            function enroll() {
 
-                            var id = document.getElementById("usId").value;
-                            $.ajax({
-                                url: "Ajaxdemo",
-                                type: "post", //send it through get method
-                                data: {
-                                    id: id,
-                                    cid: cId,
-                                    type: 2
-                                },
-                                success: function (data) {
-                                    var row = document.getElementById("content1");
-                                    row.innerHTML += data;
-                                    window.location.reload();
-                                },
-                                error: function (xhr) {
-                                    //Do Something to handle error
-                                }
-                            });
-                        }
+                var id = document.getElementById("usId").value;
+                $.ajax({
+                    url: "Ajaxdemo",
+                    type: "post", //send it through get method
+                    data: {
+                        id: id,
+                        cid: cId,
+                        type: 2
+                    },
+                    success: function (data) {
+                        var row = document.getElementById("content1");
+                        row.innerHTML += data;
+                        window.location.reload();
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
 
-                        function openForm(e) {
-                            document.getElementById(e).style.display = "block";
-                        }
+            function openForm(e) {
+                document.getElementById(e).style.display = "block";
+            }
 
-                        function closeForm() {
-                            document.getElementById("myForm").style.display = "none";
-                        }
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+            
 
 
         </script>

@@ -10,6 +10,7 @@ import Model.CourseCategory;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,11 +20,14 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Admin
  */
 public class HomeController extends HttpServlet {
-    CourseDAO courseDAO ;
+
+    CourseDAO courseDAO;
+
     @Override
     public void init() {
-        courseDAO = new CourseDAO();        
+        courseDAO = new CourseDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,7 +40,12 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        final int PAGE_SIZE = 6;       
+//        Cookie linkFw =new Cookie("request.getContextPath()/home",link);
+//        response.addCookie(linkFw);
+        String c ="/home";
+        Cookie link = new Cookie("link", c);
+        response.addCookie(link);
+        final int PAGE_SIZE = 6;
         courseDAO.loadCourse();
         courseDAO.loadCourseCategory();
         // show list categoryCourse
@@ -49,15 +58,14 @@ public class HomeController extends HttpServlet {
         if (pageStr != null) {
             page = Integer.parseInt(pageStr);
         }
-        
-        
+
         List<Course> listCourses = courseDAO.getCoursesWithPagging(page, PAGE_SIZE);
         int totalCourses = courseDAO.getCourseList().size();
         int totalPage = totalCourses / PAGE_SIZE;
         if (totalCourses % PAGE_SIZE != 0) {
             totalPage += 1;
         }
-        
+
         //
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
@@ -98,5 +106,3 @@ public class HomeController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 }
-
-
