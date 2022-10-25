@@ -62,7 +62,6 @@ public class QuestionDAO {
         String sql = "select *  from Question where SubjectID = ? ";
         try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setString(1, subject);
-            
             try ( ResultSet rs = ps.executeQuery();) {
                 while (rs.next()) {
                     int questionID = rs.getInt(1);
@@ -154,17 +153,6 @@ public class QuestionDAO {
             ps.setInt(1, questionID);
             ps.setString(2, content);
             ps.setBoolean(3, false);
-            ps.execute();
-        } catch (SQLException e) {
-            status = "Error Insert" + e.getMessage();
-        }
-    }
-    public void insertTrueAnswerByQuestionID(int questionID, String content) {
-        String sql = "insert into Answer values(?,?,?)";
-        try(PreparedStatement ps = con.prepareStatement(sql);) {           
-            ps.setInt(1, questionID);
-            ps.setString(2, content);
-            ps.setBoolean(3, true);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();

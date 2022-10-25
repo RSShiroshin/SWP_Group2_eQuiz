@@ -73,12 +73,8 @@
         <servlet-class>Controller.EnrollCourse</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>Controller.RegisterController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CourseDeleteUpdateController</servlet-name>
-        <servlet-class>Controller.CourseDeleteUpdateController</servlet-class>
+        <servlet-name>GotoCourse</servlet-name>
+        <servlet-class>Controller.GotoCourse</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
@@ -185,12 +181,8 @@
         <url-pattern>/EnrollCourse</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
-        <url-pattern>/RegisterController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CourseDeleteUpdateController</servlet-name>
-        <url-pattern>/CourseDeleteUpdateController</url-pattern>
+        <servlet-name>GotoCourse</servlet-name>
+        <url-pattern>/GotoCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
