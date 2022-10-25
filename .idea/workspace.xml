@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d9e73d3-bead-4f27-8905-bccbd37e2f75" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jakarta_servlet_jsp_jstl_2_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jakarta_servlet_jsp_jstl_api_2_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/sqljdbc42.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/ChangeProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/ChangeProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/CourseManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/CourseManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/QuizGenerateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/QuizGenerateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/QuizReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/QuizReviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/QuizViewScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/QuizViewScoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/RoleChangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/RoleChangeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/UserManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/UserManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/UserStatusChangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/UserStatusChangeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Controller/loginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Controller/loginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/DAO/CourseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/CourseDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/DAO/QuestionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/QuestionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/DAO/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/DAO/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/Model/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/Model/Quiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,17 +64,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/DAO/UserDAO.java</url>
-          <line>26</line>
+          <line>25</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/Controller/QuizGenerateController.java</url>
-          <line>118</line>
+          <line>123</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/Controller/UserManagerController.java</url>
-          <line>63</line>
+          <line>68</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
