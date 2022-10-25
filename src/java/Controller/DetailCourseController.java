@@ -13,6 +13,7 @@ import Model.Subject;
 import Model.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -51,6 +52,13 @@ public class DetailCourseController extends HttpServlet {
         courseDAO.loadCourse();
         courseDAO.loadCourseRegister();
         String courseID = request.getParameter("courseID");
+        Cookie cookie = DetailCourseController.getCookie(request, "link");
+        String l = "/DetailCourseController?courseID="+ courseID;
+
+        if (cookie != null) {
+            cookie.setValue(l);
+            response.addCookie(cookie);
+        }
         sdao.loadSubject();
         ArrayList<Subject> slist = sdao.getSubjectListByCourseID(courseID);
         ArrayList<Course> clist = courseDAO.getCourseList();
@@ -87,6 +95,18 @@ public class DetailCourseController extends HttpServlet {
             }
         }
         return 0;
+    }
+
+    public static Cookie getCookie(HttpServletRequest request, String name) {
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals(name)) {
+                    return cookie;
+                }
+            }
+        }
+
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
