@@ -20,7 +20,6 @@ public class test {
         String data = "";
         read();
     }
-    static ArrayList<String> list = new ArrayList<>();
 
     public static void read() {
         try {
@@ -33,19 +32,30 @@ public class test {
             }
             myReader.close();
             String[] q = question.trim().split("--");
+            ArrayList<String> list = new ArrayList<>();
+            ArrayList<String> list1 = new ArrayList<>();
             for (int i = 0; i < q.length; i++) {
                 if (i % 2 == 0) {
                     list.add(q[i].trim());
-                }
+                }else{
+                    list1.add(q[i].trim());
+                }               
             }
+//            System.out.println(list.size() +"  "+list1.size());
+
             QuestionDAO qdao = new QuestionDAO();
+//            System.out.println(qdao.getQuestionBySubjectID("SWR302").get(qdao.getQuestionBySubjectID("SWT301").size() - 1).getQuestionID());
             for (int i = 0; i < list.size(); i++) {
                 String[] qlist = list.get(i).split("\n");
-                qdao.insertQuestion("SWT301", qlist[0], "");
+                qdao.insertQuestion("SWR302", qlist[0], "");
                 qdao.loadQuestion();
-                int questionID = qdao.getQuestionBySubjectID("SWT301").get(qdao.getQuestionBySubjectID("SWT301").size() - 1).getQuestionID();
+                int questionID = qdao.getQuestionBySubjectID("SWR302").get(qdao.getQuestionBySubjectID("SWR302").size() - 1).getQuestionID();
                 for (int j = 1; j < qlist.length; j++) {
-                    qdao.insertAnswerByQuestionID(questionID, qlist[j]);
+                    if(qlist[j].startsWith(list1.get(i))){
+                        qdao.insertTrueAnswerByQuestionID(questionID, qlist[j]);
+                    }else{
+                        qdao.insertAnswerByQuestionID(questionID, qlist[j]);
+                    }                   
                 }
             }
 

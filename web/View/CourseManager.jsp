@@ -23,6 +23,8 @@
                     <th>Description</th>
                     <th>CategoryName</th>
                     <th>Thumbnail</th>
+                    <th>Delete</th>
+                    <th>Update</th>
                     
                 </tr>
 
@@ -37,7 +39,9 @@
                                         </c:if>
                            </c:forEach></td>
                                            
-                        <td>aaaa</td>                        
+                        <td>aaaa</td> 
+                        <td><a href="CourseDeleteUpdateController?courseID=${c.courseID}&type=0">Delete</a></td>
+                        <td>Update</a></td>
                     </tr>
                 </c:forEach>
             </table>

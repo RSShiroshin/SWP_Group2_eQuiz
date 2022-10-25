@@ -158,11 +158,20 @@
                         </div>
                     </c:if>
                     <c:if test="${statusRegister == 0}">
-                        <div style="margin-top: 60px;">                            
+                        <c:if test="${userLogin==null}">
+                            <div style="margin-top: 60px;">                            
+                            <a style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;
+                                    border-radius: 8px; margin-left: -100px;
+                                    cursor: pointer;" href="login">ENROLL</a>
+                        </div>
+                        </c:if>
+                        <c:if test="${userLogin!=null}">
+                            <div style="margin-top: 60px;">                            
                             <a style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;
                                     border-radius: 8px; margin-left: -100px;
                                     cursor: pointer;" href="EnrollCourse?cid=${cId}">ENROLL</a>
                         </div>
+                        </c:if>                       
                     </c:if>
                 </div>
             </div>

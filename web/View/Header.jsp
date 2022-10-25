@@ -100,32 +100,21 @@
                     <p>Trang chủ</p>
                 </a>
 
-
-
-                <c:if test="${sessionScope.userLogin.getRole() == 0}" >
-                    <a href="CourseManagerController"><p>Course Managert</p></a>
+                <c:if test="${userLogin!=null}">
                     <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
                         <p>Profile Manager</p>
-                    </a>
+                </a>
+                </c:if>                
+                <c:if test="${sessionScope.userLogin.getRole() == 0}" >
+                    <a style="color: darkblue;" href="CourseManagerController">
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Course Manager</p></a>                   
                     <a style="color: darkblue;" href="UserManagerController">
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">User Manager</p>
                     </a>
                 </c:if>
-                <c:if test="${sessionScope.userLogin.getRole() == 1}" >
-                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
-                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Manager</p>
-                    </a>
-                    <a style="color: darkblue;" href="UserManagerController">
-                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Subject Manager</p>
-                    </a>
-                </c:if>
-                <c:if test="${sessionScope.userLogin.getRole() == 2}" >
-                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
-                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Manager</p>
-                    </a>
-                </c:if>
+                <c:if test="${sessionScope.userLogin.getRole() == 1||sessionScope.userLogin.getRole() == 2}" >
+                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>                                  
+                </c:if>               
 
             </div>
             <div class="topR">

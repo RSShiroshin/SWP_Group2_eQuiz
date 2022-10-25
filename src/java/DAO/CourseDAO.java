@@ -231,13 +231,7 @@ public class CourseDAO extends DBContext {
             status = "Error!!" + ex.getMessage();
         }
     }
-
-    public static void main(String[] args) {
-        CourseDAO cd = new CourseDAO();
-        cd.loadCourse();
-        System.out.println(cd.getCourseList());
-    }
-
+    
     //load register course
     public void loadCourseRegister() {
         registerList = new ArrayList<>();
@@ -264,5 +258,9 @@ public class CourseDAO extends DBContext {
             status = "Error Insert" + e.getMessage();
         }
     }
-
+    public static void main(String[] args) {
+        CourseDAO cd = new CourseDAO();
+        cd.loadCourse();
+        cd.deleteCourse("qq");
+    }
 }
