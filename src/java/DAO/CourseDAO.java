@@ -39,6 +39,7 @@ public class CourseDAO extends DBContext {
     public ArrayList<CourseCategory> getCategoryList() {
         return categoryList;
     }
+
     public ArrayList<Register> getCourseRegister() {
         return registerList;
     }
@@ -46,8 +47,9 @@ public class CourseDAO extends DBContext {
     public void loadCourse() {
         courseList = new ArrayList<>();
         String sql = "select *  from Course";
-        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
-
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
                 String courseID = rs.getString(1).trim();

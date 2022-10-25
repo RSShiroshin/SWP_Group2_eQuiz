@@ -117,7 +117,7 @@
                     </div>  
                 </div>
                 <div class="infor" style="margin-top: 50px">
-                    <div style="display: flex;"><p>Password: </p> **********</div>
+<!--                    <div style="display: flex;"><p>Password: </p> **********</div>-->
                     <div style="display: flex;"><p>Email: </p> ${loginUser.getEmail()}</div>
                     <div style="display: flex;"><p>Description: </p> ${loginUser.getDescription()}</div> 
                 </div>
@@ -128,8 +128,8 @@
             <div class="form-popup" id="myForm">
                 <form action="ChangeProfileController" method="get" class="form-container">
                     <input type="text" name="userID" value="${loginUser.getUserID()}" hidden>
-                    <p>Password:</p> <input type="text" name="Password" value="${loginUser.getPassword()}"></br>
-                    <p>Confirm Password:</p> <input type="text" name="Password" value="${loginUser.getPassword()}"></br>
+<!--                    <p>Password:</p> <input type="text" name="Password" value="${loginUser.getPassword()}"></br>
+                    <p>Confirm Password:</p> <input type="text" name="Password" value="${loginUser.getPassword()}"></br>-->
                     <p>Full Name:</p> <input type="text" name="fullName" value="${loginUser.getFullName()}"></br>
                     <p>Email:</p> <input type="text" name="email" value="${loginUser.getEmail()}"></br>
                     <p>Description:</p> <input type="text" name="description" value="${loginUser.getDescription()}"></br>

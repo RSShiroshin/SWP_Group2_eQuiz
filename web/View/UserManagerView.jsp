@@ -39,8 +39,13 @@
         <%@ include file="Header.jsp" %>
 
         <div style="text-align: center; padding-top: 20px;" class="UserManagerFunction">
-            <input style="width: 30%; height: 40px; border-radius: 8px; border: 1px solid orange; padding-left: 10px" placeholder="Nhập User Name" type="text" name="searchUserTxt">
-            <button style="border: none; padding: 10px 20px; background-color: #4255ff; color:white; border-radius: 8px; margin-left: 10px; cursor: pointer">Search</button>
+            <form action="Search">
+                <input style="width: 30%; height: 40px; border-radius: 8px; border: 1px solid orange; padding-left: 10px" 
+                       placeholder="Nhập User Name" type="search" name="keyword">
+                <button style="border: none; padding: 10px 20px; background-color: #4255ff; color:white; border-radius: 8px; margin-left: 10px; cursor: pointer" 
+                        type="submit">Search</button>
+            </form>
+
             <!--<p>Filter</p>-->
         </div>
 

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -229,6 +230,24 @@ public class UserDAO extends DBContext {
         return null;
     }
 
+    // search theo tên username 
+    public List<User> search(String keyword) {
+        List<User> list = new ArrayList<>();
+//        String sql = "select * from [User] where userName like '"+keyword+"'";
+        String sql = "select * from [User] where userName like ? ";
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setString(1, "%" + keyword + "%");
+            try ( ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    list.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getDate(10)));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
     public void closeConnection() {
         try {
             con.close();
@@ -237,4 +256,10 @@ public class UserDAO extends DBContext {
         }
     }
 
+//    public static void main(String[] args) {
+//        UserDAO u = new UserDAO();
+//        u.loadUser();
+//        String search = "admin";
+//        System.out.println(u.search(search));
+//    }
 }
