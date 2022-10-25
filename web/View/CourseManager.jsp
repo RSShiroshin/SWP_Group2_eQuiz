@@ -27,11 +27,14 @@
         <div class="adminTable">
             <table>
                 <tr>
-                    <th>CourseID</th>
-                    <th>CourseName</th>                   
+                    <th>Course ID</th>
+                    <th>Course name</th>
                     <th>Description</th>
                     <th>CategoryName</th>
                     <th>Thumbnail</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+
                 </tr>
 
                 <c:forEach items="${clist}" var="c">
@@ -59,20 +62,62 @@
             </table>
         </div>
 
-        <div style="background-color: #4255ff; padding: 10px 2px; color: white; width: 100px;float: right; margin-right: 40px;
-             text-align: center; margin-top: 20px;margin-bottom: 20px;">
-            <a style="color: white; " href="#">Apply</a>
+        <div style="display: none;">
+            <form action="CourseManagerController" method="post">
+                <div class="modal-header">						
+                    <h4 class="modal-title">Add Course</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">					
+                    <div class="form-group">
+                        <label>CourseID</label>
+                        <input name="id" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>CourseName</label>
+                        <input name="name" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" class="form-select" aria-label="Default select example">
+                            <c:forEach items="${cclist}" var="o">
+                                <option value="${o.categoryID}">${o.categoryName}</option>
+                            </c:forEach>
+                        </select>
+                    </div>                                                         
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input name="description" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Thumnail</label>
+                        <input name="thumbnail" type="text" class="form-control" required>
+                    </div>
 
+
+                </div>
+                <div class="modal-footer">                           
+                    <input type="submit" class="btn btn-success" value="Add">
+                </div>
+            </form>
         </div>
 
-        <script language="javascript" type="text/javascript">
-            function update(event) {
-                var x = document.getElementsByClassName(event);
-                for (var i = 0; i < x.length; i++) {
-                    x[i].disabled = false;
-                    x[i].style.backgroundColor = "#FAF0E6";
+            <div style="background-color: #4255ff; padding: 10px 2px; color: white; width: 100px;float: right; margin-right: 40px;
+                 text-align: center; margin-top: 20px;margin-bottom: 20px;">
+                <a style="color: white; " href="#">Apply</a>
+
+            </div>
+
+            
+
+            <script language="javascript" type="text/javascript">
+                function update(event) {
+                    var x = document.getElementsByClassName(event);
+                    for (var i = 0; i < x.length; i++) {
+                        x[i].disabled = false;
+                        x[i].style.backgroundColor = "#FAF0E6";
+                    }
                 }
-            }
-        </script>
+            </script>
     </body>
 </html>
