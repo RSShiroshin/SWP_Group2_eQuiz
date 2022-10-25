@@ -21,7 +21,7 @@
 
             /*//pupup*/
             .open-button {
-                background-color: #555;
+                background-color: #4255ff;
                 color: white;
                 padding: 16px 20px;
                 border: none;
@@ -33,6 +33,21 @@
                 width: 280px;
                 border-radius: 8px;
                 margin-top: 20px;
+            }
+            .pass-button {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px 20px;
+                border: none;
+                cursor: pointer;
+                opacity: 0.8;
+                /*position: fixed;*/
+                top: 40%;
+                left: 10%;
+                width: 280px;
+                border-radius: 8px;
+                margin-top: 20px;
+                margin-left: 50px;
             }
             /* The popup form - hidden by default */
             .form-popup {
@@ -125,6 +140,7 @@
 
             <!--//pup up-->
             <button class="open-button" onclick="openForm()">Edit Profile</button>
+            <a href="#" class="pass-button">Change Password</a>
             <div class="form-popup" id="myForm">
                 <form action="ChangeProfileController" method="get" class="form-container">
                     <input type="text" name="userID" value="${loginUser.getUserID()}" hidden>

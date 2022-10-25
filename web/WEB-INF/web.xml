@@ -64,6 +64,16 @@
         <servlet-name>Contact</servlet-name>
         <servlet-class>Controller.Contact</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>SearchUsernameController</servlet-name>
+        <servlet-class>Controller.SearchUsernameController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EnrollCourse</servlet-name>
+        <servlet-class>Controller.EnrollCourse</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -160,7 +170,14 @@
         <servlet-name>Contact</servlet-name>
         <url-pattern>/Contact</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>SearchUsernameController</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnrollCourse</servlet-name>
+        <url-pattern>/EnrollCourse</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
