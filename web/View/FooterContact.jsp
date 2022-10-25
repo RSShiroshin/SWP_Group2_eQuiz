@@ -190,7 +190,7 @@
                             <option value="Other">Other</option>
                         </select> </br></br>
                         <textarea name="message" rows="4" cols="50" ></textarea>
-                        <input class="js-closeContactForm" type = 'submit' value = 'SEND' style="font-size: 20px;"><br/>
+                        <input class="js-sendContactForm" type = 'submit' value = 'SEND' style="font-size: 20px;"><br/>
                     </form>
                 </div>
             </div>
@@ -200,6 +200,7 @@
         <script>
             const contactFormOpen = document.querySelectorAll('.js-openContactForm');
             const contactFormClose = document.querySelectorAll('.js-closeContactForm');
+            const contactFormSend = document.querySelectorAll('.js-sendContactForm');
             const contactForm = document.querySelector('.js-contactForm');
             
             for (const Btn of contactFormOpen) {
@@ -211,10 +212,18 @@
             }
             
             for (const Btn of contactFormClose) {
-                Btn.addEventListener('click', hideContactForm);
+                Btn.addEventListener('click', closeContactForm);
             }
             
-            function hideContactForm() {
+            function closeContactForm() {
+                contactForm.classList.remove('open');       
+            }
+            
+            for (const Btn of contactFormSend) {
+                Btn.addEventListener('click', sendContactForm);
+            }
+            
+            function sendContactForm() {
                 contactForm.classList.remove('open');
                 alert("Send success!!");
             }
