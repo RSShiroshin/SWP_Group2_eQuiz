@@ -21,6 +21,8 @@
             .Quiz {
                 width: 60%;
                 display: inline-block;
+                padding-bottom: 50px;
+                padding-top: 50px;
             }
 
             .QuizQuestion {
@@ -156,7 +158,8 @@
                         </span>
                     </c:forEach>
 
-                    <input type="submit" value="SUBMIT">
+                    <input style="border:none; padding: 20px 80px; background-color: #4255ff; color: white;
+                           border-radius: 8px; font-size: 15px; cursor: pointer;" type="submit" value="Kiểm Tra">
                 </form>
 
 
@@ -164,7 +167,7 @@
             </div>
         </div>
 
-        <!--code-->
+<!--        code
         <div>
             <input type="radio" id="control_01" name="select" value="1">
             <label for="control_01">
@@ -200,6 +203,6 @@
                 <p>You will not live. Strap in and write a heart-felt letter to your loved ones.</p>
             </label>
         </div>
-        <!--end-->
+        end-->
     </body>
 </html>

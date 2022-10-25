@@ -117,7 +117,7 @@
                         <p>Profile Manager</p>
                     </a>
                     <a style="color: darkblue;" href="UserManagerController">
-                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Course Manager</p>
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Subject Manager</p>
                     </a>
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 2}" >

@@ -64,6 +64,10 @@
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>Controller.RegisterController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EnrollCourse</servlet-name>
+        <servlet-class>Controller.EnrollCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EnrollCourse</servlet-name>
+        <url-pattern>/EnrollCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

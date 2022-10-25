@@ -96,7 +96,7 @@
                                         <p style="margin-top: 10px;">${c.courseName}</p>
                                     </div>
                                 </a>
-                            </div>.
+                            </div>
 
 
                         </c:forEach>

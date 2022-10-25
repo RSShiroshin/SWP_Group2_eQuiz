@@ -60,6 +60,8 @@ public class DetailCourseController extends HttpServlet {
         SubjectDAO sDAO = new SubjectDAO();
         sDAO.loadSubject();
         List<Subject> listSubject = sDAO.getSubjectList();
+        User user = (User) session.getAttribute("userLogin");
+        int check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
         
         
         
@@ -67,8 +69,6 @@ public class DetailCourseController extends HttpServlet {
         request.setAttribute("num", slist.size());
         request.setAttribute("slist", slist);
         request.setAttribute("courseList", clist);
-        User user = (User) session.getAttribute("userLogin");
-        int check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
         request.setAttribute("statusRegister", check);
         request.setAttribute("cId", courseID);
 
