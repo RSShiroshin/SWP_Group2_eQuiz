@@ -11,7 +11,8 @@ import java.util.Date;
  * @author DELL
  */
 public class User {
-     private int userID;
+
+    private int userID;
     private String userName;
     private String password;
     private String fullName;
@@ -117,5 +118,5 @@ public class User {
     public void setRegisterDay(Date registerDay) {
         this.registerDay = registerDay;
     }
-    
+
 }

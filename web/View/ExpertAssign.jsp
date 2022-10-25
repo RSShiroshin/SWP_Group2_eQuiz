@@ -41,11 +41,12 @@
                 </c:if>
                 <c:if test="${role == 2}">
                     <!--<div style="display: flex; flex-wrap: wrap">-->
+                    <c:if test="${!empty lstCourse}">
                         <c:forEach items="${lstCourse}" var="ss">
                             <c:if test="${e.getSubjectID() == ss.getCourseID()}">
                                 <div class="starElement">
                                     <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${ss.courseID}">
-                                        <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
+                                        <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="${ss.getCourseName()}" />
 
                                         <div>
                                             <p style="margin-top: 10px;">${ss.getCourseName()}</p>
@@ -54,6 +55,13 @@
                                 </div>
                             </c:if>
                         </c:forEach>
+                    </c:if>
+                    <c:if test="${empty lstCourse}">
+                        <div class="starElement">
+                            <p>Chua co khoa hoc nao enroll</p>
+                        </div>
+                    </c:if>
+
                     <!--</div>-->
                 </c:if>
 
