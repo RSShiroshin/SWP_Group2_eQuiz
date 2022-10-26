@@ -8,6 +8,7 @@ import DAO.QuestionDAO;
 import DAO.QuizDAO;
 import Model.Answer;
 import Model.Question;
+import Model.User;
 //import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 //import jakarta.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,13 +30,15 @@ import java.util.Random;
  */
 public class QuizGenerateController extends HttpServlet {
 
-    QuestionDAO qd ;
-    QuizDAO quiz ;
+    QuestionDAO qd;
+    QuizDAO quiz;
+
     @Override
     public void init() {
         qd = new QuestionDAO();
         quiz = new QuizDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,7 +56,7 @@ public class QuizGenerateController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuizGenerateController</title>");            
+            out.println("<title>Servlet QuizGenerateController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet QuizGenerateController at " + request.getContextPath() + "</h1>");
@@ -76,63 +80,66 @@ public class QuizGenerateController extends HttpServlet {
         qd.loadQuestion();
         qd.loadAnswer();
         //Lay user dang tao quiz
-//        HttpSession userSes = request.getSession();
-//        User userLogin = (User) userSes.getAttribute("userLogin");
-        
-        //get current time start
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        String timeStart = dateFormat.format(cal.getTime());
-        //get Score
-        float score = 0;
-                
-        ArrayList<Question> questionList = qd.getQuestionBySubjectID("SWT301"); //sau la truyen ID cua subject
-        ArrayList<Question> quizQuestion = new ArrayList<>();
-        ArrayList<Answer>  quizAnswer = new ArrayList<>();
-        
-//        String subject = request.getParameter("SubjectID");
-//        int questionNum = Integer.parseInt(request.getParameter("questionNum")) ;
-        int questionNum = 20;
-        String subject = "SWT301";
-//        quiz.insertQuiz(subject, userLogin.getUserID(), timeStart, score);
-        quiz.insertQuiz(subject, 5, timeStart, score);
-        
-//        int newQuizID = quiz.getLatestQuiz(userLogin.getUserID()).getQuizID();
-        int newQuizID = quiz.getLatestQuiz(5);
-        //Random cac cau hoi
-        ArrayList<Integer> numbers = new ArrayList<>();   
-        Random randomGenerator = new Random();
-        while (numbers.size() < questionNum) {
+        HttpSession userSes = request.getSession();
+        User userLogin = (User) userSes.getAttribute("userLogin");
+        if (userLogin != null) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            String timeStart = dateFormat.format(cal.getTime());
+            //get Score
+            float score = 0;
+            String subject = request.getParameter("SubjectID");
+            int questionNum = 5;
 
-            int random = randomGenerator.nextInt(questionList.size());
-            if (!numbers.contains(random)) {
-                numbers.add(random);
+            ArrayList<Question> questionList = qd.getQuestionBySubjectID(subject); //sau la truyen ID cua subject
+            ArrayList<Question> quizQuestion = new ArrayList<>();
+            ArrayList<Answer> quizAnswer = new ArrayList<>();
+
+//        int questionNum = 20;
+//        String subject = "SWT301";
+//        quiz.insertQuiz(subject, userLogin.getUserID(), timeStart, score);
+            quiz.insertQuiz(subject, 5, timeStart, score);
+
+            int newQuizID = quiz.getLatestQuiz(userLogin.getUserID());
+//        int newQuizID = quiz.getLatestQuiz(5);
+            //Random cac cau hoi
+            ArrayList<Integer> numbers = new ArrayList<>();
+            Random randomGenerator = new Random();
+            while (numbers.size() < questionNum) {
+
+                int random = randomGenerator.nextInt(questionList.size());
+                if (!numbers.contains(random)) {
+                    numbers.add(random);
+                }
             }
-        }
-        
-        //add cau hoi cho quiz
-         for (Integer number : numbers) {
-            for (Question q : questionList) {
-                if(q.getQuestionID() == (number+1)) {
-                    //add cau hoi vao quiz
-                    //vi moi tao nen user answer = 0
-                    quizQuestion.add(q);
-                    quiz.insertQuizHistory(newQuizID, q.getQuestionID(), 0);
-                    ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(q.getQuestionID());
-                    for (Answer a : questionAnswer) {
-                        //add cau tra loi vao question trong quiz
-                        quizAnswer.add(a);
+
+            //add cau hoi cho quiz
+            for (Integer number : numbers) {
+                for (Question q : questionList) {
+                    if (q.getQuestionID() == (number + 1)) {
+                        //add cau hoi vao quiz
+                        //vi moi tao nen user answer = 0
+                        quizQuestion.add(q);
+                        quiz.insertQuizHistory(newQuizID, q.getQuestionID(), 0);
+                        ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(q.getQuestionID());
+                        for (Answer a : questionAnswer) {
+                            //add cau tra loi vao question trong quiz
+                            quizAnswer.add(a);
+                        }
                     }
                 }
-            }         
-        }
-        
-        request.setAttribute("quizID", newQuizID);
-        request.setAttribute("quizQuestion", quizQuestion);
-        request.setAttribute("quizAnswer", quizAnswer);
+            }
 
-        request.getRequestDispatcher("View/QuizView.jsp").forward(request, response);
-        
+            request.setAttribute("quizID", newQuizID);
+            request.setAttribute("quizQuestion", quizQuestion);
+            request.setAttribute("quizAnswer", quizAnswer);
+
+            request.getRequestDispatcher("View/QuizView.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("login").forward(request, response);
+        }
+
+        //get current time start
 //        processRequest(request, response);
     }
 

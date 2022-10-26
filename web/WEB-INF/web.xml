@@ -76,6 +76,10 @@
         <servlet-name>GotoCourse</servlet-name>
         <servlet-class>Controller.GotoCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GoToSubject</servlet-name>
+        <servlet-class>Controller.GoToSubject</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>GotoCourse</servlet-name>
         <url-pattern>/GotoCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoToSubject</servlet-name>
+        <url-pattern>/GoToSubject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

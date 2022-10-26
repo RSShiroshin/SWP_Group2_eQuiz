@@ -32,7 +32,7 @@
                 height: 100%; /* Full height */
                 overflow: auto; /* Enable scroll if needed */
                 border: none;
-                
+
             }
             /* Modal Content */
             .modal-content {
@@ -101,31 +101,17 @@
                 </a>
 
 
-
+               
                 <c:if test="${sessionScope.userLogin.getRole() == 0}" >
-                    <a href="CourseManagerController"><p>Course Managert</p></a>
-                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Manager</p>
-                    </a>
+                    <a style="color: darkblue;" href="CourseManagerController">
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Course Manager</p></a>                  
                     <a style="color: darkblue;" href="UserManagerController">
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">User Manager</p>
                     </a>
                 </c:if>
-                <c:if test="${sessionScope.userLogin.getRole() == 1}" >
-                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
-                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Manager</p>
-                    </a>
-                    <a style="color: darkblue;" href="UserManagerController">
-                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Subject Manager</p>
-                    </a>
-                </c:if>
-                <c:if test="${sessionScope.userLogin.getRole() == 2}" >
-                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>
-                    <a style="" href="ProfileController?userID=${sessionScope.userLogin.userID}">
-                        <p>Profile Manager</p>
-                    </a>
-                </c:if>
+                <c:if test="${sessionScope.userLogin.getRole() == 1||sessionScope.userLogin.getRole() == 2}" >
+                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>                                    
+                </c:if>              
 
             </div>
             <div class="topR">
@@ -166,11 +152,11 @@
                     <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
                     <p style="margin-top: 15px; margin-left: 5px;font-size: large">${sessionScope.userLogin.getEmail()}</p>
                 </div>
-                    <div>
-                        <a href="ProfileController" style="text-decoration: none; color: black;display: block;
-                           margin-bottom: 10px;">Hồ sơ</a>
-                        <a href="LogoutController" style="text-decoration: none; color: black;">Đăng xuất</a>
-                    </div>
+                <div>
+                    <a href="ProfileController" style="text-decoration: none; color: black;display: block;
+                       margin-bottom: 10px;">Hồ sơ</a>
+                    <a href="LogoutController" style="text-decoration: none; color: black;">Đăng xuất</a>
+                </div>
             </div>
 
         </div>
