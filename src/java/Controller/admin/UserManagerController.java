@@ -2,30 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
-import DAO.QuestionDAO;
+import DAO.UserDAO;
+import Model.User;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author DELL
  */
-public class QuestionManagerController extends HttpServlet {
+public class UserManagerController extends HttpServlet {
 
-    QuestionDAO qdao;
+    UserDAO ud;
 
     @Override
     public void init() {
-        qdao = new QuestionDAO();
+        ud = new UserDAO();
     }
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,10 +44,10 @@ public class QuestionManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuestionManagerController</title>");
+            out.println("<title>Servlet UserManagerController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet QuestionManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserManagerController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,20 +65,15 @@ public class QuestionManagerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String subjectID = request.getParameter("subjectID");
-        String numQues = request.getParameter("numQues");      
-        if (numQues == null) {
-            numQues = "1";
-        }
-        int numAns = 4;
-        Cookie quesNum=new Cookie("numQues",String.valueOf(numQues));
-        Cookie ansNum=new Cookie("numAns",String.valueOf(numAns));
-        response.addCookie(quesNum);
-        response.addCookie(ansNum);
-        request.setAttribute("subjectID", subjectID);        
-        
-        
-        request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
+        ud.loadUser();
+        ArrayList<User> userList;
+        ArrayList roleNameList;       
+        userList = ud.getUserList();
+        roleNameList = ud.loadRoleName();       
+        request.setAttribute("userList", userList);
+        request.setAttribute("roleNameList", roleNameList);
+
+        request.getRequestDispatcher("View/UserManagerView.jsp").forward(request, response);
     }
 
     /**
@@ -91,18 +87,7 @@ public class QuestionManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String subjectID = request.getParameter("subjectID");
-        String numAns = request.getParameter("numAns");
-        String numQues = request.getParameter("numQues");
-        for (int j = 1; j <= Integer.parseInt(numQues); j++) {
-            qdao.insertQuestion(subjectID, request.getParameter("ques"+j), "");
-            qdao.loadQuestion();
-            int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
-            for (int i = 1; i <= Integer.parseInt(numAns); i++) {
-                qdao.insertAnswerByQuestionID(questionID, request.getParameter("ques"+j+"ans" + i));
-            }
-        }
-        response.sendRedirect("QuestionManagerController");
+        processRequest(request, response);
     }
 
     /**

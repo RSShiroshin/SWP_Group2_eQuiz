@@ -2,32 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.expert;
 
-import DAO.UserDAO;
-import Model.Course;
-import Model.CourseCategory;
-import Model.User;
+import DAO.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
- * @author Admin
+ * @author DELL
  */
-public class SearchUsernameController extends HttpServlet {
+public class QuestionManagerController extends HttpServlet {
 
-    UserDAO userDAO;
+    QuestionDAO qdao;
 
     @Override
     public void init() {
-        userDAO = new UserDAO();
+        qdao = new QuestionDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,11 +39,16 @@ public class SearchUsernameController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String keyword = request.getParameter("keyword");
-            List<User> userList = userDAO.search(keyword);
-            request.setAttribute("userList", userList);
-
-            request.getRequestDispatcher("View/UserManagerView.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet QuestionManagerController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet QuestionManagerController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -61,7 +64,20 @@ public class SearchUsernameController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String subjectID = request.getParameter("subjectID");
+        String numQues = request.getParameter("numQues");      
+        if (numQues == null) {
+            numQues = "1";
+        }
+        int numAns = 4;
+        Cookie quesNum=new Cookie("numQues",String.valueOf(numQues));
+        Cookie ansNum=new Cookie("numAns",String.valueOf(numAns));
+        response.addCookie(quesNum);
+        response.addCookie(ansNum);
+        request.setAttribute("subjectID", subjectID);        
+        
+        
+        request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
     }
 
     /**
@@ -75,7 +91,18 @@ public class SearchUsernameController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String subjectID = request.getParameter("subjectID");
+        String numAns = request.getParameter("numAns");
+        String numQues = request.getParameter("numQues");
+        for (int j = 1; j <= Integer.parseInt(numQues); j++) {
+            qdao.insertQuestion(subjectID, request.getParameter("ques"+j), "");
+            qdao.loadQuestion();
+            int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
+            for (int i = 1; i <= Integer.parseInt(numAns); i++) {
+                qdao.insertAnswerByQuestionID(questionID, request.getParameter("ques"+j+"ans" + i));
+            }
+        }
+        response.sendRedirect("QuestionManagerController");
     }
 
     /**

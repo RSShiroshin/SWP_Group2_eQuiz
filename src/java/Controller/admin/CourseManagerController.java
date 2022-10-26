@@ -2,30 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
-import DAO.UserDAO;
-import Model.User;
-import Model.User;
+import DAO.CourseDAO;
+import DAO.SubjectDAO;
+//import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author DELL
  */
-public class UserManagerController extends HttpServlet {
+public class CourseManagerController extends HttpServlet {
 
-    UserDAO ud;
-
+    CourseDAO cdao;
+    SubjectDAO sdao;
     @Override
     public void init() {
-        ud = new UserDAO();
+        cdao = new CourseDAO();
+        sdao = new SubjectDAO();
     }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +44,10 @@ public class UserManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserManagerController</title>");            
+            out.println("<title>Servlet CourseManagerController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CourseManagerController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,16 +64,17 @@ public class UserManagerController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ud.loadUser();
-        ArrayList<User> userList;
-        ArrayList roleNameList;       
-        userList = ud.getUserList();
-        roleNameList = ud.loadRoleName();       
-        request.setAttribute("userList", userList);
-        request.setAttribute("roleNameList", roleNameList);
+            throws ServletException, IOException {                       
+         
+        cdao.loadCourse();
+        cdao.loadCourseCategory();
+        sdao.loadSubject();
+        
+        request.setAttribute("clist", cdao.getCourseList());
+        request.setAttribute("cclist", cdao.getCategoryList());
+        request.setAttribute("slist", sdao.getSubjectList());  
 
-        request.getRequestDispatcher("View/UserManagerView.jsp").forward(request, response);
+        request.getRequestDispatcher("View/CourseManager.jsp").forward(request, response);
     }
 
     /**
@@ -87,7 +88,13 @@ public class UserManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String courseID = request.getParameter("id");
+        String courseName = request.getParameter("name");
+        int categoryID = Integer.parseInt(request.getParameter("category"));
+        String description = request.getParameter("description");
+        String thumbnail = request.getParameter("thumbnail");             
+        cdao.insertCourse(courseID, courseName, description, categoryID, thumbnail);
+        doGet(request, response);
     }
 
     /**

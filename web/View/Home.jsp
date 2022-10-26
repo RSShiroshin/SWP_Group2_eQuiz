@@ -77,7 +77,7 @@
         <div class="HomeContent">
             <div style="padding-left: 10%;">
                 <div style="display: flex" class="cate col-md-3 mb-5">
-                    <h3 style="margin-top: 10px; margin-right: 10px;">Categories: </h3>
+<!--                    <h3 style="margin-top: 10px; margin-right: 10px;">Categories: </h3>-->
                     <ul style="margin-top: 10px;" class="list-group">
                         <c:forEach items="${listCategories}" var="cc">
                             <a class="catename" href="filter-category?categoryId=${cc.categoryID}">${cc.categoryName}</a>
@@ -85,7 +85,7 @@
                     </ul>
                 </div>
                 <div class="topStar">
-                    <h3>List Courses</h3>
+<!--                    <h3>List Courses</h3>-->
                     <div class="star">
                         <c:forEach items="${listCourses}" var="c"> 
                             <div class="starElement">
@@ -143,6 +143,6 @@
             </div>
         </div>
 
-
+ <%@ include file="FooterContact.jsp" %>
     </body>
 </html>

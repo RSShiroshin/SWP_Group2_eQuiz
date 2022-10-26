@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>CourseManagerController</servlet-name>
-        <servlet-class>Controller.CourseManagerController</servlet-class>
+        <servlet-class>Controller.admin.CourseManagerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangeProfileController</servlet-name>
@@ -14,15 +14,15 @@
     </servlet>
     <servlet>
         <servlet-name>RoleChangeController</servlet-name>
-        <servlet-class>Controller.RoleChangeController</servlet-class>
+        <servlet-class>Controller.admin.RoleChangeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserManagerController</servlet-name>
-        <servlet-class>Controller.UserManagerController</servlet-class>
+        <servlet-class>Controller.admin.UserManagerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserStatusChangeController</servlet-name>
-        <servlet-class>Controller.UserStatusChangeController</servlet-class>
+        <servlet-class>Controller.admin.UserStatusChangeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QuizReviewController</servlet-name>
@@ -38,15 +38,15 @@
     </servlet>
     <servlet>
         <servlet-name>SubjectManagerController</servlet-name>
-        <servlet-class>Controller.SubjectManagerController</servlet-class>
+        <servlet-class>Controller.admin.SubjectManagerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QuestionManagerController</servlet-name>
-        <servlet-class>Controller.QuestionManagerController</servlet-class>
+        <servlet-class>Controller.expert.QuestionManagerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Ajaxdemo</servlet-name>
-        <servlet-class>Controller.Ajaxdemo</servlet-class>
+        <servlet-class>Controller.expert.Ajaxdemo</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LibraryExpertController</servlet-name>
@@ -66,7 +66,7 @@
     </servlet>
     <servlet>
         <servlet-name>SearchUsernameController</servlet-name>
-        <servlet-class>Controller.SearchUsernameController</servlet-class>
+        <servlet-class>Controller.admin.SearchUsernameController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EnrollCourse</servlet-name>

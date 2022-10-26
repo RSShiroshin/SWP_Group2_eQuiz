@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
-import DAO.UserDAO;
+import DAO.CourseDAO;
+import DAO.SubjectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,14 +17,17 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class RoleChangeController extends HttpServlet {
+public class SubjectManagerController extends HttpServlet {
 
-    UserDAO ud;
+    SubjectDAO sdao;
+    CourseDAO cdao;
 
     @Override
     public void init() {
-        ud = new UserDAO();
+        sdao = new SubjectDAO();
+        cdao = new CourseDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +45,10 @@ public class RoleChangeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RoleChangeController</title>");            
+            out.println("<title>Servlet SubjectManagerController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RoleChangeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SubjectManagerController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,14 +66,15 @@ public class RoleChangeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int userID = Integer.parseInt(request.getParameter("userID"));
-        int roleID = Integer.parseInt(request.getParameter("roleID"));
-        roleID +=1;
-        if(roleID >2)
-            roleID = 1;
-        ud.updateUserRole(userID, roleID);
+        sdao.loadSubject();
+        String courseID = request.getParameter("courseID");
+        
+        request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
+        request.setAttribute("cId", courseID);
+        request.setAttribute("course", cdao.getCourseById(courseID));
+        request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
 
-        request.getRequestDispatcher("UserManagerController").forward(request, response);
+        request.getRequestDispatcher("View/SubjectManager.jsp").forward(request, response);
     }
 
     /**
@@ -83,7 +88,12 @@ public class RoleChangeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String courseID = request.getParameter("courseID");
+        String subjectID = request.getParameter("id");
+        String subjectName = request.getParameter("name");
+        String description = request.getParameter("description");
+        sdao.insertSubject(subjectID, subjectName, description, courseID);
+        doGet(request, response);
     }
 
     /**

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
 import DAO.UserDAO;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class UserStatusChangeController extends HttpServlet {
+public class RoleChangeController extends HttpServlet {
 
     UserDAO ud;
 
@@ -41,10 +41,10 @@ public class UserStatusChangeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserStatusChangeController</title>");            
+            out.println("<title>Servlet RoleChangeController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserStatusChangeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RoleChangeController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,12 +63,13 @@ public class UserStatusChangeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int userID = Integer.parseInt(request.getParameter("userID"));
-        boolean status = request.getParameter("status").equals("true");
-        status = !status;
-        ud.updateUserStatus(userID, status);
+        int roleID = Integer.parseInt(request.getParameter("roleID"));
+        roleID +=1;
+        if(roleID >2)
+            roleID = 1;
+        ud.updateUserRole(userID, roleID);
 
         request.getRequestDispatcher("UserManagerController").forward(request, response);
-//        processRequest(request, response);
     }
 
     /**
