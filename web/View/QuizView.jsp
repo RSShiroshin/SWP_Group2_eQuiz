@@ -19,16 +19,16 @@
                 box-sizing: border-box;
             }
             .Quiz {
-                width: 60%;
+                width: 1000px;
                 display: inline-block;
-                padding-bottom: 50px;
+                padding-bottom: 100px;
                 padding-top: 50px;
             }
 
             .QuizQuestion {
                 margin: 8px;
                 background-color: white;
-                margin-bottom: 30px;
+                margin-bottom: 50px;
                 border-radius: 8px;
                 box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
                 padding: 10px 20px;
@@ -38,6 +38,8 @@
             }
             #contentQuiz{
                 background-color: #f6f7fb;
+                font-family: hurme_no2-webfont,-apple-system,BlinkMacSystemFont,sans-serif;
+
             }
             .radio-toolbar {
                 margin: 10px;
@@ -51,11 +53,11 @@
 
             .radio-toolbar label {
                 display: inline-block;
-                background-color: #ddd;
+                background-color: #f6f7fb;
                 padding: 10px 20px;
                 font-family: sans-serif, Arial;
                 font-size: 16px;
-                border: 2px solid #444;
+                border: 1px solid silver;
                 border-radius: 4px;
             }
 
@@ -89,7 +91,7 @@
                 height: 100%;
                 display: block;
                 background: white;
-                border: 2px solid hsla(150, 75%, 50%, 1);
+                border: 1px solid silver;
                 border-radius: 20px;
                 padding: 1rem;
                 margin-bottom: 1rem;
@@ -104,7 +106,7 @@
                 &::after {
                     color: hsla(215, 5%, 25%, 1);
                     font-family: FontAwesome;
-                    border: 2px solid hsla(150, 75%, 45%, 1);
+                    border: 1px solid silver;
                     content: "\f00c";
                     font-size: 24px;
                     position: absolute;
@@ -128,31 +130,40 @@
                 font-weight: 900;
             }
             /*end*/
+
         </style>
     </head>
     <body>
+        <%@ include file="HeaderQuiz.jsp" %>
         <div id="contentQuiz">
+
+
             <div class="Quiz">
                 <form action="QuizReviewController" method="post">
-                    <span>
-                        <c:forEach items="${quizQuestion}" var="question">
+                    <c:forEach items="${quizQuestion}" var="question">
+                        <span>
                             <div class="QuizQuestion">
-                                <p style="margin-bottom: 50px; padding-top: 20px;">${question.getContent()}</p>
+                                <p style="padding-top: 20px; font-size: 20px;font-weight: 300; text-align: left; margin-left: 50px; opacity: 0.8">Câu hỏi</p>
+                                <p style="margin-bottom: 50px; padding-top: 20px; font-size: 24px; margin-left: 50px; margin-right: 50px;
+                                   font-weight: 400;text-align: justify">${question.getContent()}</p>
+                                <p style="margin-bottom: 20px;padding-top: 20px; font-size: 20px; text-align: left; margin-left: 50px;
+                                   font-weight: 300;opacity: 0.8">Chọn đáp án đúng</p>
                                 <div style="text-align: left; display: flex;">
-                                    <c:forEach items="${quizAnswer}" var="answer">
-                                        <c:if test="${question.getQuestionID() == answer.getQuestionID()}">
-                                            <div style="width: 50%" class="radio-toolbar">
+                                    <div style="margin-left: 50px; display: flex; flex-wrap: wrap;" class="radio-toolbar">
+                                        <c:forEach items="${quizAnswer}" var="answer">
+                                            <c:if test="${question.getQuestionID() == answer.getQuestionID()}">
                                                 <!--code-->
-                                                <div>
-                                                    <input type="radio" id="control_01" name="answer${answer.getQuestionID()}" value="${answer.getAnswerID()}">
-                                                    <label for="control_01">
-                                                        <p>${answer.getContent()}</p>
-                                                    </label>
-                                                </div>
+                                                <!--<div>-->
+                                                <input  type="radio" id="control_01" name="answer${answer.getQuestionID()}" value="${answer.getAnswerID()}">
+                                                <label style="width: 400px; height: 150px; margin-right: 50px;
+                                                       margin-top: 10px; margin-left: 10px; margin-right: 10px;"  for="control_01">
+                                                    <p style="font-weight: 300; font-size: 18px; text-align: left; line-height: 1.5">${answer.getContent()}</p>
+                                                </label>
+                                                <!--</div>-->
                                                 <!--end-->
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                             </div>           
                         </span>
@@ -167,42 +178,42 @@
             </div>
         </div>
 
-<!--        code
-        <div>
-            <input type="radio" id="control_01" name="select" value="1">
-            <label for="control_01">
-                <h2>Pfft</h2>
-                <p>Awww, poor baby. Too afraid of the scary game sprites? I laugh at you.</p>
-            </label>
-        </div>
-        <div>
-            <input type="radio" id="control_02" name="select" value="2">
-            <label for="control_02">
-                <h2>Wannabe</h2>
-                <p>You're not a gaming God by any stretch of the imagination.</p>
-            </label>
-        </div>
-        <div>
-            <input type="radio" id="control_03" name="select" value="3">
-            <label for="control_03">
-                <h2>Daaamn</h2>
-                <p>Now we're talking. It's gettin' a bit hairy out there in game land.</p>
-            </label>
-        </div>
-        <div>
-            <input type="radio" id="control_04" name="select" value="4" disabled>
-            <label for="control_04">
-                <h2>Mental</h2>
-                <p>Prepare for glory! This is going to be one hell of a no-holds-barred ride.</p>
-            </label>
-        </div>
-        <div>
-            <input type="radio" id="control_05" name="select" value="5">
-            <label for="control_05">
-                <h2>Suicidal</h2>
-                <p>You will not live. Strap in and write a heart-felt letter to your loved ones.</p>
-            </label>
-        </div>
-        end-->
+        <!--        code
+                <div>
+                    <input type="radio" id="control_01" name="select" value="1">
+                    <label for="control_01">
+                        <h2>Pfft</h2>
+                        <p>Awww, poor baby. Too afraid of the scary game sprites? I laugh at you.</p>
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" id="control_02" name="select" value="2">
+                    <label for="control_02">
+                        <h2>Wannabe</h2>
+                        <p>You're not a gaming God by any stretch of the imagination.</p>
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" id="control_03" name="select" value="3">
+                    <label for="control_03">
+                        <h2>Daaamn</h2>
+                        <p>Now we're talking. It's gettin' a bit hairy out there in game land.</p>
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" id="control_04" name="select" value="4" disabled>
+                    <label for="control_04">
+                        <h2>Mental</h2>
+                        <p>Prepare for glory! This is going to be one hell of a no-holds-barred ride.</p>
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" id="control_05" name="select" value="5">
+                    <label for="control_05">
+                        <h2>Suicidal</h2>
+                        <p>You will not live. Strap in and write a heart-felt letter to your loved ones.</p>
+                    </label>
+                </div>
+                end-->
     </body>
 </html>
