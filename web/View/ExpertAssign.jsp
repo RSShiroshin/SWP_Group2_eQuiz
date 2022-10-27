@@ -30,16 +30,33 @@
     </head>
     <body>
         <%@ include file="Header.jsp" %>
-        <div style="padding-top: 20px; margin-left: 10%;display: flex; flex-wrap: wrap">
-            <c:forEach items="${lstEA}" var="e">
-                <c:if test="${role == 1}">
-                    <c:forEach items="${lstSubject}" var="s">
-                        <c:if test="${e.getSubjectID() == s.getSubjectID()}">
+
+        <c:if test="${userLogin.role == 1}">
+            <div>Các subject mà bạn được admin giao cho:</div>
+        </c:if>
+        <c:if test="${userLogin.role == 2}">
+            <div>Các course mà bạn đã register:</div>
+        </c:if>
+
+        <c:forEach items="${lstEA}" var="e">
+            <c:if test="${userLogin.role == 1}">
+                <c:forEach items="${lstSubject}" var="s">
+                    <c:if test="${e.getSubjectID() == s.getSubjectID()}">
+                        <div>
                             <p>${s.getSubjectName()}</p>
-                        </c:if>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${role == 2}">
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </c:if>
+        </c:forEach>
+
+        <c:if test="${userLogin.role == 1}">
+            <div>Các course mà bạn đã register:</div>
+        </c:if>
+
+        <div style="padding-top: 20px; margin-left: 10%;display: flex; flex-wrap: wrap">        
+            <c:forEach items="${lstEA}" var="e">
+                <c:if test="${userLogin.role == 1}">
                     <!--<div style="display: flex; flex-wrap: wrap">-->
                     <c:if test="${!empty lstCourse}">
                         <c:forEach items="${lstCourse}" var="ss">
@@ -47,7 +64,6 @@
                                 <div class="starElement">
                                     <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${ss.courseID}">
                                         <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="${ss.getCourseName()}" />
-
                                         <div>
                                             <p style="margin-top: 10px;">${ss.getCourseName()}</p>
                                         </div>
@@ -58,13 +74,37 @@
                     </c:if>
                     <c:if test="${empty lstCourse}">
                         <div class="starElement">
-                            <p>Chua co khoa hoc nao enroll</p>
+                            <p>Bạn chưa đăng kí khóa học nào.</p>
                         </div>
                     </c:if>
-
-                    <!--</div>-->
                 </c:if>
+            </c:forEach>
+        </div>
 
+        <div style="padding-top: 20px; margin-left: 10%;display: flex; flex-wrap: wrap">        
+            <c:forEach items="${lstEA}" var="e">
+                <c:if test="${userLogin.role == 2}">
+                    <!--<div style="display: flex; flex-wrap: wrap">-->
+                    <c:if test="${!empty lstCourse}">
+                        <c:forEach items="${lstCourse}" var="ss">
+                            <c:if test="${e.getSubjectID() == ss.getCourseID()}">
+                                <div class="starElement">
+                                    <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${ss.courseID}">
+                                        <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="${ss.getCourseName()}" />
+                                        <div>
+                                            <p style="margin-top: 10px;">${ss.getCourseName()}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty lstCourse}">
+                        <div class="starElement">
+                            <p>Bạn chưa đăng kí khóa học nào.</p>
+                        </div>
+                    </c:if>
+                </c:if>
             </c:forEach>
         </div>
     </body>

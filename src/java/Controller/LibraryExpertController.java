@@ -23,13 +23,16 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class LibraryExpertController extends HttpServlet {
+
     CourseDAO cd;
     SubjectDAO sd;
+
     @Override
     public void init() {
-        cd = new CourseDAO();  
+        cd = new CourseDAO();
         sd = new SubjectDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -60,18 +63,17 @@ public class LibraryExpertController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-         HttpSession acc=request.getSession(); 
-         request.setAttribute("acc", acc);
-         
-        String userID = request.getParameter("userID");        
-        ExpertAssignDAO ex = new ExpertAssignDAO();        
+        HttpSession session = request.getSession();
+
+        String userID = request.getParameter("userID");
+        ExpertAssignDAO ex = new ExpertAssignDAO();
         sd.loadSubject();
         ex.loadExpertAssign();
         ex.loadCustomerAssign();
         cd.loadCourse();
-        User u = checkRole(Integer.parseInt(userID));
+        User u = (User) session.getAttribute("userLogin");
         ArrayList<ExpertAssign> lstEA = new ArrayList<>();
-        
+
         if (u != null && u.getRole() == 1) {
             for (ExpertAssign expert : ex.getExpertAssignList()) {
                 if (u.getUserID() == expert.getUserID()) {
@@ -79,6 +81,15 @@ public class LibraryExpertController extends HttpServlet {
                 }
             }
         }
+
+        if (u != null && u.getRole() == 1) {
+            for (ExpertAssign cus : ex.getCustomerAssignList()) {
+                if (u.getUserID() == cus.getUserID()) {
+                    lstEA.add(new ExpertAssign(u.getUserID(), cus.getSubjectID()));
+                }
+            }
+        }
+        
         if (u != null && u.getRole() == 2) {
             for (ExpertAssign cus : ex.getCustomerAssignList()) {
                 if (u.getUserID() == cus.getUserID()) {
@@ -87,7 +98,7 @@ public class LibraryExpertController extends HttpServlet {
             }
         }
         
-        request.setAttribute("role", u.getRole());
+
         request.setAttribute("lstSubject", sd.getSubjectList());
         request.setAttribute("lstCourse", cd.getCourseList());
         request.setAttribute("lstEA", lstEA);
@@ -96,17 +107,16 @@ public class LibraryExpertController extends HttpServlet {
 
     }
 
-    public User checkRole(int id) {
-        UserDAO u = new UserDAO();
-        u.loadUser();
-        for (User us : u.getUserList()) {
-            if (us.getUserID() == id) {
-                return us;
-            }
-        }
-        return null;
-    }
-
+//    public User checkRole(int id) {
+//        UserDAO u = new UserDAO();
+//        u.loadUser();
+//        for (User us : u.getUserList()) {
+//            if (us.getUserID() == id) {
+//                return us;
+//            }
+//        }
+//        return null;
+//    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *
