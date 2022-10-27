@@ -84,6 +84,10 @@
         <servlet-name>ImportQuestionController</servlet-name>
         <servlet-class>Controller.expert.ImportQuestionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExportQuestionController</servlet-name>
+        <servlet-class>Controller.expert.ExportQuestionController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>ImportQuestionController</servlet-name>
         <url-pattern>/ImportQuestionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportQuestionController</servlet-name>
+        <url-pattern>/ExportQuestionController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

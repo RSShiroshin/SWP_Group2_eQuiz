@@ -4,29 +4,18 @@
  */
 package Controller.expert;
 
-import DAO.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
  * @author DELL
  */
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 5, // 5 MB
-        maxFileSize = 1024 * 1024 * 10, // 10 MB
-        maxRequestSize = 1024 * 1024 * 100 // 100 MB
-)
-public class ImportQuestionController extends HttpServlet {
+public class ExportQuestionController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +34,10 @@ public class ImportQuestionController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ImportQuestionController</title>");
+            out.println("<title>Servlet ExportQuestionController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ImportQuestionController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ExportQuestionController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -80,41 +69,7 @@ public class ImportQuestionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        Part filePart = request.getPart("file");
-//        String subjectID = request.getParameter("subjectID");
-//        String fileName = filePart.getSubmittedFileName();
-//        filePart.write("D:\\" + fileName);
-//        ArrayList<String> list = new ArrayList<>();
-//        File file = new File("D:\\" + fileName);
-//        String question;
-//        try ( Scanner myReader = new Scanner(file)) {
-//            question = "";
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                question += data + "\n";
-//            }
-//        }
-//        if (file.delete()) {
-//            String[] q = question.trim().split("--");
-//            for (int i = 0; i < q.length; i++) {
-//                if (i % 2 == 0) {
-//                    list.add(q[i].trim());
-//                }
-//            }
-//            QuestionDAO qdao = new QuestionDAO();
-//            for (int i = 0; i < list.size(); i++) {
-//                String[] qlist = list.get(i).split("\n");
-//                qdao.insertQuestion(subjectID, qlist[0], "");
-//                qdao.loadQuestion();
-//                int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
-//                for (int j = 1; j < qlist.length; j++) {
-//                    qdao.insertAnswerByQuestionID(questionID, qlist[j]);
-//                }
-//            }
-//
-//        }
-        response.sendRedirect("QuestionManagerController");
-
+        processRequest(request, response);
     }
 
     /**
