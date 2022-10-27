@@ -80,6 +80,10 @@
         <servlet-name>GoToSubject</servlet-name>
         <servlet-class>Controller.GoToSubject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImportQuestionController</servlet-name>
+        <servlet-class>Controller.expert.ImportQuestionController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>GoToSubject</servlet-name>
         <url-pattern>/GoToSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImportQuestionController</servlet-name>
+        <url-pattern>/ImportQuestionController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

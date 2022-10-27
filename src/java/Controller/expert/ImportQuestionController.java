@@ -8,23 +8,25 @@ import DAO.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author DELL
  */
-public class QuestionManagerController extends HttpServlet {
-
-    QuestionDAO qdao;
-
-    @Override
-    public void init() {
-        qdao = new QuestionDAO();
-    }
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 5, // 5 MB
+        maxFileSize = 1024 * 1024 * 10, // 10 MB
+        maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
+public class ImportQuestionController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +45,10 @@ public class QuestionManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuestionManagerController</title>");
+            out.println("<title>Servlet ImportQuestionController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet QuestionManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ImportQuestionController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,22 +66,7 @@ public class QuestionManagerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String subjectID = request.getParameter("subjectID");
-        String numQues = request.getParameter("numQues");      
-        if (numQues == null) {
-            numQues = "1";
-        }
-        int numAns = 4;
-        qdao.loadAnswer();
-        
-        Cookie quesNum=new Cookie("numQues",String.valueOf(numQues));
-        Cookie ansNum=new Cookie("numAns",String.valueOf(numAns));
-        response.addCookie(quesNum);
-        response.addCookie(ansNum);
-        request.setAttribute("subjectID", subjectID);        
-        request.setAttribute("qlist", qdao.getQuestionBySubjectID("SWT301"));
-        request.setAttribute("alist", qdao.getAnswerList());
-        request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -93,17 +80,36 @@ public class QuestionManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String subjectID = request.getParameter("subjectID");        
-//        String numQues = request.getParameter("numQues");
-//        for (int j = 1; j <= Integer.parseInt(numQues); j++) {
-//            qdao.insertQuestion(subjectID, request.getParameter("ques"+j), "");
-//            qdao.loadQuestion();
-//            int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
-//            for (int i = 1; i < Integer.parseInt(request.getParameter("numAnsQues"+j)); i++) {
-//                qdao.insertAnswerByQuestionID(questionID, request.getParameter("ques"+j+"ans" + i));
+//        Part filePart = request.getPart("file");
+//        String fileName = filePart.getSubmittedFileName();
+//        filePart.write("D:\\" + fileName);
+//        ArrayList<String> list = new ArrayList<>();
+//        File myObj = new File("D:\\" + fileName);
+//        Scanner myReader = new Scanner(myObj);
+//        String question = "";
+//        while (myReader.hasNextLine()) {
+//            String data = myReader.nextLine();
+//            question += data + "\n";
+//        }
+//        myReader.close();
+//        String[] q = question.trim().split("--");
+//        for (int i = 0; i < q.length; i++) {
+//            if (i % 2 == 0) {
+//                list.add(q[i].trim());
 //            }
 //        }
-//        response.sendRedirect("QuestionManagerController");
+//        QuestionDAO qdao = new QuestionDAO();
+//        for (int i = 0; i < list.size(); i++) {
+//            String[] qlist = list.get(i).split("\n");
+//            qdao.insertQuestion("SWT301", qlist[0], "");
+//            qdao.loadQuestion();
+//            int questionID = qdao.getQuestionBySubjectID("SWT301").get(qdao.getQuestionBySubjectID("SWT301").size() - 1).getQuestionID();
+//            for (int j = 1; j < qlist.length; j++) {
+//                qdao.insertAnswerByQuestionID(questionID, qlist[j]);
+//            }
+//        }
+          response.sendRedirect("QuestionManagerController");
+
     }
 
     /**

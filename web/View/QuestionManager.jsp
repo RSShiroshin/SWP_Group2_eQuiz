@@ -130,7 +130,7 @@
                 border-radius: 8px;
 
             }
-            
+
             input:focus{
                 outline: none !important;
             }
@@ -165,37 +165,44 @@
             <div class="addCourse">
 
                 <div class="addImg">
-                    <form action="QuestionManagerController" method="get">
+                    <form action="ImportQuestionController" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file">
                         <input type="hidden" name="subjectID" value="${subjectID}">
-                        <p>numQues</p>
-                        <input type="text" name="numQues">
-                        <p>numAns</p>
-                        <input type="text" name="numAns">                        
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Upload">
                     </form>
                 </div>
                 <div class="addQuiz">
                     <form action="QuestionManagerController" method="post">                        
                         <input type="hidden" name="numQues" value="${cookie.numQues.getValue()}">
-                        <input type="hidden" name="subjectID" value="${subjectID}">                       
-
-
+                        <input type="hidden" name="subjectID" value="${subjectID}">                                                    
                         <div id="content1"></div>
                         <div id="content">
-                            <div id="addQ1" style="width: 50%;  margin-top: 40px;">
-                                <input type="text" id="q1" name="ques1" placeholder="Câu hỏi"><br>
-                                <p>THUẬT NGỮ </p>
-                            </div>
-                            <div id="addQ2" style="width: 50%;  margin-top: 40px;">
-                                <div id="addQ">
-                                    <input type="text" id="id1" name="ques1ans1" placeholder="Đáp án A"><br>
-                                    <input type="text" id="id2" name="ques1ans2" placeholder="Đáp án B"><br> 
-                                    <input type="text" id="id3" name="ques1ans3" placeholder="Đáp án C"><br> 
-                                    <input type="text" id="id4" name="ques1ans4" placeholder="Đáp án D"><br>
+                            <%! int i=1; %> 
+                            <c:forEach items="${qlist}" var="q">
+
+                                <div id="addQ1" style="width: 50%;  margin-top: 40px;">
+                                    <input type="text" id="q1" name="ques<%out.print(i);%>" placeholder="Câu hỏi" value="${q.content}"><br>
+                                    <p>THUẬT NGỮ </p>
                                 </div>
-                                <!--<button type="button" id="demo1">Add Ques</button>-->
-                                <p>ĐỊNH NGHĨA</p>
-                            </div>
+                                <div id="addQ2" style="width: 50%;  margin-top: 40px;">
+                                    <div id="addQ">
+                                        <%! int j=1; %>
+                                        <c:forEach items="${alist}" var="a">
+
+                                            <c:if test="${a.questionID==q.questionID}">
+
+                                                <input type="text" id="id1" name="ques<%out.print(i);%>ans<%out.print(j++);%>" placeholder="Đáp án A" value="${a.content}" ><br>
+                                            </c:if>
+                                        </c:forEach>
+                                        <input type="hidden" name="numAnsQues<%out.print(i);%>" value="<%out.print(j);%>">
+                                        <% j=1; %>
+                                        <% i++; %>
+                                    </div>
+                                    <!--<button type="button" id="demo1">Add Ques</button>-->
+                                    <p>ĐỊNH NGHĨA</p>
+                                </div>
+
+                            </c:forEach>
                         </div>
 
                         <div>                            
