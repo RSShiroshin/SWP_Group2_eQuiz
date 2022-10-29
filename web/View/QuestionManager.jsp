@@ -165,12 +165,10 @@
             <div class="addCourse">
 
                 <div class="addImg">
-                    <a href="../Img/icon.png" download >
-                        Download
-                    </a>
+                    
                     <form action="ImportQuestionController" method="post" enctype="multipart/form-data">
                         <input type="file" name="file">
-                        <input type="hidden" name="subjectID" value="WED201">
+                        <input type="hidden" name="subjectID" value="SWT301">
                         <input type="submit" value="Upload">
                     </form>
                 </div>

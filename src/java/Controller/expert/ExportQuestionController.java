@@ -4,18 +4,29 @@
  */
 package Controller.expert;
 
+import DAO.QuestionDAO;
+import Model.Answer;
+import Model.Question;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author DELL
  */
 public class ExportQuestionController extends HttpServlet {
+
+    QuestionDAO qdao;
+
+    @Override
+    public void init() {
+        qdao = new QuestionDAO();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +45,7 @@ public class ExportQuestionController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ExportQuestionController</title>");            
+            out.println("<title>Servlet ExportQuestionController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ExportQuestionController at " + request.getContextPath() + "</h1>");
@@ -55,7 +66,23 @@ public class ExportQuestionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String subjectID = request.getParameter("subjectID");
+        ArrayList<Question> qlist = qdao.getQuestionBySubjectID("SWT301");
+        String data = "";
+
+        for (Question q : qlist) {
+            data+=q.getContent().trim()+"\n";
+            String ans = "";
+            for (Answer answer : qdao.getQuestionAnswer(q.getQuestionID())) {
+                data+=answer.getContent().trim()+"\n";
+                if(answer.isAnswer()){
+                    ans+=answer.getContent().charAt(0);
+                }
+            }
+            data+="--"+ans+"--\n";
+        }
+        request.setAttribute("data", data);
+        request.getRequestDispatcher("View/Export.jsp").forward(request, response);
     }
 
     /**
