@@ -80,39 +80,40 @@ public class ImportQuestionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        Part filePart = request.getPart("file");
-//        String subjectID = request.getParameter("subjectID");
-//        String fileName = filePart.getSubmittedFileName();
-//        filePart.write("D:\\" + fileName);
-//        ArrayList<String> list = new ArrayList<>();
-//        File file = new File("D:\\" + fileName);
-//        String question;
-//        try ( Scanner myReader = new Scanner(file)) {
-//            question = "";
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                question += data + "\n";
-//            }
-//        }
-//        if (file.delete()) {
-//            String[] q = question.trim().split("--");
-//            for (int i = 0; i < q.length; i++) {
-//                if (i % 2 == 0) {
-//                    list.add(q[i].trim());
-//                }
-//            }
-//            QuestionDAO qdao = new QuestionDAO();
-//            for (int i = 0; i < list.size(); i++) {
-//                String[] qlist = list.get(i).split("\n");
-//                qdao.insertQuestion(subjectID, qlist[0], "");
-//                qdao.loadQuestion();
-//                int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
-//                for (int j = 1; j < qlist.length; j++) {
-//                    qdao.insertAnswerByQuestionID(questionID, qlist[j]);
-//                }
-//            }
-//
-//        }
+        Part filePart = request.getPart("file");
+        String subjectID = request.getParameter("subjectID");
+        String fileName = filePart.getSubmittedFileName();
+        filePart.write("D:\\" + fileName);
+        ArrayList<String> list = new ArrayList<>();
+        File file = new File("D:\\" + fileName);
+        StringBuilder question  = new StringBuilder();
+        try ( Scanner myReader = new Scanner(file)) {
+            
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                question.append(data.trim()).append("\n");
+            }
+        }
+        if (file.delete()) {
+            question.trimToSize();
+            String[] q = question.toString().split("--");
+            for (int i = 0; i < q.length; i++) {
+                if (i % 2 == 0) {
+                    list.add(q[i].trim());
+                }
+            }
+            QuestionDAO qdao = new QuestionDAO();
+            for (int i = 0; i < list.size(); i++) {
+                String[] qlist = list.get(i).split("\n");
+                qdao.insertQuestion(subjectID, qlist[0], "");
+                qdao.loadQuestion();
+                int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
+                for (int j = 1; j < qlist.length; j++) {
+                    qdao.insertAnswerByQuestionID(questionID, qlist[j]);
+                }
+            }
+
+        }
         response.sendRedirect("QuestionManagerController");
 
     }

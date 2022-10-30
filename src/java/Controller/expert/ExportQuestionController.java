@@ -67,19 +67,19 @@ public class ExportQuestionController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String subjectID = request.getParameter("subjectID");
-        ArrayList<Question> qlist = qdao.getQuestionBySubjectID("SWT301");
+        ArrayList<Question> qlist = qdao.getQuestionBySubjectID(subjectID);
         String data = "";
-
+        StringBuilder data1 = new StringBuilder();
         for (Question q : qlist) {
-            data+=q.getContent().trim()+"\n";
-            String ans = "";
+            data1.append(q.getContent().trim()).append("\n");
+            StringBuilder ans = new StringBuilder();
             for (Answer answer : qdao.getQuestionAnswer(q.getQuestionID())) {
                 data+=answer.getContent().trim()+"\n";
                 if(answer.isAnswer()){
-                    ans+=answer.getContent().charAt(0);
+                    ans.append(answer.getContent().charAt(0));
                 }
             }
-            data+="--"+ans+"--\n";
+            data1.append("--").append(ans).append("--\n");
         }
         request.setAttribute("data", data);
         request.getRequestDispatcher("View/Export.jsp").forward(request, response);

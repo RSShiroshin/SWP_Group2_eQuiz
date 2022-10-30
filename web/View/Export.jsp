@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <input type="radio" >
         <button id ="copy" onclick="myFunction()">Copy text</button>
         <textarea id="myInput" readonly>${data}</textarea>
         <script>
