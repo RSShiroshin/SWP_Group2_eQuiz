@@ -74,7 +74,7 @@ public class SubjectManagerController extends HttpServlet {
         request.setAttribute("course", cdao.getCourseById(courseID));
         request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
 
-        request.getRequestDispatcher("View/SubjectManager.jsp").forward(request, response);
+        request.getRequestDispatcher("View/admin/SubjectManager.jsp").forward(request, response);
     }
 
     /**

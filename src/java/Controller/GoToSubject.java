@@ -70,7 +70,7 @@ public class GoToSubject extends HttpServlet {
         request.setAttribute("sid", sid);
         request.setAttribute("listQuestion", qd.getQuestionList());
         request.setAttribute("listSubject", cd.getSubjectList());
-        request.getRequestDispatcher("View/SubjectQuestion.jsp").forward(request, response);
+        request.getRequestDispatcher("View/QuestionInSubject.jsp").forward(request, response);
     }
 
     /**

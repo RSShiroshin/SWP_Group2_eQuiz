@@ -23,7 +23,7 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="../Header.jsp" %>
         <div class="adminTable">
             <table>
                 <tr>

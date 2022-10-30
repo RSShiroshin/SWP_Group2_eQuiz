@@ -103,7 +103,7 @@ public class LibraryExpertController extends HttpServlet {
         request.setAttribute("lstCourse", cd.getCourseList());
         request.setAttribute("lstEA", lstEA);
 
-        request.getRequestDispatcher("View/ExpertAssign.jsp").forward(request, response);
+        request.getRequestDispatcher("View/Library.jsp").forward(request, response);
 
     }
 

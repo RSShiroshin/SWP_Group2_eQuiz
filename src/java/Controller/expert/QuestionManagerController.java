@@ -79,7 +79,7 @@ public class QuestionManagerController extends HttpServlet {
         request.setAttribute("subjectID", subjectID);        
         request.setAttribute("qlist", qdao.getQuestionBySubjectID("SWT301"));
         request.setAttribute("alist", qdao.getAnswerList());
-        request.getRequestDispatcher("View/QuestionManager.jsp").forward(request, response);
+        request.getRequestDispatcher("View/expert/QuestionManager.jsp").forward(request, response);
     }
 
     /**

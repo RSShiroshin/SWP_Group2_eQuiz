@@ -82,7 +82,7 @@ public class ExportQuestionController extends HttpServlet {
             data1.append("--").append(ans).append("--\n");
         }
         request.setAttribute("data", data);
-        request.getRequestDispatcher("View/Export.jsp").forward(request, response);
+        request.getRequestDispatcher("View/expert/Export.jsp").forward(request, response);
     }
 
     /**
