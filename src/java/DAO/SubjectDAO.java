@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -93,7 +94,18 @@ public class SubjectDAO {
         }
         return subjectByCourse;
     }
-
+    
+    public List<Subject> searchBySubjectsName(String keyword) {
+        List<Subject> list = new ArrayList<>();
+        loadSubject();
+        for (Subject s : getSubjectList()) {
+            if(s.getSubjectName().toLowerCase().contains(keyword.toLowerCase())){
+                list.add(s);
+            }
+        }
+        
+        return list;
+    }
     public void closeConnection() {
         try {
             con.close();

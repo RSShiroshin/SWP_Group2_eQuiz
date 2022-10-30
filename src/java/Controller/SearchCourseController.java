@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,9 +43,29 @@ public class SearchCourseController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String keyword = request.getParameter("keyword");
-            List<Course> listCourses = courseDAO.search(keyword);            
+            String sort = request.getParameter("sort");
+            List<Course> listCourses = new ArrayList<>();
+            if (sort == null) {
+                sort = "cname";
+            }
+            switch (sort) {
+                case "cname":
+                    listCourses = courseDAO.searchByCourseName(keyword);
+                    break;
+                case "cid":
+                    listCourses = courseDAO.searchByCourseID(keyword);
+                    break;
+                case "sname":
+                    listCourses = courseDAO.searchBySubjectsName(keyword);
+                    break;
+                case "sid":
+                    listCourses = courseDAO.searchBySubjectsID(keyword);
+                    break;
+                default:
+                    break;
+            }
             courseDAO.loadCourseCategory();
-            List<CourseCategory> listCategories = courseDAO.getCategoryList();           
+            List<CourseCategory> listCategories = courseDAO.getCategoryList();
             request.setAttribute("listCategories", listCategories);
             request.setAttribute("listCourses", listCourses);
 

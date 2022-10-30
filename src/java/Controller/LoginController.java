@@ -68,14 +68,14 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("id");
         String password = request.getParameter("pass");
-//        String sha256Pass = "";
-//         try {
-//            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-//            sha256Pass = convertByteToString(hash);
-//        } catch (NoSuchAlgorithmException ex) {
-//            System.out.println("" + ex);
-//        }
+        String sha256Pass = "";
+         try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            sha256Pass = convertByteToString(hash);
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("" + ex);
+        }
         UserDAO userdao = new UserDAO();
         User userLogin = userdao.checkLogin(username, password);
 
