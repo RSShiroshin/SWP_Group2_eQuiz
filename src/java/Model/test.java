@@ -4,9 +4,10 @@
  */
 package Model;
 
-import DAO.QuestionDAO;
+import DAO.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class test {
 
     public static void main(String[] args) {
         String data = "";
-        read();
+        read1();
     }
     static ArrayList<String> list = new ArrayList<>();
 
@@ -57,5 +58,49 @@ public class test {
             e.printStackTrace();
         }
     }
+    public static void read1(){
+        QuestionDAO qdao = new QuestionDAO();
+        ArrayList<Question> qlist = qdao.getQuestionBySubjectID("SWT301");
+        String data = "";
+        String ans = "";
+        for (Question q : qlist) {
+            data+=q.getContent().trim()+"\n";
+            ans = "";
+            for (Answer answer : qdao.getQuestionAnswer(q.getQuestionID())) {
+                data+=answer.getContent().trim()+"\n";
+                if(answer.isAnswer()){
+                    ans+=answer.getContent().charAt(0);
+                }
+            }
+            data+="--"+ans+"--\n";
+        }
+        System.out.println(data);
+    }
+    
+    
+    
+    
+    public static void close() {
+        try{
+        Connection con  = new DBContext().getConnection();
+        CourseDAO cd = new CourseDAO();
+        ExpertAssignDAO edao = new ExpertAssignDAO();
+        QuestionDAO qdao = new QuestionDAO();
+        QuizDAO qudao = new QuizDAO();
+        SubjectDAO sdao = new SubjectDAO();
+        UserDAO udao = new UserDAO();
+        
+        cd.closeConnection();
+        edao.closeConnection();
+        qdao.closeConnection();
+        qudao.closeConnection();
+        sdao.closeConnection();
+        udao.closeConnection();
+        con.close();}
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 
 }

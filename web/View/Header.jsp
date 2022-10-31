@@ -108,6 +108,10 @@
                     <a style="color: darkblue;" href="UserManagerController">
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">User Manager</p>
                     </a>
+                    <a style="color: darkblue;" href="#">
+                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Setting</p>
+                    </a>
+                    
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1||sessionScope.userLogin.getRole() == 2}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>                                    
@@ -122,7 +126,12 @@
                            aria-label="Search"
                            />
                     <i class="bi bi-search"></i>
-                    </button>
+                    <select name="sort">
+                        <option value="cname">Search by Course Name</option>
+                        <option value="cid">Search by Course ID</option>
+                        <option value="sname">Search by Subject Name</option>
+                        <option value="sid">Search by Subject ID</option>
+                    </select>
                 </form>
                 <c:if test="${sessionScope.userLogin != null}">
                     <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>

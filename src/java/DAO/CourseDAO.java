@@ -190,8 +190,8 @@ public class CourseDAO extends DBContext {
         return list;
     }
 
-    // search theo tên course 
-    public List<Course> search(String keyword) {
+    // searchByCourseName theo tên course 
+    public List<Course> searchByCourseName(String keyword) {
         List<Course> list = new ArrayList<>();
         String sql = "select * from Course where courseName like ?";
         try ( PreparedStatement ps = con.prepareStatement(sql);) {
@@ -204,6 +204,38 @@ public class CourseDAO extends DBContext {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return list;
+    }
+    public List<Course> searchByCourseID(String keyword) {
+        List<Course> list = new ArrayList<>();
+        loadCourse();
+        for (Course c : getCourseList()) {
+            if(c.getCourseID().toLowerCase().contains(keyword.toLowerCase())){
+                list.add(c);
+            }
+        }
+        return list;
+    } 
+    public List<Course> searchBySubjectsName(String keyword) {
+        List<Course> list = new ArrayList<>();
+        SubjectDAO sdao = new SubjectDAO();
+        sdao.loadSubject();
+        for (Subject s : sdao.getSubjectList()) {
+            if(s.getSubjectName().toLowerCase().contains(keyword.toLowerCase())){
+                list.add(getCourseById(s.getCourseID()));
+            }
+        }        
+        return list;
+    }
+    public List<Course> searchBySubjectsID(String keyword) {
+        List<Course> list = new ArrayList<>();
+        SubjectDAO sdao = new SubjectDAO();
+        sdao.loadSubject();
+        for (Subject s : sdao.getSubjectList()) {
+            if(s.getSubjectID().toLowerCase().contains(keyword.toLowerCase())){
+                list.add(getCourseById(s.getCourseID()));
+            }
+        }        
         return list;
     }
 

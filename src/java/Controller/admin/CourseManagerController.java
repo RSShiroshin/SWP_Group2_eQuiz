@@ -2,31 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
-import DAO.UserDAO;
-import Model.Course;
-import Model.CourseCategory;
-import Model.User;
+import DAO.CourseDAO;
+import DAO.SubjectDAO;
+//import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
- * @author Admin
+ * @author DELL
  */
-public class SearchUsernameController extends HttpServlet {
+public class CourseManagerController extends HttpServlet {
 
-    UserDAO userDAO;
-
+    CourseDAO cdao;
+    SubjectDAO sdao;
     @Override
     public void init() {
-        userDAO = new UserDAO();
+        cdao = new CourseDAO();
+        sdao = new SubjectDAO();
     }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,11 +40,16 @@ public class SearchUsernameController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            String keyword = request.getParameter("keyword");
-            List<User> userList = userDAO.search(keyword);
-            request.setAttribute("userList", userList);
-
-            request.getRequestDispatcher("View/UserManagerView.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CourseManagerController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CourseManagerController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -60,8 +64,17 @@ public class SearchUsernameController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {                       
+         
+        cdao.loadCourse();
+        cdao.loadCourseCategory();
+        sdao.loadSubject();
+        
+        request.setAttribute("clist", cdao.getCourseList());
+        request.setAttribute("cclist", cdao.getCategoryList());
+        request.setAttribute("slist", sdao.getSubjectList());  
+
+        request.getRequestDispatcher("View/admin/CourseManager.jsp").forward(request, response);
     }
 
     /**
@@ -75,7 +88,13 @@ public class SearchUsernameController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String courseID = request.getParameter("id");
+        String courseName = request.getParameter("name");
+        int categoryID = Integer.parseInt(request.getParameter("category"));
+        String description = request.getParameter("description");
+        String thumbnail = request.getParameter("thumbnail");             
+        cdao.insertCourse(courseID, courseName, description, categoryID, thumbnail);
+        doGet(request, response);
     }
 
     /**

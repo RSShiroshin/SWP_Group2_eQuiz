@@ -2,37 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
-import DAO.CourseDAO;
-import DAO.ExpertAssignDAO;
-import DAO.SubjectDAO;
 import DAO.UserDAO;
-import Model.*;
+import Model.Course;
+import Model.CourseCategory;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-public class LibraryExpertController extends HttpServlet {
+public class SearchUsernameController extends HttpServlet {
 
-    CourseDAO cd;
-    SubjectDAO sd;
+    UserDAO userDAO;
 
     @Override
     public void init() {
-        cd = new CourseDAO();
-        sd = new SubjectDAO();
+        userDAO = new UserDAO();
     }
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,7 +41,11 @@ public class LibraryExpertController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            String keyword = request.getParameter("keyword");
+            List<User> userList = userDAO.search(keyword);
+            request.setAttribute("userList", userList);
 
+            request.getRequestDispatcher("View/admin/UserManagerView.jsp").forward(request, response);
         }
     }
 
@@ -62,61 +61,9 @@ public class LibraryExpertController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        HttpSession session = request.getSession();
-
-        String userID = request.getParameter("userID");
-        ExpertAssignDAO ex = new ExpertAssignDAO();
-        sd.loadSubject();
-        ex.loadExpertAssign();
-        ex.loadCustomerAssign();
-        cd.loadCourse();
-        User u = (User) session.getAttribute("userLogin");
-        ArrayList<ExpertAssign> lstEA = new ArrayList<>();
-
-        if (u != null && u.getRole() == 1) {
-            for (ExpertAssign expert : ex.getExpertAssignList()) {
-                if (u.getUserID() == expert.getUserID()) {
-                    lstEA.add(new ExpertAssign(u.getUserID(), expert.getSubjectID()));
-                }
-            }
-        }
-
-        if (u != null && u.getRole() == 1) {
-            for (ExpertAssign cus : ex.getCustomerAssignList()) {
-                if (u.getUserID() == cus.getUserID()) {
-                    lstEA.add(new ExpertAssign(u.getUserID(), cus.getSubjectID()));
-                }
-            }
-        }
-        
-        if (u != null && u.getRole() == 2) {
-            for (ExpertAssign cus : ex.getCustomerAssignList()) {
-                if (u.getUserID() == cus.getUserID()) {
-                    lstEA.add(new ExpertAssign(u.getUserID(), cus.getSubjectID()));
-                }
-            }
-        }
-        
-
-        request.setAttribute("lstSubject", sd.getSubjectList());
-        request.setAttribute("lstCourse", cd.getCourseList());
-        request.setAttribute("lstEA", lstEA);
-
-        request.getRequestDispatcher("View/Library.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
-//    public User checkRole(int id) {
-//        UserDAO u = new UserDAO();
-//        u.loadUser();
-//        for (User us : u.getUserList()) {
-//            if (us.getUserID() == id) {
-//                return us;
-//            }
-//        }
-//        return null;
-//    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *

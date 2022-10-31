@@ -2,24 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
 import DAO.UserDAO;
-import Model.User;
-import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
  * @author DELL
  */
-public class UserManagerController extends HttpServlet {
+public class RoleChangeController extends HttpServlet {
 
     UserDAO ud;
 
@@ -44,10 +41,10 @@ public class UserManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserManagerController</title>");            
+            out.println("<title>Servlet RoleChangeController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RoleChangeController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,15 +62,14 @@ public class UserManagerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ud.loadUser();
-        ArrayList<User> userList;
-        ArrayList roleNameList;       
-        userList = ud.getUserList();
-        roleNameList = ud.loadRoleName();       
-        request.setAttribute("userList", userList);
-        request.setAttribute("roleNameList", roleNameList);
+        int userID = Integer.parseInt(request.getParameter("userID"));
+        int roleID = Integer.parseInt(request.getParameter("roleID"));
+        roleID +=1;
+        if(roleID >2)
+            roleID = 1;
+        ud.updateUserRole(userID, roleID);
 
-        request.getRequestDispatcher("View/UserManagerView.jsp").forward(request, response);
+        request.getRequestDispatcher("UserManagerController").forward(request, response);
     }
 
     /**

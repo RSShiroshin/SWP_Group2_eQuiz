@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.expert;
 
-import DAO.CourseDAO;
-import DAO.SubjectDAO;
-//import Model.Course;
+import DAO.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,15 +17,15 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class CourseManagerController extends HttpServlet {
+public class QuestionManagerController extends HttpServlet {
 
-    CourseDAO cdao;
-    SubjectDAO sdao;
+    QuestionDAO qdao;
+
     @Override
     public void init() {
-        cdao = new CourseDAO();
-        sdao = new SubjectDAO();
+        qdao = new QuestionDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,10 +43,10 @@ public class CourseManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CourseManagerController</title>");            
+            out.println("<title>Servlet QuestionManagerController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CourseManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet QuestionManagerController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,17 +63,23 @@ public class CourseManagerController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {                       
-         
-        cdao.loadCourse();
-        cdao.loadCourseCategory();
-        sdao.loadSubject();
+            throws ServletException, IOException {
+        String subjectID = request.getParameter("subjectID");
+        String numQues = request.getParameter("numQues");      
+        if (numQues == null) {
+            numQues = "1";
+        }
+        int numAns = 4;
+        qdao.loadAnswer();
         
-        request.setAttribute("clist", cdao.getCourseList());
-        request.setAttribute("cclist", cdao.getCategoryList());
-        request.setAttribute("slist", sdao.getSubjectList());  
-
-        request.getRequestDispatcher("View/CourseManager.jsp").forward(request, response);
+        Cookie quesNum=new Cookie("numQues",String.valueOf(numQues));
+        Cookie ansNum=new Cookie("numAns",String.valueOf(numAns));
+        response.addCookie(quesNum);
+        response.addCookie(ansNum);
+        request.setAttribute("subjectID", subjectID);        
+        request.setAttribute("qlist", qdao.getQuestionBySubjectID("SWT301"));
+        request.setAttribute("alist", qdao.getAnswerList());
+        request.getRequestDispatcher("View/expert/QuestionManager.jsp").forward(request, response);
     }
 
     /**
@@ -88,13 +93,17 @@ public class CourseManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String courseID = request.getParameter("id");
-        String courseName = request.getParameter("name");
-        int categoryID = Integer.parseInt(request.getParameter("category"));
-        String description = request.getParameter("description");
-        String thumbnail = request.getParameter("thumbnail");             
-        cdao.insertCourse(courseID, courseName, description, categoryID, thumbnail);
-        doGet(request, response);
+//        String subjectID = request.getParameter("subjectID");        
+//        String numQues = request.getParameter("numQues");
+//        for (int j = 1; j <= Integer.parseInt(numQues); j++) {
+//            qdao.insertQuestion(subjectID, request.getParameter("ques"+j), "");
+//            qdao.loadQuestion();
+//            int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
+//            for (int i = 1; i < Integer.parseInt(request.getParameter("numAnsQues"+j)); i++) {
+//                qdao.insertAnswerByQuestionID(questionID, request.getParameter("ques"+j+"ans" + i));
+//            }
+//        }
+//        response.sendRedirect("QuestionManagerController");
     }
 
     /**
