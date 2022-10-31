@@ -4,8 +4,6 @@
  */
 package Controller.admin;
 
-import DAO.CourseDAO;
-import DAO.SubjectDAO;
 import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,19 +16,14 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class SubjectManagerController extends HttpServlet {
+public class AssignExpertController extends HttpServlet {
 
-    SubjectDAO sdao;
-    CourseDAO cdao;
     UserDAO udao;
 
     @Override
     public void init() {
-        sdao = new SubjectDAO();
-        cdao = new CourseDAO();
         udao = new UserDAO();
     }
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,10 +41,10 @@ public class SubjectManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SubjectManagerController</title>");
+            out.println("<title>Servlet AssignExpertController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SubjectManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AssignExpertController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,17 +62,24 @@ public class SubjectManagerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        sdao.loadSubject();
         String courseID = request.getParameter("courseID");
+        int expertID = Integer.parseInt(request.getParameter("expertAssignID")) ;
+        String subjectID = request.getParameter("subjectAssignID");
         
-        request.setAttribute("expertlist", udao.getExpertList());
-        request.setAttribute("assignlist", udao.getExpertAssignList());
-        request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
-        request.setAttribute("cId", courseID);
-        request.setAttribute("course", cdao.getCourseById(courseID));
-        request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
-
-        request.getRequestDispatcher("View/admin/SubjectManager.jsp").forward(request, response);
+        if(expertID != 0) {
+            if(udao.checkSubjectAssign(subjectID)) {
+                udao.updateAssignExpert(expertID, subjectID);
+            } else {
+                udao.insertAssignExpert(expertID, subjectID);
+            }
+        } else {
+            udao.deleteExpertAssign(subjectID);
+        }
+        
+        
+        
+        request.setAttribute("courseID", courseID);
+        request.getRequestDispatcher("SubjectManagerController").forward(request, response);
     }
 
     /**
@@ -93,12 +93,7 @@ public class SubjectManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String courseID = request.getParameter("courseID");
-        String subjectID = request.getParameter("id");
-        String subjectName = request.getParameter("name");
-        String description = request.getParameter("description");
-        sdao.insertSubject(subjectID, subjectName, description, courseID);
-        doGet(request, response);
+        processRequest(request, response);
     }
 
     /**
