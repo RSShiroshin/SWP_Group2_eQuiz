@@ -97,8 +97,8 @@ public class QuizGenerateController extends HttpServlet {
 
 //        int questionNum = 20;
 //        String subject = "SWT301";
-//        quiz.insertQuiz(subject, userLogin.getUserID(), timeStart, score);
-            quiz.insertQuiz(subject, 5, timeStart, score);
+        quiz.insertQuiz(subject, userLogin.getUserID(), timeStart, score);
+//            quiz.insertQuiz(subject, 5, timeStart, score);
 
             int newQuizID = quiz.getLatestQuiz(userLogin.getUserID());
 //        int newQuizID = quiz.getLatestQuiz(5);

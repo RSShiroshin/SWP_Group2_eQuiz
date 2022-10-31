@@ -140,12 +140,14 @@
 
             <div class="Quiz">
                 <form action="QuizReviewController" method="post">
+                    <input type="text" name="quizID" value="${quizID}" >
                     <c:forEach items="${quizQuestion}" var="question">
                         <span>
                             <div class="QuizQuestion">
                                 <p style="padding-top: 20px; font-size: 20px;font-weight: 300; text-align: left; margin-left: 50px; opacity: 0.8">Câu hỏi</p>
                                 <p style="margin-bottom: 50px; padding-top: 20px; font-size: 24px; margin-left: 50px; margin-right: 50px;
                                    font-weight: 400;text-align: justify">${question.getContent()}</p>
+                                <input type="text" name="question${question.getQuestionID()}" value="${question.getQuestionID()}" hidden>
                                 <p style="margin-bottom: 20px;padding-top: 20px; font-size: 20px; text-align: left; margin-left: 50px;
                                    font-weight: 300;opacity: 0.8">Chọn đáp án đúng</p>
                                 <div style="text-align: left; display: flex;">
