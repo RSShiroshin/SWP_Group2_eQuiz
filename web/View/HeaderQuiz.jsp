@@ -24,8 +24,8 @@
                 display: none; /* Hidden by default */
                 position: fixed; /* Stay in place */
                 z-index: 1; /* Sit on top */
-                padding-top: 70px; /* Location of the box */
-                margin-left: 750px;
+                padding-top: 100px; /* Location of the box */
+                margin-left: 500px;
                 left: 0;
                 top: 0;
                 width: fit-content; /* Full width */
@@ -37,11 +37,11 @@
             /* Modal Content */
             .modal-content {
                 background-color: #fefefe;
-                margin-left: 440px;
+                margin-left: 0;
                 padding: 20px;
                 border: 1px solid #939bb4;
                 border-radius: 10px;
-                width: 300px;
+                width: 700px;
                 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
             /* The Close Button */
@@ -86,7 +86,11 @@
                 font-size: 15px;
             }
             .header{
+                width: 100%;
+                /*position: fixed;*/
                 background-color: white;
+                /*z-index: 1;*/
+                box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
             }
         </style>
     </head>
@@ -96,17 +100,19 @@
                 <a href="/QuizPracticeBeta/home">
                     <img src="Img/logo.png" width="95px" height="55px" alt="Quizlut"/>
                 </a>
-                <a style="" href="/QuizPracticeBeta/home">
-                    <p>Trang chủ</p>
-                </a>
+                <div style="text-align: center; width: 100%">
+                    <p style="margin-top: 5px;">20/20</p>
+                    <p style="margin-top: -3px;">SWR</p>
+
+                </div>
 
 
-               
-                    <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>                                    
 
             </div>
             <div class="topR">
-                    <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
+                <div style="margin-top: 10px">
+                    <button style="padding: 10px 20px; border: 1px solid silver; border-radius: 8px; font-weight: 300; background-color: #fefefe" id="myBtn">Tuỳ chọn</button>
+                </div>
             </div>
             <div>
 
@@ -122,15 +128,21 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close"></span>
-                <div style="display: flex; margin-bottom: 20px; border-bottom: 1px solid #939bb4; padding-bottom: 10px;">
-                    <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
-                    <p style="margin-top: 15px; margin-left: 5px;font-size: large">${sessionScope.userLogin.getEmail()}</p>
-                </div>
-                <div>
-                    <a href="ProfileController" style="text-decoration: none; color: black;display: block;
-                       margin-bottom: 10px;">Hồ sơ</a>
-                    <a href="LogoutController" style="text-decoration: none; color: black;">Đăng xuất</a>
-                </div>
+                <form action="#">
+                    <div>
+                        <!--<input style="text-decoration: none; color: black;" type="button" value="Reset">-->
+                        <input style="text-decoration: none; color: white; background-color: #4255ff;
+                               padding: 10px 200px;cursor: pointer; border:none; border-radius: 8px; font-size: 24px;" type="button" value="Tạo bài kiểm tra mới">
+                    </div>
+                    <div style=" margin-bottom: 20px; border-bottom: 1px solid #939bb4; padding-bottom: 10px;">
+                        <p style="margin-top: 15px; margin-left: 5px;font-size: 20px; font-weight: 200;">GIỚI HẠN CÂU HỎI </p>
+                        <div>
+                            <input style="width: 30px;padding-left: 10px; border:none; border-bottom: 1px solid orange; outline: none" type="text" name="name" value="20">
+                            <input style="width: 40px; border:none; outline: none" type="text" id="id" value="/20" disabled="">
+                        </div>
+                    </div>
+                </form>
+
             </div>
 
         </div>

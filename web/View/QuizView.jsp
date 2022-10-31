@@ -99,33 +99,33 @@
                 box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
                 position: relative;
             }
-            input[type="radio"]:checked + label {
-                background: hsla(150, 75%, 50%, 1);
-                color: hsla(215, 0%, 100%, 1);
-                box-shadow: 0px 0px 20px hsla(150, 100%, 50%, 0.75);
-                &::after {
-                    color: hsla(215, 5%, 25%, 1);
-                    font-family: FontAwesome;
-                    border: 1px solid silver;
-                    content: "\f00c";
-                    font-size: 24px;
-                    position: absolute;
-                    top: -25px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    height: 50px;
-                    width: 50px;
-                    line-height: 50px;
-                    text-align: center;
-                    border-radius: 50%;
-                    background: white;
-                    box-shadow: 0px 2px 5px -2px hsla(0, 0%, 0%, 0.25);
-                }
-            }
-            input[type="radio"]#control_05:checked + label {
-                background: red;
-                border-color: red;
-            }
+            /*            input[type="radio"]:checked + label {
+                            background: hsla(150, 75%, 50%, 1);
+                            color: hsla(215, 0%, 100%, 1);
+                            box-shadow: 0px 0px 20px hsla(150, 100%, 50%, 0.75);
+                            &::after {
+                                color: hsla(215, 5%, 25%, 1);
+                                font-family: FontAwesome;
+                                border: 1px solid silver;
+                                content: "\f00c";
+                                font-size: 24px;
+                                position: absolute;
+                                top: -25px;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                height: 50px;
+                                width: 50px;
+                                line-height: 50px;
+                                text-align: center;
+                                border-radius: 50%;
+                                background: white;
+                                box-shadow: 0px 2px 5px -2px hsla(0, 0%, 0%, 0.25);
+                            }
+                        }
+                        input[type="radio"]#control_05:checked + label {
+                            background: red;
+                            border-color: red;
+                        }*/
             p {
                 font-weight: 900;
             }
@@ -154,11 +154,16 @@
                                             <c:if test="${question.getQuestionID() == answer.getQuestionID()}">
                                                 <!--code-->
                                                 <!--<div>-->
-                                                <input  type="radio" id="control_01" name="answer${answer.getQuestionID()}" value="${answer.getAnswerID()}">
-                                                <label style="width: 400px; height: 150px; margin-right: 50px;
-                                                       margin-top: 10px; margin-left: 10px; margin-right: 10px;"  for="control_01">
-                                                    <p style="font-weight: 300; font-size: 18px; text-align: left; line-height: 1.5">${answer.getContent()}</p>
+
+                                                <input type="radio" id="answer${answer.getQuestionID()}" name="answer${answer.getQuestionID()}" />
+
+
+                                                <label for="answer${answer.getQuestionID()}" onclick="checkAns('answer${answer.getAnswerID()}${answer.getQuestionID()}')"
+                                                       style="width: 400px; height: 150px; margin-right: 50px;
+                                                       margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+                                                    <p style="font-weight: 300; font-size: 18px; text-align: left; line-height: 1.5">${answer.getContent()}</p> 
                                                 </label>
+
                                                 <!--</div>-->
                                                 <!--end-->
                                             </c:if>
@@ -178,42 +183,12 @@
             </div>
         </div>
 
-        <!--        code
-                <div>
-                    <input type="radio" id="control_01" name="select" value="1">
-                    <label for="control_01">
-                        <h2>Pfft</h2>
-                        <p>Awww, poor baby. Too afraid of the scary game sprites? I laugh at you.</p>
-                    </label>
-                </div>
-                <div>
-                    <input type="radio" id="control_02" name="select" value="2">
-                    <label for="control_02">
-                        <h2>Wannabe</h2>
-                        <p>You're not a gaming God by any stretch of the imagination.</p>
-                    </label>
-                </div>
-                <div>
-                    <input type="radio" id="control_03" name="select" value="3">
-                    <label for="control_03">
-                        <h2>Daaamn</h2>
-                        <p>Now we're talking. It's gettin' a bit hairy out there in game land.</p>
-                    </label>
-                </div>
-                <div>
-                    <input type="radio" id="control_04" name="select" value="4" disabled>
-                    <label for="control_04">
-                        <h2>Mental</h2>
-                        <p>Prepare for glory! This is going to be one hell of a no-holds-barred ride.</p>
-                    </label>
-                </div>
-                <div>
-                    <input type="radio" id="control_05" name="select" value="5">
-                    <label for="control_05">
-                        <h2>Suicidal</h2>
-                        <p>You will not live. Strap in and write a heart-felt letter to your loved ones.</p>
-                    </label>
-                </div>
-                end-->
+
+        <script>
+            function checkAns(e) {
+                var x = document.getElementById(e);
+                x.check = 'click';
+            }
+        </script>
     </body>
 </html>
