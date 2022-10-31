@@ -18,8 +18,7 @@ import java.util.Scanner;
 public class test {
 
     public static void main(String[] args) {
-        String data = "";
-        read1();
+        System.out.println(System.getProperty("user.dir"));
     }
     static ArrayList<String> list = new ArrayList<>();
 

@@ -160,10 +160,12 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="../Header.jsp" %>
         <div class="contentCourse">
             <div class="addCourse">
-
+                
+                Sample File for User to Import Question:
+                <a href="Files/demo.txt" download>Download</a>
                 <div class="addImg">
                     
                     <form action="ImportQuestionController" method="post" enctype="multipart/form-data">
