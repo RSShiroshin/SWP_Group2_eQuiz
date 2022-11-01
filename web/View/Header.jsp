@@ -126,7 +126,8 @@
                            aria-label="Search"
                            />
                     <i class="bi bi-search"></i>
-                    <select name="sort">
+                    <select name="sort" style="height: 40px; border-radius: 8px; padding: 0 5px;
+                            outline: none;">
                         <option value="cname">Search by Course Name</option>
                         <option value="cid">Search by Course ID</option>
                         <option value="sname">Search by Subject Name</option>
