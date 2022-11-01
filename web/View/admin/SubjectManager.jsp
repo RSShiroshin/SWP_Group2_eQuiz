@@ -118,8 +118,13 @@
                             <div>
                                 <p style="margin-top: 10px; font-weight: bold">${s.subjectID}</p>
                                 <p style="margin-top: 10px;">${s.subjectName}</p>
-                                <p style="margin-top: 10px;">Expert: <c:forEach begin="0" end="${assignlist.size()}" step="1" var="i">
-                                        <c:if test="${assignlist[i].getSubjectID().equals(s.getSubjectID())}">${assignlist[i].getUserID()}</c:if>
+                                <p style="margin-top: 10px;">Expert: <c:forEach begin="0" end="${assignlist.size()}" step="1" var="i">                          
+                                        <c:if test="${assignlist[i].getSubjectID().equals(s.getSubjectID())}">
+                                            <c:forEach begin="0" end="${expertlist.size()-1}" step="1" var="e">
+                                                <c:if test="${assignlist[i].getUserID()==expertlist[e].userID}">
+                                                    ${expertlist[e].fullName}
+                                                </c:if>
+                                        </c:forEach></c:if>
                                 </c:forEach></p>
                             </div>
                         </a>

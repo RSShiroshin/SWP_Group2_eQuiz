@@ -67,39 +67,9 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession userLogin=request.getSession(); 
-//        int userID = userLogin.getAttribute("");
-//        String userName = "";
-//        String password = "";
-//        String fullName = "";
-//        String email = "";      
-//        String avatar = "";            
-//        String description = "";   
-//        int roleID = 2;               
-//        boolean status = true;
-//        Date registerDay;
-        
-        User loginUser = (User) userLogin.getAttribute("userLogin");
-//        ud.loadUser();
-//        for(User us : ud.getUserList()) {
-//           if(us.getUserID() == userID) {
-//               userName = us.getUserName();
-//               password = us.getPassword();
-//               fullName = us.getFullName();
-//               email = us.getEmail();
-//               if(us.getAvatar() != null)
-//                avatar = us.getAvatar();
-//               if(us.getDescription()!= null)
-//                description = us.getDescription();
-//               roleID = us.getRole();
-//               status = us.isStatus();
-//               registerDay = us.getRegisterDay();
-//               loginUser = new User(userID, userName, password, fullName, email, avatar, description, roleID, status, registerDay);
-//           }
-//        }
-        
+        HttpSession userLogin=request.getSession();      
+        User loginUser = (User) userLogin.getAttribute("userLogin");       
         request.setAttribute("loginUser", loginUser);
-
         request.getRequestDispatcher("View/ProfileView.jsp").forward(request, response);
     }
 
