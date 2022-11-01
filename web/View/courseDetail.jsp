@@ -185,24 +185,34 @@
             <div id="content1"></div>
             <div class="quizDetail">
                 <c:forEach items="${slist}" var="s">
-                    
-
                     <div class="starElement">
                         <a style="text-decoration: none; color: black" href="GoToSubject?id=${s.subjectID}">
                             <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="" />
                             <div style="height: 80px;">
                                 <p style="margin-top: 10px; font-weight: bold">${s.subjectID}</p>
                                 <p style="margin-top: 10px; height: 50px;">${s.subjectName}</p>
-                                <div style="margin-top:10px; ">
-                                    <a style="padding: 10px 20px; border-radius: 8px; background-color: #00ff33;color: white; margin-right: 50px;" href="QuizGenerateController?SubjectID=${s.subjectID}">Take Quiz</a>
-                                    <a style="padding: 10px 30px; border-radius: 8px; background-color: #4255ff;
-                                       color: white" href="GoToSubject?id=${s.subjectID}">Learn</a>
-                                </div>
+                                <c:if test="${sessionScope.userLogin == null}">
+                                    <div style="margin-top:10px; ">
+                                        <a style="padding: 10px 30px; border-radius: 8px; background-color: #4255ff;
+                                           color: white" href="GoToSubject?id=${s.subjectID}">Learn</a>
+                                    </div>
+                                </c:if>
+                                <c:if test="${sessionScope.userLogin != null}">
+                                    <div style="margin-top:10px; ">
+                                        <c:if test="${statusRegister == 1}">
+
+                                            <a style="padding: 10px 20px; border-radius: 8px; background-color: #00ff33;color: white; margin-right: 50px;" href="QuizGenerateController?SubjectID=${s.subjectID}">Take Quiz</a>
+                                        </c:if>
+
+                                        <a style="padding: 10px 30px; border-radius: 8px; background-color: #4255ff;
+                                           color: white" href="GoToSubject?id=${s.subjectID}">Learn</a>
+                                    </div>
+                                </c:if>
                             </div>
                         </a>
                     </div>
-                            
-                            
+
+
 
                     <!--//pup up-->
 
@@ -246,7 +256,7 @@
             function closeForm() {
                 document.getElementById("myForm").style.display = "none";
             }
-            
+
 
 
         </script>

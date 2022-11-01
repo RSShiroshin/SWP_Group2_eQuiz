@@ -155,7 +155,7 @@
     </head>
     <body >
         <!--phần BEGIN: CONTACT-->
-        <div style="background-color: #3ccfcf;">
+        <div style="background-color: #3ccfcf; ">
             <div style=" width: 70%; margin: 40px 15% 0 15%; padding-bottom: 50px; padding-top: 20px;" id="contact" class="content-section">
                 <div>
                     <h2 class="section-heading">CONTACT</h2>
@@ -180,27 +180,32 @@
         </div>
         <!--phần END: CONTACT-->
 
-        <div id="mydiv" class="contactForm js-contactForm ${open}">
-            <div class="inner_contact_form">
-                <div class="contactFormClose js-closeContactForm">
-                    <i class="ti-close"></i>      
+        <div style="padding-top: 100px; padding-left: 20%;" id="mydiv" class="contactForm js-contactForm ${open}">
+            <div style="width: 80%; border-radius: 8px;" class="inner_contact_form">
+                <div style="border-radius: 8px 0 8px 0; background-color: red; color: white" class="contactFormClose js-closeContactForm">
+                    <i style="font-size: 25px;" class="ti-close"></i>      
                 </div>
                 <div class="pic">
                     <img src="Img/support-img.png" alt="Quizlut"/>
                 </div>
-                <div class="form">
+                <div style="margin-left: 20px; margin-bottom: 20px;" class="form">
                     <h2 class="m-8 col-full">Contact us</h2>
                     <form class="Contact_Form" action="Contact" method="post" enctype="multipart/form-data">
                         <label for="subject">What is your problem:</label>
                         <input type="text" name="viewID" value="home" hidden>
-                        <select style="height: 40px; border-radius: 8px;" name="subject">
+                        <select style="height: 30px; border-radius: 8px; outline: none; width: 100px;" name="subject">
                             <option value="Question">Question</option>
                             <option value="Quiz">Quiz</option>
                             <option value="Interface">Interface</option>
                             <option value="Other">Other</option>
                         </select> </br></br>
-                        <textarea name="message" rows="4" cols="50" ></textarea>
-                        <input class="js-closeContactForm" type = 'submit' value = 'SEND' style="font-size: 20px;"><br/>
+                        <textarea style="border-radius: 8px; margin-bottom: 10px; resize: none; outline: none;" 
+                                  name="message" rows="10" cols="50" ></textarea>
+                        <div>
+                            <input class="js-closeContactForm" type = 'submit' value = 'SEND'
+                                   style="font-size: 20px; background-color: #3ccfcf; color: white; border:none;
+                                   padding: 5px 10px; border-radius: 8px;"><br/>
+                        </div>
                     </form>
                 </div>
             </div>
