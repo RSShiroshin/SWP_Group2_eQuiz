@@ -160,7 +160,7 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="../Header.jsp" %>
         <div class="contentCourse">
             <div class="addCourse">
 
