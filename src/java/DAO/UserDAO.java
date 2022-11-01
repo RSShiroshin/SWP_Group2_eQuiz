@@ -84,6 +84,106 @@ public class UserDAO extends DBContext {
         }
         return roleNameList;
     }
+    
+    public ArrayList<User> getExpertList() {
+        ArrayList expertList = new ArrayList<>();
+        String sql = "select *  from [User] where roleID = 1";
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
+            while (rs.next()) {
+
+                int userID = rs.getInt(1);
+                String userName = rs.getString(2).trim();
+                String password = rs.getString(3).trim();
+                String fullName = rs.getString(4).trim();
+                String email = rs.getString(5).trim();
+
+                String avatar = "";
+                if (rs.getString(6) != null) {
+                    avatar = rs.getString(6).trim();
+                }
+
+                String description = "";
+                if (rs.getString(7) != null) {
+                    description = rs.getString(7).trim();
+                }
+
+                int roleID = rs.getInt(8);
+                boolean statusDB = rs.getBoolean(9);
+                Date registerDay = rs.getDate(10);
+                expertList.add(new User(userID, userName, password, fullName, email, avatar, description, roleID, statusDB, registerDay));
+            }
+        } catch (SQLException e) {
+            status = "Error Load User" + e.getMessage();
+        }
+        return expertList;
+    }
+    
+    public ArrayList<ExpertAssign> getExpertAssignList() {
+        ArrayList<ExpertAssign> expertList = new ArrayList<>();
+        String sql = "select *  from [ExpertAssign]";
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
+            while (rs.next()) {
+
+                int userID = rs.getInt(1);
+                String subjectID = rs.getString(2).trim();               
+
+
+                expertList.add(new ExpertAssign(userID, subjectID));
+            }
+        } catch (SQLException e) {
+            status = "Error Load User" + e.getMessage();
+        }
+        return expertList;
+    }
+    
+    public boolean checkSubjectAssign(String subjectID) {
+        boolean subjectExit = false;
+        String sql = "select * from ExpertAssign where subjectID = '"+subjectID+"'";
+        try ( PreparedStatement ps = con.prepareStatement(sql);  ResultSet rs = ps.executeQuery();) {
+            if(rs.next() == false) {
+                subjectExit = false;
+            } else {
+                subjectExit = true;
+            }
+        } catch (SQLException e) {
+            status = "Error Load User" + e.getMessage();
+        }
+        return subjectExit;
+    }
+    
+    public void insertAssignExpert(int userID, String subjectID) {
+        String sql = "insert into [ExpertAssign] values(?,?)";
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setInt(1, userID);
+            ps.setString(2, subjectID);
+            
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Assign expert" + e.getMessage();
+        }
+    }
+    
+    public void updateAssignExpert(int userID, String subjectID) {
+        String sql = "update [ExpertAssign] set userID = ?, subjectID = ?";
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setInt(1, userID);
+            ps.setString(2, subjectID);
+            
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Assign expert" + e.getMessage();
+        }
+    }
+    
+    public void deleteExpertAssign(String subjectID) {
+        String sql = "delete from ExpertAssign where subjectID = ?";
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setString(1, subjectID);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Delete" + e.getMessage();
+        }
+    }
 
     public void insertUser(String userName, String password, String fullName,
             String email, String avatar, String description, int roleID, boolean statusDB, Date registerDay) {
@@ -260,6 +360,6 @@ public class UserDAO extends DBContext {
 //        UserDAO u = new UserDAO();
 //        u.loadUser();
 //        String search = "admin";
-//        System.out.println(u.search(search));
+//        System.out.println(u.getExpertAssignList());
 //    }
 }

@@ -20,7 +20,7 @@
             </div>
             <div class="right">
                 <div class="nameTitle">
-                      <a style="color: black;" href="login">Sign up</a>
+                      <a style="color: black;" href="RegisterController">Sign in</a>
                     <a style="color: #939bb4" href="login">Log in</a>
                 </div>
                 <form action="login" method="post">

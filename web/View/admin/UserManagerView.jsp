@@ -36,7 +36,7 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="../Header.jsp" %>
 
         <div style="text-align: center; padding-top: 20px;" class="UserManagerFunction">
             <form action="Search">

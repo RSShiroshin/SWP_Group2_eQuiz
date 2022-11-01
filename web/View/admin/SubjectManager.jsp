@@ -3,7 +3,7 @@
     Created on : Oct 13, 2022, 8:05:01 AM
     Author     : DELL
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -79,7 +79,7 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="../Header.jsp" %>
         <div id="topProfile">
             <div style="height: 150px; background-color: darkcyan; margin-left: -25%; color: white; display: flex">
                 <div style="width: 70%">
@@ -118,8 +118,27 @@
                             <div>
                                 <p style="margin-top: 10px; font-weight: bold">${s.subjectID}</p>
                                 <p style="margin-top: 10px;">${s.subjectName}</p>
+                                <p style="margin-top: 10px;">Expert: <c:forEach begin="0" end="${assignlist.size()}" step="1" var="i">                          
+                                        <c:if test="${assignlist[i].getSubjectID().equals(s.getSubjectID())}">
+                                            <c:forEach begin="0" end="${expertlist.size()-1}" step="1" var="e">
+                                                <c:if test="${assignlist[i].getUserID()==expertlist[e].userID}">
+                                                    ${expertlist[e].fullName}
+                                                </c:if>
+                                        </c:forEach></c:if>
+                                </c:forEach></p>
                             </div>
                         </a>
+                                <form action="AssignExpertController" method="get">
+                                    <input type="submit" value="Assign"> 
+                                    <input type="text" name="courseID" value="${course.courseID}" hidden>
+                                    <input type="text" name="subjectAssignID" value="${s.subjectID}" hidden>
+                                    <select name="expertAssignID">
+                                        <option value="0">none</option>
+                                        <c:forEach begin="0" end="${expertlist.size()-1}" step="1" var="e">
+                                            <option value="${expertlist[e].userID}">${expertlist[e].userName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </form>
                     </div>
 
 
@@ -128,6 +147,7 @@
 
                 </c:forEach>
             </div>
+            
             <!--pup up-->
 
 

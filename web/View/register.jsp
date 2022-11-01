@@ -21,7 +21,7 @@
             <div class="right">
                 <div class="nameTitle">
                      <a style="color: black;" href="../View/register.jsp">Sign up</a>
-                    <a style="color: #939bb4" href="../View/Login.jsp">Log in</a>
+                    <a style="color: #939bb4" href="login">Log in</a>
                 </div>
                 <form action="#" method="post">
                     <div class="infoUser">

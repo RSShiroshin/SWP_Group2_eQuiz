@@ -6,6 +6,7 @@ package Controller.admin;
 
 import DAO.CourseDAO;
 import DAO.SubjectDAO;
+import DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -21,11 +22,13 @@ public class SubjectManagerController extends HttpServlet {
 
     SubjectDAO sdao;
     CourseDAO cdao;
+    UserDAO udao;
 
     @Override
     public void init() {
         sdao = new SubjectDAO();
         cdao = new CourseDAO();
+        udao = new UserDAO();
     }
 
     /**
@@ -69,6 +72,8 @@ public class SubjectManagerController extends HttpServlet {
         sdao.loadSubject();
         String courseID = request.getParameter("courseID");
         
+        request.setAttribute("expertlist", udao.getExpertList());
+        request.setAttribute("assignlist", udao.getExpertAssignList());
         request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
         request.setAttribute("cId", courseID);
         request.setAttribute("course", cdao.getCourseById(courseID));

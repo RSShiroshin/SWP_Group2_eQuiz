@@ -101,7 +101,7 @@
                 </a>
 
 
-               
+
                 <c:if test="${sessionScope.userLogin.getRole() == 0}" >
                     <a style="color: darkblue;" href="CourseManagerController">
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Course Manager</p></a>                  
@@ -111,7 +111,7 @@
                     <a style="color: darkblue;" href="#">
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Setting</p>
                     </a>
-                    
+
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1||sessionScope.userLogin.getRole() == 2}" >
                     <a href="LibraryExpertController?userID=${sessionScope.userLogin.userID}"><p>Thư viện của bạn</p></a>                                    
@@ -126,7 +126,8 @@
                            aria-label="Search"
                            />
                     <i class="bi bi-search"></i>
-                    <select name="sort">
+                    <select name="sort" style="height: 40px; border-radius: 8px; padding: 0 5px;
+                            outline: none;">
                         <option value="cname">Search by Course Name</option>
                         <option value="cid">Search by Course ID</option>
                         <option value="sname">Search by Subject Name</option>
@@ -134,7 +135,15 @@
                     </select>
                 </form>
                 <c:if test="${sessionScope.userLogin != null}">
-                    <img id="myBtn" src="Img/avt.png" width="50px" height="50px" alt="Avatar"/>
+                    <c:if test="${sessionScope.userLogin.getRole() == 0}" >
+                        <img style="margin-left: 10px;" id="myBtn" src="Img/admin.png" width="50px" height="50px" alt="Avatar"/>
+                    </c:if>
+                    <c:if test="${sessionScope.userLogin.getRole() == 1}" >
+                        <img style="margin-left: 10px;" id="myBtn" src="Img/expert.png" width="50px" height="50px" alt="Avatar"/>
+                    </c:if>
+                    <c:if test="${sessionScope.userLogin.getRole() == 2}" >
+                        <img style="margin-left: 10px;" id="myBtn" src="Img/cus.png" width="50px" height="50px" alt="Avatar"/>
+                    </c:if>
                 </c:if>
                 <c:if test="${sessionScope.userLogin == null}">
                     <div class="btn-option">

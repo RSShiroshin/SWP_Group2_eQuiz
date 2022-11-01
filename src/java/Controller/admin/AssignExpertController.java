@@ -2,32 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.admin;
 
 import DAO.UserDAO;
-import Model.User;
-import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-
 
 /**
  *
  * @author DELL
  */
-public class ProfileController extends HttpServlet {
+public class AssignExpertController extends HttpServlet {
 
-    UserDAO ud ;
+    UserDAO udao;
+
     @Override
     public void init() {
-        ud = new UserDAO(); 
+        udao = new UserDAO();
     }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +41,10 @@ public class ProfileController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfileController</title>");            
+            out.println("<title>Servlet AssignExpertController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProfileController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AssignExpertController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,10 +62,24 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession userLogin=request.getSession();      
-        User loginUser = (User) userLogin.getAttribute("userLogin");       
-        request.setAttribute("loginUser", loginUser);
-        request.getRequestDispatcher("View/ProfileView.jsp").forward(request, response);
+        String courseID = request.getParameter("courseID");
+        int expertID = Integer.parseInt(request.getParameter("expertAssignID")) ;
+        String subjectID = request.getParameter("subjectAssignID");
+        
+        if(expertID != 0) {
+            if(udao.checkSubjectAssign(subjectID)) {
+                udao.updateAssignExpert(expertID, subjectID);
+            } else {
+                udao.insertAssignExpert(expertID, subjectID);
+            }
+        } else {
+            udao.deleteExpertAssign(subjectID);
+        }
+        
+        
+        
+        request.setAttribute("courseID", courseID);
+        request.getRequestDispatcher("SubjectManagerController").forward(request, response);
     }
 
     /**
@@ -84,7 +93,7 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        processRequest(request, response);
     }
 
     /**

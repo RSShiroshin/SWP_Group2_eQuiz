@@ -88,11 +88,11 @@
             .mt-8 {
                 margin-top: 8px !important;
             }
-            
+
             .m-8 {
                 margin: 8px !important;
             }
-            
+
             .mt-16 {
                 margin-top: 16px !important;
             }
@@ -100,122 +100,144 @@
             .mt-32 {
                 margin-top: 32px !important;
             }
-.contactForm {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    align-items: center;
-    justify-content: center;
-}
+            .contactForm {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.4);
+                align-items: center;
+                justify-content: center;
+            }
 
-.contactForm.open {
-    display: flex;
-}
+            .contactForm.open {
+                display: flex;
+            }
 
-.contactFormClose{
-    display: inline-block;
-    font-size: 30px;
-    width: 30px;
-    height: 30px;
-}
+            .contactFormClose{
+                display: inline-block;
+                font-size: 30px;
+                width: 30px;
+                height: 30px;
+            }
 
-.contactFormClose:hover {
-    background: red;
-    color: white;
-    cursor: pointer;
-}
+            .contactFormClose:hover {
+                background: red;
+                color: white;
+                cursor: pointer;
+            }
 
-.inner_contact_form {
-    display: flex;
-    background: white;
-    width: 60%;
-    height: 50%;
-}
+            .inner_contact_form {
+                display: flex;
+                background: white;
+                width: 60%;
+                height: 50%;
+            }
 
-.pic {
-    display: inline-block;
-    width: 40%;
-}
-.pic img{  
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
-}
+            .pic {
+                display: inline-block;
+                width: 40%;
+            }
+            .pic img{
+                width: -webkit-fill-available;
+                height: -webkit-fill-available;
+            }
 
-.form {
-    display: inline-block;
-}
+            .form {
+                display: inline-block;
+            }
+            body{
+
+            }
         </style>
     </head>
-    <body>
+    <body >
         <!--phần BEGIN: CONTACT-->
-                <div id="contact" class="content-section">
-                    <div style="background: #99ffff">
-                        <h2 class="section-heading">CONTACT</h2>
-                        <p class="section-sub-heading">Drop your problem here!</p>
-                    </div>
-
-                    <div class="row contact-content">
-                        <div class="col col-half s-col-full contact-info">
-                            <p><i class="ti-location-pin"></i>Hòa Lạc, Thạch Thất</p>
-                            <p><i class="ti-mobile"></i>Phone: <a href="tel:+84 364151863">+84 364151863</a></p>
-                            <p><i class="ti-email"></i> Email: <a href="mailto:khaihay78@mail.com">khaihay78@mail.com</a></p>
-                            <p class="btn mt-16 js-openContactForm">OPEN CONTACT FORM</p>
-                        </div>  
-                    </div>
-                    
+        <div style="background-color: #3ccfcf; ">
+            <div style=" width: 70%; margin: 40px 15% 0 15%; padding-bottom: 50px; padding-top: 20px;" id="contact" class="content-section">
+                <div>
+                    <h2 class="section-heading">CONTACT</h2>
+                    <p class="section-sub-heading">Drop your problem here!</p>
                 </div>
-                <!--phần END: CONTACT-->
-                
-        <div class="contactForm js-contactForm ${open}">
-            <div class="inner_contact_form">
-                <div class="contactFormClose js-closeContactForm">
-                    <i class="ti-close"></i>      
+
+                <div class="row contact-content">
+                    <div style="display: flex; width: 100%; justify-content: space-between" class="col col-half s-col-full contact-info">
+                        <div>
+                            <p style="margin-top: 10px;"><i class="ti-location-pin"></i>Hòa Lạc, Thạch Thất</p>
+                            <p style="margin-top: 10px;"><i class="ti-mobile"></i>Phone: <a href="tel:+84 364151863">+84 364151863</a></p>
+                            <p style="margin-top: 10px;"><i class="ti-email"></i> Email: <a href="mailto:khaihay78@mail.com">khaihay78@mail.com</a></p>
+                        </div>
+
+                        <div>
+                            <p style="border-radius: 8px;" class="btn mt-16 js-openContactForm">OPEN CONTACT FORM</p>
+                        </div>
+                    </div>  
+                </div>
+
+            </div>
+        </div>
+        <!--phần END: CONTACT-->
+
+        <div style="padding-top: 100px; padding-left: 20%;" id="mydiv" class="contactForm js-contactForm ${open}">
+            <div style="width: 80%; border-radius: 8px;" class="inner_contact_form">
+                <div style="border-radius: 8px 0 8px 0; background-color: red; color: white" class="contactFormClose js-closeContactForm">
+                    <i style="font-size: 25px;" class="ti-close"></i>      
                 </div>
                 <div class="pic">
                     <img src="Img/support-img.png" alt="Quizlut"/>
                 </div>
-                <div class="form">
+                <div style="margin-left: 20px; margin-bottom: 20px;" class="form">
                     <h2 class="m-8 col-full">Contact us</h2>
                     <form class="Contact_Form" action="Contact" method="post" enctype="multipart/form-data">
                         <label for="subject">What is your problem:</label>
                         <input type="text" name="viewID" value="home" hidden>
-                        <select name="subject">
+                        <select style="height: 30px; border-radius: 8px; outline: none; width: 100px;" name="subject">
                             <option value="Question">Question</option>
                             <option value="Quiz">Quiz</option>
                             <option value="Interface">Interface</option>
                             <option value="Other">Other</option>
                         </select> </br></br>
-                        <textarea name="message" rows="4" cols="50" ></textarea>
-                        <input class="js-closeContactForm" type = 'submit' value = 'SEND' style="font-size: 20px;"><br/>
+                        <textarea style="border-radius: 8px; margin-bottom: 10px; resize: none; outline: none;" 
+                                  name="message" rows="10" cols="50" ></textarea>
+                        <div>
+                            <input class="js-closeContactForm" type = 'submit' value = 'SEND'
+                                   style="font-size: 20px; background-color: #3ccfcf; color: white; border:none;
+                                   padding: 5px 10px; border-radius: 8px;"><br/>
+                        </div>
                     </form>
                 </div>
             </div>
-  
+
         </div>
-            
+
         <script>
             const contactFormOpen = document.querySelectorAll('.js-openContactForm');
             const contactFormClose = document.querySelectorAll('.js-closeContactForm');
             const contactForm = document.querySelector('.js-contactForm');
-            
+
             for (const Btn of contactFormOpen) {
-                Btn.addEventListener('click', showContactForm);
+                Btn.addEventListener('click', show);
             }
-            
+
             function showContactForm() {
                 contactForm.classList.add('open');
             }
-            
+
             for (const Btn of contactFormClose) {
-                Btn.addEventListener('click', hideContactForm);
+                Btn.addEventListener('click', hide);
             }
-            
+
+            function hide() {
+                document.getElementById('mydiv').style.display = 'none';
+            }
+            function show() {
+                document.getElementById('mydiv').style.display = 'block';
+            }
+
             function hideContactForm() {
-                contactForm.classList.remove('open');
+                contactForm.classList.remove('hide');
                 alert("Send success!!");
             }
         </script>

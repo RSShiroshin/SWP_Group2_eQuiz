@@ -99,7 +99,7 @@
                 box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
                 position: relative;
             }
-            /*            input[type="radio"]:checked + label {
+                        input[type="radio"]:checked + label {
                             background: hsla(150, 75%, 50%, 1);
                             color: hsla(215, 0%, 100%, 1);
                             box-shadow: 0px 0px 20px hsla(150, 100%, 50%, 0.75);
@@ -121,15 +121,21 @@
                                 background: white;
                                 box-shadow: 0px 2px 5px -2px hsla(0, 0%, 0%, 0.25);
                             }
-                        }
-                        input[type="radio"]#control_05:checked + label {
-                            background: red;
-                            border-color: red;
-                        }*/
+
+            /*                        input[type="radio"]#control_05:checked + label {
+                                        background: red;
+                                        border-color: red;
+                                    }*/
             p {
                 font-weight: 900;
             }
             /*end*/
+
+/*            input[type="radio"]:hover + label,
+            input[type="radio"]:checked + label,
+            input[type="radio"]:focus + label {
+                fill: rgb(0, 204, 79);
+            }*/
 
         </style>
     </head>
@@ -140,12 +146,14 @@
 
             <div class="Quiz">
                 <form action="QuizReviewController" method="post">
+                    <input type="text" name="quizID" value="${quizID}" >
                     <c:forEach items="${quizQuestion}" var="question">
                         <span>
                             <div class="QuizQuestion">
                                 <p style="padding-top: 20px; font-size: 20px;font-weight: 300; text-align: left; margin-left: 50px; opacity: 0.8">Câu hỏi</p>
                                 <p style="margin-bottom: 50px; padding-top: 20px; font-size: 24px; margin-left: 50px; margin-right: 50px;
                                    font-weight: 400;text-align: justify">${question.getContent()}</p>
+                                <input type="text" name="question${question.getQuestionID()}" value="${question.getQuestionID()}" hidden>
                                 <p style="margin-bottom: 20px;padding-top: 20px; font-size: 20px; text-align: left; margin-left: 50px;
                                    font-weight: 300;opacity: 0.8">Chọn đáp án đúng</p>
                                 <div style="text-align: left; display: flex;">
@@ -155,7 +163,8 @@
                                                 <!--code-->
                                                 <!--<div>-->
 
-                                                <input type="radio" id="answer${answer.getQuestionID()}" name="answer${answer.getQuestionID()}" />
+                                                <input type="radio" id="answer${answer.getQuestionID()}" name="answer${answer.getQuestionID()}"
+                                                       value="${answer.getContent()}"/>
 
 
                                                 <label for="answer${answer.getQuestionID()}" onclick="checkAns('answer${answer.getAnswerID()}${answer.getQuestionID()}')"
@@ -185,10 +194,10 @@
 
 
         <script>
-            function checkAns(e) {
-                var x = document.getElementById(e);
-                x.check = 'click';
-            }
+//            function checkAns(e) {
+//                var x = document.getElementById(e);
+//                x.check = 'click';
+//            }
         </script>
     </body>
 </html>
