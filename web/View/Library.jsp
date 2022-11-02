@@ -32,10 +32,10 @@
         <%@ include file="Header.jsp" %>
 
         <c:if test="${userLogin.role == 1}">
-            <div>Các subject mà bạn được admin giao cho:</div>
+            <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các subject được giao:</div>
         </c:if>
         <c:if test="${userLogin.role == 2}">
-            <div>Các course mà bạn đã register:</div>
+            <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các course mà bạn đã register:</div>
         </c:if>
 
         <c:forEach items="${lstEA}" var="e">
@@ -51,10 +51,10 @@
         </c:forEach>
 
         <c:if test="${userLogin.role == 1}">
-            <div>Các course mà bạn đã register:</div>
+            <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các course đã register:</div>
         </c:if>
 
-        <div style="padding-top: 20px; margin-left: 10%;display: flex; flex-wrap: wrap">        
+        <div style="padding-top: 10px; margin-left: 10%;display: flex; flex-wrap: wrap">        
             <c:forEach items="${lstEA}" var="e">
                 <c:if test="${userLogin.role == 1}">
                     <!--<div style="display: flex; flex-wrap: wrap">-->

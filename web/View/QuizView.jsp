@@ -75,7 +75,7 @@
                         }*/
 
             /*code*/
-            input[type="radio"] {
+z            input[type="radio"] {
                 display: none;
                 &:not(:disabled) ~ label {
                     cursor: pointer;

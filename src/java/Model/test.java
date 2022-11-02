@@ -4,9 +4,14 @@
  */
 package Model;
 
+import static Controller.LoginController.convertByteToString;
 import DAO.*;
+import Utility.Utility;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,8 +22,17 @@ import java.util.Scanner;
  */
 public class test {
 
-    public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        String password = "admin";
+        String sha256Pass = "";
+         try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            sha256Pass = convertByteToString(hash);
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("" + ex);
+        }
+        System.out.println(sha256Pass);
     }
     static ArrayList<String> list = new ArrayList<>();
 

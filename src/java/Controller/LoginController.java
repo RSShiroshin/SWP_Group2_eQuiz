@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.UserDAO;
 import Model.User;
+import Utility.Utility;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -13,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,6 +57,8 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         request.getRequestDispatcher("View/Login.jsp").forward(request, response);
     }
+
+    Utility uti = new Utility();
 
     /**
      * Handles the HTTP <code>POST</code> method.
