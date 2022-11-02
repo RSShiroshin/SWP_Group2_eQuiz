@@ -69,7 +69,15 @@ public class QuizViewScoreController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int quizID = (int) request.getAttribute("quizReviewID");
+        int quizID = 0;
+        
+        if(request.getAttribute("quizReviewID")!=null){
+            quizID = (int) request.getAttribute("quizReviewID");
+        }
+        
+        if(request.getParameter("quizReviewID")!=null){
+            quizID = Integer.parseInt(request.getParameter("quizReviewID"));
+        }
         ArrayList<Integer> quizQuestionID = quiz.getQuizQuestion(quizID);
         ArrayList<Question> quizQuestion = new ArrayList<>();
         ArrayList<Answer>  quizAnswer = new ArrayList<>();

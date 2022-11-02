@@ -6,7 +6,10 @@ package Controller;
 
 import DAO.CourseDAO;
 import DAO.QuestionDAO;
+import DAO.QuizDAO;
 import DAO.SubjectDAO;
+import Model.Quiz;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -64,10 +68,15 @@ public class GoToSubject extends HttpServlet {
         String sid = request.getParameter("id");
         QuestionDAO qd = new QuestionDAO();
         SubjectDAO cd = new SubjectDAO();
+        QuizDAO quizdao = new QuizDAO();
+        
+        User userLogin = (User) session.getAttribute("userLogin");
+        ArrayList<Quiz> userLoginQuiz = quizdao.loadQuiz(userLogin.getUserID());
         cd.loadSubject();
         qd.loadQuestion();
         qd.loadAnswer();
         request.setAttribute("sid", sid);
+        request.setAttribute("listQuizTaken", userLoginQuiz);
         request.setAttribute("listQuestion", qd.getQuestionList());
         request.setAttribute("listAns", qd.getAnswerList());
         request.setAttribute("listSubject", cd.getSubjectList());

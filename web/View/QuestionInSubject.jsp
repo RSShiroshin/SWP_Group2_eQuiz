@@ -25,6 +25,26 @@
     </head>
     <body>
         <%@ include file="Header.jsp" %>
+        <div class="quizTaken">
+            Your quiz in this subject <br> 
+            <c:forEach items="${listQuizTaken}" var="quiz">
+                <table >
+                    <tr>
+                        <td style="border: 1px solid">QuizID</td>
+                        <td style="border: 1px solid">Time Start</td>
+                        <td style="border: 1px solid">Score</td>
+                    </tr>
+                </table>
+                <c:if test="${quiz.getSubjectID() == sid}">
+                    <tr>
+                        <td style="border: 1px solid"${quiz.getQuizID()}</td>
+                        <td style="border: 1px solid">${quiz.getTimeStart()}</td>
+                        <td style="border: 1px solid">${quiz.getScore()}</td>
+                        <td><a href="QuizViewScoreController?quizReviewID=${quiz.getQuizID()}">VIEW</a></td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </div>
         <div class="adminTable">
             <table>
                 <tr>
