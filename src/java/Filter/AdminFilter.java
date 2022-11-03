@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
@@ -79,6 +78,7 @@ public class AdminFilter implements Filter {
 	    String name = (String)en.nextElement();
 	    Object value = request.getAttribute(name);
 	    log("attribute: " + name + "=" + value.toString());
+
 	}
          */
         // For example, a filter might append something to the response.
@@ -119,9 +119,7 @@ public class AdminFilter implements Filter {
         } else {
             User acc = (User) session.getAttribute("userLogin");
             if (acc.getRole() != 0) {
-                error = "Access denied ! Must be login by Admin account";
-                request.setAttribute("message", error);
-                req.getRequestDispatcher("View/Login.jsp").forward(request, response);
+               resp.sendRedirect("home");
             }
         }    
         Throwable problem = null;
