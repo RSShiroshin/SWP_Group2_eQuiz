@@ -116,10 +116,8 @@ public class ExpertFilter implements Filter {
             req.getRequestDispatcher("View/Login.jsp").forward(request, response);
         } else {
             User acc = (User) session.getAttribute("userLogin");
-            if (acc.getRole() > 1) {
-                error = "Access denied ! Must be login by Expert account";
-                request.setAttribute("message", error);
-                req.getRequestDispatcher("View/Login.jsp").forward(request, response);
+            if (acc.getRole() != 1) {
+                response.sendRedirect("home");
             }
         }    
         
