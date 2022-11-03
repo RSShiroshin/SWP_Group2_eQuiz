@@ -81,14 +81,27 @@ public class DetailCourseController extends HttpServlet {
         Cookie checkCourseHome = DetailCourseController.getCookie(request, user.getUserName());
         String nameCkie = user.getUserName();
         if (checkCourseHome == null) {
-            Cookie courseHome = new Cookie(nameCkie,courseID);
+            Cookie courseHome = new Cookie(nameCkie, courseID);
             response.addCookie(courseHome);
         }
         int chck = 0;
-        if (checkCourseHome != null) {                      
-                String tempValue1 = courseID +"/"+ checkCourseHome.getValue();
+        if (checkCourseHome != null) {
+            String tempValue = checkCourseHome.getValue();
+            String[] arrayCourseID = tempValue.split("/");
+            for (int i = 0; i < Math.min(arrayCourseID.length, 3); i++) {
+                if (arrayCourseID[i].equals(courseID)) {
+                    chck = 1;
+                    break;
+                } else {
+                    chck = 0;
+                }
+            }
+
+            if (chck == 0) {
+                String tempValue1 = courseID + "/" + checkCourseHome.getValue();
                 checkCourseHome.setValue(tempValue1);
-                response.addCookie(checkCourseHome);           
+                response.addCookie(checkCourseHome);
+            }
         }
 
         if (cookie != null) {

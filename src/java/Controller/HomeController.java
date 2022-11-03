@@ -89,14 +89,13 @@ public class HomeController extends HttpServlet {
             ArrayList<Course> newestCourse = null;
             List<Course> tail = null;
             if(valueCourse!=null){
-                String [] newest = valueCourse.split("/");                 
+                String [] newest = valueCourse.split("/");                
                 newestCourse = new ArrayList<>();                
-                for (String s : newest) {
-                    newestCourse.add(courseDAO.getCourseById(s));
-                }     
-                tail = newestCourse.subList(0, Math.min(newestCourse.size() , 3));
+                for (int i = 0; i < Math.min(newest.length , 3); i++) {
+                    newestCourse.add(courseDAO.getCourseById(newest[i]));
+                }                    
             }
-            request.setAttribute("courseHome", tail);
+            request.setAttribute("courseHome", newestCourse);
         }
 
 //        
