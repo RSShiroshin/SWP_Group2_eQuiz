@@ -38,7 +38,10 @@
                         <input type="password" name="repass" placeholder="Nhập lại mật khẩu">
                         <input type="text" name="fullname" placeholder="Nhập tên đầy đủ của bạn">
                         <c:if test="${not empty requestScope.fullnameerror}">
-                            <a style="color: red;">${requestScope.fullnameerror}</a>
+                            <a style="color: red;">${requestScope.fullnameerror}</a><br>
+                        </c:if>
+                        <c:if test="${not empty requestScope.error}">
+                            <a style="color: red;">${requestScope.error}</a>
                         </c:if>
                          <input type="submit" value="Đăng ký">
 

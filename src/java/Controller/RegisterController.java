@@ -133,17 +133,16 @@ public class RegisterController extends HttpServlet {
         String date_raw = "2022-10-18";
         String fullname = request.getParameter("fullname");
         Date date = Date.valueOf(date_raw);
-        if (checkDupInfor(userDAO,username, email, fullname) == false) {
+        if (checkDupInfor(userDAO,username, email, fullname) == false || !password.equals(rePassword)) {
+            if(checkDupInfor(userDAO,username, email, fullname) == false){
             checkDupInput(request, userDAO, username, email, fullname);
             userDAO.closeConnection();
-            request.getRequestDispatcher("View/register.jsp").forward(request, response);
-        } else {
-            if (!password.equals(rePassword)) {
+            } if(!password.equals(rePassword)){
                 error = "Re-enter password isn't match! please try again";
                 request.setAttribute("error", error);
-                userDAO.closeConnection();
-                request.getRequestDispatcher("View/register.jsp").forward(request, response);
-            } else {
+            }            
+            request.getRequestDispatcher("View/register.jsp").forward(request, response);
+        } else {           
                 String sha256Pass = "";
                 try {
                     MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -160,8 +159,7 @@ public class RegisterController extends HttpServlet {
                 userDAO.insertUser(username, sha256Pass, fullname, email, avatar, description, role, status, date);
                 processRequest(request, response);
 
-                response.sendRedirect("login");
-            }
+                response.sendRedirect("login");           
         }
     }
 
@@ -192,11 +190,11 @@ public class RegisterController extends HttpServlet {
             request.setAttribute("usererror", usererror);
         }
         if (checkDupEmail != null) {
-            emailerror = "Duplicate email";
+            emailerror = "Duplicate Email";
             request.setAttribute("emailerror", emailerror);
         }
         if (checkDupFullName != null) {
-            fullnameerror = "Duplicate fullname";
+            fullnameerror = "Duplicate Fullname";
             request.setAttribute("fullnameerror", fullnameerror);
         }
     }
