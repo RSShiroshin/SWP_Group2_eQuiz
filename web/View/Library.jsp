@@ -35,7 +35,7 @@
             <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các subject được giao:</div>
         </c:if>
         <c:if test="${userLogin.role == 2}">
-            <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các course mà bạn đã register:</div>
+            <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các course mà bạn đã enroll</div>
         </c:if>
 
         <c:forEach items="${lstEA}" var="e">

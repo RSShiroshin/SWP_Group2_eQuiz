@@ -85,22 +85,10 @@ public class DetailCourseController extends HttpServlet {
             response.addCookie(courseHome);
         }
         int chck = 0;
-        if (checkCourseHome != null) {
-            String tempValue = checkCourseHome.getValue();
-            String[] arrayCourseID = tempValue.split("/");
-            for (String str : arrayCourseID) {
-                if (str.equals(courseID)) {
-                    chck = 1;
-                    break;
-                } else {
-                    chck = 0;
-                }
-            }
-            if (chck == 0) {
+        if (checkCourseHome != null) {                      
                 String tempValue1 = courseID +"/"+ checkCourseHome.getValue();
                 checkCourseHome.setValue(tempValue1);
-                response.addCookie(checkCourseHome);
-            }
+                response.addCookie(checkCourseHome);           
         }
 
         if (cookie != null) {
