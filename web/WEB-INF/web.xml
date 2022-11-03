@@ -96,6 +96,10 @@
         <servlet-name>AssignExpertController</servlet-name>
         <servlet-class>Controller.admin.AssignExpertController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>Controller.ChangePasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfileController</servlet-name>
         <url-pattern>/ChangeProfileController</url-pattern>
@@ -273,9 +277,12 @@
         <url-pattern>/Search</url-pattern>
         <url-pattern>/SubjectManagerController</url-pattern>
         <url-pattern>/UserManagerController</url-pattern>
-        <url-pattern>/UserStatusChangeController</url-pattern>        
+        <url-pattern>/UserStatusChangeController</url-pattern>
     </filter-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

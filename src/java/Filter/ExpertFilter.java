@@ -116,8 +116,14 @@ public class ExpertFilter implements Filter {
             req.getRequestDispatcher("View/Login.jsp").forward(request, response);
         } else {
             User acc = (User) session.getAttribute("userLogin");
-            if (acc.getRole() != 1) {
-                resp.sendRedirect("home");
+            if (acc.getRole() != 1 || acc.isStatus() == false) {
+                if (acc.getRole() != 1 && acc.isStatus() == true) {
+                    resp.sendRedirect("home");
+                } else if (acc.isStatus() == false) {
+                    error = "Your account is expired!!";
+                    request.setAttribute("message", error);
+                    req.getRequestDispatcher("View/Login.jsp").forward(request, response);
+                }
             }
         }    
         
