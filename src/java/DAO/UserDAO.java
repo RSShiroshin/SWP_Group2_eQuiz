@@ -286,7 +286,7 @@ public class UserDAO extends DBContext {
                 + "                      ,[status]\n"
                 + "                      ,[registerDay]\n"
                 + "                  FROM [dbo].[User]\n"
-                + "                  WHERE Username = ? AND [Password] = ?";
+                + "                  WHERE userName = ? AND [password] = ?";
         try ( PreparedStatement st = con.prepareStatement(sql);) {
             st.setString(1, username);
             st.setString(2, password);
@@ -301,7 +301,7 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public User checkDupAcc(String username, String fullname, String email) {
+    public User checkDupAcc(String text) {
         String sql = "SELECT [userID]\n"
                 + "      ,[userName]\n"
                 + "      ,[password]\n"
@@ -313,11 +313,11 @@ public class UserDAO extends DBContext {
                 + "      ,[status]\n"
                 + "      ,[registerDay]\n"
                 + "  FROM [dbo].[User]\n"
-                + "  WHERE Username = ? OR fullName =? OR email = ?";
+                + "  WHERE userName = ? OR fullName =? OR email = ?";
         try ( PreparedStatement st = con.prepareStatement(sql);) {
-            st.setString(1, username);
-            st.setString(2, fullname);
-            st.setString(3, email);
+            st.setString(1, text);
+            st.setString(2, text);
+            st.setString(3, text);
             try ( ResultSet rs = st.executeQuery();) {
                 if (rs.next()) {
                     User acc = new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));

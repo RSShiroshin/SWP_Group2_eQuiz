@@ -4,6 +4,7 @@
     Author     : ducda
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,10 +27,22 @@
                 <form action="#" method="post">
                     <div class="infoUser">
                         <input type="text" name="user" placeholder="Nhập tên đăng nhập của bạn">
+                        <c:if test="${not empty requestScope.usererror}">
+                            <a style="color: red;">${requestScope.usererror}</a>
+                        </c:if>
                         <input type="text" name="email" placeholder="Nhập địa chỉ email của bạn">
+                        <c:if test="${not empty requestScope.emailerror}">
+                            <a style="color: red;">${requestScope.emailerror}</a>
+                        </c:if>
                         <input type="password" name="pass" placeholder="Nhập mật khẩu">
                         <input type="password" name="repass" placeholder="Nhập lại mật khẩu">
                         <input type="text" name="fullname" placeholder="Nhập tên đầy đủ của bạn">
+                        <c:if test="${not empty requestScope.fullnameerror}">
+                            <a style="color: red;">${requestScope.fullnameerror}</a><br>
+                        </c:if>
+                        <c:if test="${not empty requestScope.error}">
+                            <a style="color: red;">${requestScope.error}</a>
+                        </c:if>
                          <input type="submit" value="Đăng ký">
 
                     </div>

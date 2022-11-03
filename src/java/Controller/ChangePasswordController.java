@@ -4,32 +4,19 @@
  */
 package Controller;
 
-import DAO.QuestionDAO;
-import DAO.QuizDAO;
-import Model.Answer;
-import Model.Question;
-import Model.QuizHistory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 /**
  *
- * @author DELL
+ * @author hello
  */
-public class QuizViewScoreController extends HttpServlet {
+public class ChangePasswordController extends HttpServlet {
 
-    QuestionDAO qd ;
-    QuizDAO quiz ;
-    @Override
-    public void init() {
-        qd = new QuestionDAO();
-        quiz = new QuizDAO();
-    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,10 +34,10 @@ public class QuizViewScoreController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuizViewScoreController</title>");            
+            out.println("<title>Servlet ChangePasswordController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet QuizViewScoreController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangePasswordController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,38 +55,7 @@ public class QuizViewScoreController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int quizID = 0;
-        
-        if(request.getAttribute("quizReviewID")!=null){
-            quizID = (int) request.getAttribute("quizReviewID");
-        }
-        
-        if(request.getParameter("quizReviewID")!=null){
-            quizID = Integer.parseInt(request.getParameter("quizReviewID"));
-        }
-        ArrayList<Integer> quizQuestionID = quiz.getQuizQuestion(quizID);
-        ArrayList<Question> quizQuestion = new ArrayList<>();
-        ArrayList<Answer>  quizAnswer = new ArrayList<>();
-        
-        for (Integer id : quizQuestionID) {
-            quizQuestion.add(qd.getQuestion(id));
-            ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(qd.getQuestion(id).getQuestionID());
-            for (Answer a : questionAnswer) {
-            //add cau tra loi vao question trong quiz
-                quizAnswer.add(a);
-            }
-        }
-        
-        ArrayList<QuizHistory> check = quiz.getQuizHistory(quizID);
-        
-        request.setAttribute("quizReviewID", quizID);
-        request.setAttribute("quizQuestion", quizQuestion);
-        request.setAttribute("quizAnswer", quizAnswer);
-        request.setAttribute("check", check);
-
-        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
-//        processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -113,8 +69,7 @@ public class QuizViewScoreController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        doGet(request, response);
+        processRequest(request, response);
     }
 
     /**

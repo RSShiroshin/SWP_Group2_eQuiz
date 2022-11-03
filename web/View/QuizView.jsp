@@ -164,7 +164,7 @@ z            input[type="radio"] {
                                                 <!--<div>-->
 
                                                 <input type="radio" id="answer${answer.getQuestionID()}" name="answer${answer.getQuestionID()}"
-                                                       value="${answer.getContent()}"/>
+                                                       value="${answer.getAnswerID()}"/>
 
 
                                                 <label for="answer${answer.getQuestionID()}" onclick="checkAns('answer${answer.getAnswerID()}${answer.getQuestionID()}')"

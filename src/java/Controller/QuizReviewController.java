@@ -9,6 +9,7 @@ import DAO.QuizDAO;
 import Model.Answer;
 import Model.Question;
 import Model.QuizCheck;
+import Model.QuizHistory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -68,8 +69,14 @@ public class QuizReviewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
-        doPost(request, response);
+        int quizID = Integer.parseInt(request.getParameter("quizID"));
+        ArrayList<QuizHistory> quizQuestion = quiz.getQuizHistory(quizID);
+        
+        ArrayList<Integer> questionList = new ArrayList<>(); 
+        ArrayList<Integer> answerList = new ArrayList<>();
+        
+        request.getRequestDispatcher("View/QuizReviewView.jsp").forward(request, response);
+        //doPost(request, response);
 //        processRequest(request, response);
     }
 

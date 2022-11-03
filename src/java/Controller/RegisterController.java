@@ -16,6 +16,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -32,9 +33,9 @@ public class RegisterController extends HttpServlet {
     }
 
     public static void SendEmail(String getEmail) throws MessagingException, UnsupportedEncodingException {
-        
+
         //Email cua ban
-        final String fromEmail = ""; 
+        final String fromEmail = "";
         // Mat khai email cua ban
         final String password = "";
         // dia chi email nguoi nhan
@@ -132,19 +133,16 @@ public class RegisterController extends HttpServlet {
         String date_raw = "2022-10-18";
         String fullname = request.getParameter("fullname");
         Date date = Date.valueOf(date_raw);
-        User acc = userDAO.checkDupAcc(username,fullname,email);
-        if (acc != null) {
-            error = "Account is existed!";
-            request.setAttribute("error", error);
+        if (checkDupInfor(userDAO,username, email, fullname) == false || !password.equals(rePassword)) {
+            if(checkDupInfor(userDAO,username, email, fullname) == false){
+            checkDupInput(request, userDAO, username, email, fullname);
             userDAO.closeConnection();
-            request.getRequestDispatcher("View/register.jsp").forward(request, response);
-        } else {
-            if (!password.equals(rePassword)) {
+            } if(!password.equals(rePassword)){
                 error = "Re-enter password isn't match! please try again";
                 request.setAttribute("error", error);
-                userDAO.closeConnection();
-                request.getRequestDispatcher("View/register.jsp").forward(request, response);
-            } else {
+            }            
+            request.getRequestDispatcher("View/register.jsp").forward(request, response);
+        } else {           
                 String sha256Pass = "";
                 try {
                     MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -161,14 +159,44 @@ public class RegisterController extends HttpServlet {
                 userDAO.insertUser(username, sha256Pass, fullname, email, avatar, description, role, status, date);
                 processRequest(request, response);
 
-                response.sendRedirect("login");
-            }
+                response.sendRedirect("login");           
         }
     }
 
     public static String convertByteToString(byte[] byteValue) {
         String stringValue = "" + Arrays.toString(byteValue);
         return (stringValue);
+    }
+
+    public boolean checkDupInfor(UserDAO userDAO,String username, String email, String fullname) {
+        User checkDupUsername = userDAO.checkDupAcc(username);
+        User checkDupEmail = userDAO.checkDupAcc(email);
+        User checkDupFullName = userDAO.checkDupAcc(fullname);
+        if (checkDupFullName != null || checkDupEmail != null || checkDupUsername != null) {
+            return false;
+        }
+        return true;
+    }
+
+    public void checkDupInput(HttpServletRequest request, UserDAO userDAO, String username, String email, String fullname) {
+        String usererror = "";
+        String emailerror = "";
+        String fullnameerror = "";
+        User checkDupUsername = userDAO.checkDupAcc(username);
+        User checkDupEmail = userDAO.checkDupAcc(email);
+        User checkDupFullName = userDAO.checkDupAcc(fullname);
+        if (checkDupUsername != null) {
+            usererror = "Duplicate Username";
+            request.setAttribute("usererror", usererror);
+        }
+        if (checkDupEmail != null) {
+            emailerror = "Duplicate Email";
+            request.setAttribute("emailerror", emailerror);
+        }
+        if (checkDupFullName != null) {
+            fullnameerror = "Duplicate Fullname";
+            request.setAttribute("fullnameerror", fullnameerror);
+        }
     }
 
     /**

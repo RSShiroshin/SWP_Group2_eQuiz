@@ -82,7 +82,8 @@ public class LoginController extends HttpServlet {
             System.out.println("" + ex);
         }
         UserDAO userdao = new UserDAO();
-        User userLogin = userdao.checkLogin(username, sha256Pass);
+        //User userLogin = userdao.checkLogin(username, sha256Pass);
+        User userLogin = userdao.checkLogin(username, password);
 
         HttpSession session = request.getSession();
 

@@ -112,7 +112,7 @@ public class QuizDAO {
                 quizHis.add(new QuizHistory(quizID, ques, userAnswer, isCorrect));
             }
         } catch (SQLException e) {
-            status = "Error Load Course" + e.getMessage();
+            status = "Error Load Quiz History" + e.getMessage();
         }
         return quizHis;
     }
