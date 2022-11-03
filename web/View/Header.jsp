@@ -107,10 +107,7 @@
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Course Manager</p></a>                  
                     <a style="color: darkblue;" href="UserManagerController">
                         <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">User Manager</p>
-                    </a>
-                    <a style="color: darkblue;" href="#">
-                        <p style="background-color: greenyellow; padding: 5px; border-radius: 8px; margin-top: 15px">Setting</p>
-                    </a>
+                    </a>                   
 
                 </c:if>
                 <c:if test="${sessionScope.userLogin.getRole() == 1||sessionScope.userLogin.getRole() == 2}" >

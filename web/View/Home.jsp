@@ -126,7 +126,12 @@
                         <c:forEach items="${listCourses}" var="c"> 
                             <div class="starElement">
                                 <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
-                                    <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
+                                    <c:if test="${c.thumbnail==null}">
+                                        <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
+                                    </c:if>
+                                    <c:if test="${c.thumbnail!=null}">
+                                        <img class="" src="${c.thumbnail}" height="100%" width="100%" alt="..." />
+                                    </c:if>
 
                                     <div>
                                         <p style="margin-top: 10px;">${c.courseName}</p>

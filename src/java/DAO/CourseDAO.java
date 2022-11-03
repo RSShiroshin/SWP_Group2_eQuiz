@@ -267,7 +267,8 @@ public class CourseDAO extends DBContext {
     public static void main(String[] args) {
         CourseDAO cd = new CourseDAO();
         cd.loadCourse();
-        System.out.println(cd.getCourseList());
+        
+        System.out.println(cd.getCourseList().get(0).getThumbnail().equals(""));
     }
 
     //load register course
