@@ -119,9 +119,7 @@ public class AdminFilter implements Filter {
         } else {
             User acc = (User) session.getAttribute("userLogin");
             if (acc.getRole() != 0) {
-                error = "Access denied ! Must be login by Admin account";
-                request.setAttribute("message", error);
-                req.getRequestDispatcher("View/Login.jsp").forward(request, response);
+               response.sendRedirect("home");
             }
         }    
         Throwable problem = null;
