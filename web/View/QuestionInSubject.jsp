@@ -26,31 +26,19 @@
     <body>
         <%@ include file="Header.jsp" %>
         <div class="adminTable">
-            <table>
+<!--            <table>
                 <tr>
                     <th>Question ID</th>
                     <th>Content</th>                   
                     <th>Explain</th>
                     <th>Subject Name</th>
-                </tr>
+                </tr>-->
 
                 <c:if test="${sessionScope.userLogin == null}">
                     <c:forEach items="${listQuestion}" begin="0" end="19" var="q">
                         <c:if test="${q.subjectID==sid}">
-                            <tr>
-                                <td style="width: 3%; text-align: center; border-right: 1px solid black">${q.questionID}</td>
-                                <td style="width: 45%; border-right: 1px solid black;padding: 10px 5px">${q.content}</td>
-                                <td style="width: 30%; border-right: 1px solid black">${q.explain}</td>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
-
-                </c:if>
-                <c:if test="${sessionScope.userLogin != null}">
-                    <c:forEach items="${listQuestion}" var="q">
-                        <c:if test="${q.subjectID==sid}">
                             <div  style="width: 80%; height: fit-content; background-color: white; margin-bottom: 50px;
-                                  padding: 10px 10px; border-radius: 8px; display: flex;
+                                  padding: 20px 20px; border-radius: 8px; display: flex;
                                   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
                                 <div style="width: 40%; border-right: 1px solid #939bb4; margin-right: 10px;" class="quesSub">
                                     <c:set var="str1" value="${q.content}"/>  
@@ -69,7 +57,46 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                                <div style="">
+                                <div style="width: 40%">
+                                    <c:forEach items="${listAns}" var="a">
+                                        <c:if test="${a.getQuestionID() == q.getQuestionID()}">
+                                            <c:if test="${a.isAnswer() ne false}">
+                                                <p style="margin-left: 10px;">${a.getContent()}</p>
+                                            </c:if>
+                                        </c:if>
+                                    </c:forEach>
+
+                                </div>
+                            </div>
+                            <!--lam hien cau hoi-->
+                        </c:if>
+                    </c:forEach>
+
+                </c:if>
+                <c:if test="${sessionScope.userLogin != null}">
+                    <c:forEach items="${listQuestion}" var="q">
+                        <c:if test="${q.subjectID==sid}">
+                            <div  style="width: 80%; height: fit-content; background-color: white; margin-bottom: 50px;
+                                  padding: 20px 20px; border-radius: 8px; display: flex;
+                                  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+                                <div style="width: 40%; border-right: 1px solid #939bb4; margin-right: 10px;" class="quesSub">
+                                    <c:set var="str1" value="${q.content}"/>  
+                                    <c:set var="str2" value="${fn:split(str1, '/')}" />  
+                                    <c:if test="${not empty str2}">
+                                        <c:forEach items="${str2}" var="s">
+                                            <p>${s}</p>
+
+                                        </c:forEach>
+                                    </c:if>
+                                    <div style="margin-top: 20px;">
+                                        <c:forEach items="${listAns}" var="a">
+                                            <c:if test="${a.getQuestionID() == q.getQuestionID()}">
+                                                <p>${a.getContent()}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                                <div style="width: 40%">
                                     <c:forEach items="${listAns}" var="a">
                                         <c:if test="${a.getQuestionID() == q.getQuestionID()}">
                                             <c:if test="${a.isAnswer() ne false}">
@@ -85,7 +112,7 @@
 
                     </c:forEach>
                 </c:if>
-            </table>
+            <!--</table>-->
             <c:if test="${sessionScope.userLogin == null}">
                 <div style="margin-top: 60px; text-align: center">                            
                     <a style="background-color: greenyellow; border: none; padding: 20px 40px; color: darkblue;font-size: large; font-weight: 600;

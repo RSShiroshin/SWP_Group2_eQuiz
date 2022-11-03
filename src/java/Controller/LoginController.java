@@ -103,6 +103,9 @@ public class LoginController extends HttpServlet {
                     break;
                 }
             }
+            
+            
+            
 
             if (userLogin.getRole() == 0) {
                 //chuyen huong den trang cua admin

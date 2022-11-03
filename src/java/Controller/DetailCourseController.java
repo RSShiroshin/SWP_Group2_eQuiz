@@ -55,7 +55,7 @@ public class DetailCourseController extends HttpServlet {
         courseDAO.loadCourseRegister();
         String courseID = request.getParameter("courseID");
 //        Cookie cookie = DetailCourseController.getCookie(request, "link");
-        String l = "/DetailCourseController?courseID="+ courseID;
+        String l = "/DetailCourseController?courseID=" + courseID;
 
 //        if (cookie != null) {
 //            cookie.setValue(l);
@@ -76,8 +76,32 @@ public class DetailCourseController extends HttpServlet {
         } else {
             check = checkRegister(courseDAO.getCourseRegister(), user.getUserID(), courseID);
         }
-        String link = "/DetailCourseController?courseID="+courseID;
+        String link = "/DetailCourseController?courseID=" + courseID;
         Cookie cookie = DetailCourseController.getCookie(request, "link");
+        Cookie checkCourseHome = DetailCourseController.getCookie(request, user.getUserName());
+        String nameCkie = user.getUserName();
+        if (checkCourseHome == null) {
+            Cookie courseHome = new Cookie(nameCkie,courseID);
+            response.addCookie(courseHome);
+        }
+        int chck = 0;
+        if (checkCourseHome != null) {
+            String tempValue = checkCourseHome.getValue();
+            String[] arrayCourseID = tempValue.split("/");
+            for (String str : arrayCourseID) {
+                if (str.equals(courseID)) {
+                    chck = 1;
+                    break;
+                } else {
+                    chck = 0;
+                }
+            }
+            if (chck == 0) {
+                String tempValue1 = courseID +"/"+ checkCourseHome.getValue();
+                checkCourseHome.setValue(tempValue1);
+                response.addCookie(checkCourseHome);
+            }
+        }
 
         if (cookie != null) {
             cookie.setValue(link);
@@ -116,7 +140,6 @@ public class DetailCourseController extends HttpServlet {
         }
         return 0;
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

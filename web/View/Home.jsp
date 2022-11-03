@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,7 +54,7 @@
                 margin-top: 40px;
 
             }
-            
+
             .catename{
                 border: 1px solid silver;
                 padding: 2px 4px;
@@ -77,7 +77,7 @@
         <div class="HomeContent">
             <div style="padding-left: 10%;">
                 <div style="display: flex" class="cate col-md-3 mb-5">
-<!--                    <h3 style="margin-top: 10px; margin-right: 10px;">Categories: </h3>-->
+                    <!--                    <h3 style="margin-top: 10px; margin-right: 10px;">Categories: </h3>-->
                     <ul style="margin-top: 10px;" class="list-group">
                         <c:forEach items="${listCategories}" var="cc">
                             <a class="catename" href="filter-category?categoryId=${cc.categoryID}">${cc.categoryName}</a>
@@ -85,7 +85,43 @@
                     </ul>
                 </div>
                 <div class="topStar">
-<!--                    <h3>List Courses</h3>-->
+                    <!--                    <h3>List Courses</h3>-->
+                    <c:if test="${courseHome != null}">
+
+
+
+                        <h2 style="margin-left: 60px; margin-top: 20px;">Gần đây</h2>
+                        <div class="star">
+                            <c:forEach items="${listCourses}" var="c"> 
+                                <c:set var="str1" value="${courseHome}"/>  
+                                <c:set var="str2" value="${fn:split(str1, '/')}" />  
+                                <c:if test="${not empty str2}">
+                                    <c:forEach begin="0" end="4" step="1" items="${str2}" var="s">
+                                        <c:if test="${s.equals(c.courseID)}">
+                                            <div class="starElement">
+                                                <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
+                                                    <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
+
+                                                    <div>
+                                                        <p style="margin-top: 10px;">${c.courseName}</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </c:if>
+
+                                    </c:forEach>
+                                </c:if>
+
+
+
+
+
+                            </c:forEach>
+                        </div>
+                    </c:if>
+
+                    <!--add cookie course to display-->
+                    <h2 style="margin-left: 60px; margin-top: 50px;">Tất cả khoá học</h2>
                     <div class="star">
                         <c:forEach items="${listCourses}" var="c"> 
                             <div class="starElement">
@@ -143,6 +179,6 @@
             </div>
         </div>
 
- <%@ include file="FooterContact.jsp" %>
+        <%@ include file="FooterContact.jsp" %>
     </body>
 </html>

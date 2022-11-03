@@ -7,6 +7,7 @@ package Controller;
 import DAO.CourseDAO;
 import Model.Course;
 import Model.CourseCategory;
+import Model.User;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -42,7 +44,7 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 //        Cookie linkFw =new Cookie("request.getContextPath()/home",link);
 //        response.addCookie(linkFw);
-        String c ="/home";
+        String c = "/home";
         Cookie link = new Cookie("link", c);
         response.addCookie(link);
         final int PAGE_SIZE = 6;
@@ -67,10 +69,26 @@ public class HomeController extends HttpServlet {
         }
 
         //
+        HttpSession session = request.getSession();
         request.setAttribute("page", page);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("listCourses", listCourses);
         request.getSession().setAttribute("UrlHistory", "home");
+        User user = (User) session.getAttribute("userLogin");
+        if (user != null) {
+            Cookie[] cookies = request.getCookies();
+            String valueCourse = "";
+            for (int i = 0; i < cookies.length; i++) {
+                String courseHome = user.getUserName();
+                if (courseHome.equals(cookies[i].getName())) {
+                    valueCourse = cookies[i].getValue();
+                    break;
+                }
+            }
+
+            request.setAttribute("courseHome", valueCourse);
+        }
+
 //        
         request.getRequestDispatcher("View/Home.jsp").forward(request, response);
 
