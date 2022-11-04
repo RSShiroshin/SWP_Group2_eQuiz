@@ -90,10 +90,15 @@ public class QuizViewScoreController extends HttpServlet {
                 quizAnswer.add(a);
             }
         }
+        int intArray[] = new int[500];
+        for (int i = 0; i < 500; i++) {
+            intArray[i] = i;
+        }
         
         ArrayList<QuizHistory> check = quiz.getQuizHistory(quizID);
         
         request.setAttribute("quizReviewID", quizID);
+        request.setAttribute("numLst", intArray);
         request.setAttribute("quizQuestion", quizQuestion);
         request.setAttribute("quizAnswer", quizAnswer);
         request.setAttribute("check", check);
