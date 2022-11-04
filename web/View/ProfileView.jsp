@@ -117,6 +117,143 @@
             {
                 background-color: #f6f7fb;
             }
+            .clear {
+                clear: both;
+            }
+
+            .text-white { /*thay thành chữ trắng*/
+                color: #fff !important;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .pull-right {
+                float: right !important;
+            }
+
+            .btn {
+                color: white;
+                background-color: #4255ff;
+                text-decoration: none;
+                padding: 11px 16px;
+                display: inline-block;
+                margin-top: 16px;
+                border: none;
+                appearance: none;
+                -webkit-appearance: none;
+            }
+
+            .btn:hover {
+                color: white;
+                background-color: #4275FC;
+                cursor: pointer;
+            }
+
+
+            .row {
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+
+            /* thêm element giả (thẻ div) sau thẻ row */
+            .row::after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            .col {
+                float: left;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .col_2_3{
+                width: 200px;
+                height: 300px;
+            }
+
+            .col-fouth {
+                width: calc(100% /4);
+            }
+
+            .col-third {
+                width: calc(100% /3);
+            }
+
+            .col-half {
+                width: calc(100% /2);
+            }
+
+            .col-full {
+                width: 100%;
+            }
+
+            .mt-8 {
+                margin-top: 8px !important;
+            }
+
+            .m-8 {
+                margin: 8px !important;
+            }
+
+            .mt-16 {
+                margin-top: 16px !important;
+            }
+
+            .mt-32 {
+                margin-top: 32px !important;
+            }
+            .contactForm {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.4);
+                align-items: center;
+                justify-content: center;
+            }
+
+            .contactForm.open {
+                display: flex;
+            }
+
+            .contactFormClose{
+                display: inline-block;
+                font-size: 30px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .contactFormClose:hover {
+                background: red;
+                color: white;
+                cursor: pointer;
+            }
+
+            .inner_contact_form {
+                display: flex;
+                background: white;
+                width: 60%;
+                height: 50%;
+            }
+
+            .pic {
+                display: inline-block;
+                width: 40%;
+            }
+            .pic img{
+                width: -webkit-fill-available;
+                height: -webkit-fill-available;
+            }
+
+            .form {
+                display: inline-block;
+            }
         </style>
     </head>
     <body>
@@ -132,7 +269,7 @@
                     </div>  
                 </div>
                 <div class="infor" style="margin-top: 50px">
-<!--                    <div style="display: flex;"><p>Password: </p> **********</div>-->
+                    <!--                    <div style="display: flex;"><p>Password: </p> **********</div>-->
                     <div style="display: flex;"><p>Email: </p> ${loginUser.getEmail()}</div>
                     <div style="display: flex;"><p>Description: </p> ${loginUser.getDescription()}</div> 
                 </div>
@@ -140,7 +277,7 @@
 
             <!--//pup up-->
             <button class="open-button" onclick="openForm()">Edit Profile</button>
-            <a href="#" class="pass-button">Change Password</a>
+            <p href="#"  class="btn mt-16 js-openContactForm pass-button">Change Password</p>
             <div class="form-popup" id="myForm">
                 <form action="ChangeProfileController" method="get" class="form-container">
                     <input type="text" name="userID" value="${loginUser.getUserID()}" hidden>
@@ -155,6 +292,38 @@
             </div><!-- comment -->
         </div>
 
+        <div style="padding-top: 100px; padding-left: 20%;" id="mydiv" class="contactForm js-contactForm ${open}">
+            <div style="width: 80%; border-radius: 8px;" class="inner_contact_form">
+                <div style="border-radius: 8px 0 8px 0; background-color: red; color: white" class="contactFormClose js-closeContactForm">
+                    <i style="font-size: 25px;" class="ti-close"></i>      
+                </div>
+                <div class="pic">
+                    <img src="Img/support-img.png" alt="Quizlut"/>
+                </div>
+                <div style="margin-left: 20px; margin-bottom: 20px;" class="form">
+                    <h2 class="m-8 col-full">Contact us</h2>
+                    <form class="Contact_Form" action="Contact" method="post" enctype="multipart/form-data">
+                        <label for="subject">What is your problem:</label>
+                        <input type="text" name="viewID" value="home" hidden>
+                        <select style="height: 30px; border-radius: 8px; outline: none; width: 100px;" name="subject">
+                            <option value="Question">Question</option>
+                            <option value="Quiz">Quiz</option>
+                            <option value="Interface">Interface</option>
+                            <option value="Other">Other</option>
+                        </select> </br></br>
+                        <textarea style="border-radius: 8px; margin-bottom: 10px; resize: none; outline: none;" 
+                                  name="message" rows="10" cols="50" ></textarea>
+                        <div>
+                            <input class="js-closeContactForm" type = 'submit' value = 'SEND'
+                                   style="font-size: 20px; background-color: #3ccfcf; color: white; border:none;
+                                   padding: 5px 10px; border-radius: 8px;"><br/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
         <script>
             function openForm() {
                 document.getElementById("myForm").style.display = "block";
@@ -162,6 +331,35 @@
 
             function closeForm() {
                 document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+        <script>
+            const contactFormOpen = document.querySelectorAll('.js-openContactForm');
+            const contactFormClose = document.querySelectorAll('.js-closeContactForm');
+            const contactForm = document.querySelector('.js-contactForm');
+
+            for (const Btn of contactFormOpen) {
+                Btn.addEventListener('click', show);
+            }
+
+            function showContactForm() {
+                contactForm.classList.add('open');
+            }
+
+            for (const Btn of contactFormClose) {
+                Btn.addEventListener('click', hide);
+            }
+
+            function hide() {
+                document.getElementById('mydiv').style.display = 'none';
+            }
+            function show() {
+                document.getElementById('mydiv').style.display = 'block';
+            }
+
+            function hideContactForm() {
+                contactForm.classList.remove('hide');
+                alert("Send success!!");
             }
         </script>
     </body>
