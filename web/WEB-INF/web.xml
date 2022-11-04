@@ -249,12 +249,10 @@
         <url-pattern>/View/QuizView.jsp</url-pattern>
         <url-pattern>/View/QuizReviewView.jsp</url-pattern>
         <url-pattern>/View/SubjectView.jsp</url-pattern>
-        <url-pattern>/View/courseDetail.jsp</url-pattern>
         <url-pattern>/ChangeProfileController</url-pattern>
         <url-pattern>/EnrollCourse</url-pattern>
         <url-pattern>/ProfileController</url-pattern>
         <url-pattern>/LibraryExpertController</url-pattern>
-        <url-pattern>/DetailCourseController</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>ExpertFilter</filter-name>
