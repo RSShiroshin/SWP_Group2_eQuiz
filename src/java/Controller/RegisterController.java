@@ -133,14 +133,14 @@ public class RegisterController extends HttpServlet {
         String date_raw = "2022-10-18";
         String fullname = request.getParameter("fullname");
         Date date = Date.valueOf(date_raw);
-        if (checkDupInfor(userDAO,username, email, fullname) == false || !password.equals(rePassword)) {
-            if(checkDupInfor(userDAO,username, email, fullname) == false){
+        if (checkDupInfor(userDAO,username, email, fullname) == false || !password.equals(rePassword) || checkValidationInput(username, email, fullname) == false) {
+            if(checkDupInfor(userDAO,username, email, fullname) == false || checkValidationInput(username, email, fullname) == false){
             checkDupInput(request, userDAO, username, email, fullname);
             userDAO.closeConnection();
             } if(!password.equals(rePassword)){
                 error = "Re-enter password isn't match! please try again";
                 request.setAttribute("error", error);
-            }            
+            }         
             request.getRequestDispatcher("View/register.jsp").forward(request, response);
         } else {           
                 String sha256Pass = "";
@@ -177,6 +177,14 @@ public class RegisterController extends HttpServlet {
         }
         return true;
     }
+    
+     public boolean checkValidationInput(String username,String email,String fullname) {
+        if (CheckValidation.CheckValidInput.checkUsername(username) == false ||  CheckValidation.CheckValidInput.checkEmail(email) == false 
+                || CheckValidation.CheckValidInput.checkFullname(fullname) == false) {
+            return false;
+        }
+        return true;
+    }
 
     public void checkDupInput(HttpServletRequest request, UserDAO userDAO, String username, String email, String fullname) {
         String usererror = "";
@@ -188,13 +196,22 @@ public class RegisterController extends HttpServlet {
         if (checkDupUsername != null) {
             usererror = "Duplicate Username";
             request.setAttribute("usererror", usererror);
+        } else if (CheckValidation.CheckValidInput.checkUsername(username) == false){
+            usererror ="Invaild username!";
+            request.setAttribute("usererror", usererror);
         }
         if (checkDupEmail != null) {
             emailerror = "Duplicate Email";
             request.setAttribute("emailerror", emailerror);
+        } else if (CheckValidation.CheckValidInput.checkEmail(email) == false ){
+            emailerror = "Invaild Email";
+            request.setAttribute("emailerror", emailerror);
         }
         if (checkDupFullName != null) {
             fullnameerror = "Duplicate Fullname";
+            request.setAttribute("fullnameerror", fullnameerror);
+        } else if (CheckValidation.CheckValidInput.checkFullname(fullname) == false){
+            fullnameerror = "Invaild Fullname";
             request.setAttribute("fullnameerror", fullnameerror);
         }
     }
