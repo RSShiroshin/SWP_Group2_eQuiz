@@ -113,5 +113,9 @@ public class SubjectDAO {
             status = "Error!!" + ex.getMessage();
         }
     }
-
+    public static void main(String[] args) {
+        SubjectDAO sdao = new SubjectDAO();
+        sdao.loadSubject();
+        System.out.println(sdao.getSubjectListByCourseID("aa"));
+    }
 }

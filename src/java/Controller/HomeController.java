@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -77,7 +78,7 @@ public class HomeController extends HttpServlet {
         User user = (User) session.getAttribute("userLogin");
         if (user != null) {
             Cookie[] cookies = request.getCookies();
-            String valueCourse = "";
+            String valueCourse = null;
             for (int i = 0; i < cookies.length; i++) {
                 String courseHome = user.getUserName();
                 if (courseHome.equals(cookies[i].getName())) {
@@ -85,8 +86,16 @@ public class HomeController extends HttpServlet {
                     break;
                 }
             }
-
-            request.setAttribute("courseHome", valueCourse);
+            ArrayList<Course> newestCourse = null;
+            List<Course> tail = null;
+            if(valueCourse!=null){
+                String [] newest = valueCourse.split("/");                
+                newestCourse = new ArrayList<>();                
+                for (int i = 0; i < Math.min(newest.length , 3); i++) {
+                    newestCourse.add(courseDAO.getCourseById(newest[i]));
+                }                    
+            }
+            request.setAttribute("courseHome", newestCourse);
         }
 
 //        

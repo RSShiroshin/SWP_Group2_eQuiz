@@ -6,6 +6,7 @@ package Controller.admin;
 
 import DAO.CourseDAO;
 import DAO.SubjectDAO;
+import Model.Course;
 //import Model.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,11 +23,13 @@ public class CourseManagerController extends HttpServlet {
 
     CourseDAO cdao;
     SubjectDAO sdao;
+
     @Override
     public void init() {
         cdao = new CourseDAO();
         sdao = new SubjectDAO();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +47,7 @@ public class CourseManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CourseManagerController</title>");            
+            out.println("<title>Servlet CourseManagerController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CourseManagerController at " + request.getContextPath() + "</h1>");
@@ -64,17 +67,57 @@ public class CourseManagerController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {                       
-         
-        cdao.loadCourse();
-        cdao.loadCourseCategory();
-        sdao.loadSubject();
-        
-        request.setAttribute("clist", cdao.getCourseList());
-        request.setAttribute("cclist", cdao.getCategoryList());
-        request.setAttribute("slist", sdao.getSubjectList());  
+            throws ServletException, IOException {
+        String type = request.getParameter("type");
+        if (type == null) {
+            cdao.loadCourse();
+            cdao.loadCourseCategory();
+            sdao.loadSubject();
 
-        request.getRequestDispatcher("View/admin/CourseManager.jsp").forward(request, response);
+            request.setAttribute("clist", cdao.getCourseList());
+            request.setAttribute("cclist", cdao.getCategoryList());
+            request.setAttribute("slist", sdao.getSubjectList());
+
+            request.getRequestDispatcher("View/admin/CourseManager.jsp").forward(request, response);
+        } else if (type.equals("1")) {
+            String courseID = request.getParameter("courseID");
+            cdao.loadCourse();
+            cdao.loadCourseCategory();
+            sdao.loadSubject();
+            if (sdao.getSubjectListByCourseID(courseID).isEmpty()) {
+                cdao.deleteCourse(courseID);
+            }
+            cdao.loadCourse();
+            cdao.loadCourseCategory();
+            sdao.loadSubject();
+            request.setAttribute("clist", cdao.getCourseList());
+            request.setAttribute("cclist", cdao.getCategoryList());
+            request.setAttribute("slist", sdao.getSubjectList());
+            request.getRequestDispatcher("View/admin/CourseManager.jsp").forward(request, response);
+        } else if (type.equals("2")) {
+            cdao.loadCourse();
+            cdao.loadCourseCategory();
+            sdao.loadSubject();
+            for (Course c : cdao.getCourseList()) {
+                if (c.getCourseID().equals(request.getParameter(c.getCourseID()))) {
+                    String name = request.getParameter(c.getCourseID() + "0").trim();
+                    String description = null;
+                    if(request.getParameter(c.getCourseID() + "1").trim()!=null||!request.getParameter(c.getCourseID() + "1").trim().equals("")){
+                        description = request.getParameter(c.getCourseID() + "1").trim();
+                    }                   
+                    int cate = Integer.parseInt(request.getParameter(c.getCourseID() + "2"));
+                    String thumb = null;
+                    if(request.getParameter(c.getCourseID() + "3").trim()!=null||!request.getParameter(c.getCourseID() + "3").trim().equals("")){
+                        thumb = request.getParameter(c.getCourseID() + "3").trim();
+                    }  
+                    cdao.updateCourse(c.getCourseID(), name, description, cate, thumb);
+                }
+
+            }
+            response.sendRedirect("CourseManagerController");
+
+        }
+
     }
 
     /**
@@ -92,7 +135,7 @@ public class CourseManagerController extends HttpServlet {
         String courseName = request.getParameter("name");
         int categoryID = Integer.parseInt(request.getParameter("category"));
         String description = request.getParameter("description");
-        String thumbnail = request.getParameter("thumbnail");             
+        String thumbnail = request.getParameter("thumbnail");
         cdao.insertCourse(courseID, courseName, description, categoryID, thumbnail);
         doGet(request, response);
     }

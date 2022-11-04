@@ -92,30 +92,21 @@
 
                         <h2 style="margin-left: 60px; margin-top: 20px;">Gần đây</h2>
                         <div class="star">
-                            <c:forEach items="${listCourses}" var="c"> 
-                                <c:set var="str1" value="${courseHome}"/>  
-                                <c:set var="str2" value="${fn:split(str1, '/')}" />  
-                                <c:if test="${not empty str2}">
-                                    <c:forEach begin="0" end="4" step="1" items="${str2}" var="s">
-                                        <c:if test="${s.equals(c.courseID)}">
-                                            <div class="starElement">
-                                                <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
-                                                    <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
-
-                                                    <div>
-                                                        <p style="margin-top: 10px;">${c.courseName}</p>
-                                                    </div>
-                                                </a>
-                                            </div>
+                            <c:forEach items="${courseHome}" var="c"> 
+                                <div class="starElement">
+                                    <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
+                                        <c:if test="${c.thumbnail==null}">
+                                            <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
+                                        </c:if>
+                                        <c:if test="${c.thumbnail!=null}">
+                                            <img class="" src="${c.thumbnail}" height="100%" width="100%" alt="..." />
                                         </c:if>
 
-                                    </c:forEach>
-                                </c:if>
-
-
-
-
-
+                                        <div>
+                                            <p style="margin-top: 10px;">${c.courseName}</p>
+                                        </div>
+                                    </a>
+                                </div>
                             </c:forEach>
                         </div>
                     </c:if>
@@ -126,7 +117,12 @@
                         <c:forEach items="${listCourses}" var="c"> 
                             <div class="starElement">
                                 <a style="text-decoration: none; color: black"  href="DetailCourseController?courseID=${c.courseID}">
-                                    <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
+                                    <c:if test="${c.thumbnail==null}">
+                                        <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="..." />
+                                    </c:if>
+                                    <c:if test="${c.thumbnail!=null}">
+                                        <img class="" src="${c.thumbnail}" height="100%" width="100%" alt="..." />
+                                    </c:if>
 
                                     <div>
                                         <p style="margin-top: 10px;">${c.courseName}</p>
