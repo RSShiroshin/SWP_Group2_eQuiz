@@ -93,6 +93,10 @@ public class QuizGenerateController extends HttpServlet {
         if(request.getParameter("questionNum")!=null) {
             questionNum = Integer.parseInt(request.getParameter("questionNum"));
         }
+        
+        if (questionNum == 0) {
+            questionNum = 1;
+        }
             
            
         if(qd.getQuestionBySubjectID(subject).size()<=0){
@@ -147,6 +151,10 @@ public class QuizGenerateController extends HttpServlet {
                         }
                     }
                 }
+                
+                request.setAttribute("maxQuestionNum", qd.getQuestionBySubjectID(subject).size());
+                request.setAttribute("courseID", courseID);
+                request.setAttribute("SubjectID", subject);
                 request.setAttribute("quizID", newQuizID);
                 request.setAttribute("quizQuestion", quizQuestion);
                 request.setAttribute("quizAnswer", quizAnswer);
