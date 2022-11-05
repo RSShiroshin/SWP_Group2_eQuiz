@@ -239,7 +239,7 @@
                 display: flex;
                 background: white;
                 width: 60%;
-                height: 50%;
+                height: 60%;
             }
 
             .pic {
@@ -253,6 +253,21 @@
 
             .form {
                 display: inline-block;
+            }
+            
+            .form-group{
+                display: flex;
+                margin-bottom: 20px;
+            }
+            .form-control{
+                height: 30px;
+                margin-left: 30px;
+                width: 500px;
+                padding: 5px 10px;
+            }
+            .courseTxt{
+                width: 50%;
+                margin-left: 5%;
             }
         </style>
     </head>
@@ -294,34 +309,46 @@
 
         <div style="padding-top: 100px; padding-left: 20%;" id="mydiv" class="contactForm js-contactForm ${open}">
             <div style="width: 80%; border-radius: 8px;" class="inner_contact_form">
-                <div style="border-radius: 8px 0 8px 0; background-color: red; color: white" class="contactFormClose js-closeContactForm">
-                    <i style="font-size: 25px;" class="ti-close"></i>      
+                <div style="border-radius: 8px 0 8px 0; width: 50px;background-color: red; color: white;" class="contactFormClose js-closeContactForm">
+                    <p style="font-size: 18px; width: 50px; padding-top: 5px; " class="ti-close">Close</p>      
                 </div>
-                <div class="pic">
-                    <img src="Img/support-img.png" alt="Quizlut"/>
-                </div>
-                <div style="margin-left: 20px; margin-bottom: 20px;" class="form">
-                    <h2 class="m-8 col-full">Contact us</h2>
-                    <form class="Contact_Form" action="Contact" method="post" enctype="multipart/form-data">
-                        <label for="subject">What is your problem:</label>
-                        <input type="text" name="viewID" value="home" hidden>
-                        <select style="height: 30px; border-radius: 8px; outline: none; width: 100px;" name="subject">
-                            <option value="Question">Question</option>
-                            <option value="Quiz">Quiz</option>
-                            <option value="Interface">Interface</option>
-                            <option value="Other">Other</option>
-                        </select> </br></br>
-                        <textarea style="border-radius: 8px; margin-bottom: 10px; resize: none; outline: none;" 
-                                  name="message" rows="10" cols="50" ></textarea>
-                        <div>
-                            <input class="js-closeContactForm" type = 'submit' value = 'SEND'
-                                   style="font-size: 20px; background-color: #3ccfcf; color: white; border:none;
-                                   padding: 5px 10px; border-radius: 8px;"><br/>
-                        </div>
-                    </form>
+                <div style="margin-left: 20px; margin-bottom: 20px; margin-top: 50px;" class="form">
+                    <div >
+                        
+                        <!--add subject-->
+                        
+                        
+                        <form action="#" method="post">
+                            <div style="margin-bottom: 50px; margin-left:30px;" class="modal-header">						
+                                <h3 class="modal-title">Thay đổi mật khẩu</h3>
+                            </div>
+                            <div class="modal-body">					
+                                <div class="form-group">
+                                    <p class="courseTxt">Mật khẩu cũ</p>
+                                    <input name="id" type="text" class="form-control" placeholder="Mật khẩu cũ" required>
+                                </div>
+                                <div class="form-group">
+                                    <p class="courseTxt">Mật khẩu mới</p>
+                                    <input name="name" type="text" class="form-control" placeholder="Mật khẩu mới" required>
+                                </div>
+                                                                                        
+                                <div class="form-group">
+                                    <p class="courseTxt">Nhập lại mật khẩu mới</p>
+                                    <input name="description" type="text" class="form-control" placeholder="Nhập lại mật khẩu mới" required>
+                                </div>
+                               
+
+
+                            </div>
+                            <div style="margin-left: 30px;" class="modal-footer">                           
+                                <input style=" border-radius: 8px;" type="submit" class="btn btn-success" value="Thay đổi">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
+                                <!--end add subjetc-->
         </div>
 
         <script>
