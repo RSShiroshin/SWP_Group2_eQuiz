@@ -80,6 +80,9 @@ public class DetailCourseController extends HttpServlet {
         }
         String link = "/DetailCourseController?courseID=" + courseID;
         Cookie cookie = DetailCourseController.getCookie(request, "link");
+        if(user!=null){
+            
+        
         Cookie checkCourseHome = DetailCourseController.getCookie(request, user.getUserName());
         String nameCkie = user.getUserName();
         if (checkCourseHome == null) {
@@ -105,7 +108,7 @@ public class DetailCourseController extends HttpServlet {
                 response.addCookie(checkCourseHome);
             }
         }
-
+        }
         if (cookie != null) {
             cookie.setValue(link);
             response.addCookie(cookie);

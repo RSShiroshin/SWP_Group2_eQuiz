@@ -425,12 +425,10 @@
                 <div style="margin-left: 20px; margin-bottom: 20px; margin-top: 50px;" class="form">
                     <div >
 
-                        <!--add subject-->
-
-
-                        <form action="#" method="post">
+                        <!--add subject-->                 
+                        <form action="SubjectManagerController" method="post">
                             <div style="margin-bottom: 50px; margin-left:30px;" class="modal-header">						
-                                <h3 class="modal-title">Add Course</h3>
+                                <h3 class="modal-title">Add Subject</h3>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">

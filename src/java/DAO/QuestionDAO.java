@@ -148,12 +148,12 @@ public class QuestionDAO {
         return answer;
     }
 
-    public void insertAnswerByQuestionID(int questionID, String content) {
+    public void insertAnswerByQuestionID(int questionID, String content,boolean isAnswer) {
         String sql = "insert into Answer values(?,?,?)";
         try(PreparedStatement ps = con.prepareStatement(sql);) {           
             ps.setInt(1, questionID);
             ps.setString(2, content);
-            ps.setBoolean(3, false);
+            ps.setBoolean(3, isAnswer);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();

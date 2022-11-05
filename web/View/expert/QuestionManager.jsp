@@ -160,7 +160,7 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="../Header.jsp" %>
         <div class="contentCourse">
             <div class="addCourse">
                 
@@ -170,7 +170,7 @@
                     
                     <form action="ImportQuestionController" method="post" enctype="multipart/form-data">
                         <input type="file" name="file">
-                        <input type="hidden" name="subjectID" value="SWT301">
+                        <input type="hidden" name="subjectID" value="${subjectID}">
                         <input type="submit" value="Upload">
                     </form>
                 </div>
