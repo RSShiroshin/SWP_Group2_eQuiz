@@ -295,6 +295,7 @@
                         </form>
                         <button style="margin-top: 10px; padding: 10px 20px; border:none; border-radius: 8px; background-color: #00ff33;
                                 color: purple; cursor: pointer">Edit Subject</button>
+                                <a style="background-color: #4275FC; padding: 10px 10px; border-radius: 8px; color: white;" href="#">Delete Subject</a>
                     </div>
 
 
