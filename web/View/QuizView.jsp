@@ -143,8 +143,12 @@ z            input[type="radio"] {
         <%@ include file="HeaderQuiz.jsp" %>
         <div id="contentQuiz">
 
-
-            <div class="Quiz">
+            <c:if test="${QuizNull == true}">
+                <h1 style="text-align: center; color: red; padding: 32px">Subject has no questions</h1>
+            </c:if>
+                
+            <c:if test="${QuizNull == false}">
+                <div class="Quiz">
                 <form action="QuizReviewController" method="post">
                     <input type="text" name="quizID" value="${quizID}" >
                     <c:forEach items="${quizQuestion}" var="question">
@@ -190,6 +194,8 @@ z            input[type="radio"] {
 
 
             </div>
+            </c:if>
+            
         </div>
 
 

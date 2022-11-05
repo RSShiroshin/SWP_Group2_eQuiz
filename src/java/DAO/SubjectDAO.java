@@ -95,6 +95,16 @@ public class SubjectDAO {
         return subjectByCourse;
     }
     
+    public Subject getSubjectListBySubjectID(String subjectID) {
+        loadSubject();
+        for (Subject subject : subjectList) {
+            if (subject.getSubjectID().equals(subjectID)) {
+                return subject;
+            }
+        }
+        return null;
+    }
+    
     public List<Subject> searchBySubjectsName(String keyword) {
         List<Subject> list = new ArrayList<>();
         loadSubject();
