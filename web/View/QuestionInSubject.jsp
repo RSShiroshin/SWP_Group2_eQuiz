@@ -16,7 +16,7 @@
 
             body{
                 background-color: #f6f7fb;
-/*                background-color: #00ff33;*/
+                /*                background-color: #00ff33;*/
             }
             .adminTable{
                 padding-top: 50px;
@@ -26,6 +26,7 @@
     </head>
     <body>
         <%@ include file="Header.jsp" %>
+        <c:if test="${!empty listQuizTaken}">
         <div style="margin-left: 15%;margin-right: 15%; margin-top: 50px;" class="quizTaken">
             <h2 style="margin-left: 15px; margin-bottom: 20px;">Lịch sử kiểm tra</h2>
             <!--Your quiz in this subject <br>--> 
@@ -34,21 +35,24 @@
                     <td style="border: 1px solid;border-radius: 8px;padding: 10px 20px; background-color: #4255ff; color: white ">Time Start</td>
                     <td style="border: 1px solid; border-radius: 8px;padding: 10px 20px; background-color: #4255ff; color: white">Score</td>
                 </tr>
-                <c:forEach begin="1" end="12" step="1" items="${listQuizTaken}" var="quiz">
-                    <c:if test="${quiz.getSubjectID() == sid}">
-                        <tr>
-                            <td class="${quiz.getQuizID()}" style="border: 1px solid; height: 40px;border-radius: 8px;padding: 0 20px;">${quiz.getTimeStart()}</td>
-                            <td class="${quiz.getQuizID()}" style="border: 1px solid;border-radius: 8px;padding: 0 20px;">${quiz.getScore()}</td>
-                            <td><a style="border: none; padding: 10px 30px; background-color: #4255ff; color: white;
-                                   border-radius: 8px;"
-                                   onMouseOver="this.style.backgroundColor='#427EFB'"
-                                   onMouseOut="this.style.backgroundColor='#4255ff'"
-                                   href="QuizViewScoreController?quizReviewID=${quiz.getQuizID()}">VIEW</a></td>
-                        </tr>
-                    </c:if>
-                </c:forEach>
+                
+                    <c:forEach begin="1" end="12" step="1" items="${listQuizTaken}" var="quiz">
+                        <c:if test="${quiz.getSubjectID() == sid}">
+                            <tr>
+                                <td class="${quiz.getQuizID()}" style="border: 1px solid; height: 40px;border-radius: 8px;padding: 0 20px;">${quiz.getTimeStart()}</td>
+                                <td class="${quiz.getQuizID()}" style="border: 1px solid;border-radius: 8px;padding: 0 20px;">${quiz.getScore()}</td>
+                                <td><a style="border: none; padding: 10px 30px; background-color: #4255ff; color: white;
+                                       border-radius: 8px;"
+                                       onMouseOver="this.style.backgroundColor = '#427EFB'"
+                                       onMouseOut="this.style.backgroundColor = '#4255ff'"
+                                       href="QuizViewScoreController?quizReviewID=${quiz.getQuizID()}">VIEW</a></td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                
             </table>
         </div>
+        </c:if>
         <div class="adminTable">
             <!--            <table>
                             <tr>
