@@ -212,20 +212,75 @@
             .form {
                 display: inline-block;
             }
-            
+
             .form-group{
                 display: flex;
                 margin-bottom: 20px;
             }
             .form-control{
-                height: 30px;
+                height: 40px;
                 margin-left: 30px;
                 width: 500px;
                 padding: 5px 10px;
+                border-radius: 8px;
             }
             .courseTxt{
                 width: 50%;
                 margin-left: 5%;
+            }
+            .form-popup {
+                display: none;
+                position: fixed;
+                top: 100px;
+                left: 20%;
+                border: 3px solid #f1f1f1;
+                /*z-index: 9;*/
+                border-radius: 8px;
+                box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+            }
+
+            /* Add styles to the form container */
+            .form-container {
+                width: 800px;
+                padding: 10px;
+                background-color: white;
+            }
+
+            /* Full-width input fields */
+            .form-container input[type=text], .form-container input[type=password] {
+                width: 90%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+            }
+
+            /* When the inputs get focus, do something */
+            .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+
+            /* Set a style for the submit/login button */
+            .form-container .btn {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px 20px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom:10px;
+                opacity: 0.8;
+            }
+
+            /* Add a red background color to the cancel button */
+            .form-container .cancel {
+                background-color: red;
+            }
+
+            /* Add some hover effects to buttons */
+            .form-container .btn:hover, .open-button:hover {
+                opacity: 1;
             }
         </style>
     </head>
@@ -294,8 +349,8 @@
                             </select>
                         </form>
                         <button style="margin-top: 10px; padding: 10px 20px; border:none; border-radius: 8px; background-color: #00ff33;
-                                color: purple; cursor: pointer">Edit Subject</button>
-                                <a style="background-color: #4275FC; padding: 10px 10px; border-radius: 8px; color: white;" href="#">Delete Subject</a>
+                                color: purple; cursor: pointer" onclick="openForm()">Edit Subject</button>
+                        <a style="background-color: #4275FC; padding: 10px 10px; border-radius: 8px; color: white;" href="#">Delete Subject</a>
                     </div>
 
 
@@ -304,19 +359,45 @@
 
                 </c:forEach>
             </div>
-            
+
             <!--update subject-->
-            
-            
-            
-            
+
+            <!--//pup up-->
+            <div class="form-popup" id="myForm">
+                <form action="#" method="get" class="form-container">
+                    <h2 style="margin-bottom: 40px; margin-left: 30px;">Update Subject</h2>
+                    <div class="modal-body">					
+                        <div class="form-group">
+                            <p class="courseTxt">SubjectID</p>
+                            <input name="id" type="text" class="form-control" placeholder="Nhập subject ID" required>
+                            <input name="courseID" type="text" class="form-control" value="${course.courseID}" hidden="">
+                        </div>
+                        <div class="form-group">
+                            <p class="courseTxt">SubjectName</p>
+                            <input name="name" type="text" class="form-control" placeholder="Nhập course name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="courseTxt">Description</p>
+                            <input name="description" type="text" class="form-control" placeholder="Nhập mô tả" required>
+                        </div>
+
+
+
+                    </div>
+                    <input type="submit" class="btn" value="Submit Change">
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+            </div><!-- comment -->
+
+
             <!--end update subject-->
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
 
             <!--pup up-->
 
@@ -331,11 +412,11 @@
 
 
 
-            
-                <!--add subject-->
-                
-                
-                
+
+        <!--add subject-->
+
+
+
         <div style="padding-top: 100px; padding-left: 20%;" id="mydiv" class="contactForm js-contactForm ${open}">
             <div style="width: 80%; border-radius: 8px;" class="inner_contact_form">
                 <div style="border-radius: 8px 0 8px 0; width: 50px;background-color: red; color: white;" class="contactFormClose js-closeContactForm">
@@ -343,10 +424,10 @@
                 </div>
                 <div style="margin-left: 20px; margin-bottom: 20px; margin-top: 50px;" class="form">
                     <div >
-                        
+
                         <!--add subject-->
-                        
-                        
+
+
                         <form action="#" method="post">
                             <div style="margin-bottom: 50px; margin-left:30px;" class="modal-header">						
                                 <h3 class="modal-title">Add Course</h3>
@@ -361,12 +442,12 @@
                                     <p class="courseTxt">SubjectName</p>
                                     <input name="name" type="text" class="form-control" placeholder="Nhập course name" required>
                                 </div>
-                                                                                        
+
                                 <div class="form-group">
                                     <p class="courseTxt">Description</p>
                                     <input name="description" type="text" class="form-control" placeholder="Nhập mô tả" required>
                                 </div>
-                               
+
 
 
                             </div>
@@ -378,10 +459,20 @@
                 </div>
             </div>
 
-                                <!--end add subjetc-->
+            <!--end add subjetc-->
         </div>
-
         <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+        <script>
+
+//            add
             const contactFormOpen = document.querySelectorAll('.js-openContactForm');
             const contactFormClose = document.querySelectorAll('.js-closeContactForm');
             const contactForm = document.querySelector('.js-contactForm');
@@ -409,6 +500,18 @@
                 contactForm.classList.remove('hide');
                 alert("Send success!!");
             }
+
+//            end add
+
+//edit
+
+//end edit
+
+
+
+
+
+
         </script>
 
 

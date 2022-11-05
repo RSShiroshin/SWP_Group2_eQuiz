@@ -149,7 +149,7 @@
 
                 <c:choose>
                     <c:when test="${listCourses==null|| listCourses.size()==0}">
-                        <div style="text-align: center"><img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png" alt="alt" height="200px"/></div>
+                        <div style="text-align: center"><img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg//assets/a60759ad1dabe909c46a817ecbf71878.png" alt="alt" width="100%" height="200px"/></div>
                         <div style="text-align: center; color: rgba(0,0,0,.54)">Hãy thử sử dụng các từ khóa chung hơn</div>
                         <div style="text-align: center">Không tìm thấy kết quả nào</div>
                     </c:when>                         
