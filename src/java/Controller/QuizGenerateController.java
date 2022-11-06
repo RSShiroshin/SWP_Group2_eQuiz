@@ -94,7 +94,7 @@ public class QuizGenerateController extends HttpServlet {
             questionNum = Integer.parseInt(request.getParameter("questionNum"));
         }
         
-        if (questionNum == 0) {
+        if (questionNum <= 0) {
             questionNum = 1;
         }
             
