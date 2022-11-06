@@ -109,6 +109,8 @@ public class ChangePasswordController extends HttpServlet {
             dao.changePassword(username, repass);
             request.getSession().removeAttribute("userLogin");
             response.sendRedirect("login");
+            
+            
         }
 
     }
