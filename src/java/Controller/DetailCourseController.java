@@ -30,11 +30,13 @@ public class DetailCourseController extends HttpServlet {
 
     SubjectDAO sdao;
     CourseDAO courseDAO;
+    QuestionDAO questdao;
 
     @Override
     public void init() {
         sdao = new SubjectDAO();
         courseDAO = new CourseDAO();
+        questdao = new QuestionDAO();
     }
 
     /**
@@ -78,6 +80,9 @@ public class DetailCourseController extends HttpServlet {
         }
         String link = "/DetailCourseController?courseID=" + courseID;
         Cookie cookie = DetailCourseController.getCookie(request, "link");
+        if(user!=null){
+            
+        
         Cookie checkCourseHome = DetailCourseController.getCookie(request, user.getUserName());
         String nameCkie = user.getUserName();
         if (checkCourseHome == null) {
@@ -103,12 +108,19 @@ public class DetailCourseController extends HttpServlet {
                 response.addCookie(checkCourseHome);
             }
         }
-
+        }
         if (cookie != null) {
             cookie.setValue(link);
             response.addCookie(cookie);
         }
-
+        
+        //khai edit 
+        ArrayList<Integer> listNumQuest = new ArrayList();
+        for (Subject subject : slist) {
+            listNumQuest.add(questdao.getQuestionBySubjectID(subject.getSubjectID()).size())  ;
+        }
+        
+        request.setAttribute("listNumQuest", listNumQuest);
         request.setAttribute("listSubject", listSubject);
         request.setAttribute("num", slist.size());
         request.setAttribute("slist", slist);

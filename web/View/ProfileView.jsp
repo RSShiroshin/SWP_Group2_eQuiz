@@ -279,14 +279,14 @@
                 <div style="border-bottom: 1px solid black; padding-bottom: 20px;" id="topProfile">
                     <img src="Img/avt.png" width="70px" height="70px" alt="Avatar"/>
                     <div class="profileName">
-                        <h2>${loginUser.getUserName()}</h2>
-                        <p>${loginUser.getFullName()}</p>
+                        <h2>${userLogin.getUserName()}</h2>
+                        <p>${userLogin.getFullName()}</p>
                     </div>  
                 </div>
                 <div class="infor" style="margin-top: 50px">
                     <!--                    <div style="display: flex;"><p>Password: </p> **********</div>-->
-                    <div style="display: flex;"><p>Email: </p> ${loginUser.getEmail()}</div>
-                    <div style="display: flex;"><p>Description: </p> ${loginUser.getDescription()}</div> 
+                    <div style="display: flex;"><p>Email: </p> ${userLogin.getEmail()}</div>
+                    <div style="display: flex;"><p>Description: </p> ${userLogin.getDescription()}</div> 
                 </div>
             </div>
 
@@ -295,12 +295,12 @@
             <p href="#"  class="btn mt-16 js-openContactForm pass-button">Change Password</p>
             <div class="form-popup" id="myForm">
                 <form action="ChangeProfileController" method="get" class="form-container">
-                    <input type="text" name="userID" value="${loginUser.getUserID()}" hidden>
-<!--                    <p>Password:</p> <input type="text" name="Password" value="${loginUser.getPassword()}"></br>
-                    <p>Confirm Password:</p> <input type="text" name="Password" value="${loginUser.getPassword()}"></br>-->
-                    <p>Full Name:</p> <input type="text" name="fullName" value="${loginUser.getFullName()}"></br>
-                    <p>Email:</p> <input type="text" name="email" value="${loginUser.getEmail()}"></br>
-                    <p>Description:</p> <input type="text" name="description" value="${loginUser.getDescription()}"></br>
+                    <input type="text" name="userID" value="${userLogin.getUserID()}" hidden>
+                    <input type="text" name="userName" value="${userLogin.getUserName()}" hidden>
+                    <!--<p>Password:</p>--> <input type="text" name="Password" value="${userLogin.getPassword()}" hidden></br>                  
+                    <p>Full Name:</p> <input type="text" name="fullName" value="${userLogin.getFullName()}"></br>
+                    <p>Email:</p> <input type="text" name="email" value="${userLogin.getEmail()}"></br>
+                    <p>Description:</p> <input type="text" name="description" value="${userLogin.getDescription()}"></br>
                     <input type="submit" class="btn" value="Submit Change">
                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                 </form>

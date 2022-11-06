@@ -71,7 +71,10 @@ public class GoToSubject extends HttpServlet {
         QuizDAO quizdao = new QuizDAO();
         
         User userLogin = (User) session.getAttribute("userLogin");
-        ArrayList<Quiz> userLoginQuiz = quizdao.loadQuiz(userLogin.getUserID());
+        ArrayList<Quiz> userLoginQuiz = null;
+        if(userLogin!=null){
+            userLoginQuiz = quizdao.loadQuiz(userLogin.getUserID());
+        }       
         cd.loadSubject();
         qd.loadQuestion();
         qd.loadAnswer();

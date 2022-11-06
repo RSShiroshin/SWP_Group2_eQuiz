@@ -76,6 +76,7 @@ public class QuestionDAO {
         }
         return q;
     }
+     
 
     public Question getQuestion(int questionId) {
         Question q = null;
@@ -147,12 +148,12 @@ public class QuestionDAO {
         return answer;
     }
 
-    public void insertAnswerByQuestionID(int questionID, String content) {
+    public void insertAnswerByQuestionID(int questionID, String content,boolean isAnswer) {
         String sql = "insert into Answer values(?,?,?)";
         try(PreparedStatement ps = con.prepareStatement(sql);) {           
             ps.setInt(1, questionID);
             ps.setString(2, content);
-            ps.setBoolean(3, false);
+            ps.setBoolean(3, isAnswer);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
@@ -172,48 +173,10 @@ class using2 {
 
     public static void main(String[] args) {
         QuestionDAO qd = new QuestionDAO();
-//        ArrayList<Question> questionList = qd.getQuestionBySubjectID("ACC101");
-//        ArrayList<Question> quizQuestion = new ArrayList<>();
-//        ArrayList<Answer>  quizAnswer = new ArrayList<>();
-//        
-////        String subject = request.getParameter("SubjectID");
-////        int questionNum = Integer.parseInt(request.getParameter("questionNum")) ;
-//        int questionNum = 5;
-//        String subject = "ACC101";
-//        //Random cac cau hoi
-//        ArrayList<Integer> numbers = new ArrayList<Integer>();   
-//        Random randomGenerator = new Random();
-//        while (numbers.size() < questionNum) {
-//
-//            int random = randomGenerator.nextInt(questionList.size());
-//            System.out.println(random);
-//            if (!numbers.contains(random)) {
-//                numbers.add(random);
-//            }
-//        }
-//        
-//        //add cau hoi cho quiz
-//        for (Question q : questionList) {
-//            for (Integer number : numbers) {
-//                if(q.getQuestionID() == (number+1)) {
-//                    quizQuestion.add(q);
-//                    ArrayList<Answer> questionAnswer = qd.getQuestionAnswer(q.getQuestionID());
-//                    for (Answer a : questionAnswer) {
-//                        quizAnswer.add(a);
-//                    }
-//                }
-//            }         
-//        }
-//        
-//        for (Question question : quizQuestion) {
-//            System.out.println(question.getContent());
-//        }
-////        System.out.println(quizQuestion);
-////        System.out.println(quizAnswer);
+        QuizDAO quiz = new QuizDAO();
         qd.loadQuestion();
-        for (Answer a : qd.getAnswerList()) {
-            System.out.println(a.getContent());
-        }
+        System.out.println(qd.getQuestionBySubjectID("SWR302"));
+        System.out.println(quiz.getLatestQuiz(4));
 
     }
 }

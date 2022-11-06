@@ -77,7 +77,7 @@ public class QuestionManagerController extends HttpServlet {
         response.addCookie(quesNum);
         response.addCookie(ansNum);
         request.setAttribute("subjectID", subjectID);        
-        request.setAttribute("qlist", qdao.getQuestionBySubjectID("SWT301"));
+        request.setAttribute("qlist", qdao.getQuestionBySubjectID(subjectID));
         request.setAttribute("alist", qdao.getAnswerList());
         request.getRequestDispatcher("View/expert/QuestionManager.jsp").forward(request, response);
     }

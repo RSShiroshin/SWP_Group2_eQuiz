@@ -73,7 +73,7 @@ public class ChangeProfileController extends HttpServlet {
         String email = request.getParameter("email");
         String description = request.getParameter("description");
 
-        ud.updateUserProfile(userID, userName, Password, fullName, email, description);
+        ud.updateUserProfile(userID, userName, fullName, email, description);
         User acc = ud.checkLogin(userName, Password);
         HttpSession userLogin = request.getSession();
         userLogin.setAttribute("userLogin", acc);

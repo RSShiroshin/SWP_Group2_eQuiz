@@ -246,16 +246,15 @@ public class UserDAO extends DBContext {
         }
     }
 
-    public void updateUserProfile(int UserID, String userName, String password, String fullName,
+    public void updateUserProfile(int UserID, String userName, String fullName,
             String email, String description) {
-        String sql = "Update [User] set userName = ?, password = ?,fullName = ?,email = ?, description = ? where userID = ?";
+        String sql = "Update [User] set userName = ?,fullName = ?,email = ?, description = ? where userID = ?";
         try ( PreparedStatement ps = con.prepareStatement(sql);) {
-            ps.setInt(6, UserID);
+            ps.setInt(5, UserID);
             ps.setString(1, userName);
-            ps.setString(2, password);
-            ps.setString(3, fullName);
-            ps.setString(4, email);
-            ps.setString(5, description);
+            ps.setString(2, fullName);
+            ps.setString(3, email);
+            ps.setString(4, description);
 //            ps.setDate(9, (java.sql.Date) registerDay);
             ps.execute();
         } catch (SQLException e) {

@@ -54,9 +54,19 @@ public class CourseDAO extends DBContext {
 
                 String courseID = rs.getString(1).trim();
                 String courseName = rs.getString(2).trim();
-                String description = rs.getString(3);
+                String description = "";
+                if (rs.getString(3) != null) {
+                    description = rs.getString(3).trim();
+                }
                 int categoryID = rs.getInt(4);
-                String thumbnail = rs.getString(5);
+                String thumbnail = null;
+                if (rs.getString(5) != null) {
+                    if (rs.getString(5).equals("")) {
+                        thumbnail = null;
+                    } else {
+                        thumbnail = rs.getString(5).trim();
+                    }
+                }
                 courseList.add(new Course(courseID, courseName, description, categoryID, thumbnail));
             }
         } catch (SQLException e) {
@@ -162,7 +172,21 @@ public class CourseDAO extends DBContext {
             ps.setInt(1, categoryId);
             try ( ResultSet rs = ps.executeQuery();) {
                 while (rs.next()) {
-                    list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
+                    String courseID = rs.getString(1).trim();
+                    String courseName = rs.getString(2).trim();
+                    String description = "";
+                    if (rs.getString(3) != null) {
+                        description = rs.getString(3).trim();
+                    }
+                    int categoryID = rs.getInt(4);
+                    String thumbnail = null;
+                    if (rs.getString(5) != null) {
+                        if (rs.getString(5).equals("")) {
+                            thumbnail = null;
+                        } else {
+                            thumbnail = rs.getString(5).trim();
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
@@ -181,7 +205,22 @@ public class CourseDAO extends DBContext {
             ps.setInt(3, PAGE_SIZE);
             try ( ResultSet rs = ps.executeQuery();) {
                 while (rs.next()) {
-                    list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
+                    String courseID = rs.getString(1).trim();
+                    String courseName = rs.getString(2).trim();
+                    String description = "";
+                    if (rs.getString(3) != null) {
+                        description = rs.getString(3).trim();
+                    }
+                    int categoryID = rs.getInt(4);
+                    String thumbnail = null;
+                    if (rs.getString(5) != null) {
+                        if (rs.getString(5).equals("")) {
+                            thumbnail = null;
+                        } else {
+                            thumbnail = rs.getString(5).trim();
+                        }
+                    }
+                    list.add(new Course(courseID, courseName, description, categoryID, thumbnail));
                 }
             }
         } catch (Exception e) {
@@ -206,36 +245,39 @@ public class CourseDAO extends DBContext {
         }
         return list;
     }
+
     public List<Course> searchByCourseID(String keyword) {
         List<Course> list = new ArrayList<>();
         loadCourse();
         for (Course c : getCourseList()) {
-            if(c.getCourseID().toLowerCase().contains(keyword.toLowerCase())){
+            if (c.getCourseID().toLowerCase().contains(keyword.toLowerCase())) {
                 list.add(c);
             }
         }
         return list;
-    } 
+    }
+
     public List<Course> searchBySubjectsName(String keyword) {
         List<Course> list = new ArrayList<>();
         SubjectDAO sdao = new SubjectDAO();
         sdao.loadSubject();
         for (Subject s : sdao.getSubjectList()) {
-            if(s.getSubjectName().toLowerCase().contains(keyword.toLowerCase())){
+            if (s.getSubjectName().toLowerCase().contains(keyword.toLowerCase())) {
                 list.add(getCourseById(s.getCourseID()));
             }
-        }        
+        }
         return list;
     }
+
     public List<Course> searchBySubjectsID(String keyword) {
         List<Course> list = new ArrayList<>();
         SubjectDAO sdao = new SubjectDAO();
         sdao.loadSubject();
         for (Subject s : sdao.getSubjectList()) {
-            if(s.getSubjectID().toLowerCase().contains(keyword.toLowerCase())){
+            if (s.getSubjectID().toLowerCase().contains(keyword.toLowerCase())) {
                 list.add(getCourseById(s.getCourseID()));
             }
-        }        
+        }
         return list;
     }
 
@@ -246,7 +288,22 @@ public class CourseDAO extends DBContext {
             ps.setString(1, CourseId);
             try ( ResultSet rs = ps.executeQuery();) {
                 while (rs.next()) {
-                    Course course = new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+                    String courseID = rs.getString(1).trim();
+                    String courseName = rs.getString(2).trim();
+                    String description = "";
+                    if (rs.getString(3) != null) {
+                        description = rs.getString(3).trim();
+                    }
+                    int categoryID = rs.getInt(4);
+                    String thumbnail = null;
+                    if (rs.getString(5) != null) {
+                        if (rs.getString(5).equals("")) {
+                            thumbnail = null;
+                        } else {
+                            thumbnail = rs.getString(5).trim();
+                        }
+                    }
+                    Course course = new Course(courseID, courseName, description, categoryID, thumbnail);
                     return course;
                 }
             }
@@ -267,8 +324,8 @@ public class CourseDAO extends DBContext {
     public static void main(String[] args) {
         CourseDAO cd = new CourseDAO();
         cd.loadCourse();
-        
-        System.out.println(cd.getCourseList().get(0).getThumbnail().equals(""));
+        System.out.println(cd.getCourseList().get(5).getThumbnail());
+
     }
 
     //load register course

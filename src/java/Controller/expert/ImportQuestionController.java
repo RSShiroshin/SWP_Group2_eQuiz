@@ -85,10 +85,11 @@ public class ImportQuestionController extends HttpServlet {
         String fileName = filePart.getSubmittedFileName();
         filePart.write("D:\\" + fileName);
         ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list1 = new ArrayList<>();
         File file = new File("D:\\" + fileName);
-        StringBuilder question  = new StringBuilder();
+        StringBuilder question = new StringBuilder();
         try ( Scanner myReader = new Scanner(file)) {
-            
+
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 question.append(data.trim()).append("\n");
@@ -100,16 +101,26 @@ public class ImportQuestionController extends HttpServlet {
             for (int i = 0; i < q.length; i++) {
                 if (i % 2 == 0) {
                     list.add(q[i].trim());
+                } else {
+                    list1.add(q[i].trim());
                 }
             }
             QuestionDAO qdao = new QuestionDAO();
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < list.size()-1; i++) {
                 String[] qlist = list.get(i).split("\n");
+                String[] alist = list1.get(i).trim().split(",");
                 qdao.insertQuestion(subjectID, qlist[0], "");
                 qdao.loadQuestion();
                 int questionID = qdao.getQuestionBySubjectID(subjectID).get(qdao.getQuestionBySubjectID(subjectID).size() - 1).getQuestionID();
                 for (int j = 1; j < qlist.length; j++) {
-                    qdao.insertAnswerByQuestionID(questionID, qlist[j]);
+                    boolean check = false;
+                    for (String s : alist) {
+                        if (qlist[j].substring(0, 1).trim().equals(s.trim())) {
+                            check = true;
+                            break;
+                        }
+                    }
+                    qdao.insertAnswerByQuestionID(questionID, qlist[j], check);
                 }
             }
 

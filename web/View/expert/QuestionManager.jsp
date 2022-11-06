@@ -171,8 +171,13 @@
 
                     <form action="ImportQuestionController" method="post" enctype="multipart/form-data">
                         <input type="file" name="file">
+
                         <input type="hidden" name="subjectID" value="SWT301">
                         <input style="padding: 10px 20px; border: none; border-radius: 8px; background-color: #4275FC; color: white" type="submit" value="Upload">
+
+                        <input type="hidden" name="subjectID" value="${subjectID}">
+                        <input type="submit" value="Upload">
+
                     </form>
                 </div>
                 <div style="text-align: center">
