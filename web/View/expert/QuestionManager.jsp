@@ -160,32 +160,32 @@
         </style>
     </head>
     <body>
-        <%@ include file="Header.jsp" %>
+        <%@ include file="../Header.jsp" %>
         <div class="contentCourse">
-            <div class="addCourse">
-                
-                Sample File for User to Import Question:
-                <a href="Files/demo.txt" download>Download</a>
+            <div style="padding-top: 30px;" class="addCourse">
+                <div style="padding: 10px 10px; border-radius: 8px; background-color: #4275FC; color: white">
+                    <p style="text-transform: uppercase; margin-bottom: 10px;">Sample File for User to Import Question:</p>
+                    <a style="color: orange; font-weight: bold" href="Files/demo.txt" download>Download</a>
+                </div>
                 <div class="addImg">
-                    
+
                     <form action="ImportQuestionController" method="post" enctype="multipart/form-data">
                         <input type="file" name="file">
                         <input type="hidden" name="subjectID" value="SWT301">
-                        <input type="submit" value="Upload">
+                        <input style="padding: 10px 20px; border: none; border-radius: 8px; background-color: #4275FC; color: white" type="submit" value="Upload">
                     </form>
                 </div>
-                <div>
-                    <a href="ExportQuestionController?subjectID=${subjectID}">Export</a>
+                <div style="text-align: center">
+                    <a style="padding: 10px 200px; background-color: #4275FC; color: white; border-radius: 8px;" href="ExportQuestionController?subjectID=${subjectID}">Export</a>
                 </div>
                 <div class="addQuiz">
                     <form action="QuestionManagerController" method="post">                        
                         <input type="hidden" name="numQues" value="${cookie.numQues.getValue()}">
                         <input type="hidden" name="subjectID" value="${subjectID}">                                                    
                         <div id="content1"></div>
-                        <div id="content">
+                        <div style="" id="content">
                             <%! int i=1; %> 
                             <c:forEach items="${qlist}" var="q">
-
                                 <div id="addQ1" style="width: 50%;  margin-top: 40px;">
                                     <input type="text" id="q1" name="ques<%out.print(i);%>" placeholder="Câu hỏi" value="${q.content}"><br>
                                     <p>THUẬT NGỮ </p>
