@@ -301,7 +301,7 @@ z            input[type="radio"] {
             <c:if test="${QuizNull == false}">
                 <div class="quizTable" style="width: 200px; height: 300px; position: fixed; background: white">
                     <c:forEach begin="0" end="${quizQuestion.size()-1}" step="1" var="i">
-                        <button style="width: 20%; height: 20px; margin: 8px"><a href="#${i}" style="padding: 3px 14px">${i+1}</a></button>
+                        <button style="width: 20%; height: 20px; margin: 8px"><a href="#${i}" style="padding: 3px 14px; text-decoration: none;">${i+1}</a></button>
                     </c:forEach>
                     <input style="border:none; padding: 8px 40px; background-color: #4255ff; color: white;
                            border-radius: 8px; font-size: 15px; cursor: pointer;" type="submit" form="frm" value="Kiểm Tra">
@@ -319,13 +319,13 @@ z            input[type="radio"] {
                                 <p style="margin-bottom: 20px;padding-top: 20px; font-size: 20px; text-align: left; margin-left: 50px;
                                    font-weight: 300;opacity: 0.8">Chọn đáp án đúng</p>
                                 <div style="text-align: left; display: flex;">
-                                    <div style="margin-left: 50px; display: flex; flex-wrap: wrap;" class="radio-toolbar">
+                                    <div style="margin-left: 50px; display: flex; flex-wrap: wrap;" class="">
                                         <c:forEach items="${quizAnswer}" var="answer">
                                             <c:if test="${quizQuestion[i].getQuestionID() == answer.getQuestionID()}">
                                                 <!--code-->
                                                 <!--<div>-->
 
-                                                <input type="radio" id="answer${answer.getQuestionID()}" name="answer${answer.getQuestionID()}"
+                                                <input style="margin-right: 10px;" type="radio" id="answer${answer.getQuestionID()}" name="answer${answer.getQuestionID()}"
                                                        value="${answer.getAnswerID()}"/>
 
 
