@@ -60,7 +60,7 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession userLogin = request.getSession();
         userLogin.removeAttribute("userLogin");
-        request.getRequestDispatcher("home").forward(request, response);
+        response.sendRedirect("home");
 //        processRequest(request, response);
     }
 

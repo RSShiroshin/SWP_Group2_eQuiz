@@ -318,26 +318,26 @@
                         <!--add subject-->
                         
                         
-                        <form action="#" method="post">
+                        <form action="ChangePassword" method="post">
                             <div style="margin-bottom: 50px; margin-left:30px;" class="modal-header">						
                                 <h3 class="modal-title">Thay đổi mật khẩu</h3>
                             </div>
                             <div class="modal-body">					
                                 <div class="form-group">
                                     <p class="courseTxt">Mật khẩu cũ</p>
-                                    <input name="id" type="text" name="oldpass" class="form-control" placeholder="Mật khẩu cũ" required>
+                                    <input name="id" type="password" name="oldpass" class="form-control" placeholder="Mật khẩu cũ" required>
                                      <c:if test="${not empty requestScope.error1}">
                                         <a style="color:red">${requestScope.error1}</a>
                                     </c:if>
                                 </div>
                                 <div class="form-group">
                                     <p class="courseTxt">Mật khẩu mới</p>
-                                    <input name="name" type="text" name="newpass" class="form-control" placeholder="Mật khẩu mới" required>
+                                    <input name="name" type="password" name="newpass" class="form-control" placeholder="Mật khẩu mới" required>
                                 </div>
                                                                                         
                                 <div class="form-group">
                                     <p class="courseTxt">Nhập lại mật khẩu mới</p>
-                                    <input name="description" name="repass" type="text" class="form-control" placeholder="Nhập lại mật khẩu mới" required>
+                                    <input name="description" name="repass" type="password" class="form-control" placeholder="Nhập lại mật khẩu mới" required>
                                     <c:if test="${not empty requestScope.error}">
                                         <a style="color:red">${requestScope.error}</a>
                                     </c:if>

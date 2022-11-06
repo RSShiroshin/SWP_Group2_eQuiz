@@ -69,17 +69,20 @@ public class ExportQuestionController extends HttpServlet {
         String subjectID = request.getParameter("subjectID");
         ArrayList<Question> qlist = qdao.getQuestionBySubjectID(subjectID);
         String data = "";
-        StringBuilder data1 = new StringBuilder();
+        String data1 ="";
         for (Question q : qlist) {
-            data1.append(q.getContent().trim()).append("\n");
-            StringBuilder ans = new StringBuilder();
+            String[] temp = q.getContent().trim().split("/");
+            for (String string : temp) {
+                data+=string.trim()+"\n";
+            }            
+            String ans = "";
             for (Answer answer : qdao.getQuestionAnswer(q.getQuestionID())) {
                 data+=answer.getContent().trim()+"\n";
                 if(answer.isAnswer()){
-                    ans.append(answer.getContent().charAt(0));
+                    ans+=(answer.getContent().charAt(0));
                 }
             }
-            data1.append("--").append(ans).append("--\n");
+            data+=("--")+(ans)+("--\n");
         }
         request.setAttribute("data", data);
         request.getRequestDispatcher("View/expert/Export.jsp").forward(request, response);

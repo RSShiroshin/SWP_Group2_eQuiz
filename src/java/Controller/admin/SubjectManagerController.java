@@ -5,6 +5,7 @@
 package Controller.admin;
 
 import DAO.CourseDAO;
+import DAO.QuestionDAO;
 import DAO.SubjectDAO;
 import DAO.UserDAO;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -23,12 +25,14 @@ public class SubjectManagerController extends HttpServlet {
     SubjectDAO sdao;
     CourseDAO cdao;
     UserDAO udao;
+    QuestionDAO qdao;
 
     @Override
     public void init() {
         sdao = new SubjectDAO();
         cdao = new CourseDAO();
         udao = new UserDAO();
+        qdao = new QuestionDAO();
     }
 
     /**
@@ -70,16 +74,52 @@ public class SubjectManagerController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         sdao.loadSubject();
+        String type = request.getParameter("type");
         String courseID = request.getParameter("courseID");
-        
-        request.setAttribute("expertlist", udao.getExpertList());
-        request.setAttribute("assignlist", udao.getExpertAssignList());
-        request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
-        request.setAttribute("cId", courseID);
-        request.setAttribute("course", cdao.getCourseById(courseID));
-        request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
+               
+        if (type == null) {
+            request.setAttribute("expertlist", udao.getExpertList());
+            request.setAttribute("assignlist", udao.getExpertAssignList());
+            request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
+            request.setAttribute("cId", courseID);
+            request.setAttribute("course", cdao.getCourseById(courseID));
+            request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
 
-        request.getRequestDispatcher("View/admin/SubjectManager.jsp").forward(request, response);
+            request.getRequestDispatcher("View/admin/SubjectManager.jsp").forward(request, response);
+        } else if (type.equals("1")) {
+            String subjectID = request.getParameter("subjectID");
+            String subjectName = request.getParameter("name");
+            String description = request.getParameter("description");
+            sdao.updateSubject(subjectID, subjectName, description);
+            cdao.loadCourse();           
+            sdao.loadSubject();
+            request.setAttribute("expertlist", udao.getExpertList());
+            request.setAttribute("assignlist", udao.getExpertAssignList());
+            request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
+            request.setAttribute("cId", courseID);
+            request.setAttribute("course", cdao.getCourseById(courseID));
+            request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
+
+            request.getRequestDispatcher("View/admin/SubjectManager.jsp").forward(request, response);
+        } else if (type.equals("2")) {
+            
+            String subjectID = request.getParameter("subjectID");
+            if(qdao.getQuestionBySubjectID(subjectID).isEmpty()){
+                sdao.deleteSubject(subjectID);
+            } 
+            cdao.loadCourse();           
+            sdao.loadSubject();
+            request.setAttribute("expertlist", udao.getExpertList());
+            request.setAttribute("assignlist", udao.getExpertAssignList());
+            request.setAttribute("slist", sdao.getSubjectListByCourseID(courseID));
+            request.setAttribute("cId", courseID);
+            request.setAttribute("course", cdao.getCourseById(courseID));
+            request.setAttribute("num", sdao.getSubjectListByCourseID(courseID).size());
+
+            request.getRequestDispatcher("View/admin/SubjectManager.jsp").forward(request, response);
+
+        }
+
     }
 
     /**

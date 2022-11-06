@@ -350,7 +350,7 @@
                         </form>
                         <button style="margin-top: 10px; padding: 10px 20px; border:none; border-radius: 8px; background-color: #00ff33;
                                 color: purple; cursor: pointer" onclick="openForm()">Edit Subject</button>
-                        <a style="background-color: #4275FC; padding: 10px 10px; border-radius: 8px; color: white;" href="#">Delete Subject</a>
+                        <a style="background-color: #4275FC; padding: 10px 10px; border-radius: 8px; color: white;" href="SubjectManagerController?type=2&courseID=${cId}&subjectID=${s.subjectID}">Delete Subject</a>
                     </div>
 
 
@@ -364,14 +364,11 @@
 
             <!--//pup up-->
             <div class="form-popup" id="myForm">
-                <form action="#" method="get" class="form-container">
+                <form action="SubjectManagerController" method="get" class="form-container">
                     <h2 style="margin-bottom: 40px; margin-left: 30px;">Update Subject</h2>
-                    <div class="modal-body">					
-                        <div class="form-group">
-                            <p class="courseTxt">SubjectID</p>
-                            <input name="id" type="text" class="form-control" placeholder="Nhập subject ID" required>
-                            <input name="courseID" type="text" class="form-control" value="${course.courseID}" hidden="">
-                        </div>
+                    <div class="modal-body">	
+                        <input name="type" type="text"  value="1" hidden="">
+                        <input name="courseID" type="text" value="${course.courseID}" hidden="">
                         <div class="form-group">
                             <p class="courseTxt">SubjectName</p>
                             <input name="name" type="text" class="form-control" placeholder="Nhập course name" required>

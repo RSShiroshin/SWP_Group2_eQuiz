@@ -151,11 +151,6 @@ public class RegisterController extends HttpServlet {
                 } catch (NoSuchAlgorithmException ex) {
                     System.out.println("" + ex);
                 }
-                try {
-                    SendEmail(email);
-                } catch (MessagingException ex) {
-                    System.out.println("" + ex);
-                }
                 userDAO.insertUser(username, sha256Pass, fullname, email, avatar, description, role, status, date);
                 processRequest(request, response);
 
