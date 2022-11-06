@@ -238,6 +238,7 @@
 
 
                     </div>
+
                     <div class="topR">
                         <div style="margin-top: 10px">
                             <button style="padding: 10px 20px;
@@ -245,6 +246,15 @@
                             border-radius: 8px;
                             font-weight: 300;
                             background-color: #fefefe" id="myBtn">Tuỳ chọn</button>
+
+                    <div style=" margin-bottom: 20px; border-bottom: 1px solid #939bb4; padding-bottom: 10px;">
+                        <p style="margin-top: 15px; margin-left: 5px;font-size: 20px; font-weight: 200;">GIỚI HẠN CÂU HỎI </p>
+                        <div>
+                            <input style="outline: none; border-radius: 8px; border: none" type="text" name="courseID" value="${courseID}" hidden>
+                            <input type="text" name="SubjectID" value="${SubjectID}" hidden>
+                            <input style="width: 30px;padding-left: 10px; border:none; border-bottom: 1px solid orange; outline: none" type="text" name="questionNum" value="${quizQuestion.size()}">
+                            <input style="width: 40px; border:none; outline: none" type="text" id="id" value="/${maxQuestionNum}" disabled="">
+
                         </div>
                     </div>
                     <div>
