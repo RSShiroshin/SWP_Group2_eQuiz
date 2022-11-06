@@ -245,6 +245,17 @@ public class UserDAO extends DBContext {
             status = "Error Delete" + e.getMessage();
         }
     }
+    
+    public void changePassword(String UserID, String password) {
+        String sql = "Update [User] set [password] = ?  where userID = ?";
+        try ( PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setString(1, password);
+            ps.setString(2, UserID);
+            ps.execute();
+        } catch (SQLException e) {
+            status = "Error Insert" + e.getMessage();
+        }
+    }
 
     public void updateUserProfile(int UserID, String userName, String fullName,
             String email, String description) {
@@ -289,6 +300,32 @@ public class UserDAO extends DBContext {
         try ( PreparedStatement st = con.prepareStatement(sql);) {
             st.setString(1, username);
             st.setString(2, password);
+            try ( ResultSet rs = st.executeQuery();) {
+                if (rs.next()) {
+                    return new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
+                }
+            }
+        } catch (SQLException ex) {
+
+        }
+        return null;
+    }
+    
+     public User checkPassword(String password) {
+        String sql = " SELECT [userID]\n"
+                + "                      ,[userName]\n"
+                + "                      ,[password]\n"
+                + "                      ,[fullName]\n"
+                + "                      ,[email]\n"
+                + "                      ,[avatar]\n"
+                + "                      ,[description]\n"
+                + "                      ,[roleID]\n"
+                + "                      ,[status]\n"
+                + "                      ,[registerDay]\n"
+                + "                  FROM [dbo].[User]\n"
+                + "                  WHERE [password] = ?";
+        try ( PreparedStatement st = con.prepareStatement(sql);) {
+            st.setString(1, password);
             try ( ResultSet rs = st.executeQuery();) {
                 if (rs.next()) {
                     return new User(rs.getInt("userID"), rs.getString("userName"), rs.getString("password"), rs.getString("fullName"), rs.getString("email"), rs.getString("avatar"), rs.getString("description"), rs.getInt("roleID"), rs.getBoolean("status"), rs.getDate("registerDay"));
