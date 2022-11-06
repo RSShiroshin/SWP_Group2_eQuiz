@@ -32,23 +32,30 @@
         <%@ include file="Header.jsp" %>
 
         <c:if test="${userLogin.role == 1}">
-            <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các subject được giao:</div>
+            <div style="margin-left: 15%; font-size: 20px; font-weight: 500; margin-top: 30px;">Các subject được giao:</div>
         </c:if>
         <c:if test="${userLogin.role == 2}">
-            <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các course mà bạn đã enroll</div>
+            <div style="margin-left: 15%; font-size: 20px; font-weight: 500; margin-top: 30px;">Các course mà bạn đã enroll</div>
         </c:if>
 
-        <c:forEach items="${lstEA}" var="e">
-            <c:if test="${userLogin.role == 1}">
-                <c:forEach items="${lstSubject}" var="s">
-                    <c:if test="${e.getSubjectID() == s.getSubjectID()}">
-                        <div>
-                            <p>${s.getSubjectName()}</p>
-                        </div>
-                    </c:if>
-                </c:forEach>
-            </c:if>
-        </c:forEach>
+        <div style="padding-top: 0; margin-left: 10%;display: flex; flex-wrap: wrap; padding-bottom: 30px;">  
+            <c:forEach items="${lstEA}" var="e">
+                <c:if test="${userLogin.role == 1}">
+                    <c:forEach items="${lstSubject}" var="s">
+                        <c:if test="${e.getSubjectID() == s.getSubjectID()}">
+                            <div class="starElement">
+                                <a style="text-decoration: none; color: black"  href="QuestionManagerController?subjectID=${s.getSubjectID()}">
+                                    <img class="" src="Img/courseImg.png" height="100%" width="100%" alt="${s.getSubjectName()}" />
+                                    <div>
+                                        <p style="margin-top: 10px;">${s.getSubjectName()}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+            </c:forEach>
+        </div>
 
         <c:if test="${userLogin.role == 1}">
             <div style="margin-left: 15%; font-size: 20px; font-weight: 500">Các course đã register:</div>

@@ -59,7 +59,7 @@ public class test {
                 qdao.loadQuestion();
                 int questionID = qdao.getQuestionBySubjectID("SWT301").get(qdao.getQuestionBySubjectID("SWT301").size() - 1).getQuestionID();
                 for (int j = 1; j < qlist.length; j++) {
-                    qdao.insertAnswerByQuestionID(questionID, qlist[j]);
+                    //qdao.insertAnswerByQuestionID(questionID, qlist[j]);
                 }
             }
 

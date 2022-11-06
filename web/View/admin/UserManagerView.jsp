@@ -65,7 +65,7 @@
                 </tr>
                 <c:forEach items="${userList}" var="user">
                     <c:if test="${user.getRole()==0}">
-                        <tr style="background-color: greenyellow; color: red">
+                        <tr style="background-color: greenyellow; color: red" hidden>
                             <td>${user.getUserID()}</td>
                             <td>${user.getUserName()}</td>
                             <td>${user.getFullName()}</td>
