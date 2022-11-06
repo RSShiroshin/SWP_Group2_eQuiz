@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -263,8 +265,8 @@ z            input[type="radio"] {
                     <div style=" margin-bottom: 20px; border-bottom: 1px solid #939bb4; padding-bottom: 10px;">
                         <p style="margin-top: 15px; margin-left: 5px;font-size: 20px; font-weight: 200;">GIỚI HẠN CÂU HỎI </p>
                         <div>
-                            <input type="text" name="courseID" value="${courseID}">
-                            <input type="text" name="SubjectID" value="${SubjectID}">
+                            <input style="outline: none; border-radius: 8px; border: none" type="text" name="courseID" value="${courseID}" hidden="">
+                            <input type="text" name="SubjectID" value="${SubjectID}" disabled="">
                             <input style="width: 30px;padding-left: 10px; border:none; border-bottom: 1px solid orange; outline: none" type="text" name="questionNum" value="${quizQuestion.size()}">
                             <input style="width: 40px; border:none; outline: none" type="text" id="id" value="/${maxQuestionNum}" disabled="">
                         </div>
@@ -299,7 +301,7 @@ z            input[type="radio"] {
             </c:if>
                 
             <c:if test="${QuizNull == false}">
-                <div class="quizTable" style="width: 200px; height: 300px; position: fixed; background: white">
+                <div class="quizTable" style="width: 200px; height: 300px; position: fixed; background: white; border-radius: 8px;">
                     <c:forEach begin="0" end="${quizQuestion.size()-1}" step="1" var="i">
                         <button style="width: 20%; height: 20px; margin: 8px"><a href="#${i}" style="padding: 3px 14px; text-decoration: none;">${i+1}</a></button>
                     </c:forEach>
@@ -308,13 +310,27 @@ z            input[type="radio"] {
                 </div>
                 <div class="Quiz">
                     <form id="frm" action="QuizReviewController" method="post">
-                    <input type="text" name="quizID" value="${quizID}" >
+                        <input type="text" name="quizID" value="${quizID}" hidden="">
                     <c:forEach begin="0" end="${quizQuestion.size()-1}" step="1" var="i">
                         <span>
                             <div class="QuizQuestion" id="${i}">
                                 <p style="padding-top: 20px; font-size: 20px;font-weight: 300; text-align: left; margin-left: 50px; opacity: 0.8">Câu hỏi ${i+1}</p>
-                                <p style="margin-bottom: 50px; padding-top: 20px; font-size: 24px; margin-left: 50px; margin-right: 50px;
-                                   font-weight: 400;text-align: justify">${quizQuestion[i].getContent()}</p>
+                                
+                                <c:set var="str1" value="${quizQuestion[i].getContent()}"/>  
+                                <c:set var="str2" value="${fn:split(str1, '/')}" />  
+                                <c:if test="${not empty str2}">
+                                    <c:forEach items="${str2}" var="s">
+                                        <p style="margin-bottom: 10px; padding-top: 20px; font-size: 24px; margin-left: 50px; margin-right: 50px;
+                                   font-weight: 400;text-align: justify">${s}</p>
+
+                                    </c:forEach>
+                                </c:if>
+                                
+                                
+                                
+                                
+                                
+                                
                                 <input type="text" name="question${quizQuestion[i].getQuestionID()}" value="${quizQuestion[i].getQuestionID()}" hidden>
                                 <p style="margin-bottom: 20px;padding-top: 20px; font-size: 20px; text-align: left; margin-left: 50px;
                                    font-weight: 300;opacity: 0.8">Chọn đáp án đúng</p>
