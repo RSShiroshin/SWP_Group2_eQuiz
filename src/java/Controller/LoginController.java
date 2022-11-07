@@ -83,7 +83,7 @@ public class LoginController extends HttpServlet {
         }
         UserDAO userdao = new UserDAO();
 //        User userLogin = userdao.checkLogin(username, sha256Pass);
-        User userLogin = userdao.checkLogin(username, password);
+        User userLogin = userdao.checkLogin(username, sha256Pass);
 
         HttpSession session = request.getSession();
 
@@ -131,8 +131,7 @@ public class LoginController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public static String
-            convertByteToString(byte[] byteValue) {
+    public static String convertByteToString(byte[] byteValue) {
         String stringValue = "" + Arrays.toString(byteValue);
         return (stringValue);
     }

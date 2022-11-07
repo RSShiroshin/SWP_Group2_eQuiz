@@ -81,22 +81,25 @@ public class ChangePasswordController extends HttpServlet {
         String newpass = request.getParameter("newpass");
         String repass = request.getParameter("repass");
         User account = (User) request.getSession().getAttribute("userLogin");
-        HttpSession session = request.getSession();
         String username = account.getUserName();
-        UserDAO dao = new UserDAO();
-        User acc = dao.checkPassword(oldpass);
-        if (acc == null || !newpass.equals(repass)) {
-            if (!newpass.equals(repass)) {
-                String error = "Re-Enter password doesn't match!";
-                request.setAttribute("error", error);
-                request.getRequestDispatcher("/View/ProfileView.jsp").forward(request, response);
-            }
-            if (acc == null) {
-                String error1 = "Password doesn't correct";
-                request.setAttribute("error1", error1);
-                request.getRequestDispatcher("/View/ProfileView.jsp").forward(request, response);
-            }
-        } else {
+        String pass = account.getPassword();
+        UserDAO dao = new UserDAO();       
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(oldpass.getBytes(StandardCharsets.UTF_8));
+            oldpass = convertByteToString(hash);
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("" + ex);
+        }
+        if (!oldpass.equals(pass)) {
+            String error1 = "Password doesn't correct";
+            request.setAttribute("error1", error1);
+            request.getRequestDispatcher("/View/ProfileView.jsp").forward(request, response);
+        } else if (!newpass.equals(repass)) {
+            String error = "Re-Enter password doesn't match!";
+            request.setAttribute("error", error);
+            request.getRequestDispatcher("/View/ProfileView.jsp").forward(request, response);
+        }else{
             String sha256Pass = "";
             try {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -104,13 +107,10 @@ public class ChangePasswordController extends HttpServlet {
                 sha256Pass = convertByteToString(hash);
             } catch (NoSuchAlgorithmException ex) {
                 System.out.println("" + ex);
-            }
-            
-            dao.changePassword(username, repass);
+            }           
+            dao.changePassword(username, sha256Pass);
             request.getSession().removeAttribute("userLogin");
             response.sendRedirect("login");
-            
-            
         }
 
     }

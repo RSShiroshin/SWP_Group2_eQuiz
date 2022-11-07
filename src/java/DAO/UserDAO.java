@@ -246,11 +246,11 @@ public class UserDAO extends DBContext {
         }
     }
     
-    public void changePassword(String UserID, String password) {
-        String sql = "Update [User] set [password] = ?  where userID = ?";
+    public void changePassword(String username, String password) {
+        String sql = "Update [User] set [password] = ?  where userName = ?";
         try ( PreparedStatement ps = con.prepareStatement(sql);) {
             ps.setString(1, password);
-            ps.setString(2, UserID);
+            ps.setString(2, username);
             ps.execute();
         } catch (SQLException e) {
             status = "Error Insert" + e.getMessage();
