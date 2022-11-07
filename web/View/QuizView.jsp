@@ -200,7 +200,7 @@ z            input[type="radio"] {
                 width: 400px;
             }
 
-<<<<<<< HEAD
+
                 .topR input{
                     border: none;
                     background-color: #f0f0f0;
