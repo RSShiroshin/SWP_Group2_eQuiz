@@ -264,8 +264,8 @@ z            input[type="radio"] {
                     <div style=" margin-bottom: 20px; border-bottom: 1px solid #939bb4; padding-bottom: 10px;">
                         <p style="margin-top: 15px; margin-left: 5px;font-size: 20px; font-weight: 200;">GIỚI HẠN CÂU HỎI </p>
                         <div>
-                            <input style="outline: none; border-radius: 8px; border: none" type="text" name="courseID" value="${courseID}" hidden="">
-                            <input type="text" name="SubjectID" value="${SubjectID}" disabled="">
+                            <input style="outline: none; border-radius: 8px; border: none" type="text" name="courseID" value="${courseID}" hidden>
+                            <input type="text" name="SubjectID" value="${SubjectID}" hidden>
                             <input style="width: 30px;padding-left: 10px; border:none; border-bottom: 1px solid orange; outline: none" type="text" name="questionNum" value="${quizQuestion.size()}">
                             <input style="width: 40px; border:none; outline: none" type="text" id="id" value="/${maxQuestionNum}" disabled="">
                         </div>
